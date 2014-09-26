@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# A simple script to start up a local Jekyll instance for viewing
+# the site.  This script assumes the user has Jekyll and the bundle
+# program installed.
+#
+# Jekyll listens on port 4000.
+
+bundle exec jekyll serve --watch

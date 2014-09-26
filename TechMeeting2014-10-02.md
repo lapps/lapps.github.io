@@ -4,29 +4,42 @@ title: LAPPS Technical Meeting
 ---
 
 **Date** October 2-3, 2014 <br/>
-**Place** Vassar College, Poughkeepsie NY
-In no particular order.
+**Place** Vassar College, Poughkeepsie NY<br/>
 
 ## Licensing
 
-1. Language Grid support
+1. Service Grid support
 1. Actual mechanisms we will use
 1. Security
 	* Start using https ASAP.
 	* WS-Trust
 	* WS-Federation
  
-## The Language Grid
+## The Service Grid
 1. REST/JSON services
 1. User authorization (See Licensing)
 
-## Interim Hack(s)
-1. What do we need to do until the LG catches up?
-	* LAPPS Composer
-	* LAPPS Pipeline Planner
-	* 
+### Interim Hacks
+What do we need to do until the Service Grid catches up?
 
-# Work Items 
+* LAPPS Composer
+* LAPPS Pipeline Planner
+* Users invoking services
+	1. via the language grid
+	1. calling the service directly
+
+## JSON-LD 
+1. Vocabulary
+	* URLs and namespaces
+	* Markables
+	* Coreference
+1. LIF
+1. Metadata
+	* Services
+	* DataSources
+1. Validation and Schemata
+
+## Work Items 
 
 If we have time:
 
