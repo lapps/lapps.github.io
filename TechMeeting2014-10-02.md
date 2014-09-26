@@ -3,7 +3,7 @@ layout: default
 title: LAPPS Technical Meeting
 ---
 
-**Date** October 2nd and 3rd <br/>
+**Date** October 2-3, 2014 <br/>
 **Place** Vassar College, Poughkeepsie NY
 In no particular order.
 
