@@ -1,0 +1,86 @@
+
+body {
+   counter-reset: section;
+   xcounter-reset: subsection;
+   width: 800px;
+   margin-left: 0.5em;
+   font-size: 12pt; }
+
+h1 {
+    font-size: 24pt; 
+    border-bottom: thick solid darkgreen;
+}
+
+h2 {
+    font-size: 20pt; 
+    border-bottom: thin solid darkgreen;
+    counter-reset: subsection; }
+
+h3 {
+    font-size: 16pt; 
+    border-bottom: thin dotted darkgreen;
+    counter-increment: subsection; }
+
+h2:before {
+   content: counter(section) ". "; 
+   counter-increment: section;
+}
+
+h3:before {
+   content: counter(section) "." counter(subsection) ". "; }
+
+p, li, td {
+   font-size: 100%; }
+
+.navigation {
+   font-size: 140%; }
+
+.author {
+   font-size: 120%; }
+
+.pre {
+   font-family: "courier new", monospace; }
+
+p.pre { 
+    margin-left: 2em;
+    white-space: pre; }
+
+span.pre {
+    white-space: normal; }
+
+pre.example {
+    margin-left: 2em;
+    font-family: "courier new"; }
+
+p.abstract {
+    padding: 5pt;
+    background-color: #eeffee;
+    border: thin solid grey; }
+
+dt {
+    font-style: italic; }
+
+dd {
+    margin-top: 5pt;
+    margin-bottom: 8pt; }
+
+.indent {
+    margin-left: 2em; }
+
+.outdent {
+   margin-left: -1.3em; }
+
+.move-up {
+   margin-top: -1em; }
+
+.move-up-a-bit {
+   margin-top: -0.5em; }
+
+.move-down-a-bit {
+   margin-top: 0.5em; }
+
+.nowrap {
+    white-space: nowrap; }
+
+ul.spacy > li {
+    margin-bottom: 10pt; }
