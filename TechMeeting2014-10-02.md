@@ -18,6 +18,7 @@ title: LAPPS Technical Meeting
 ## The Service Grid
 1. REST/JSON services
 1. User authorization (See Licensing)
+1. Collecting and collating usage statistics.
 
 ### Interim Hacks
 What do we need to do until the Service Grid catches up?
@@ -38,6 +39,11 @@ What do we need to do until the Service Grid catches up?
 	* Services
 	* DataSources
 1. Validation and Schemata
+
+
+## Road maps and Milestones
+
+Set some...
 
 ## Work Items 
 
