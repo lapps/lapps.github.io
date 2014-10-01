@@ -45,6 +45,7 @@ What do we need to do until the Service Grid catches up?
 1. Metadata
 	* Services
 	* DataSources
+	* Passing parameters to services
 1. Validation and Schemata
 
 
