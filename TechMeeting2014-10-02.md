@@ -34,6 +34,8 @@ What do we need to do until the Service Grid catches up?
 	* URLs and namespaces
 	* Markables
 	* Coreference
+		* [v1](../interchange/coref-v1.html)
+		* [v2](../interchange/coref-v2.html)
 1. LIF
 1. Metadata
 	* Services

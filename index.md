@@ -13,4 +13,9 @@ The GitHub Pages for the Language Application Grid.
 
 ## Other
 
+### Coreference
+
+* [version 1](interchange/coref-v1.html)
+* [version 2](interchange/coref-v2.html)
+
 More information is sure to follow.
