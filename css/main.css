@@ -51,6 +51,13 @@ p, li, td {
 .pre {
    font-family: "courier new", monospace; }
 
+dl.nicer dt {
+    font-style: italic; }
+
+dl.nicer dd {
+    margin-top: 5pt;
+    margin-bottom: 8pt; }
+
 p.pre { 
    margin-left: 2em;
    white-space: pre; }
