@@ -33,6 +33,7 @@ What do we need to do until the Service Grid catches up?
 1. Vocabulary
 	* URLs and namespaces
 	* Markables
+	* Discriminators ([current list](http://vocab.lappsgrid.org/discriminators.html))
 	* Coreference
 		* [v1](../interchange/coref-v1.html)
 		* [v2](../interchange/coref-v2.html)
