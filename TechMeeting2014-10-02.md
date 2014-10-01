@@ -38,13 +38,17 @@ What do we need to do until the Service Grid catches up?
 		* [v1](../interchange/coref-v1.html)
 		* [v2](../interchange/coref-v2.html)
 1. LIF
+	* experimental LEDs classes
+		* **groupId:** org.lappsgrid.experimental
+		* **artifactId:** serialization
+		* **version:** 1.0.0-SNAPSHOT
 1. Metadata
 	* Services
 	* DataSources
 1. Validation and Schemata
 
 
-## Road maps and Milestones
+## Road map and Milestones
 
 Set some...
 
