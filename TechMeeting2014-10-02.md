@@ -41,13 +41,18 @@ What do we need to do until the Service Grid catches up?
 		* [v1](../interchange/phrase_structure-v1.html)
 	  	 
 1. LIF
+	* experimental LEDs classes
+		* **groupId:** org.lappsgrid.experimental
+		* **artifactId:** serialization
+		* **version:** 1.0.0-SNAPSHOT
 1. Metadata
 	* Services
 	* DataSources
+	* Passing parameters to services
 1. Validation and Schemata
 
 
-## Road maps and Milestones
+## Road map and Milestones
 
 Set some...
 
