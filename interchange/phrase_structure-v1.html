@@ -33,20 +33,26 @@
           "type": "????:xxxx" },
         "NP": {
           "producer": "edu.brandeis.cs.lappsgrid.xxxx.Parser:n.n.n",
-          "type": "????:xxxx" }}},
-    "annotations": [
-       { "@type": "S", 
-         "id": "s0", 
-         "children": [ "np0", "vp0"],
-         "features": {} },
-       { "@type": "NP", 
-         "id": "np0", 
-         "children": [ "tok0"],
-         "features": {} },
-       { "@type": "VP", 
-         "id": "vp0", 
-         "children": [ "tok1", "tok2"],
-         "features": {} },
+          "type": "????:xxxx" }
+          },
+        },
+		"annotations": [
+		   {
+			  "@type":"PhraseStructure",
+			   "constituents": [
+		          { "@type": "S", 
+			         "id": "s0", 
+			 "children": [ "np0", "vp0"],
+			 "features": {} },
+		   { "@type": "NP", 
+			 "id": "np0", 
+			 "children": [ "tok0"],
+			 "features": {} },
+		   { "@type": "VP", 
+			 "id": "vp0", 
+			 "children": [ "tok1", "tok2"],
+			 "features": {} }] }
+			 
 </pre>
 
 <p>Questions/issues:</p>
