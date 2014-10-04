@@ -1,20 +1,25 @@
 <html>
 
 <head>
-<title>LAPPS Coreference</title>
+<title>LIF Coreference</title>
 <link rel="stylesheet" href="../css/main.css" type="text/css" />
 </head>
 
 <body>
 
-<h1>Coreference for LAPPS</h2>
+<p>
+  <a href="index.html">LIF</a>
+> <a href="">coreference</a>
+</p>
 
-<p>Version 3, October 2014, Marc Verhagen, Brandeis University</p>
+<h1>Coreference in LIF</h2>
 
-<p>This document contains a proposal on how to represent coreferenc in the Lapps
-Interchange Format. It is based on a <a href="coref-v2.html">prior version</a>
-of this document and subsequent discussion at a LAPPS meeting at Vassar College
-with Nancy Ide, Keith Suderman, Di Wang and Chunqi Shi.</p>
+<p>Version 3, October 2014</p>
+
+<p>This document contains a proposal on how to represent coreference in the
+Lapps Interchange Format. It is based on a <a href="coref-v2.html">prior
+version</a> of this document and subsequent discussion at a LAPPS meeting at
+Vassar College with Nancy Ide, Keith Suderman, Di Wang and Chunqi Shi.</p>
 
 <p>
 [ <a href="#linguistics">linguistics</a>
@@ -274,7 +279,6 @@ felt that using a set was the better way.</dd>
   this. We can make it work either way, the issue may just be to decide on what
   is easier to explain to outsiders.</dd>
 
-
 <dt>Can we maintain schema similar to Steve Cassidy's?</dt>
 
 <dd>This is an open question and we cannot say anything intelligent about it
@@ -308,16 +312,17 @@ views.</p>
           "Markable": {
             "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
             "type": "coref:xxxx" },
-         "Coreference": {
+          "Coreference": {
             "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
-            "type": "coref:xxxx" },
+            "type": "coref:xxxx" }}},
       "annotations": [
          { "@type": "Markable", "id": "m0", "targets": [ "tok0" ] },
-         { "@type": "Markable", "id": "m1", "targets": [ "tok2" ] } ] },
+         { "@type": "Markable", "id": "m1", "targets": [ "tok2" ] },
          { "@type": "Coreference", 
            "id": "coref0", 
-           "mentions": [ "m0", "m1" ],
-           "representative": "m0" }]}]
+           "features": {
+             "mentions": [ "m0", "m1" ],
+             "representative": "m0" }}]}]
 }
 </pre>
 
@@ -327,15 +332,16 @@ views.</p>
 
 <li>What is the value of type in the coreference metadata?
 
-<li>The markables are required, no referring directly to other views. There is a
-slight penalty to pay, but it appears conceptually cleaner to do it this way.
+<li>The markables are required, the mentions list cannot refer directly to other
+views. There is a slight penalty to pay, but it appears conceptually cleaner to
+do it this way.
 
-<li>Markables either have start and end or a target specified. We allow both to
-be there. This is still a little bit up for discussion though. How to we endode
-in schema that it is either or?
+<li>Markables either have start and end or a target specified. Bur we do allow
+all three to be there. This is still a little bit up for discussion though. How
+can we endode this in JSON schema?
 
-<li>We use Markable because this is a common practice for manual coref
-annotation. Did I get this right?  References?
+<li>We use Markable because this is a common practice for manual corefence
+annotation. We need some references here.
 
 </ol>
 
@@ -347,20 +353,24 @@ annotation. Did I get this right?  References?
   "views": [ 
     { "metadata": {
         "contains": {
-          "Markable": { ... },
-          "Coreference": { ... } }},
+          "Markable": { },
+          "Coreference": { } }},
       "annotations": [
          { "@type": "Markable", "id": "m0", "start": 0, "end": 3 },
          { "@type": "Markable", "id": "m1", "start": 9, "end": 16 },
          { "@type": "Coreference", 
-           "id": "coref0", 
-           "mentions": [ "m0", "m1" ],
-           "representative": "m0" }]}]
+           "id": "coref0",
+           "features": {
+             "mentions": [ "m0", "m1" ],
+             "representative": "m0" }}]}]
 }
 </pre>
 
-<p>If a coreference component generates actual annotations that can be used,
-then we put them in the coreference vew.</p>
+<p>If a coreference component generates actual annotations that can be used, but
+that are not available in other views, then we put them in the coreference
+view. Below we have Token annotations in the coreference view. Instead of Token
+we could also have Person or NounChunk or any other Annotation type.</p>
+
 
 <pre class="example">
 {
@@ -368,27 +378,32 @@ then we put them in the coreference vew.</p>
   "views": [ 
     { "metadata": {
         "contains": {
-          "Token": { ... },
-          "Markable": { ... },
-          "Coreference": { ... } }},
+          "Token": { },
+          "Markable": { },
+          "Coreference": { } }},
       "annotations": [
          { "@type": "Token", "id": "tok0", "start": 0, "end": 3 },
          { "@type": "Token", "id": "tok2", "start": 9, "end": 16 },
-         { "@type": "Markable", "id": "m0", "targets": [ "tok0" ] },
-         { "@type": "Markable", "id": "m1", "targets": [ "tok2" ] },
+         { "@type": "Markable",
+           "id": "m0",
+           "features": {
+             "targets": [ "tok0" ] }},
+         { "@type": "Markable",
+           "id": "m1",
+           "features": {
+             "targets": [ "tok2" ] }},
          { "@type": "Coreference", 
-           "id": "coref0", 
-           "mentions": [ "m0", "m1" ],
-           "representative": "m0" }]}]
+           "id": "coref0",
+           "features": {
+             "mentions": [ "m0", "m1" ],
+             "representative": "m0" }}]}]
 }
 </pre>
-<p>These other annotations could also be Person or NounChunk or any other
-Annotation type.</p>
 
 <p>Sometimes, coreference modules will have all kinds of other information on
 the annotations that are linked. For example, the ANNIE Coreference componen has
-a attribute ENTITY_MENTION_TYPE with value PRONOUN on one of the annotations. We
-put them in the features directory of the Markable. </p>
+an attribute ENTITY_MENTION_TYPE with value PRONOUN on one of the
+annotations. We put them in the features directory of the Markable. </p>
 
 <pre class="example">
 {
@@ -396,47 +411,58 @@ put them in the features directory of the Markable. </p>
   "views": [ 
     { "metadata": {
         "contains": {
-          "Token": { ... },
-          "Markable": { ... },
-          "Coreference": { ... } }},
+          "Token": { },
+          "Markable": { },
+          "Coreference": { } }},
       "annotations": [
          { "@type": "Token", "id": "tok0", "start": 0, "end": 3 },
          { "@type": "Token", "id": "tok2", "start": 9, "end": 16 },
-         { "@type": "Markable", "id": "m0", "targets": [ "tok0" ] },
-         { "@type": "Markable", "id": "m1", "targets": [ "tok2" ], 
-           "features": { "ENTITY_MENTION_TYPE": "PRONOUN" } },
+         { "@type": "Markable",
+           "id": "m0",
+           "features": {
+             "targets": [ "tok0" ] }},
+         { "@type": "Markable",
+           "id": "m1",
+           "features": {
+             "targets": [ "tok2" ],
+             "ENTITY_MENTION_TYPE": "PRONOUN" } },
          { "@type": "Coreference", 
            "id": "coref0", 
-           "mentions": [ "m0", "m1" ],
-           "representative": "m0" }]}]
+           "features": {
+             "mentions": [ "m0", "m1" ],
+             "representative": "m0" }}]}]
 }
 </pre>
 
-<p>The list of targets can be used to deal with split antecedents, we
-thought. For example, in "John and Mary left, they were late", the mentions can
-be m1 and m2, and m1 is a Markable with tok_john and tok_mary as targets. But
-this does not really work if there are no Tokens available in another view. So
-we need to either make the mentions a list of lists or introduce markables that
-contain other markables. Here is the latter option.</p>
+<p>The list of targets can be used to deal with split antecedents. For example,
+in "John and Mary left, they were late", the mentions can be m1 and m2, and m1
+is a Markable with "John" and "Mary" as targets. Note though that in this case
+we need to be able to refer to annotation objects that contain "john" and
+"Mary". If they are not available then we need to introduce markables that refer
+to other markables.</p>
 
 <pre class="example">
 {
   "text": "John and Mary left, they were late",
   "views": [ 
-    { "metadata": { ... },
+    { "metadata": { },
       "annotations": [
-         { "@type": "Markable", "id": "m0", "start": 0, "end": 5 },
-         { "@type": "Markable", "id": "m1", "start": 10, "end": 14 },
-         { "@type": "Markable", "id": "m2", "targets": [ "mo", "m1" ] },
-         { "@type": "Markable", "id": "m3", "start": 21, "end": 25 },
+         { "@type": "Markable", "id": "m0", "start": 0, "end": 4 },
+         { "@type": "Markable", "id": "m1", "start": 9, "end": 13 },
+         { "@type": "Markable",
+           "id": "m2",
+           "features": {
+             "targets": [ "mo", "m1" ] }},
+         { "@type": "Markable", "id": "m3", "start": 20, "end": 24 },
          { "@type": "Coreference", 
            "id": "coref0", 
-           "mentions": [ "m2", "m3" ],
-           "representative": "m2" }]}]
+           "features": {
+             "mentions": [ "m2", "m3" ],
+             "representative": "m2" }}]}]
 }
 </pre>
 
-<p>Markables m0 and m1 could be other annotation types liek Token or Person.</p>
+<p>Markables m0 and m1 could be other annotation types like Token or Person.</p>
 
 </body>
 </html>
