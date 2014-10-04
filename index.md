@@ -14,10 +14,9 @@ The GitHub Pages for the Language Application Grid.
 
 ## Other
 
-### Coreference
+### LAPPS Interchange Format
 
-* [version 1](interchange/coref-v1.html)
-* [version 2](interchange/coref-v2.html)
-* [version 3](interchange/coref-v3.html)
+* [specifications](interchange/index.html)
+* [json schema](http://vocab.lappsgrid.org/schema/lif-schema.json)
 
 More information is sure to follow.
