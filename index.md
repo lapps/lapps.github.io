@@ -12,11 +12,18 @@ The GitHub Pages for the Language Application Grid.
 **When:** October 2-3, 2014
 1. [Meeting Summary](Summary2014-10-03.html)
 
-## Other
+## Specifications and Schemata
 
 ### LAPPS Interchange Format
 
 * [specifications](interchange/index.html)
 * [json schema](http://vocab.lappsgrid.org/schema/lif-schema.json)
 
-More information is sure to follow.
+## Project Modules
+
+1. org.lappsgrid.api
+1. org.lappsgrid.core
+1. [org.lappsgrid.discriminator](http://lapps.github.io/org.lappsgrid.discriminator)
+1. org.lappsgrid.client
+
+
