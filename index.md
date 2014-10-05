@@ -21,9 +21,10 @@ The GitHub Pages for the Language Application Grid.
 
 ## Project Modules
 
-1. org.lappsgrid.api
-1. org.lappsgrid.core
+1. [org.lappsgrid.api](#)
+1. [org.lappsgrid.core](#)
 1. [org.lappsgrid.discriminator](http://lapps.github.io/org.lappsgrid.discriminator)
-1. org.lappsgrid.client
-
+1. [org.lappsgrid.client](*)
+1. [org.lappsgrid.serialization](http://lapps.github.io/org.lappsgrid.serialization) Classes
+used to read and write the LAPPS Interchange Format.
 
