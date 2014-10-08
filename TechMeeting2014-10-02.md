@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: slate
 title: LAPPS Technical Meeting
 ---
+
+# LAPPS Technical Meeting
 
 **Date** October 2-3, 2014 <br/>
 **Place** Vassar College, Poughkeepsie NY<br/>
