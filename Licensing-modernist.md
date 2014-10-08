@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: modernist
 title: Licensing Meeting
 ---
 
@@ -31,9 +31,9 @@ title: Licensing Meeting
 
 1. Creating a road map is the #1 work item for this meeting.
 
-
 ### Themes
 
 * [Default](Licensing.html)
 * [Slate](Licensing-slate.html)
 * [Modernist](Licensing-modernist.html)
+
