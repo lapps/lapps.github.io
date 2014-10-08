@@ -1,5 +1,5 @@
 ---
-layout: modernist
+layout: slate
 title: Language Application Grid
 ---
 
