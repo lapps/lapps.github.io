@@ -25,7 +25,27 @@
 		* prevent an unauthorized user from running a protected service
 			* unregistered user
 			* user with incorrect permissions
-		
+
+### Possible Technologies
+
+The following are the technologies currently being investigated with some links to 
+interesting articles.
+
+#### OAUTH
+
+[http://oauth.net](http://oauth.net)
+
+1. [http://hueniverse.com/2010/09/29/oauth-bearer-tokens-are-a-terrible-idea/](http://hueniverse.com/2010/09/29/oauth-bearer-tokens-are-a-terrible-idea/)
+
+#### WS-Security
+
+[https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wss](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wss)
+
+1. An Oasis standard
+1. Seems to be very SOAP and Java-centric
+1. Several years old but does not seem to have much traction.
+
+
 ### Roadmap
 
 1. Creating a road map is the #1 work item for this meeting.
