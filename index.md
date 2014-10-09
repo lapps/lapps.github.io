@@ -3,7 +3,7 @@ layout: slate
 title: Language Application Grid
 ---
 
-## Upcoming Events
+### Upcoming Events
 
 1. <a href="TechMeeting2014-10-02.html">LAPPS Technical Meeting</a><br/>
 **Where:** Vassar College, Poughkeepsie New York<br/>
@@ -16,6 +16,10 @@ title: Language Application Grid
 
 * [specifications](interchange/index.html)
 * [json schema](http://vocab.lappsgrid.org/schema/lif-schema.json)
+
+### Project Notes and Plans
+
+* [Roadmap.html](Roadmap)
 
 ### Subprojects
 
