@@ -101,6 +101,13 @@ footer p {
   color: #f2f2f2;
 }
 
+.note {
+	border: 1px black solid;
+	background-color: #e0e0e0;
+	padding: 5px;
+    margin: 10px 0 15px 0;
+}
+
 a {
   text-decoration: none;
   color: #007edf;
