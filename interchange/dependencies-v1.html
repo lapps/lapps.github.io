@@ -12,14 +12,14 @@
 > <a href="">dependency structure</a>
 </p>
 
-<h1>Dependency Structure in LIF</h2>
+<h1>Dependency Structure in LIF</h1>
 
 <p>Version 1, October 2014</p>
 
 <p>We introduce an Annotation object with @type DependencyStructure. This object
 contains a list of dependencies, typically for a sentence. It introduces a
 feature named dependencies which contains a list of annotations of @type
-Dpendency. A Dependency has a label reflecting the dependency name and in its
+Dependency. A Dependency has a label reflecting the dependency name and in its
 feature dictionary it has references to the governeor and dependent.</p>
 
 <pre class="example">
@@ -72,7 +72,7 @@ feature dictionary it has references to the governeor and dependent.</p>
 
 
 <p>Some notes and open issues on the above (some are similar to the notes for
-the <a href="phrase_structure-v1.html">phrase structure</a>):</p>
+the <a href="phrase_structure-v1.html">phrase structure</a> specifications):</p>
 
 <ol class="spacy">
 
@@ -82,7 +82,7 @@ another view. For coreference, we stipulated that only Markable objects can
 refer to objects in other views. Do we have a same stipulation here? Using
 Markable objects seems wrong here.
 
-<li>In addition to the PhraseStrcuture object this view could also have Token
+<li>In addition to the DependencyStructure object this view could also have Token
 objects in it and the governor and dependent features would refer to identifiers
 in the same view.
 
