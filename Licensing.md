@@ -31,6 +31,12 @@ title: Licensing Meeting
 			* unregistered user
 			* user with incorrect permissions
 
+### Questions
+
+1. Can we distinguish between transformative uses and derivative uses.
+1. Should services be required to state if they create transformative or derivative 
+uses?
+
 ### Possible Technologies
 
 The following are the technologies currently being investigated with some links to 
