@@ -19,7 +19,7 @@ title: Language Application Grid
 * [specifications](interchange/index.html)
 * [json schema](http://vocab.lappsgrid.org/schema/lif-schema.json)
 
-** LAPPS Vocabulary
+**LAPPS Vocabulary**
 
 * [current issues](vocabulary/current_issues.html)
 
