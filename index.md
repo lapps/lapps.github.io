@@ -3,6 +3,8 @@ layout: slate
 title: Language Application Grid
 ---
 
+<h1>{{ page.title }}</h1>
+
 ### Upcoming Events
 
 1. <a href="TechMeeting2014-10-02.html">LAPPS Technical Meeting</a><br/>
