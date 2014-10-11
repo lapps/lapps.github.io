@@ -35,7 +35,7 @@ dd p { padding-left: 0px; }
 
 <h1>LAPPS Vocabulary - Current Issues</h1>
 
-<p>Last update: October 10th, 20014.</p>
+<p>Last update: October 11th, 20014.</p>
 
 <p>There are now four spots where the syntax and semantics of the LAPPS data
 structures are defined: the source code (mainly the wrappers),
@@ -52,27 +52,21 @@ vocabulary).</p>
 
 <dl class="spacy normalfont">
 
-<!--
-<dt></dt>
-<dd></dd>
--->
 
 <dt>Required versus optional attributes</dt>
 
 <dd>The vocabulary does not make a distinction between required and optional
   attributes. We do not yet have a clear idea what attributes should be
-  required. Take for example the Annotation element. I think we should require
-  the <em>id</em> attribute. But we cannot require <em>start</em>
+  required. Take for example the <em>Annotation</em> element. We should probably
+  require the <em>id</em> attribute. But we cannot require <em>start</em>
   and <em>end</em> since under <em>Annotation</em> we may have things
-  like <em>Dependency</em>, which has no offsets.</dd>
+  like <em>Dependency</em>, for which character offsets are not meaningful.</dd>
 
 
 <dt>Lists versus sets</dt>
-<dd></dd>
 
-
-<dt>View meta data</dt>
-<dd></dd>
+<dd>When the vocabulary says "List of URIs", does this imply that the list is
+ordered? Shall we use List and Ordered List, or List and Set?</dd>
 
 
 <dt>Adding vocabulary pages for coreference </dt>
@@ -102,12 +96,12 @@ LIF</a> page. We need to add two elements.
 <tr>
   <td>Markable</td>
   <td>
-  This is needed in LIF in case we do not have Annotation objects that the
+  This is needed in LIF in case we do not have annotation objects that the
   mentions list can point to. An object then needs to be created from the
-  offsets alone and we make this a Markable object. It has an extra feature
-  named targets that allows it to point to other Annotation objects. It may also
-  need features like ENTITY_MENTION_TYPE in order to store what is available in
-  the output of the coreference tool used.</td> 
+  offsets alone and we called this a <em>Markable</em> object. It has an extra
+  feature named <em>targets</em> that allows it to point to other annotation
+  objects. It may also need features like ENTITY_MENTION_TYPE in order to store
+  what is available in the output of typical coreference services.</td>
 </tr>
 
 <!--
@@ -142,9 +136,10 @@ structure in LIF</a> page. We need to add two elements.
   The container with all phrase structure information. Possibly an immediate subtype
   of <em>Annotation</em>. It has two features:
   <ul>
-    <li><em>categorySet</em>. A URI for a particular category set. If defined in
-    the LAPPS vocabulary, the URI would be inside
-    http://vocab.lappsgrid.org/ns/types. This is a meta data feature.
+    <li><em>categorySet</em>. A meta data feature containing a URI for a
+    particular category set. If defined in the LAPPS vocabulary, this URI would
+    be inside http://vocab.lappsgrid.org/ns/types.<br/> Question: should this be a
+    list of URIs?
     <li><em>constituents</em>. A set of annotation objects of type <em>Constituent</em>.
   </ul>
 </tr>
@@ -194,7 +189,10 @@ structure in LIF</a> page. Two new elements:
     labels. If defined in the LAPPS vocabulary, the URI would be inside
     http://vocab.lappsgrid.org/ns/types. This is a meta data feature.
     <li><em>type</em>. The type of dependencies: basic-dependencies,
-    collapsed-dependencies, etcetera.
+    collapsed-dependencies, etcetera. Given Steve Cassidy's insistence on
+    having <em>@type</em> as well as <em>type</em> in his JSON-LD, and the
+    possibility that we go along with this, maybe this feature should be
+    called <em>dependencyType</em>.
     <li><em>dependencies</em>. A set of annotation objects of type <em>Dependency</em>.
   </ul>
 </tr>
@@ -208,7 +206,8 @@ structure in LIF</a> page. Two new elements:
   <li><em>label</em>. A dependency label, defined in the URI that is
   the value of <em>DependencyStructure#dependencySet</em>.
   <li><em>governor</em>. An identifier pointing at an object of
-  type <em>Annotation</em> or a subtype thereof. Can be null for the root dependency.
+  type <em>Annotation</em> or a subtype thereof. Can be <em>null</em> for the
+  root dependency.
   <li><em>dependent</em>. An identifier pointing at an object of
   type <em>Annotation</em> or a subtype thereof.
   </ul>
@@ -227,34 +226,21 @@ structure in LIF</a> page. Two new elements:
 </dd>
 
 
-<dt>Missing links</dt>
 
+<dt>The Date object</dt>
 
-<dd>
-<table>
-<tr>
-  <td>Date</td>
-  <td>sameAs and similarTo are not links</td>
-</tr>
-<tr>
-  <td>Person</td>
-  <td>sameAs and similarTo are not links</td>
-</tr>
-<tr>
-  <td>Document</td>
-  <td>sameAs isocat reference is not a link</td>
-</tr>
-<!--
-<tr>
-  <td></td>
-  <td></td>
-</tr>
--->
-</table>
+<dd>Dates have a <em>dateType</em> feature with values
+like <em>date</em>, <em>datetime </em> and <em>time</em>. With features like
+this, should we add a meta data feature like <em>dateTypeSet</em>, which has a URI
+containing type definitions? This question is relevant for other object types as well.
+
+<p>Also, we should add a <em>value</em> feature to store the normalized value,
+as well as other Timex2 and Timex3 features.</p>
+
 </dd>
 
 
-<dt>Details</dt>
+<dt>Minor Details</dt>
 
 <dd>
 <table>
@@ -262,17 +248,32 @@ structure in LIF</a> page. Two new elements:
   <td>Thing</td>
   <td>layout of the headers is different from the other pages</td>
 </tr>
+  <td>Date</td>
+  <td>URLs in sameAs and similarTo are not links</td>
+</tr>
+<tr>
+  <td>Person</td>
+  <td>URLs in sameAs and similarTo are not links</td>
+</tr>
+<tr>
+  <td>Document</td>
+  <td>URLs in sameAs isocat reference is not a link</td>
+</tr>
 <tr>
   <td>Sentence</td>
   <td>sentenceType is in red</td>
 </tr>
 <tr>
+  <td>Location</td>
+  <td>locType is in red</td>
+</tr>
+<tr>
   <td>TextDocument</td>
-  <td>has a different table layout then other pages</td>
+  <td>has a different table layout than other pages</td>
 </tr>
 <tr>
   <td>AudioDocument</td>
-  <td>has a different table layout then other pages</td>
+  <td>has a different table layout than other pages</td>
 </tr>
 <!--
 <tr>
