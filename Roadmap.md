@@ -11,9 +11,14 @@ In no particular order.
 <span style="color:red">Note</span> These tasks should be prioritized.
 </div>
 
+* Release 2.0.0 for Java modules.
+	1. Merge feature branches back into develop branches.
+	1. Code review
+	1. Bump version and release.
 * Wrap HeidelTime annotator for adding Timex3 tags to text.<br/>
 [https://code.google.com/p/heideltime/](https://code.google.com/p/heideltime/)
 * Wrap some UIMA Services
+* GrAF/NIF converter.
 * Licensing
 	* common authentication/authorization service
 	* protect web services
