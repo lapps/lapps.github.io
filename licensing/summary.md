@@ -7,18 +7,25 @@ title: Licensing Meeting Summary
 
 The following items were discussed (in no particular order):
 
-1. **JSON Formats**<br/>While defining a precise JSON format was beyond the scope of our 
+1. **JSON Formats**
+	* While defining a precise JSON format was beyond the scope of our 
 meeting, we did discuss how licensing constraints might be expressed in the LAPPS formats.
 	* Existing software for generating and consuming LAPPS Interchange Format (LEDS).
-1. **Authentication and Authorization**<br/>How can LAPPS services use the existing
+1. **Authentication and Authorization**
+	* This is going to be hard, and to be done properly requires modifications to the
+	service grid software.  An ad-hoc interim solution will be required in the short term.
+	* How can LAPPS services use the existing
 infrastructure already in use at the LDC.
-1. **Licensing Calculus**<br/>We need one. More specifically, we need an authorization 
+1. **Licensing Calculus**
+	* We need one. More specifically, we need an authorization 
 calculus. If we want to reason about licensing then we need some formal rules.
-1. **Workflow**<br/>
+1. **Workflow**
+	* What will a typical conversation between the user, resource provider, and services
+	look like.
 
 ## Questions
 
-Many questions need to be answered before we can implement the licensing model:
+Many questions still need to be answered before we can implement the licensing model:
 
 1. Are we to distinguish between transformative uses and derivative uses?
 	* Does this mean services will be required to state if they create transformative or derivative 
@@ -33,33 +40,17 @@ works?
 		* Having the composer collect the username/password is less work for the LDC.
 1. The *Fee* constraint; is that a fee the user must pay to use the resource, or does
 it grant the user the right to sell the pipeline output?
-1. On slide 12 of PowerPoint presentation: what is the difference between *Require* and *Notify*	
 1. Do we need to distinguish between *user* types and *usage* types, eg. can a *commerical*
 user (ie. a company) use a resource for *research* purposes?
 		
 ### Possible Technologies
 
 None of the security standards we discussed will be able to assist us until the Service
-Grid software supports them natively.
-#### OAUTH
+Grid software supports them natively.  For OAuth or WS-Security to work the service needs
+low level access to the HTTP request (OAuth) or to the SOAP-Envelope (WS-Security). That
+can only be done by the service grid.
 
-[http://oauth.net](http://oauth.net)
-
-1. [http://hueniverse.com/2010/09/29/oauth-bearer-tokens-are-a-terrible-idea/](http://hueniverse.com/2010/09/29/oauth-bearer-tokens-are-a-terrible-idea/)
-1. [Scribe](https://github.com/fernandezpablo85/scribe-java) A Java library for OAuth 1.0 and 2.0
-1. [Netflix Oauth Library](http://oauth.googlecode.com/svn/code/java/)
-1. [Consuming OAuth SOAP services.](http://blog.avisi.nl/2012/11/22/consuming-oauth-secured-soap-webservices-using-spring-ws-axiom-signpost/)
-
-#### WS-Security
-
-[https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wss](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wss)
-
-1. An Oasis standard
-1. SOAP only and Java-centric
-1. Several years old but does not seem to have much traction.
-1. Seems to be used as the exemplar of how not to do security or standards.
-
-### Workflow
+## Workflow
 
 1. User logs in to composer/planner
 1. User selects a (LDC) data source	
@@ -76,7 +67,7 @@ Grid software supports them natively.
 1. Run pipeline.
 	* Add licensing metadata to the output.
 
-### Roadmap
+## Roadmap
 
 1. Get everything running on HTTPS
 1. Calculus for Licensing permissions.
@@ -93,7 +84,7 @@ Grid software supports them natively.
 	* Service Grid modified to consume OAuth services.
 	* LDC to implement OAuth authentication services.
 
-### Developer Guidelines
+## Developer Guidelines
 
 1. Don't ask the user anything until we have to.
 
