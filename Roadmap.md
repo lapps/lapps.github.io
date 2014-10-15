@@ -5,20 +5,21 @@ title: Roadmap
 
 # LAPPS Roadmap
 
-In no particular order.
-
 <div class="note">
-<span style="color:red">Note</span> These tasks should be prioritized.
+<span class="red">Note</span> These tasks should be prioritized and assigned to
+specific organizations/people.
 </div>
 
-* Release 2.0.0 for Java modules.
+In no particular order.
+
+* Release 2.0.0 for Java modules. Assigned to Vassar
 	1. Merge feature branches back into develop branches.
 	1. Code review
 	1. Bump version and release.
-* Wrap HeidelTime annotator for adding Timex3 tags to text.<br/>
-[https://code.google.com/p/heideltime/](https://code.google.com/p/heideltime/)
-* Wrap some UIMA Services
-* GrAF/NIF converter.
+* Wrap HeidelTime annotator for adding Timex3 tags to text. Assigned to Brandeis.
+	* [https://code.google.com/p/heideltime/](https://code.google.com/p/heideltime/)
+* Wrap some UIMA Services. 
+	* Not assigned.
 * Licensing
 	* common authentication/authorization service
 	* protect web services

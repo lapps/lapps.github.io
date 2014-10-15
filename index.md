@@ -7,11 +7,19 @@ title: Language Application Grid
 
 ### Upcoming Events
 
+None scheduled.
+
+### Past Events
+
 1. <a href="TechMeeting2014-10-02.html">LAPPS Technical Meeting</a><br/>
 **Where:** Vassar College, Poughkeepsie New York<br/>
 **When:** October 2-3, 2014
 	* [Meeting Summary](Summary2014-10-03.html)
-
+1. [LAPPS Licensing Meeting](Licensing.html)<br/>
+**Where:** Vassar College, Poughkeepsie New York<br/>
+**When:** October 12, 2014
+	* Meeting Summary (in progress)
+	
 ### Specifications and Schemata
 
 **LAPPS Interchange Format**

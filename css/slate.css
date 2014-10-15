@@ -108,6 +108,14 @@ footer p {
     margin: 10px 0 15px 0;
 }
 
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
 a {
   text-decoration: none;
   color: #007edf;
