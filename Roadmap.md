@@ -16,6 +16,8 @@ In no particular order.
 	1. Merge feature branches back into develop branches.
 	1. Code review
 	1. Bump version and release.
+* Wrap coreference following the new LIF specification
+* Wrap Stanford parsers (phrase structure and dependencies)
 * Security
 	1. Move all services to https
 	1. Finalize authorization workflow.
