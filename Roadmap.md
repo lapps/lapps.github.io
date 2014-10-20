@@ -12,10 +12,11 @@ specific organizations/people.
 
 In no particular order.
 
-* Release 2.0.0 for Java modules. <span class="green">Assigned to Vassar.</span>
+* Release 2.0.0 for Java modules. <span class="green">Assigned to Vassar</span>.
 	1. Merge feature branches back into develop branches.
 	1. Code review
 	1. Bump version and release.
+* Run Tomcat over HTTPS. <span class="green">Assigned to everyone</span>.
 * Wrap coreference following the new LIF specification
 * Wrap Stanford parsers (phrase structure and dependencies)
 * Security
