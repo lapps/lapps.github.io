@@ -17,13 +17,14 @@ In no particular order.
 	1. Code review
 	1. Bump version and release.
 * Run Tomcat over HTTPS. <span class="green">Assigned to everyone</span>.
+	1. Services **must** be reregistered with the Service Manager so the new, secure
+	ports are used instead of the unsecured ports.
+	1. Close unsecured ports so Tomcat **only** accepts secure connections.
+* Prototype authentication system with LDC.	
+	1. Finalize authorization workflow.
+	1. Finalize JSON format(s).
 * Wrap coreference following the new LIF specification
 * Wrap Stanford parsers (phrase structure and dependencies)
-* Security
-	1. Move all services to https
-	1. Finalize authorization workflow.
-		* This is non-trivial.
-	1. Prototype authentication system with LDC.	
 * Wrap HeidelTime annotator for adding Timex3 tags to text. <span class="green">Assigned to Brandeis?</span>
 	* [https://code.google.com/p/heideltime/](https://code.google.com/p/heideltime/)
 * Wrap some UIMA Services. 
