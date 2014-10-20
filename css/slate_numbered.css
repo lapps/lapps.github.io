@@ -49,6 +49,8 @@ Theme Styles
 *******************************************************************************/
 
 body {
+  counter-reset: section;
+  xcounter-reset: subsection;
   box-sizing: border-box;
   color:#373737;
   background: #212121;
@@ -68,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 700;  
 }
 
 h2 {
@@ -79,11 +81,21 @@ h2 {
 
 h3 {
   font-size: 24px;
+  counter-reset: subsection; 
+}
+h3:before {
+   content: counter(section) ". "; 
+   counter-increment: section;
 }
 
 h4 {
   font-size: 21px;
+  counter-increment: subsection; 
 }
+h4:before {
+   content: counter(section) "." counter(subsection) ". "; 
+}
+
 
 h5 {
   font-size: 18px;
