@@ -65,12 +65,12 @@ these passwords **must** be the same or Tomcat will have problems.
 
 ### Generate a Certificate Signing Request (CSR)
 
-This step is optional if you already have a security certificate for you server (and if 
-you serve anything over https you do).
+This step is optional if you already have a security certificate for you server.  However,
+if your certificate is self-signed you should generate a new certificate for use with Tomcat
+that can be signed by the LAPPS Certificate Authority (LAPPSCA).
 
-This step is only needed if your server does not already have a security certificate, or if
-you want your Tomcat instance to use a separate certificate.  If you already have a security
-certificate skip this step and move directly to the *Installing the Certificate* step.
+If you already have a (non-self-signed) security certificate that you would like to use
+skip this step and move directly to the *Installing the Certificate* step below.
 
 ```bash
 keytool -certreq -keyalg RSA -alias tomcat -file server-name.csr -keystore /path/to/keystore
@@ -82,8 +82,8 @@ Email the CSR to me and I will send you three certificates in return:
 
 1. Your signed security certificate for your server. This will be server-name.crt where
 <tt>server-name</tt> is the server name used by the CSR.
-1. The security certificate for the Signing Authority: lapps-sa.crt
-1. The security certificate for the Certificate Authority: lapps-ca.crt
+1. The security certificate for the LAPPS Signing Authority: lapps-sa.crt
+1. The security certificate for the LAPPS Certificate Authority: lapps-ca.crt
 
 All three certificates need to be installed into the Java keystore we created above.
 
