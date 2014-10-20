@@ -63,7 +63,7 @@ or I will not be able to sign your certificate.
 You will also be asked to generate two passwords;
 these passwords **must** be the same or Tomcat will have problems.
 
-#### Generate a Certificate Signing Request (CSR)
+### Generate a Certificate Signing Request (CSR)
 
 This step is optional if you already have a security certificate for you server (and if 
 you serve anything over https you do).
@@ -87,7 +87,7 @@ Email the CSR to me and I will send you three certificates in return:
 
 All three certificates need to be installed into the Java keystore we created above.
 
-#### Installing the Certificate
+### Installing the Certificate
 
 If you are using your existing security certificate you only need to perform the last command,
 substituting the filename of you existing certificate for <tt>server-name.crt</tt>.
@@ -151,3 +151,15 @@ Restart you Tomcat instance(s) and try to connect via https: e.g.
 
 After a month or so the Connector for port 8080 should be commented out of the `server.xml`
 file.  This will restrict access to the secure port only.
+
+# End Users
+
+End users should install the [LAPPS CA Root Certificate](http://www.anc.org/downloads/lapps-ca.crt)
+ before accessing any secured LAPPS services. Firefox will ask users if they want to trust 
+ the certificate as soon as they click the above link.  Other browsers will download the certificate
+ and usually double clicking the downloaded file will install the certificate.
+
+## Certificate Fingerprints
+
+**SHA1:** B0 13 82 B6 3C DA 91 16 52 11 82 1C 81 A4 18 FB 43 97 B0 94<br/>
+**MD5:** F6 F0 CF CF A9 10 7B 25 79 82 49 02 4C 4A 3E F4
