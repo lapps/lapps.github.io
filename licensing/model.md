@@ -1,5 +1,5 @@
 ---
-layout: slate
+layout: slate_numbered
 title: Data Model for LAPPS Licensing
 ---
 
@@ -32,31 +32,26 @@ their work, only that if they do they must *share alike*.
 
 ### Dependent Permissions
 
-Some permissions depend on other permissions.  For example, permissions like `ATTTRIBUTION`
-and `SHARE_ALIKE` are not relevant if `REDISTRIBUTION` is not allowed.
+Some permissions depend on other permissions.  For example, permissions like <tt>ATTTRIBUTION</tt>
+and <tt>SHARE_ALIKE</tt> are not relevant if <tt>REDISTRIBUTION</tt> is not allowed.
 
-1. COMMERCIAL
-1. RESEARCH
-1. EDUCATION
-1. PERSONAL
+### Enforcable vs Nonenforcable 
 
 Some permissions must be conveyed to the user but can not be enforced in software; e.g.
-*Attribution*, *ShareAlike*, *Fee*, *Redistribution*.
+*Attribution*, *ShareAlike*, *Redistribution*. Some restrictions can be enforced, e.g. 
+*Did the user sign license* x *?*
 
-### Permissions Class
+## Permissions Class
 
-The set of permission values will be managed by a *Permissions* class which will consist of:
+The set of permission values should be managed by a *Permissions* class which will consist of:
 
-* a set of values from the `Permission` enum
+* a set of *permission values*
 * methods to add/remove elements from the set.
-* methods to serialize the set to/from JSON
+* methods to serialize the permissions to/from JSON.
+* methods to compare instances of the *Permissions* class.
+	* For example, if user *U* has permissions % U\_p % and resource *R* requires 
+	permissions % R\_p % to allow access, the user % U % may access the
+	resource % R % *iff* % U\_p\\bigcap R\_p = R\_p %
 
-A `DataSource`'s `getMetadata()` method should return the JSON for the licensing permissions
+A <tt>DataSource</tt>'s <tt>getMetadata()</tt> method should return the JSON for the licensing permissions
 as part of its response.
-
-## Pipelines
-
-1. The user provides credentials to an authorization server 
-Every processing transaction on the Lappsgrid begins with the user providing credentials to
-an authorization server.
-
