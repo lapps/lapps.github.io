@@ -23,12 +23,16 @@ In no particular order.
 * Prototype authentication system with LDC.	
 	1. Finalize authorization workflow.
 	1. Finalize JSON format(s).
-* Wrap coreference following the new LIF specification
+* Wrap coreference following the new LIF specification <span class="green">Assigned to Brandeis</span>
 * Wrap Stanford parsers (phrase structure and dependencies)
-* Wrap HeidelTime annotator for adding Timex3 tags to text. <span class="green">Assigned to Brandeis?</span>
+* Wrap HeidelTime annotator for adding Timex3 tags to text. <span class="green">Assigned to Brandeis</span>
 	* [https://code.google.com/p/heideltime/](https://code.google.com/p/heideltime/)
 * Wrap some UIMA Services. 
 	* Not assigned.
+* Wrap a service that consumes the output of coref, phrase structure and dependency structure
+	* This is partially to test the LIF of newly wrapped annotation types
+	* One option is to simply provide a simplistic printout of the LIF conent
+	* This could be a version of the current [BRAT visualization](http://eldrad.cs-i.brandeis.edu:8484/jld/visualization.html).
 * Licensing
 	* Common authentication/authorization service (See Security).
 	* Protect resources at LDC
