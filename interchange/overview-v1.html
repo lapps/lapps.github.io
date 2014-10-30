@@ -31,18 +31,87 @@ http://vocab.lappsgrid.org/schema/lif-schema.json</a>
 <p>At this point it is dangerous to assume that the schema are in sync with the
 prose in these LIF pages.</p>
 
-<p>The rest of this document now has some current open issues</p>
+<p>The rest of this document now has some current open issues and questions.</p>
 
 <dl class="nicer">
 
 <dt>Use of identifiers in LIF.</dt>
 
-<dd></dd>
+<dd>This is tricky from a conceptual angle (I think). We now have a situation
+  where two views (from the tokenizer and tagger for example) can have Token
+  objects with the same identifier. Is this confusing? I find it somehwat
+  confusing to have two different JSON objects with the same identifier (they
+  are different because the same Token in the tagger view has added
+  attributes). Are these identifiers really references to some underlying object
+  that we imply, but that does not occur in the representation explicitly? And
+  do we need the identifiers for the Token objects with the same text span to be
+  the same? We don't really because the Token objects also have the start and
+  end offsets which are identical for the two. The identical identifiers do
+  indicate that the two tokens in the two views really are the same token, if we
+  require each token identifier to be unique to the document, then we loose
+  this. We can make it work either way, the issue may just be to decide on what
+  is easier to explain to outsiders.</dd>
+
+<dt>Is the list value of view ordered or unordered</dt>
+
+<dd>We could require that any view added by a lif-wrapped service has to be
+  appended to the end and that is the list were ordered we could read a
+  processing history from the views list. If we want to do that we would have
+  to change the value of "views" and make it look like
+
+	<blockquote>
+	"views": { "@list": [ ... ] }
+	</blockquote>
+
+  Alternatively, this can be done in the context:
+
+	<blockquote>
+	"@context": { "views": { "@container": "@list" } }
+	</blockquote>
+
+  My current preference is to make the order not matter in the views list since
+  this is the least effort and make the fewest assumptions.</dd>
 
 
-<dt></dt>
+<dt>Does a view know who created it?</dt>
 
-<dd></dd>
+<dd>Yes in the sense that it has a set of producers, one or more for each
+  annotation type. But the producer is not an identifier of any kind, rather, it
+  is some string that give us an indication of where it came from (and we now
+  tend to use the Java class). The producer cannot be the webservice that
+  created the view because the web service does not know where it lives. We also
+  do not know explicitly what was the producer that added new data to the
+  view. Note that a view can have data that were copied from other views. We can
+  probably derive a flow in convoluted ways, but I think it is better to
+  consider a view as a purely descriptive device, one that contains no
+  procedural knowledge. If we want to do the latter, only the composer can do
+  that.</dd>
+
+
+<dt>Does a view know what kind of data it contains, what kind of data were
+  added by the service and what data were used by the service?</dt>
+
+<dd>Yes, no and no. It knows what data it contains in the "contains" attribute
+  in the meta data. The question on what was added and what was used is much
+  harder to answer. We could require that the service that added the view has
+  to give it some information about itself, perhaps by dumping all its metadata
+  in the view in a "service" attribute of the meta data. This will probably only
+  make sense if each view is added by only one service.</dd>
+
+
+<dt>What is the "type" attribute doing?</dt>
+
+<dd>This is the attribute that is bundled with the producer names inside the
+  "contains" attribute of the view metadata. I have no idea what it means and I
+  suggest we remove it.</dd>
+
+
+<dt>How many views can be created by a service?</dt>
+
+<dd>Do we restrict this to exactly one view or do we allow a service to add
+  many views. We may also allow a service to add no views and instead add data
+  to existing views. If we have a one-view-added-per-service we can give the
+  view some metadata on the service that created it.</dd>
 
 
 <dt></dt>
@@ -51,6 +120,12 @@ prose in these LIF pages.</p>
 
 
 </dl>
+
+<p>There is a general issue that surfaces when thinking about the metdata and
+  the views. One thing that motivated the old "steps" attribute was to be able
+  to find data that some service may need. Another was (I think) that isolating
+  the results of a service in one view may be neat. But it may make for a muddy
+  story of what our views really are.</p>
 
 </body>
 </html>
