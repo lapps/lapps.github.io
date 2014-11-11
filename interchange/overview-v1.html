@@ -14,22 +14,225 @@
 
 <h1>Overview of LIF</h1>
 
-<p>Version 1, October 2014</p>
+<p>Last updated: November 1<sup>st</sup>, 2014</p>
 
 <p>This document contains a general overview of the LAPPS Interchange Format
 (LIF), which is a JSON-LD format used to tranport data between LAPPS
-services. This version of the document is just a draft with a couple of
-disjointed notes.</p>
+services.</p>
 
-<p>The current JSON schema for LIF are at</p>
+<p>The current JSON schema for LIF are at
+<a href="http://vocab.lappsgrid.org/schema/lif-schema.json">
+http://vocab.lappsgrid.org/schema/lif-schema.json</a>. At this point it is
+dangerous to assume that the schema are in sync with the prose in these LIF
+pages. Similarly, while the specifications often refer to or rely on the Lapps
+vocabulary at
+<a href="http://vocab.lappsgrid.org">http://vocab.lappsgrid.org</a>, it is
+unwise to assume that at this point the specifications are in sync with the
+vocabulary.</p>
+
+<p>There are still many open issues. These are indicated in boxes with red
+dotted borders.</p>
+
+
+
+<h2>Top-level structure of LIF objects</h2>
+
+<p>The top-level structure of a LIF object is as follows:</p>
+
+<pre class="example">
+{
+  "@context": "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+  "metadata": { },
+  "text": { },
+  "views": [ ]
+}
+</pre>
+
+<p>There are four top-level keys: @context, metadata, text and views. The
+following sub sections will describe the values of these four keys.</p>
+
+
+<h3>The @context key</h2>
+
+<p>The value here is the fixed URL
+<a href="http://vocab.lappsgrid.org/context-1.0.0.jsonld">http://vocab.lappsgrid.org/context-1.0.0.jsonld</a>. It
+points to a document with a JSON object that points to various parts of the
+Lapps vocabulary. One question is whether we allow people to provide their own
+context. My hunch would be to say yes.  As far as I can see there are two ways
+to deal with this. The first is to not allow this key to be edited and to
+specify that user contexts be added to the annotation views (see below). The
+other is to change the value of @context into a list where services can add
+their own definitions:
+
+<pre class="example">
+{
+  "@context": [
+	"http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+	{ 
+	  "Token": "http://example.com/types/Token"
+	}
+  ]
+}
+</pre>
+
+<p>What I do not know though is how JSON-LD deals with cases like the above,
+where we have Token defined in the vocabulary as well as by a user-added
+definition.</p>
+
+<p class="issue">Do we indeed allow services to define their own context? And
+what way do we choose? And how is the Token issue to be dealt with?</p>
+
+
+<h3>The metadata key</h3>
+
+<p>All examples of output of our services have an empty object here. I have no
+intuitions on what should be in here. The LIF object is created and consumed by
+wrappers and metadata information added should be relevant to and usable by
+these wrappers. All metadata we have so far are relevant to individual views
+only and are included in the views key.</p>
+
+<p class="issue">Decide whether the metadata key is needed.</p>
+
+
+<h3>The text key</h3>
+
+<p>This is a JSON <a href="http://www.w3.org/TR/json-ld/#dfn-value-object">value
+object</a> containing a @value and a @language key. The value associated with
+@value is a string and the value associated with @language follows the rules in
+<a href="http://www.w3.org/TR/json-ld/#bib-BCP47">BCP47</a>, which for our
+current purposes boils down to using the ISO 639 code (also
+see <a href="http://vocab.lappsgrid.org/Document.html#language">Document
+section</a> in the vocabulary).
+
+
+<h3>The views key</h3>
+
+<p>This is where all the annotations and associated information live. The value
+is a JSON array of views where each view specifies what information is in it and
+what service created that information. There are a few general principles:</p>
+
+<ol>
+
+<li>There is no limit to the number of views.
+
+<li>Services may create as many new views as they want.
+
+<li>Services may add information to existing views.
+
+<li>Services may not overwrite information in existing views.
+
+</ol>
+
+<p>Here is a minimal example of one view with just one annotation element. </p>
+
+<pre class="example">
+"views": [ 
+   {
+      "@context": {},
+      "id": "v0",
+      "metadata": {
+        "contains": {
+          "Token": {
+            "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+            "type": "tokenization:opennlp",
+            "rules": "tokenization:opennlp_basic"
+          }
+        }
+      },
+      "annotations": [ 
+         { "@type": "Token", 
+           "id": "t0", 
+           "start": 0, 
+           "end": 5, 
+           "features": {} 
+         }
+      ]
+   }
+]
+</pre>
+
+<p>There are four keys in the view object: @context, id, metadata and
+annotations. The <b>@context</b> key is used for user-defined context
+elements. As noted before, this is one of two possible choices on how to do
+this. This is an optional key.</p>
+
+<p>The <b>id</b> keys is required and its value should be unique relative to all
+view objects. </p>
+
+<p>@context</p>
+
+<p></p>
+
+<p>The type key inside of Token is used to specify what kind of token we are
+dealing with. It allows several tokenizer to specify the same type, for example
+if sevaral tokenizers are all implementations of the the OpenNLP tokenization.
+In the example here it has the compact IRI value tokenization:opennlp, where
+tokenization refers to the tokenization key in the context defined
+in <a href="http://vocab.lappsgrid.org/context-1.0.0.jsonld">http://vocab.lappsgrid.org/context-1.0.0.jsonld</a>,
+which contains the following two lines:
+
+<pre class="example">
+    "types": "http://vocab.lappsgrid.org/types/",
+    "tokenization": "types:tokenization/",
+</pre>
+
+<p>So tokenization:opennlp will be expanded to
+http://vocab.lappsgrid.org/types/tokenization/opennlp. The rules key inside of
+Token can be used to specify a rule set. Assuming it expands to
+http://vocab.lappsgrid.org/types//opennlp_basic, it can use the same expansion
+as used by tokenization:opennlp.</p>
+
+<p>Note that in the vocabulary producer and rules are both defined as metadata
+properties on Token (albeit inherited from Annotation). The type key on the
+other hand is defined in the metadata area of the vocabulary
+(<a href="http://vocab.lappsgrid.org/metadata/type">http://vocab.lappsgrid.org/metadata/type</a>).
+
+<p class="issue">Well, it is not there yet. Also, is this the right place to
+define this key?</p>
+
+<pre>
+We have
+         "Token": {
+            "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+            "type": "tokenizer:opennlp"
+Should this be
+         "Token": {
+            "token:producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+            "lif:type": "tokenizer:opennlp"
+Avoids ambiguous references. Or just the lif:, not the token:, or using Token:.
+</pre>
+
+
+<p class="issue">Identifiers for same object and text span need to be the same
+if they are in different views?</p>
+
+<div class="issue">
+We need to decide whether the array that is the value of the views key is
+ordered or unordered. We could require that any view added by a lif-wrapped
+service has to be appended to the end and that is the list were ordered we could
+read a processing history from the views list. If we want to do that we would
+have to change the value of "views" and make it look like
 
 <blockquote>
-<a href="http://vocab.lappsgrid.org/schema/lif-schema.json">
-http://vocab.lappsgrid.org/schema/lif-schema.json</a>
+"views": { "@list": [ ... ] }
 </blockquote>
 
-<p>At this point it is dangerous to assume that the schema are in sync with the
-prose in these LIF pages.</p>
+<p>Alternatively, this can be done in the context:</p>
+
+<blockquote>
+"@context": { "views": { "@container": "@list" } }
+</blockquote>
+
+My current preference is to make the order not matter in the views list since
+this is the least effort and make the fewest assumptions. However, if we have a
+good reason for having the order mean something we could require that.
+
+</div>
+
+
+
+
+
 
 <p>The rest of this document now has some current open issues and questions.</p>
 
@@ -51,27 +254,6 @@ prose in these LIF pages.</p>
   require each token identifier to be unique to the document, then we loose
   this. We can make it work either way, the issue may just be to decide on what
   is easier to explain to outsiders.</dd>
-
-<dt>Is the list value of view ordered or unordered</dt>
-
-<dd>We could require that any view added by a lif-wrapped service has to be
-  appended to the end and that is the list were ordered we could read a
-  processing history from the views list. If we want to do that we would have
-  to change the value of "views" and make it look like
-
-	<blockquote>
-	"views": { "@list": [ ... ] }
-	</blockquote>
-
-  Alternatively, this can be done in the context:
-
-	<blockquote>
-	"@context": { "views": { "@container": "@list" } }
-	</blockquote>
-
-  My current preference is to make the order not matter in the views list since
-  this is the least effort and make the fewest assumptions.</dd>
-
 
 <dt>Does a view know who created it?</dt>
 

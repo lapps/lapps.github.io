@@ -1,25 +1,22 @@
 
 body {
-   counter-reset: section;
-   xcounter-reset: subsection;
-   #width: 800px;
-   #margin-left: 0.5em;
-   padding-right: 5em;
-   padding-left: 5em;
-   font-size: 12pt; }
+    counter-reset: section;
+    xcounter-reset: subsection;
+    #width: 800px;
+    #margin-left: 0.5em;
+    padding-right: 5em;
+    padding-left: 5em;
+    font-size: 12pt; }
 
-#main
-{
-	padding-right: 50px; 
-	padding-bottom: 5px;
-	border-bottom: solid 1px #CCCCCC;
-	text-align: left;
-}
+#main {
+    padding-right: 50px; 
+    padding-bottom: 5px;
+    border-bottom: solid 1px #CCCCCC;
+    text-align: left; }
 
 h1 {
     font-size: 24pt; 
-    border-bottom: thick solid darkgreen;
-}
+    border-bottom: thick solid darkgreen; }
 
 h2 {
     font-size: 20pt; 
@@ -31,25 +28,30 @@ h3 {
     border-bottom: thin dotted darkgreen;
     counter-increment: subsection; }
 
+h4 {
+    font-size: 14pt; 
+    border-bottom: thin dotted darkgreen; }
+
+
 h2:before {
-   content: counter(section) ". "; 
-   counter-increment: section;
+    content: counter(section) ". "; 
+    counter-increment: section;
 }
 
 h3:before {
-   content: counter(section) "." counter(subsection) ". "; }
+    content: counter(section) "." counter(subsection) ". "; }
 
 p, li, td {
-   font-size: 100%; }
+    font-size: 100%; }
 
 .navigation {
-   font-size: 140%; }
+    font-size: 140%; }
 
 .author {
-   font-size: 120%; }
+    font-size: 120%; }
 
 .pre {
-   font-family: "courier new", monospace; }
+    font-family: "courier new", monospace; }
 
 dl.nicer dt {
     font-style: italic; }
@@ -59,35 +61,39 @@ dl.nicer dd {
     margin-bottom: 8pt; }
 
 p.pre { 
-   margin-left: 2em;
-   white-space: pre; }
+    margin-left: 2em;
+    white-space: pre; }
 
 span.pre {
-   white-space: normal; }
+    white-space: normal; }
 
 pre.example {
-   margin-left: 2em;
-   font-family: "courier new"; }
+    margin-left: 1em;
+    font-family: "courier new"; }
 
 p.abstract {
     padding: 5pt;
     background-color: #eeffee;
     border: thin solid grey; }
 
+.issue {
+    padding: 5pt;
+    border: thin dotted red; }
+
 .indent {
-   margin-left: 2em; }
+    margin-left: 2em; }
 
 .outdent {
-   margin-left: -1.3em; }
+    margin-left: -1.3em; }
 
 .move-up {
-   margin-top: -1em; }
+    margin-top: -1em; }
 
 .move-up-a-bit {
-   margin-top: -0.5em; }
+    margin-top: -0.5em; }
 
 .move-down-a-bit {
-   margin-top: 0.5em; }
+    margin-top: 0.5em; }
 
 .nowrap {
     white-space: nowrap; }
