@@ -13,6 +13,9 @@ is most likely already out of date...
 This page serves as a "worksheet" to sketch out the data structures and algorithms that
 will be used to implement the LAPPS licensing model.
 
+## Licensing Calculus
+
+
 ## Permissions 
 
 The permissions for a DataSource can be modeled as a set of *permission values*. Allowable
@@ -49,7 +52,7 @@ The set of permission values should be managed by a *Permissions* class which wi
 * methods to add/remove elements from the set.
 * methods to serialize the permissions to/from JSON.
 * methods to compare instances of the *Permissions* class.
-	* For example, if user *U* has permissions % U\_p % and resource *R* requires 
+	* For example, if user % U % has permissions % U\_p % and resource % R % requires 
 	permissions % R\_p % to allow access, the user % U % may access the
 	resource % R % *iff* % U\_p\\bigcap R\_p = R\_p %
 
