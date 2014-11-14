@@ -28,12 +28,12 @@ authenticate with every request.
 The application (composer or pipeline planner) the end user is using to access a
 *protected resource*.
 <br/>
+**AAS**<br/>
+An authentication and authorization service. Any service that can authenticate a user and
+determine if they are authorized to access a particular *protected resource*.  The *AAS*
+must also return any *access constraints* that apply to the *protected resource*.
 **LAAS**<br/>
-The LDC's Authentication and Authorization Service.  A service provided by the LDC that can authorize a 
-user's credentials and return a JSON document indicating whether or not a particular user
-may access a *protected resource* as well as any *access constraints*
-required by the resource.
-
+The LDC's Authentication and Authorization Service.  
 
 ## Authorization Use Cases
 
