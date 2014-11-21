@@ -18,8 +18,8 @@
 
 
 <p>This section contains examples on how to represent tokenized and split
-text. It includes how to represent some token-level information, including part
-of speech.</p>
+text. It includes how to represent token-level information, in particular part
+of speech tags.</p>
 
 <p>Sentence splitters create annotation objects of type Sentence and tokenizers
 create objects of type Token, these are both defined in the LAPPS vocabulary
@@ -30,9 +30,9 @@ http://vocab.lappsgrid.org/Token.html</a>. POS taggers fill in
 the <code>posTag</code> property in the <code>features</code> dictionary on the
 Token (but note that some taggers create Token objects as part of that process).</p>
 
-<p>There are many pipelines for creating sentences, tokens and pos tags and
-lemmas. As an example, we take a pipeline where the OpenNLP splitter as wrapped
-at Brandeis is followed by the Vassar Stanford tokenizer and the Vassar Stanford
+<p>There are many pipelines for creating sentences, tokens and part of speech
+tags. As an example, we take a pipeline where the OpenNLP splitter as wrapped at
+Brandeis is followed by the Vassar Stanford tokenizer and the Vassar Stanford
 POS tagger (note that we assume here that Stanford tokenizer and tagger are
 wrapped as separate services).</p>
 
@@ -46,10 +46,10 @@ wrapped as separate services).</p>
 }
 </pre>
 
-<p>With this object as input, the first component of the pipeline will append a
-Sentence view to the views array and the tokenizer a Token view. Recall from the
-LIF overview that wrapped components are expected to add views to the end of the
-views array and to give each view a unique identifier.</p>
+<p>With this object as input, the sentence splitter will append a Sentence view
+to the views array and the tokenizer a Token view. Recall from the LIF overview
+that wrapped components are expected to add views to the end of the views array
+and to give each view a unique identifier.</p>
 
 <pre class="example">
 {
@@ -95,33 +95,41 @@ follows:</p>
        "Token": {
          "producer": "org.anc.lapps.stanford.SATokenizer:1.4.0",
          "type": "tokenization:stanford" },
-       "Token#pos": {
+       "Token#posTag": {
          "producer": "org.anc.lapps.stanford.SATagger:1.4.0",
          "posTagset": "penn",	
          "type": "postagging:stanford" }}},
   "annotations": [
-     { "@type": "Token", "id": "tok0", "start": 0, "end": 4, "features": { "pos": "NNP" } },
-     { "@type": "Token", "id": "tok1", "start": 5, "end": 10, "features": { "pos": "VBZ" } },
-     { "@type": "Token", "id": "tok2", "start": 10, "end": 11, "features": { "pos": "." } } ]
+     { "@type": "Token", "id": "tok0", "start": 0, "end": 4, "features": { "posTag": "NNP" } },
+     { "@type": "Token", "id": "tok1", "start": 5, "end": 10, "features": { "posTag": "VBZ" } },
+     { "@type": "Token", "id": "tok2", "start": 10, "end": 11, "features": { "posTag": "." } } ]
 }
 </pre>
 
-In the vocabulary, <code>posTagset</code> is defined as a meta data property on <code>Token</code> (and
-<code>producer</code> and <code>rules</code> are defined as meta data properties
-of <code>Annotation</code>). Note also the use of <code>Token#pos</code>
-and <code>pos</code>. These are two alternative ways of pointing to the same URL
-in the vocabulary, given that the external context file has the following three
-lines:
+In the vocabulary, <code>posTagset</code> is defined as a meta data property on Token and
+<code>producer</code> and <code>rules</code> are meta data properties inherited
+from Annotation. Note the use of <code>Token#posTag</code>
+and <code>posTag</code>. These are two alternative ways of pointing to the same URL
+in the vocabulary and this works if the context contains the following lines:</p>
 
 <pre class="example">
 "@vocab": "http://vocab.lappsgrid.org/",
 "token": "http://vocab.lappsgrid.org/Token#",
-"pos": "token:pos",
+"posTag": "token:posTag",
 </pre>
 
+<p>The first line allows <code>Token#posTag</code> to be expanded to
+"http://vocab.lappsgrid.org/Token#posTag" and the second and third line do the
+same for <code>posTag</code>. In the dictionary, we could have
+used <code>Token#posTag</code> but we prefer the shorter version.</p>
+
+<p class="issue">Note that the external context file actually has "token:pos" as
+the value in the third line, this needs to be updated. In addition, the
+vocabulary still uses "pos" instead of "posTag".</p>
+
 <p>The second way for the tagger to add to the LIF object is to add a view and
-not change an exiting view. WHile the views with identifier "v1" and "v2" would
-remain the same, the next view woul be appended to the views list:</p>
+not change an existing view. While the views with identifier "v1" and "v2" would
+remain the same, the next view would be appended to the views list:</p>
 
 <pre class="example">
 {
@@ -131,27 +139,27 @@ remain the same, the next view woul be appended to the views list:</p>
        "Token": {
          "producer": "org.anc.lapps.stanford.SATokenizer:1.4.0",
          "type": "tokenization:stanford" },
-       "Token#pos": {
+       "Token#posTag": {
          "producer": "org.anc.lapps.stanford.SATagger:1.4.0",
          "posTagset": "penn",	
          "type": "postagging:stanford" }}},
   "annotations": [
-     { "@type": "Token", "id": "tok0", "start": 0, "end": 4, "features": { "pos": "NNP" } },
-     { "@type": "Token", "id": "tok1", "start": 5, "end": 10, "features": { "pos": "VBZ" } },
-     { "@type": "Token", "id": "tok2", "start": 10, "end": 11, "features": { "pos": "." } } ]
+     { "@type": "Token", "id": "tok0", "start": 0, "end": 4, "features": { "posTag": "NNP" } },
+     { "@type": "Token", "id": "tok1", "start": 5, "end": 10, "features": { "posTag": "VBZ" } },
+     { "@type": "Token", "id": "tok2", "start": 10, "end": 11, "features": { "postag": "." } } ]
 }
 </pre>
 
 <p>This views list is identical to the previous one shown because meta data
-elements from "v2" are copied and tagging example does not overwrite existing
+elements from "v2" are copied and the tagger does not overwrite existing
 information. There are other cases though where existing information could be
 overwritten (for example a cascade of taggers where later taggers are allowed to
 overwrite results of earlier taggers). In those cases, adding a view with merged
-information has the benifit of not removing information.</p>
+information has the benefit of not removing information.</p>
 
-<p class="issue">There are references to <code>tokenization:stanford</code>
-and <code>postagging:stanford</code>. These both refer to URLs in the types
-section of the vocabulary. We need to come up with an initial directory
+<p class="issue">In the above, we have used types like "splitter:nlp",
+"tokenization:stanford" and "postagging:stanford". These refer to URLs in the
+types section of the vocabulary. We need to come up with an initial directory
 structure for these.</p>
 
 </body>

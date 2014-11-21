@@ -353,5 +353,16 @@ outside of the LAPPS vocabulary. In that case the user should either use the
 full URI or add a context to the view in which this new annotation category
 lives.</p>
 
+<p>Technically all that is required of the keys in the features dictionary is
+that they expand to a URI. In most cases, the keys reflect properties in the
+LAPPS vocabulary and we prefer to use the same name. So if we have a property
+"posTag", we will use "posTag" in the dictionary. This implies that "posTag"
+needs to be defined in the context so that it can be expanded to the correct URI
+in the vocabulary. This in term implies that in the vocabulary, each property
+should be only defined once. </p>
+
+<p>User-defined properties need to be defined in the view where they are added
+or full URI must be used.</p>
+
 </body>
 </html>
