@@ -104,10 +104,8 @@ In no particular order. Some may need to be transferred to the above sections.
 	1. Merge feature branches back into develop branches.
 	1. Code review
 	1. Bump version and release.
-
 * Wrap some UIMA Services. 
 	* Not assigned.
-
 * Outstanding Issues
 	* ID values in views.  Currently ID values are <span class="red">not</span> unique
 	in a JSON document. E.g. a token will have the same ID in every view it appears in. How 
