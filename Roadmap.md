@@ -31,16 +31,16 @@ This would be due a few days before Nancy leaves for the workshop. The workshow 
   class="green">Chunqi</span>
 * Wrap Stanford parsers (phrase structure and dependencies) <span
   class="green">Chunqi</span>
+* Add pages to the LIF specifications for temporal processing <span class="green">Marc</span>
 * Wrap HeidelTime annotator for adding Timex3 tags to text. <span
   class="green">Chunqi</span>
 	* [https://code.google.com/p/heideltime/](https://code.google.com/p/heideltime/)
-* Add pages to the LIF specifications for temporal processing <span class="green">Marc</span>
 * Test and update existing services to conform to LIF and vocab. <span
   class="green">Vassar/Brandeis</span>
-* Write script/service that test whether services generate well-formed LIF
+* Write script/service that tests whether services generate well-formed LIF
   objects. <span class="green">Marc</span>
 * Wrap a service that consumes the output of coref, phrase structure and
-  dependency structure <span class="green">Brandeis</span>
+  dependency structure services <span class="green">Brandeis</span>
 	* This is partially to test the LIF of newly wrapped annotation types
 	* One option is to simply provide a simplistic printout of the LIF conent
 	* This could be a version of the current [BRAT
@@ -48,17 +48,60 @@ This would be due a few days before Nancy leaves for the workshop. The workshow 
 * Updates to Composer <span class="green">CMU</span>
 
 
-### LAPPS version usable for CMU course
+### LAPPS version usable for CMU MIIS Seminar course
+
+The MIIS seminar course (capstone project planning for M.S. in Intelligent
+Information Systems) will include a project on "automatically building
+customized search engines with LAPPS". In this project, students will setup
+their crawlers, indexers, and searchers as LAPPS services. For a new domain, the
+crawler will fetch relevant documents to construct a domain-specific corpus,
+then send to the indexer. The index searchers can be part of information
+retrieval pipeline with testing queries and gold standards as inputs. Students
+will experiment with different ways of document discovery, query formulation,
+and ranking methods. By comparing retrieved documents with gold standards, they
+can then evaluate the effectiveness of newly built search engines.
 
 * Figure out what services are needed <span class="green">Di and Erik</span>
 
 
-### LAPPS version usable for Brandeis course 
+### LAPPS version usable for CMU Question Answering course
 
-* Work out what needs to be done in order to integrate the LAPPS Grid into the
-  course. <span class="green">Brandeis (Chunqi + Te)</span>
+The LAPPS Grid will be used to support the development of a world history
+question-answering pipeline. Students will incorporate exiting LAPPS annotators
+(e.g. Time annotators) to their system. When students develops a "heavy"
+component and wants other team members to use it, they can deploy it as a LAPPS
+service. For example, a Wikibook corpus searcher or DBPedia spotlight (knowledge
+entity recognizer) is not usually able to run on a laptop. We will make the
+LAPPS Grid more attractive to students by including major LDC-held resources
+like Gigaword corpus available in the grid.
+
+* Figure out what services are needed <span class="green">Di and Erik</span>
+* Provide documentation on wrapping services
+
+
+### LAPPS version usable for Brandeis Computational Linguistics course
+
+The Fundamentals in Computational Linguistics (COSI 114) class is offered in
+Spring 2014, and will focus on five modules, each of them involving a
+fundamental area of computational linguistics. For the final three projects of
+the class, the Language Grid will be deployed as the development, testing, and
+evaluation platform. These topics are: Part of speech tagging, including running
+the Viterbi algorithm for part of speech tagger for twitter data; Lexical
+Semantics, including Distributional word similarity for thesaurus generation,
+and statistical testing (log-likelihood ratio, t-test, chi-squared test); and
+Machine translation, running the IBM model 1, including the EM algorithm.
+
+* Work out what needs to be added to the LAPPS Grid to meet the above needs.
+  <span class="green">Brandeis (Chunqi + Te)</span>
 * Specifications due December 12th. <span class="green">Brandeis</span>
-* LAPPS Grid ready for this class by March 2015
+* LAPPS Grid needs to be ready for this class by March 2015
+* Test and check robustness of previously wrapped services
+* Implement/find a POS tagger that uses the viterbi algorithm and wrap it
+* Decide what word similarity measures to use (cosine, latent semantic analysis,
+  single value decomposition, mutual information)
+* Explore whether Twitter data and LAPPS Grid can co-exist
+* Select bilingual data and wrap them as Data Sources
+* Wrap IBM model 1 and Expectation Maximization
 
 
 ### Implement licensing model
