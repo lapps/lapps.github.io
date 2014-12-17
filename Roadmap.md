@@ -82,26 +82,47 @@ like Gigaword corpus available in the grid.
 ### LAPPS version usable for Brandeis Computational Linguistics course
 
 The Fundamentals in Computational Linguistics (COSI 114) class is offered in
-Spring 2014, and will focus on five modules, each of them involving a
-fundamental area of computational linguistics. For the final three projects of
-the class, the Language Grid will be deployed as the development, testing, and
-evaluation platform. These topics are: Part of speech tagging, including running
-the Viterbi algorithm for part of speech tagger for twitter data; Lexical
-Semantics, including Distributional word similarity for thesaurus generation,
-and statistical testing (log-likelihood ratio, t-test, chi-squared test); and
-Machine translation, running the IBM model 1, including the EM algorithm.
+Spring 2014. The Language Grid will be deployed as the development, testing, and
+evaluation platform for three class projects. The LAPPS Grid needs to be ready
+for this class by March 2015. A staggered roll-out, with elements needed for
+project 2 and 3 available somewhat later, is acceptable.
 
-* Work out what needs to be added to the LAPPS Grid to meet the above needs.
-  <span class="green">Brandeis (Chunqi + Te)</span>
-* Specifications due December 12th. <span class="green">Brandeis</span>
-* LAPPS Grid needs to be ready for this class by March 2015
-* Test and check robustness of previously wrapped services
-* Implement/find a POS tagger that uses the viterbi algorithm and wrap it
-* Decide what word similarity measures to use (cosine, latent semantic analysis,
-  single value decomposition, mutual information)
-* Explore whether Twitter data and LAPPS Grid can co-exist
+The first project is on part of speech tagging. Students create their own Python
+POS tagger using the Viterbi algorithm and evaluate it using the LAPPS
+Grid. Prefered data would be Tweets, but it is okay to use data available on the
+LAPPS Grid. 
+
+* Explore whether and how Twitter data can be used on the LAPPS Grid
+* If Twitter data are used:
+  1. implement a service that accesses Twitter data
+  1. generate a gold standard over Twitter data
+  1. adapt the composer/evaluator so it can work with Twitter data
+* If Twitter data are not used:
+  1. select a gold standard for pos tags
+  1. confirm whether the current composer/evaluator meets the needs
+  1. updates to evaluation code where needed
+* Streamline the process of wrapping Python services. Ideally, this would be a
+  push-button operation.
+
+The second project is on lexical semantics and distributional word similarity,
+where student are asked to analyze a corpus. Here the LAPPS Grid is used to
+provide access to data as well as statistical measures over those data (a kind
+of mini-SketchEngine). Some of the requested statistics: Mutual Information,
+Jackard Measure, Cosine, Singular Value Decomposition, Latent Semantic Indexing,
+log-likelyhood ratio, basic frequency counts, t-test, chi-square test.
+
+* Design how the LAPPS Grid deals with the various statistical measures over data
+* Adapt existing statistical packages and wrap them, or
+* Implement and wrap these measures
+
+The third project is on Machine translation, using IBM model 1 and the EM
+algorithm. Students are given translated texts, create a bilingual dictionary
+and implement a model. The LAPPS Grid provides data and an evaluation
+module. This project also depends on the smooth Python wrapping needed for
+project 1.
+
 * Select bilingual data and wrap them as Data Sources
-* Wrap IBM model 1 and Expectation Maximization
+* Adapt the composer/evaluator so it can deal with evaluation of translations
 
 
 ### Implement licensing model
