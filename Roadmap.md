@@ -61,7 +61,7 @@ will experiment with different ways of document discovery, query formulation,
 and ranking methods. By comparing retrieved documents with gold standards, they
 can then evaluate the effectiveness of newly built search engines.
 
-* Figure out what services are needed <span class="green">Di and Erik</span>
+* Figure out what services are needed <span class="green">Di and Eric</span>
 
 
 ### LAPPS version usable for CMU Question Answering course
@@ -75,7 +75,7 @@ entity recognizer) is not usually able to run on a laptop. We will make the
 LAPPS Grid more attractive to students by including major LDC-held resources
 like Gigaword corpus available in the grid.
 
-* Figure out what services are needed <span class="green">Di and Erik</span>
+* Figure out what services are needed <span class="green">Di and Eric</span>
 * Provide documentation on wrapping services
 
 
