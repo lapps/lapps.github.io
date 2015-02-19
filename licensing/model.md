@@ -19,7 +19,7 @@ will be used to implement the LAPPS licensing model.
 * [Definitions](#definitions)
 * [JSON Structures](#json)
 	1. [License](#license)
-	1. [Request for Access](#access)
+	1. [Request for Access](#request)
 	1. [Access Denied](#denied)
 	1. [Access Granted](#grant)
 * [Algorithms and Workflows](#algorithms)
