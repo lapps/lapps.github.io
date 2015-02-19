@@ -34,8 +34,15 @@ None scheduled.
 ### Project Notes and Plans
 
 * [Roadmap](Roadmap.html)
+* [Maven Repository Information](Maven.html)
 
 ### Subprojects
+
+<div class="note">
+<span class="red">Note</span> This section is used to explore the various ways to
+deploy the Maven site documentation to Github and the links may or may not work as
+expected.
+</div>
 
 1. [org.lappsgrid.api](http://lapps.github.io/org.lappsgrid.api)
 1. [org.lappsgrid.core](#)
