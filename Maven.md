@@ -12,9 +12,9 @@ The following modules have been deployed to the ANC's Nexus repository:
 | org.lappsgrid | api | 2.0.0 |
 | org.lappsgrid | core | 2.0.0-SNAPSHOT |
 | org.lappsgrid | client | 2.0.0-SNAPSHOT |
-| org.lappsgrid | discriminator | 2.0.0-SNAPSHOT |
+| org.lappsgrid | discriminator | 2.0.1 |
 | org.lappsgrid | serialization | 2.0.0-SNAPSHOT |
-
+| org.lappsgrid | vocabulary | 1.0.0-SNAPSHOT |
 
 ### Maven Repository Settings
 
