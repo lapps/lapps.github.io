@@ -1,9 +1,9 @@
 ---
 layout: slate
-title: LifeSite
+title: LiveSite
 ---
 
-# LAPPS Life Site
+# LAPPS Live Site
 
 Functionality available on the site:
 
@@ -17,7 +17,7 @@ Functionality available on the site:
 
 * Instructions on how to programmatically access services and data sources
 
-* Run a service and evaluate its results agains another service or gold standard
+* Run a service and evaluate its results against another service or gold standard
 
 * Compose a life pipeline from available services and run it (not necessarily
   with an evaluation backend)
@@ -84,7 +84,7 @@ mentioned above:
 * testing compatibilty of output produced and input required
 
 * backward chaining from a goal as expressed by a discriminator (which stands
-  for a vocabalary categroy)
+  for a vocabulary category)
 
 
 ### Evaluating the results of a service
