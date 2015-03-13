@@ -5,7 +5,7 @@ title: LiveSite
 
 # LAPPS Live Site
 
-The overview Marc produced is a start but does not prioritize nor set deadlines. I propose we follow the task timeline below. This puts some items at lower priority and tries to take advatange of what we have to work with now. This way, we get a rough cut at something that we can improve. 
+The overview Marc produced is a start but does not prioritize nor set deadlines. I propose we follow the task timeline below. This puts some items at lower priority and tries to take advantage of what we have to work with now. This way, we  very quickly get a rough cut at something that we can improve. 
 
 TIMELINE:
 
