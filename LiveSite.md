@@ -5,17 +5,47 @@ title: LiveSite
 
 # LAPPS Live Site
 
-Functionality available on the site:
+The overview Marc produced is a start but does not prioritize nor set deadlines. I propose we follow the task timeline below. This puts some items at lower priority and tries to take advatange of what we have to work with now. This way, we get a rough cut at something that we can improve. 
 
-* Accessing specifications and vocabulary
+TIMELINE:
 
-* Viewing all available services
+(1) ***April 1***: The following available (not live but at a universally accessible URL):
+
+* Web page front, minimal for now, use material from lapps.anc.org
+* Place to click for USE THE LAPPS GRID
+
+USE THE LAPPS GRID:
+
+* Composer front end interface, providing the ability to:
+   - View all available services, which should include ALL the  services (including OpenNLP that need to be updated) we have wrapped so far (splitters, tokenizers, taggers, coreferencers, named entity recognizers, parsers (Stanford?)
+   - Compose a pipeline from available services and run it
+   - Run a pipeline on a MASC data source or text in a text box
+   - Evaluate results against another service or gold standard (if Di can get this done)
+
+This is effectively what we showed last year in Reykjavik. Keith says this is doable by April 1.
+
+(2) ***April 15***
+
+* Add access to (at least some) LDC data, with authorization capabilities
+* Improve interface (Find someone with some skills in this area? And/or in making nice web pages?)
+
+(3) ***April 30***
+
+* Improved interface, web page front finalized
+* Go live, soft opening (but enlist some users to test--maybe people in James' class?)
+
+------------------------------------------------------------
+Eventual functionality available on the site (low priority items are simply those we do not focus on first, but are necessary for going live) :
+
+* Accessing specifications and vocabulary (low priority)
+
+* Viewing all available services (in composer: high priority; elsehwere: low priority)
 
 * Putting text in a text box and sending it off to a service
 
 * Running a service on a MASC data source
 
-* Instructions on how to programmatically access services and data sources
+* Instructions on how to programmatically access services and data sources (low priority)
 
 * Run a service and evaluate its results against another service or gold standard
 
@@ -45,12 +75,12 @@ Needed:
   area of the meta data
 
 * Time expressions and dependencies were never wrapped before, may need tweaks
-  to specifications and vocabulary
+  to specifications and vocabulary (lowest priority--not needed to go live)
 
 
 ### Showing available services on website
 
-Need list of services, but want to show these from outside the service manager.
+Need list of services, but want to show these from outside the service manager. (low priority)
 
 Not sure how to access those directly from the service manager database.
 
