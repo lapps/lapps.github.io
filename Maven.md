@@ -15,6 +15,7 @@ The following modules have been deployed to the ANC's Nexus repository:
 | org.lappsgrid | discriminator | 2.0.1 |
 | org.lappsgrid | serialization | 2.0.0 |
 | org.lappsgrid | vocabulary | 1.0.0 |
+| org.lappsgrid | all | 2.0.0 |
 
 ### Maven Repository Settings
 
