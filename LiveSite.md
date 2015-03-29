@@ -13,6 +13,7 @@ TIMELINE:
 
 * Web page front, minimal for now, use material from lapps.anc.org
 * Place to click for USE THE LAPPS GRID
+   - LAPPS Web Composer: http://gold.lti.cs.cmu.edu:8080/cseweb/faces/services.xhtml
 
 USE THE LAPPS GRID:
 
