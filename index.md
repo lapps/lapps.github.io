@@ -11,6 +11,10 @@ None scheduled.
 
 ### Past Events
 
+1. Grid Integration Meeting<br/>
+**Where:** Vassar College, Poughkeepsie New York<br/>
+**When:** May 11-14, 2015
+	* [Notes on format conversions](grids/conversion.html)
 1. <a href="TechMeeting2014-10-02.html">LAPPS Technical Meeting</a><br/>
 **Where:** Vassar College, Poughkeepsie New York<br/>
 **When:** October 2-3, 2014
