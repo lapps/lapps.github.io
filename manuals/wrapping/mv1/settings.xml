@@ -1,0 +1,132 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+		      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+<!--
+	@brief:	settings.xml should be placed at ~/.m2/settings.xml
+	@ref:	https://github.com/oaqa/LAPPS/wiki/Maven-Artifacts   http://www.anc.org/tools/settings.xml
+	@date:	2013-12-05
+-->
+
+<!--localRepository></localRepository-->
+<interactiveMode>true</interactiveMode>
+<!--usePluginRegistry></usePluginRegistry-->
+<!--offline></offline-->
+<!--servers></servers-->
+<!--proxies></proxies-->
+<profiles>
+  <profile>
+    <id>anc-profile</id>
+    <!--properties></properties-->
+   <repositories>
+      <repository>
+	<id>anc-releases</id>
+	<url>http://www.anc.org:8080/nexus/content/repositories/release/</url>
+	<releases><enabled>true</enabled></releases>
+	<snapshots><enabled>false</enabled></snapshots>
+      </repository>
+      <repository>
+	<id>anc-snapshots</id>
+	<url>http://www.anc.org:8080/nexus/content/repositories/snapshots/</url>
+	<snapshots>
+	  <enabled>true</enabled>
+	  <updatePolicy>always</updatePolicy>
+	</snapshots>
+      </repository>
+      <!--  Repositories below this point will likely be phased out. -->
+      <repository>
+	<id>anc-dev-release</id>
+	<name>ANC Release Repository</name>
+	<url>http://www.anc.org/maven/release</url>
+	<releases>
+	  <enabled>true</enabled>
+	</releases>
+	<snapshots>
+	  <enabled>false</enabled>
+	</snapshots>
+      </repository>
+      <repository>
+	<id>anc-dev-3rdparty</id>
+	<name>ANC External Dependency Repository</name>
+	<url>http://www.anc.org/maven/thirdparty</url>
+	<releases>
+	  <enabled>true</enabled>
+	</releases>
+	<snapshots>
+	  <enabled>false</enabled>
+	</snapshots>
+      </repository>
+      <repository>
+	<id>anc-dev-snaphot</id>
+	<name>ANC Snapshot Repository</name>
+	<url>http://www.anc.org/maven/snapshot</url>
+	<releases>
+	  <enabled>false</enabled>
+	</releases>
+	<snapshots>
+	  <enabled>true</enabled>
+	  <updatePolicy>always</updatePolicy>
+	</snapshots>
+      </repository>
+   </repositories>
+   <pluginRepositories>
+     <pluginRepository>
+       <id>maven-plugin-repo</id>
+       <name>Maven Plugin Central</name>
+       <url>http://repo1.maven.org/maven2</url>
+       <releases>
+	 <enabled>true</enabled>
+	 <updatePolicy>always</updatePolicy>
+	 <checksumPolicy>ignore</checksumPolicy>
+       </releases>
+     </pluginRepository>
+     <pluginRepository>
+       <id>anc-dev-plugin-snapshots</id>
+       <name>ANC Plugin Snapshots</name>
+       <releases>
+	 <enabled>false</enabled>
+	 <updatePolicy>always</updatePolicy>
+	 <checksumPolicy>warn</checksumPolicy>
+       </releases>
+       <snapshots>
+	 <enabled>true</enabled>
+	 <updatePolicy>always</updatePolicy>
+	 <checksumPolicy>warn</checksumPolicy>
+       </snapshots>
+       <url>http://www.anc.org/maven/snapshot/</url>
+     </pluginRepository>
+     <pluginRepository>
+       <id>anc-dev-plugin-releases</id>
+       <name>ANC Plugin Repleases</name>
+       <releases>
+	 <enabled>true</enabled>
+	 <updatePolicy>always</updatePolicy>
+	 <checksumPolicy>warn</checksumPolicy>
+       </releases>
+       <snapshots>
+	 <enabled>false</enabled>
+	 <updatePolicy>always</updatePolicy>
+	 <checksumPolicy>warn</checksumPolicy>
+       </snapshots>
+       <url>http://www.anc.org/maven/release/</url>
+     </pluginRepository>
+   </pluginRepositories>
+  </profile>
+</profiles>
+<activeProfiles>
+  <activeProfile>anc-profile</activeProfile>
+</activeProfiles>
+<mirrors>
+  <mirror>
+    <id>nexus</id>
+    <url>
+      http://www.anc.org:8080/nexus/content/groups/public/
+    </url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+</mirrors>
+<pluginGroups>
+  <pluginGroup>org.anc.maven.plugins</pluginGroup>
+</pluginGroups>
+</settings>
