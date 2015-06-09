@@ -1,0 +1,22 @@
+
+# These two are used in active-bpel.xml
+
+${CORE_TOMCAT_IPADDRESS}	127.0.0.1	# should this be same as ${AE_TOMCAT_ADDRESS}
+						# in settings-service-manager.txt
+
+${CORE_TO_AE_APPAUTHKEY}	aabbcc		# same as ${CORE_TO_AE_APPAUTHKEY}
+						# in settings-service-manager.txt
+
+
+# And these two are used in bpr/langrid.ae.properties
+
+${CORE_TOMCAT_ADDRESS}/langrid-${VERSION}	localhost:8080/service_manager
+						# same as ${NODE_URL} in
+						# settings-service-manager.txt
+						# This is used because of a idosynchrasy in the
+						# original active-bpel.xml, should really be
+						# ${NODE_URL}
+
+${AE_TO_CORE_APPAUTHKEY}			ccbbaa
+						# same as ${AE_TO_CORE_APPAUTHKEY}
+						# in settings-service-manager.txt

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?> 
+<Context reloadable="true" displayName="Language Grid Core Node" > 
+   <Resource name="jdbc/langrid" auth="Container" type="javax.sql.DataSource" maxActive="100" maxIdle="50" maxWait="10000" username="service" password="servicepw" driverClassName="org.postgresql.Driver" url="jdbc:postgresql:servicegrid" /> 
+
+   <Parameter name="langrid.node.gridId" value="LappLandGrid" /> 
+   <Parameter name="langrid.node.gridName" value="LappLandGrid" /> 
+   <Parameter name="langrid.node.nodeId" value="Brandeis Node" /> 
+   <Parameter name="langrid.node.name" value="Brandeis Node" /> 
+   <Parameter name="langrid.node.url" value="http://localhost:8080/service_manager" /> 
+   <Parameter name="langrid.node.os" value="" /> 
+   <Parameter name="langrid.node.cpu" value="" /> 
+   <Parameter name="langrid.node.memory" value="" /> 
+   <Parameter name="langrid.node.specialNotes" value="" /> 
+
+   <Parameter name="langrid.operator.userId" value="operator" /> 
+   <Parameter name="langrid.operator.initialPassword" value="operator" /> 
+   <Parameter name="langrid.operator.organization" value="LappLand - Brandeis" /> 
+   <Parameter name="langrid.operator.responsiblePerson" value="Marc Verhagen" /> 
+   <Parameter name="langrid.operator.emailAddress" value="marc@cs.brandeis.edu" /> 
+   <Parameter name="langrid.operator.homepageUrl" value="http://lappland.org" /> 
+   <Parameter name="langrid.operator.address" value="Skandinavia" /> 
+
+   <Parameter name="langrid.gridName" value="LappLand -- Brandeis" /> 
+   <Parameter name="langrid.serviceManagerCopyright" value="LappLand 2012" /> 
+
+   <Parameter name="langrid.activeBpelServicesUrl" value="http://localhost:8081/active-bpel/services" /> 
+   <Parameter name="langrid.activeBpelAppAuthKey" value="aabbcc" /> 
+   <Parameter name="langrid.javaEngineAppAuthKey" value="" /> 
+
+   <Parameter name="langrid.atomicServiceReadTimeout" value="30000" /> 
+   <Parameter name="langrid.compositeServiceReadTimeout" value="30000" /> 
+   <Parameter name="langrid.maxCallNest" value="16" /> 
+
+   <Parameter name="appAuth.simpleApp.authIps" value="127.0.0.1" /> 
+   <Parameter name="appAuth.simpleApp.authKey" value="ccbbaa" /> 
+</Context> 
+
