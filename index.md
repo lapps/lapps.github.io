@@ -50,8 +50,10 @@ expected.
 </div>
 
 1. [org.lappsgrid.api](http://lapps.github.io/org.lappsgrid.api)
-1. [org.lappsgrid.core](#)
+1. [org.lappsgrid.core](http://lapps.github.io/org.lappsgrid.core)
+1. [org.lappsgrid.client](http://lapps.github.io/org.lappsgrid.client)
 1. [org.lappsgrid.discriminator](http://lapps.github.io/org.lappsgrid.discriminator)
-1. [org.lappsgrid.client](*)
 1. [org.lappsgrid.serialization](http://lapps.github.io/org.lappsgrid.serialization)
+1. [org.lappsgrid.vocabulary](http://lapps.github.io/org.lappsgrid.vocabulary)
+
 
