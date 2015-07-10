@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/lapps/lapps.github.io.png?label=ready&title=Ready)](https://waffle.io/lapps/lapps.github.io)
 ---
 layout: default
 title: LAPPS Project Documentation
