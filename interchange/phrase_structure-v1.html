@@ -18,15 +18,18 @@
 
 <p>We introduce an Annotation object with @type PhraseStructure. This object
 contains a single parse tree for some text span, typically for a sentence. It
-introduces a feature named constituents which contains a list of annotations of
-@type Constituent. A Constituent has a label reflecting the category and in the
-feature dictionary a list of children.</p>
+introduces a feature named constituents which contains a list of identifiers
+referring to (1) annotations of @type Constituent in the same view or (2)
+annotations of @type Token that may live in another view. A Constituent has a
+label reflecting the category and in the feature dictionary a list of
+children.</p>
 
 <pre class="example">
 {
   "text": "Sue sees herself",
   "views": [
-    { "metadata": {
+    { "id": "v1",
+      "metadata": {
         "contains": {
           "Token": {
             "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
@@ -35,9 +38,14 @@ feature dictionary a list of children.</p>
          { "@type": "Token", "id": "tok0", "start": 0, "end": 3 },
          { "@type": "Token", "id": "tok1", "start": 4, "end": 8 },
          { "@type": "Token", "id": "tok2", "start": 9, "end": 16 } ]},
-    { "metadata": {
+    { "id": "v2",
+      "metadata": {
         "contains": {
           "PhraseStructure": {
+            "producer": "edu.brandeis.cs.lappsgrid.SimpleParser:1.0.0",
+            "categorySet": "ns/types/PTBcategories",
+            "type": "PhraseStructure:SimpleParser" },
+          "Constituent": {
             "producer": "edu.brandeis.cs.lappsgrid.SimpleParser:1.0.0",
             "categorySet": "ns/types/PTBcategories",
             "type": "PhraseStructure:SimpleParser" }}},
@@ -47,22 +55,22 @@ feature dictionary a list of children.</p>
            "start": 0,
            "end": 16,
            "features": {
-              "constituents": [
-                 { "@type": "Constituent",
-                   "label": "S",
-                   "id": "c0",
-                   "features": {
-                     "children": [ "c1", "c2"] } },
-                 { "@type": "Constituent",
-                   "label": "NP",
-                   "id": "c1",
-                   "features": {
-                     "children": [ "tok0" ] }},
-                 { "@type": "Constituent",
-                   "label": "VP",
-                   "id": "c2",
-                   "features": {
-                     "children": [ "tok1", "tok2" ] }}]}}]}]
+              "constituents": [ "c0", "c1", "c2", "v1:tok0", "v1:tok1", "v1:tok2" ] }},
+         { "@type": "Constituent",
+           "label": "S",
+           "id": "c0",
+           "features": {
+             "children": [ "c1", "c2"] } },
+         { "@type": "Constituent",
+           "label": "NP",
+           "id": "c1",
+           "features": {
+             "children": [ "v1:tok0" ] }},
+         { "@type": "Constituent",
+           "label": "VP",
+           "id": "c2",
+           "features": {
+             "children": [ "v1:tok1", "v1:tok2" ] }}]}]
 }
 </pre>
 
@@ -75,7 +83,7 @@ feature dictionary a list of children.</p>
 identifiers? In the example above, two of the consituents refer to tokens in
 another view. For coreference, we stipulated that only Markable objects can
 refer to objects in other views. Do we have a same stipulation here? Using
-Markable objects seems wrong here.
+Markable objects seems wrong here. 
 
 <li>In addition to the PhraseStructure object this view could also have Token
 objects in it.
