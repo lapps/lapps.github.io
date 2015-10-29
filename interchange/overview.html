@@ -14,21 +14,17 @@
 
 <h1>Overview of LIF</h1>
 
-<p>Version 3: November 20<sup>th</sup>, 2014</p>
+<p>Last updated: October 28<sup>th</sup>, 2015</p>
 
 <p>This document contains a general overview of the LAPPS Interchange Format
-(LIF), which is a JSON-LD format used to transport data between LAPPS
-services.</p>
-
-<p>The current JSON schema for LIF are at
+(LIF), which is the JSON-LD format used to transport data between LAPPS
+services. The current JSON schema for LIF are at
 <a href="http://vocab.lappsgrid.org/schema/lif-schema.json">
-http://vocab.lappsgrid.org/schema/lif-schema.json</a>. At this point it is
-dangerous to assume that the schema are in sync with the prose in these LIF
-pages. Similarly, while the specifications often refer to or rely on the Lapps
-vocabulary at
-<a href="http://vocab.lappsgrid.org">http://vocab.lappsgrid.org</a>, it is
-unwise to assume that at this point the specifications are in sync with the
-vocabulary.</p>
+http://vocab.lappsgrid.org/schema/lif-schema.json</a>. These specifications
+often refer to elements of the LAPPS Web Services Exchange Vocabulary (also
+named WSEV or simply the vocabulary), available at
+<a href="http://vocab.lappsgrid.org">http://vocab.lappsgrid.org</a>.</p>
+
 
 <p>There are still a couple of open issues. These are indicated in boxes with
 red dotted borders.</p>
@@ -57,17 +53,17 @@ following sub sections will describe the values of these four keys.</p>
 <p>The value here is the fixed URL
 <a href="http://vocab.lappsgrid.org/context-1.0.0.jsonld">http://vocab.lappsgrid.org/context-1.0.0.jsonld</a>
 which leads to a document with a JSON object that points to various parts of the
-Lapps vocabulary. We allow people to provide their own context, but we do not
+LAPPS vocabulary. We allow people to provide their own context, but we do not
 allow services to changes this top-level context and turn it into a
 list. Instead, we allow services to add contexts to individual views or to add
 elements to contexts in individual views. However, we strongly caution against
 redefining terms that are defined in the external context or the vocabulary
-since then some annoation objects or properties would have different meanings
-depending on what view they are in. Note that the JSON-LD recommendation is not
-too thrilled about this: <i>this is rarely a good authoring practice and is
-typically used when working with legacy applications that depend on a specific
-structure of the JSON object</i>
-(<a href="http://www.w3.org/TR/json-ld/#advanced-context-usage">link</a>).</p>
+since then some annotation objects or properties would have different meanings
+depending on what view they are in. Note that this sentiment is shared by the
+<a href="http://www.w3.org/TR/json-ld/#advanced-context-usage">JSON-LD
+recommendation</a>: <i>this is rarely a good authoring practice and is typically
+used when working with legacy applications that depend on a specific structure
+of the JSON object</i>.</p>
 
 
 <h3>The metadata key</h3>
@@ -86,8 +82,8 @@ key. Nevertheless, we will allow a metadata key here for future use cases.</p>
 object</a> containing a @value and a @language key. The value associated with
 @value is a string and the value associated with @language follows the rules in
 <a href="http://www.w3.org/TR/json-ld/#bib-BCP47">BCP47</a>, which for our
-current purposes boils down to using the ISO 639 code (also
-see <a href="http://vocab.lappsgrid.org/Document.html#language">Document
+current purposes boils down to using the ISO 639 code (also see
+the <a href="http://vocab.lappsgrid.org/Document.html#language">Document
 section</a> in the vocabulary).
 
 
@@ -97,7 +93,7 @@ section</a> in the vocabulary).
 is a JSON array of views where each view specifies what information it contains
 and what service created that information. Views are similar to annotation
 layers and annotation tasks as used by several annotation tools, formalisms and
-frameworks. They contain structured information about a text but are separated
+frameworks. They contain structured information about a text but are separate
 from that text. They also provide flexibility in structuring annotations.</p>
 
 <p>First a note on the nature of the views array. JSON-LD arrays are by default
@@ -109,13 +105,18 @@ be, enforced in the external context, with the following lines:
 </blockquote>
 
 <p>The order is interpreted to reflect when views were added. So we require that
-any view added by a lif-wrapped service has to be appended to the end.</p>
+any view added by a service that generates LIF has to be appended to the end.</p>
 
 <p>There are a few general principles:</p>
 
 <ol class="spacy">
 
 <li>There is no limit to the number of views.
+
+<li>Each view has a unique identifier. Annotation elements in the view have
+identifiers unique to the view and these elements can be uniquely referred to
+from outside the view by using the view identifier and the annotaiton element
+identifier.
 
 <li>For each view, the metadata should specify what kind of information objects
 are in the view.
@@ -125,7 +126,7 @@ are in the view.
 <li>Services may add information to existing views.
 
 <li>Services may overwrite or delete information in existing views. We have been
-  flip-flopping on this, see below for a discussion.
+  flip-flopping on this, see immediately below for a discussion.
 
 <li>Services may not overwrite term definitions that were defined in the view's
 context.
@@ -133,10 +134,9 @@ context.
 </ol>
 
 
-
 <p>It may be a good idea to not allow a service to add information to an
 existing view. While this introduces some redundancy (a POS service would need
-to copy data from aToken view for example), it would create a clear picture
+to copy data from a Token view for example), it would create a clear picture
 where a view, once added, can never be changed. And if a view would say on what
 other view it is based, then we could derive a flow chart of what views were
 used in the processing chain.</p>
@@ -199,53 +199,23 @@ elements to a view that already has Token elements. Adding a Token definition to
 the context in the existing view now overwrites the existing interpretation of
 Token, which is not acceptable. There are two solutions: (i) do not allow a
 service to redefine a term that was not added by the service, and (ii) do not
-allow services to change the context of a view. The latter has my preference
-because the former is so much harder to do and to enforce. Note also that if you
+allow services to change the context of an existing view. The latter is preferred
+because the former is much harder to do and to enforce. Note also that if you
 have two kinds of Tokens in a view it is impossible to say who was the
 producer. With the latter approach, services that want to use their own context
 definitions either have to create a new view for adding that context or use a
 fully expanded URI.</p>
 
-<p class="issue">Agree on how to deal with this.</p>
+<p class="issue">This needs to be vetted and agreed on.</p>
 
-<p>The <b>id</b> keys is required and its value should be unique relative to all
-view objects. If Annotation elements refer to an Annotation in another view then
-it has to use the view identifier as part of the reference.</p>
-
-<p>We have several times touched upon the issue of identifiers in LIF. This is
-tricky from a conceptual angle (I think). We now have a situation where two
-views (from the tokenizer and tagger for example) can have Token objects with
-the same identifier. Is this confusing? I find it somehwat confusing to have two
-different JSON objects of the same type with the same identifier. What is equal
-about these two objects is that they refer to the same text span, but they can
-have different features (for example, our current POS tags view has Token
-objects with the same identifier and offsets as Token objects in the token
-views, but the former has an extra feature posTag in the features
-dictionary).</p>
-
-<p>Are these identifiers really references to some underlying object that we
-imply, but that does not occur in the representation explicitly? And what if
-these two Token objects have conflicting information? The latter could happen if
-we have two taggers working on the same tokens but adding different pos tags.
-
-Do we need the identifiers for the Token objects with the same text span to be
-the same? We don't really because the Token objects also have the start and end
-offsets which are identical for the two. The identical identifiers do indicate
-that the two tokens in the two views really are the same token, if we require
-each token identifier to be unique to the document, then we loose this. Before
-we had view identifiers we also had an issue with referring to a specific token,
-this is now not an issue anymore.</p>
-
-<p class="issue">At some point we need to decide on what to do with
-identifiers. For now, we are happy to leave this unresolved.</p>
-
+<p>The <b>id</b> key is required and its value should be unique relative to all
+view objects. If annotation elements refer to an Annotation in another view then
+they have to use the view identifier as part of the reference.</p>
 
 <p>The <b>metadata</b> key contains information to describe the annotations in a
-view. At this point, its only key is <code>contains</code>. We have shortly
-discussed the idea of adding a timestamp, probably using Unix epoch, and, in
-addition, using a key like <code>dependsOn</code> might be useful too (see the
-beginning of the views section). The <code>contains</code> dictionary has keys
-that refer to Annotation objects in the Lapps vocabulary or properties of those
+view. At this point, its only key
+is <code>contains</code>. The <code>contains</code> dictionary has keys that
+refer to annotation objects in the LAPPS vocabulary or properties of those
 annotation objects (they can also refer to user-defined objects or
 properties). And the value of each of those keys is a JSON object
 with <code>producer</code>, <code>type</code> and <code>rules</code> keys. The
@@ -270,6 +240,11 @@ information to the LIF objects. The current convention is to use the java class
 name of the service and the producer name is actually added to the LIF object by
 accessing a name or identifier method on the server.</p>
 
+<p class="issue">We have discussed adding (1) a <code>timestam</code> key,
+probably using Unix epoch, and (2) a <code>dependsOn</code> key which could be
+used to specify what views a view depends on.</p>
+
+<!--
 <p class="issue">Thinking this through again I still feel somewhat uneasy about
 this. We cannot guarantee any kind of uniqueness of this name and this brings up
 the specter that this value may be misleading or useless. Three potential
@@ -285,6 +260,7 @@ is to not care that this value is not an identifier.<br/>
 Another issue is whether there a clear use case for this feature.<br/>
 <br/>
 We decided to leave this unresolved for now.</p>
+-->
 
 <p>The <code>type</code> key is used to specify what kind of token we are
 dealing with. It allows several tokenizers to specify the same type, for example
@@ -305,16 +281,17 @@ key inside of Token can be used to specify a rule set. Assuming it expands to
 http://vocab.lappsgrid.org/types//opennlp_basic, it can use the same expansion
 as used by tokenization:opennlp.</p>
 
+<!--
 <p>Note that in the vocabulary producer and rules are both defined as metadata
 properties on Token (albeit inherited from Annotation) as well as under
 http://vocab.lappsgrid.org/meta. The type key on the other hand is defined only
 in the metadata area of the vocabulary.</p>
 
-
 <p class="issue">Well, they are not in the metadata section yet. Also, we have
 planned to change this into http://vocab.lappsgrid.org/ns or
 http://vocab.lappsgrid.org/ns/schema or something else, but we should check our
 notes on that.</p>
+-->
 
 <!--
 <pre class="issue">
@@ -347,11 +324,48 @@ relevant part of the view printed above is repeated here: </p>
 <a href="http://vocab.lappsgrid.org/schema/lif-schema.json">
 JSON LIF schema</a> in the definitions for <code>annotations</code>
 and <code>annotation</code>. The value of <code>@type</code> is an element of
-the LAPPS vocabulary or an annotation category added by the user. But, as
-mentioned above, note that if a user-definition is added it would be defined
-outside of the LAPPS vocabulary. In that case the user should either use the
-full URI or add a context to the view in which this new annotation category
-lives.</p>
+the LAPPS vocabulary or an annotation category added by the user. If a
+user-defined is used then it would be defined outside of the LAPPS vocabulary
+and in that case the user should either use the full URI or add a context to the
+view in which this new annotation category lives.</p>
+
+<p>Identifiers are unique to the view. It is allowed that two views both have an
+annotation with the same identifier and these could even be annotations of the
+same type (Token for example) and have the same start and end character
+offset. To uniquely refer to one of them we use the view identifier and the
+annotation identifier separated by a colon and the Token in the example above
+can be referred to as "v0:t0".</p>
+
+
+<!---
+<p>We have several times touched upon the issue of identifiers in LIF. This is
+tricky from a conceptual angle (I think). We now have a situation where two
+views (from the tokenizer and tagger for example) can have Token objects with
+the same identifier. Is this confusing? I find it somehwat confusing to have two
+different JSON objects of the same type with the same identifier. What is equal
+about these two objects is that they refer to the same text span, but they can
+have different features (for example, our current POS tags view has Token
+objects with the same identifier and offsets as Token objects in the token
+views, but the former has an extra feature posTag in the features
+dictionary).</p>
+
+<p>Are these identifiers really references to some underlying object that we
+imply, but that does not occur in the representation explicitly? And what if
+these two Token objects have conflicting information? The latter could happen if
+we have two taggers working on the same tokens but adding different pos tags.
+
+Do we need the identifiers for the Token objects with the same text span to be
+the same? We don't really because the Token objects also have the start and end
+offsets which are identical for the two. The identical identifiers do indicate
+that the two tokens in the two views really are the same token, if we require
+each token identifier to be unique to the document, then we loose this. Before
+we had view identifiers we also had an issue with referring to a specific token,
+this is now not an issue anymore.</p>
+
+<p class="issue">At some point we need to decide on what to do with
+identifiers. For now, we are happy to leave this unresolved.</p>
+-->
+
 
 <p>Technically all that is required of the keys in the features dictionary is
 that they expand to a URI. In most cases, the keys reflect properties in the
@@ -361,8 +375,20 @@ needs to be defined in the context so that it can be expanded to the correct URI
 in the vocabulary. This in term implies that in the vocabulary, each property
 should be only defined once. </p>
 
-<p>User-defined properties need to be defined in the view where they are added
-or full URI must be used.</p>
+<p>All annotation elements in a view are members of the list of annotations,
+that is, annotations are not embedded inside of other annotation. For example,
+Constituent annotations will not contain other Constituent objects. However, in
+the features dictionary annotations can refer to other annotations using their
+identifiers.</p>
+
+<p>This concludes the LIF overview. Examples of the LIF format for common
+linguistic categories are given in theother sections of the specification.</p>
+
+<p>
+[ <a href="index.html">up</a>
+| <a href="tokens.html">next</a> ]
+
+</p>
 
 </body>
 </html>
