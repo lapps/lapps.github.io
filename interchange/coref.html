@@ -14,12 +14,12 @@
 
 <h1>Coreference in LIF</h1>
 
-<p>Version 3, October 2014</p>
+<p>Last updated: October 29<sup>th</sup>, 2015</p>
 
-<p>This document contains a proposal on how to represent coreference in the
-Lapps Interchange Format. It is based on a <a href="coref-v2.html">prior
-version</a> of this document and subsequent discussion at a LAPPS meeting at
-Vassar College with Nancy Ide, Keith Suderman, Di Wang and Chunqi Shi.</p>
+
+<p>This document contains examples on how to represent coreference in the LAPPS
+Interchange Format. It also has examples of the output of some common
+coreference tools.</p>
 
 <p>
 [ <a href="#linguistics">linguistics</a>
@@ -172,133 +172,33 @@ not <i>Smith</i>. Coreference information is added to the Person
 annotations. StartNode and EndNode refer to the character offsets, whereas
 matches refers to the annotation object identifiers.
 
-<p>Currently, we already have a default JSON structure for this because the
-converters keep all features:</p>
-
-<pre class="example">
-{
-  "@type" : "Person",
-  "id" : "28",
-  "start" : 9,
-  "end" : 13,
-  "features" : {
-    "word" : "John",
-    "matches" : [ 28, 31 ] }
-}, 
-{
-  "@type" : "Person",
-  "id" : "31",
-  "start" : 27,
-  "end" : 30,
-  "features" : {
-    "matches" : [ 28, 31 ],
-    "antecedent_offset" : 9,
-    "ENTITY_MENTION_TYPE" : "PRONOUN" }
-}
-</pre>
-
-<p>This is not how we want to represent coreference though.</p>
-
 
 <a name="lif"></a>
 <h2>Coreference in the LAPPS Interchange Format</h2>
-
-<p>Before presenting the proposed format, first some more general questions that
-  play into the issue. The relevance of many of these questions are not limited
-  to coreference, even though they came up in this context.</p>
-
-<dl class="nicer">
-
-<dt>Can elements in the coreference view refer to identifiers in other
-views?</dt>
-
-<dd>There were strong sentiments to allow this. It does not duplicate
-  information, is a bit more flexible and makes for potentially more compact
-  representations.</dd>
-
-<dt>How deeply nested do we allow our JSON datastructure to be?</dt>
-
-<dd>This refers to how much embedded structure we allow in the JSON objects that
-  are in the annotations list. So far, the Token elements in this list just have
-  one sub structure: the dictionary of features. The current proposed structures
-  extend this a tiny bit by allowing lists for some attributes. All three
-  examples of coreference in the previous section (Stanford, OpenNLP and GATE)
-  all use a set or list to group mentions/matches. The only way to avoid this
-  would be to introduce annotation objects in a coreference chain that link just
-  two elements of a chain. This question on nesting becomes more salient when we
-  start wrapping tree structures.</dd>
-
-<dt>Is coreference its own annotation object?</dt>
-
-<dd>Yes. Nobody liked the approach of having corefence expressed as an attribute
-or set of attributes on Token or Person objects (which is what GATE does). From
-this it follows that Coreference will have its own page in the LAPPS
-vocabulary.</dd>
-
-<dt>Is coreference expressed as a coreference chain (linked list) or as a set?</dt>
- 
-<dd>In the first case, each link in the chain would be represented by a
-Coreference object, which would have references to the two objects linked. The
-previous version of this document had this as an option, but it ran into a few
-little snags. Using a set to represent a list of mentions is common to all three
-example coreference modules in the previous section. One advantage of using a
-list may be that no list values are needed inside the Coreference object. We
-felt that using a set was the better way.</dd>
-
-<dt>How do we represent the text elements that are coreferring?</dt>
-
-<dd>In some cases, there will be annotation objects in another view that can be
-  used and in some cases new objects will need to be made. We discussed a
-  Markable object that could fill this need.</dd>
-
-<dt>Do we want to aim for views that somehow give away what views they depend on?</dt>
-
-<dd>The metadata of a view specify who created the view. The metadata of this
-  producer will have input requirements specified, but won't tell you where to
-  get them. The output data in the views do not necessarily say what other view
-  data were used, excepts when an object refers to an identifier in another
-  view. But these identifiers are not unique in our current scheme (see
-  below). We could add metadata that says what views were consumed, but that is
-  adding more work to the wrapper. And it is not even clear whether this
-  question is actually important.</dd>
-
-<dt>What is the status of the id attribute on the annotation objects?</dt>
-
-<dd>This is tricky from a conceptual angle (I think). We now have a situation
-  where two views (from the tokenizer and tagger for example) can have Token
-  objects with the same identifier. Is this confusing? I find it somehwat
-  confusing to have two different JSON objects with the same identifier (they
-  are different because the same Token in the tagger view has added
-  attributes). Are these identifiers really references to some underlying object
-  that we imply, but that does not occur in the representation explicitly? And
-  do we need the identifiers for the Token objects with the same text span to be
-  the same? We don't really because the Token objects also have the start and
-  end offsets which are identical for the two. The identical identifiers do
-  indicate that the two tokens in the two views really are the same token, if we
-  require each token identifier to be unique to the document, then we loose
-  this. We can make it work either way, the issue may just be to decide on what
-  is easier to explain to outsiders.</dd>
-
-<dt>Can we maintain schema similar to Steve Cassidy's?</dt>
-
-<dd>This is an open question and we cannot say anything intelligent about it
-  right now. We would need to get examples on how coreference plays out for the
-  Australian National Corpus Initiative.</dd>
-
-</dl>
 
 <p>Time for some coreference representations in JSON. The examples below are all
 for the simple phrase <i>Sue sees herself</i>. The JSON is fairly informal, just
 showing the bits and pieces that are relevant to the discussion.</p>
 
-<p>Here is an example where the Coreference view refers to elements in other
-views.</p>
+<p>The LIF approach to coreference is closer to the Stanford and OpenNLP output
+than to the GATE output, that is, we express corefence as an attribute or set of
+attributes on Token or Person objects. Instead, we introduce Coreference and
+Markable annotation categories, defined in the vocabulary
+at <a href="http://vocab.lappsgrid.org/Coreference.html">http://vocab.lappsgrid.org/Coreference.html</a>
+and <a href="http://vocab.lappsgrid.org/Markable.html">http://vocab.lappsgrid.org/Markable.html</a>. The
+latter category is a common appearance in coreference annotation.</p>
+
+<p>There are several ways in which coreference can be represented. Here is an
+example where the coreference view refers to elements in another view and where
+in fact the tokenization in that view may have been input to the coreference
+tool.</p>
 
 <pre class="example">
 {
   "text": "Sue sees herself",
   "views": [ 
-    { "metadata": {
+    { "id": "v1",
+       "metadata": {
         "contains": {
           "Token": {
             "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
@@ -307,17 +207,16 @@ views.</p>
          { "@type": "Token", "id": "tok0", "start": 0, "end": 3 },
          { "@type": "Token", "id": "tok1", "start": 4, "end": 8 },
          { "@type": "Token", "id": "tok2", "start": 9, "end": 16 } ]},
-    { "metadata": {
+    { "id": "v2",
+      "metadata": {
         "contains": {
           "Markable": {
-            "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
-            "type": "coref:xxxx" },
+            "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n" },
           "Coreference": {
-            "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
-            "type": "coref:xxxx" }}},
+            "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n" }}},
       "annotations": [
-         { "@type": "Markable", "id": "m0", "targets": [ "tok0" ] },
-         { "@type": "Markable", "id": "m1", "targets": [ "tok2" ] },
+         { "@type": "Markable", "id": "m0", "targets": [ "v1:tok0" ] },
+         { "@type": "Markable", "id": "m1", "targets": [ "v1:tok2" ] },
          { "@type": "Coreference", 
            "id": "coref0", 
            "features": {
@@ -326,35 +225,26 @@ views.</p>
 }
 </pre>
 
-<p>Some notes on the Markables and Coreference elements</p>
+<p>The Coreference element contains a list of mentions, which are identifiers of
+annotation objects in the same view. In this case the mentions refer to
+markables that refer to eleents in another view. Markables either have start and
+end attributes or the target attribute. These attibutes are inherited from
+Span (see <a href="http://vocab.lappsgrid.org/Span.html">http://vocab.lappsgrid.org/Span.html</a>). Note that this use of Span is a bit peculiar since we allow spans to
+either have a start and end or have a list of targets which each have a start
+and end, th eformer use is common, but the latter use may raise eyebrows.</p>
 
-<ol class="spacy">
-
-<li>What is the value of type in the coreference metadata?
-
-<li>The markables are required, the mentions list cannot refer directly to other
-views. There is a slight penalty to pay, but it appears conceptually cleaner to
-do it this way.
-
-<li>Markables either have start and end or a target specified. Bur we do allow
-all three to be there. This is still a little bit up for discussion though. How
-can we endode this in JSON schema?
-
-<li>We use Markable because this is a common practice for manual corefence
-annotation. We need some references here.
-
-</ol>
-
-<p>An example where there is no other view to refer to.</p>
+<p>Here is an example where there is no other view to refer to and where the
+markables directly refer to text offsets.</p>
 
 <pre class="example">
 {
   "text": "Sue sees herself",
   "views": [ 
-    { "metadata": {
+    { "id": "v1",
+      "metadata": {
         "contains": {
-        "Markable": { },
-        "Coreference": { } }},
+          "Markable": { },
+          "Coreference": { } }},
       "annotations": [
          { "@type": "Markable", "id": "m0", "start": 0, "end": 3 },
          { "@type": "Markable", "id": "m1", "start": 9, "end": 16 },
@@ -371,12 +261,12 @@ that are not available in other views, then we put them in the coreference
 view. Below we have Token annotations in the coreference view. Instead of Token
 we could also have Person or NounChunk or any other Annotation type.</p>
 
-
 <pre class="example">
 {
   "text": "Sue sees herself",
   "views": [ 
-    { "metadata": {
+    { "id": "v1",
+      "metadata": {
         "contains": {
           "Token": { },
           "Markable": { },
@@ -409,7 +299,8 @@ annotations. We put them in the features directory of the Markable. </p>
 {
   "text": "Sue sees herself",
   "views": [ 
-    { "metadata": {
+    { "id": "v1",
+      "metadata": {
         "contains": {
           "Token": { },
           "Markable": { },
@@ -445,7 +336,8 @@ to other markables.</p>
 {
   "text": "John and Mary left, they were late",
   "views": [ 
-    { "metadata": { },
+    { "id": "v1",
+      "metadata": { },
       "annotations": [
          { "@type": "Markable", "id": "m0", "start": 0, "end": 4 },
          { "@type": "Markable", "id": "m1", "start": 9, "end": 13 },
@@ -463,6 +355,15 @@ to other markables.</p>
 </pre>
 
 <p>Markables m0 and m1 could be other annotation types like Token or Person.</p>
+
+<hr>
+<p>
+[ <a href="index.html">up</a>
+| <a href="tokens.html">previous</a>
+<!--| <a href="ner.html">previous</a>-->
+| <a href="phrase_structure.html">next</a> ]
+</p>
+
 
 </body>
 </html>

@@ -14,15 +14,22 @@
 
 <h1>Phrase Structure in LIF</h1>
 
-<p>Version 1, October 2014</p>
+<p>Last updated: October 29<sup>th</sup>, 2015</p>
 
-<p>We introduce an Annotation object with @type PhraseStructure. This object
-contains a single parse tree for some text span, typically for a sentence. It
-introduces a feature named constituents which contains a list of identifiers
-referring to (1) annotations of @type Constituent in the same view or (2)
-annotations of @type Token that may live in another view. A Constituent has a
-label reflecting the category and in the feature dictionary a list of
-children.</p>
+
+<p>We use two annnotation object from the vocabulary, PhraseStructure and Consituent:
+
+<ul>
+<li><a href="http://vocab.lappsgrid.org/PhraseStructure.html">http://vocab.lappsgrid.org/PhraseStructure.html</a>
+<li><a href="http://vocab.lappsgrid.org/Constituent.html">http://vocab.lappsgrid.org/Constituent.html</a>
+</ul>
+
+<p>The PhraseStrucutre object contains a single parse tree for some text span,
+typically for a sentence. It introduces a feature named constituents which
+contains a list of identifiers referring to (1) annotations of @type Constituent
+in the same view or (2) annotations of @type Token that may live in another
+view. A Constituent has a label reflecting the category and in the features
+dictionary a list of children.</p>
 
 <pre class="example">
 {
@@ -75,6 +82,7 @@ children.</p>
 </pre>
 
 
+<!--
 <p>Some notes and open issues on the above:</p>
 
 <ol class="spacy">
@@ -100,7 +108,14 @@ decided to flatten out all these structures, but embed them in their own
 annotation type (PhraseStructure in this case).
 
 </ol>
+-->
 
+<hr>
+<p>
+[ <a href="index.html">up</a>
+| <a href="coref.html">previous</a>
+| <a href="dependencies.html">next</a> ]
+</p>
 
 </body>
 </html>
