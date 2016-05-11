@@ -52,15 +52,13 @@ None scheduled.
 ### Technical Information
 
 * [GitHub Branches](technical/github.html)
-* [Creating Docker Images](technical/docker.md)
-* [Jupyter Notebook](technical/jupyter.md)
+* [Creating Docker Images](technical/docker.html)
+* [Jupyter Notebook](technical/jupyter.html)
 	
-**Maven Generated Sites**
+#### Maven Generated Sites
 <div class="note">
-<span class="red">Note</span> Work is ongoing to have these sites built and
-deployed automatically by <a href="https://travis-ci.org/lapps">Travis</a>. This effort 
-is being coordinated with the work being done to deploy all Lappsgrid artifacts to the
-Sonatype Central Repository (aka Maven Central).
+<span class="red">Note</span> The following pages are generated automatically every time
+a new release is pushed to Maven Central.
 </div>
 
 1. [org.lappsgrid.api](http://lapps.github.io/org.lappsgrid.api)
