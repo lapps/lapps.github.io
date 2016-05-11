@@ -11,6 +11,10 @@ None scheduled.
 
 ### Past Events
 
+1. LAPPS-Clarin Integration Workshop<br/>
+**Where:** Brandeis University, Waltham MA<br/>
+**When:** Dec 5-7, 2015
+	* Meeting Summary (in progress)
 1. Grid Integration Meeting<br/>
 **Where:** Vassar College, Poughkeepsie New York<br/>
 **When:** May 11-14, 2015
@@ -41,20 +45,26 @@ None scheduled.
 * [Roadmap](Roadmap.html)
 * [Maven Repository Information](Maven.html)
 
-### Subprojects
+### Technical Information
 
+* [GitHub Branches](technical/github.html)
+* [Release Practices](technical/release.md)
+	
+**Maven Generated Sites**
 <div class="note">
-<span class="red">Note</span> This section is used to explore the various ways to
-deploy the Maven site documentation to Github and the links may or may not work as
-expected.
+<span class="red">Note</span> Work is ongoing to have these sites built and
+deployed automatically by <a href="https://travis-ci.org/lapps">Travis</a>. This effort 
+is being coordinated with the work being done to deploy all Lappsgrid artifacts to the
+Sonatype Central Repository (aka Maven Central).
 </div>
 
-1. [org.lappsgrid.api](http://lapps.github.io/org.lappsgrid.api)
-1. [org.lappsgrid.core](http://lapps.github.io/org.lappsgrid.core)
-1. [org.lappsgrid.client](http://lapps.github.io/org.lappsgrid.client)
-1. [org.lappsgrid.discriminator](http://lapps.github.io/org.lappsgrid.discriminator)
-1. [org.lappsgrid.metadata](http://lapps.github.io/org.lappsgrid.metadata)
-1. [org.lappsgrid.serialization](http://lapps.github.io/org.lappsgrid.serialization)
-1. [org.lappsgrid.vocabulary](http://lapps.github.io/org.lappsgrid.vocabulary)
+1. [org.lappsgrid.api](http://lapps.github.io/org.lappsgrid.api) [pending]
+1. [org.lappsgrid.core](http://lapps.github.io/org.lappsgrid.core) [pending]
+1. [org.lappsgrid.client](http://lapps.github.io/org.lappsgrid.client) [pending]
+1. [org.lappsgrid.discriminator](http://lapps.github.io/org.lappsgrid.discriminator) [pending]
+1. [org.lappsgrid.metadata](http://lapps.github.io/org.lappsgrid.metadata) [pending]
+1. [org.lappsgrid.serialization](http://lapps.github.io/org.lappsgrid.serialization) [pending]
+1. [org.lappsgrid.vocabulary](http://lapps.github.io/org.lappsgrid.vocabulary) [pending]
+
 
 
