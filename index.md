@@ -44,6 +44,7 @@ None scheduled.
 * [Live Site](LiveSite.html)
 * [Roadmap](Roadmap.html)
 * [Maven Repository Information](Maven.html)
+* [Documentation - of widely varying maturity](manuals/)
 
 ### Technical Information
 
