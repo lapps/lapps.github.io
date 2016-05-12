@@ -54,6 +54,14 @@ path as the *source*.
 The *ADD* directive is the same as the *COPY* directive except it does some extra magic.
 In particular, the *ADD* directive will decompress any files when it copies them to the target.
 
+The *ADD* directive's *source* parameter can also be a URL, in which case Docker will download
+the file pointed to by the URL and copy it to the target image.
+
+```bash
+	ADD http://example.com/file.tgz /usr/share
+```
+
+
 #### RUN
 
 The *RUN* directive can be used to execute arbitrary commands when building the image,
@@ -62,8 +70,33 @@ The *RUN* directive can be used to execute arbitrary commands when building the 
 	RUN chmod ug+x /usr/local/share/file.txt
 ```
 
+Long commands can be be split into several lines with the line continuation character \ and
+multiple commands can be run in sequence by joining them with the AND (&&) operator.  
+
+```bash
+	RUN apt-get update && apt-get upgrade -y && \
+	    apt-get install package1 package2 pacakge3 && \
+		chmod u+x /usr/bin/startup.sh	    		
+```
+
+#### USER
+
+The *USER* directive specifies the user account subsequent command will be *RUN* as.
+
+```bash
+	USER joe
+	RUN echo 'some data' > /home/joe/file.txt && \
+	    chmod a+r /home/joe/file.txt
+	    
+	USER root
+	RUN apt-get install -y package1 package2 package3
+```
+
 #### CMD
 
 The **CMD** directive specifies the command that will be run when the container is launched.
 When this command terminates the Docker container will exit.
 
+```bash
+	CMD /usr/bin/startup.sh
+```
