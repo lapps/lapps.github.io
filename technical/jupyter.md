@@ -36,7 +36,7 @@ change GALAXY_HOST and GALAXY_KEY to the appropriate values.
 
 You should now be able to start Jupyter with `jupyter notebook` or `jupyter console --kernel lsd`.
 
-## Usage
+## Interacting with Galaxy
 
 The LSD kernel provides two methods for interacting with Galaxy: `get` and `put`. The `get`
 method downloads a data set item from the current history into a `java.io.File` object and the `put` command
@@ -59,6 +59,8 @@ Groovy you do not need to include the *.class* suffix when specifying a Java/Gro
 f = get(80)
 data = parse(f.text, DataContainer)
 ```
+
+The above reads the JSON from the file and parses it into a [DataContainer](http://wiki.lappsgrid.org/org.lappsgrid.serialization/groovydoc/org/lappsgrid/serialization/DataContainer.html) object.
 
 Use the `toJSon` or `toPrettyJson` methods to convert an object into a JSON string.
 
@@ -117,7 +119,7 @@ container.text
 # Exercise : Create a list of all locations in a document.
 
 Each of the following steps should be run in their own cell in a Jupyter Notebook. A Notebook
-with the folling exercise can be downloaded [here](WikiExamply.ipynb).
+with the folling exercise can be downloaded [here](WikiExample.ipynb).
 
 #### Step 1 : Load a document into a Galaxy history
 

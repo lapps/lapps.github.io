@@ -7,7 +7,9 @@ title: Language Application Grid
 
 ### Upcoming Events
 
-None scheduled.
+LREC 2016  
+Portorož, Slovenia  
+May 23-28, 2016
 
 ### Past Events
 
