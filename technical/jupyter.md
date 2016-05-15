@@ -6,12 +6,21 @@ title: Jupyter Notebook
 # {{ page.title }}
 
 The Lappsgrid Services DSL (LSD) is a [Groovy](http://groovy-lang.org/) Domain Specific 
-Language that can be used to interact with service on the LAPPS Grid. The Language 
+Language that can be used to interact with services on the LAPPS Grid. The Language 
 Application Grid has also developed a LSD kernel for use in [Jupyter Notebooks](http://jupyter.org/).  
 
 ## Installation
 
 It is assumed that users already have [Jupyter installed](http://jupyter.readthedocs.io/en/latest/install.html).
+If you don't have Jupyter, but do have Python the following should work:
+
+```bash
+$> pip install jupyter
+```
+
+### Install the kernel
+
+In Jupyter-speak a *kernel* is the program that Jupyter uses to run the code entered into a cell.
 
 1. [Download](http://www.anc.org/downloads/jupyter-lsd-kernel-1.0.0-SNAPSHOT.tgz) the LSD Kernel.
 1. Open the above archive and edit the jupyter-lsd-kernel.properties file.
@@ -116,7 +125,7 @@ container = getContainer(80)
 container.text
 ```
 
-# Exercise : Create a list of all locations in a document.
+# Example : Create a list of all locations in a document.
 
 Each of the following steps should be run in their own cell in a Jupyter Notebook. A Notebook
 with the folling exercise can be downloaded [here](WikiExample.ipynb).
@@ -170,7 +179,7 @@ for locations.
 locations = view.annotations.findAll { it.atType == Uri.LOCATION }
 ```
 
-#### Step 5 : Write a method (closure) to retrieve the text covered by an annotation.
+#### Step 5 : Create a closure to get the text covered by an annotation.
 
 The MASC NE annotations do not include the span of text being annotated so we need to 
 retrieve the text from the document text, which is stored in `container.text`.
