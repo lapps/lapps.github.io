@@ -50,12 +50,13 @@ Jupyter will read/write files in the current directory.
 
 ## Interacting with Galaxy
 
-The LSD kernel provides two methods for interacting with Galaxy: `get` and `put`. The `get`
-method downloads a data set item from the current history into a `java.io.File` object and the `put` command
+The LSD kernel provides two methods for interacting with Galaxy: `get(int)` and `put(File)`. The `get`
+method downloads a data set item from the current history into a `java.io.File` object. The
+int parameter is the history id number of the item to be downloaded. The `put` command
 uploads a `java.io.File` to the current Galaxy history.
 
 ```groovy
-f = get(80)
+f = get(42)
 
 f = new File('/tmp/HelloWorld.txt')
 f.text = 'Hello world'
@@ -68,7 +69,7 @@ Use the `parse(String, Class)` method to parse a JSON String into an object.  **
 Groovy you do not need to include the *.class* suffix when specifying a Java/Groovy class.
 
 ```groovy
-f = get(80)
+f = get(42)
 data = parse(f.text, DataContainer)
 ```
 
@@ -109,7 +110,7 @@ Container getContainer(int historyId) {
 	return dc.payload
 }
 
-container = getContainer(80)
+container = getContainer(42)
 container.text
 ```
 
@@ -124,7 +125,7 @@ getContainer =  { historyId ->
 }
 
 // In another cell.
-container = getContainer(80)
+container = getContainer(42)
 container.text
 ```
 
