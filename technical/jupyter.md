@@ -45,6 +45,9 @@ change GALAXY_HOST and GALAXY_KEY to the appropriate values.
 
 You should now be able to start Jupyter with `jupyter notebook` or `jupyter console --kernel lsd`.
 
+Jupyter will read/write files in the current directory.
+
+
 ## Interacting with Galaxy
 
 The LSD kernel provides two methods for interacting with Galaxy: `get` and `put`. The `get`
@@ -128,7 +131,7 @@ container.text
 # Example : Create a list of all locations in a document.
 
 Each of the following steps should be run in their own cell in a Jupyter Notebook. A Notebook
-with the folling exercise can be downloaded [here](WikiExample.ipynb).
+with the following exercise can be downloaded [here](WikiExample.ipynb).
 
 #### Step 1 : Load a document into a Galaxy history
 
