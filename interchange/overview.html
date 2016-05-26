@@ -2,7 +2,7 @@
 
 <head>
 <title>LIF Overview</title>
-<link rel="stylesheet" href="../css/main.css" type="text/css" />
+<link rel="stylesheet" href="main.css" type="text/css" />
 </head>
 
 <body>
@@ -14,7 +14,7 @@
 
 <h1>Overview of LIF</h1>
 
-<p>Last updated: October 29<sup>th</sup>, 2015</p>
+<p>Last updated: May 26<sup>th</sup>, 2016</p>
 
 
 <h2>The structure of LIF objects</h2>
@@ -32,8 +32,10 @@ object is as follows:</p>
 }
 </pre>
 
-<p>There are four top-level keys: @context, metadata, text and views. The
-following sub sections will describe the values of these four keys.</p>
+<p>There are four top-level
+keys: <code>@context</code>, <code>metadata</code>, <code>text</code>
+and <code>views</code>. The following sub sections will describe the values of
+these four keys.</p>
 
 
 <h3>The @context key</h2>
@@ -67,8 +69,10 @@ key. Nevertheless, we will allow a metadata key here for future use.</p>
 <h3>The text key</h3>
 
 <p>This is a JSON <a href="http://www.w3.org/TR/json-ld/#dfn-value-object">value
-object</a> containing a @value and a @language key. The value associated with
-@value is a string and the value associated with @language follows the rules in
+object</a> containing a <code>@value</code> and a <code>@language</code>
+key. The value associated with
+<code>@value</code> is a string and the value associated
+with <code>@language</code> follows the rules in
 <a href="http://www.w3.org/TR/json-ld/#bib-BCP47">BCP47</a>, which for our
 current purposes boils down to using the ISO 639 code (also see
 the <a href="http://vocab.lappsgrid.org/Document.html#language">Document
@@ -110,13 +114,8 @@ and the annotations. We have considered making views read only, which has some
 advantages, see the <a href="tokens.html">Tokens and Tags</a> section for a
 discussion.
 
-<!--
-<li>Services may overwrite or delete information in existing views. We have been
-  flip-flopping on this, see immediately below for a discussion.
--->
-
-<li>Services may not overwrite term definitions that were defined in the view's
-context.
+<li>Services may not overwrite or delete information in existing views. This
+holds for the view's metadata as well as the annotations.
 
 </ol>
 
@@ -157,8 +156,9 @@ used in the processing chain.</p>
 ]
 </pre>
 
-<p>There are four keys in the view object: @context, id, metadata and
-annotations.</p>
+<p>There are four keys in the view
+object: <code>@context</code>, <code>id</code>, <code>metadata</code> and
+<code>annotations</code>.</p>
 
 <p>The <b>@context</b> key is an optional key used for user-defined context
 elements. As noted before, this is one of two possible choices on how to do
@@ -228,7 +228,7 @@ information to the LIF objects. The current convention is to use the java class
 name of the service and the producer name is actually added to the LIF object by
 accessing a name or identifier method on the server.</p>
 
-<p class="issue">We have discussed adding (1) a <code>timestam</code> key,
+<p class="issue">We have discussed adding (1) a <code>timestamp</code> key,
 probably using Unix epoch, and (2) a <code>dependsOn</code> key which could be
 used to specify what views a view depends on.</p>
 
@@ -252,9 +252,10 @@ We decided to leave this unresolved for now.</p>
 
 <p>The <code>type</code> key is used to specify what kind of token we are
 dealing with. It allows several tokenizers to specify the same type, for example
-if two tokenizers are both implementations of the OpenNLP tokenization scheme. In
-the example here the type key has the compact IRI value tokenization:opennlp,
-where tokenization refers to the tokenization key in the external context file
+if two tokenizers are both implementations of the OpenNLP tokenization
+scheme. In the example here the type key has the compact IRI value
+"tokenization:opennlp", where tokenization refers to the tokenization key in the
+external context file
 in <a href="http://vocab.lappsgrid.org/context-1.0.0.jsonld">http://vocab.lappsgrid.org/context-1.0.0.jsonld</a>,
 which contains the following two lines:
 
@@ -265,30 +266,30 @@ which contains the following two lines:
 
 <p>Because of these definitions, <code>tokenization:opennlp</code> will be expanded to
 http://vocab.lappsgrid.org/types/tokenization/opennlp. The <code>rules</code>
-key inside of Token can be used to specify a rule set, in this case one defined at 
+key inside of Token can be used to specify a rule set, in this case one defined by 
 http://vocab.lappsgrid.org/types/tokenization/opennlp_basic.</p>
 
 <p>Finally, the value of <b>annotations</b> is a list of annotation objects. The
 relevant part of the view printed above is repeated here: </p>
 
 <pre class="example">
-"annotations": [ 
-  { "@type": "Token", 
-    "id": "t0", 
-    "start": 0, 
-    "end": 5, 
-    "features": {} 
+"annotations": [
+  { "@type": "Token",
+    "id": "t0",
+    "start": 0,
+    "end": 5,
+    "features": {}
   }
 </pre>
 
 <p>The keys allowed are specified in the 
-<a href="http://vocab.lappsgrid.org/schema/lif-schema.json">
-JSON LIF schema</a> in the definitions for <code>annotations</code>
-and <code>annotation</code>. The value of <code>@type</code> is an element of
-the LAPPS vocabulary or an annotation category added by the user. If a
-user-defined is used then it would be defined outside of the LAPPS vocabulary
-and in that case the user should either use the full URI or add a context to the
-view in which this new annotation category lives.</p>
+<a href="http://vocab.lappsgrid.org/schema/lif-schema.json">JSON LIF schema</a>
+in the definitions for <code>annotations</code> and <code>annotation</code>. The
+value of <code>@type</code> is an element of the LAPPS vocabulary or an
+annotation category added by the user. If a user-defined category is used then
+it would be defined outside of the LAPPS vocabulary and in that case the user
+should either use the full URI or add a context to the view in which this new
+annotation category lives.</p>
 
 <p>Identifiers are unique to the view. It is allowed that two views both have an
 annotation with the same identifier and these could even be annotations of the
@@ -300,16 +301,26 @@ can be referred to as "v0:t0".</p>
 <p>Technically all that is required of the keys in the features dictionary is
 that they expand to a URI. In most cases, the keys reflect properties in the
 LAPPS vocabulary and we prefer to use the same name. So if we have a property
-"posTag", we will use "posTag" in the dictionary. This implies that "posTag"
-needs to be defined in the context so that it can be expanded to the correct URI
-in the vocabulary. This in turn implies that in the vocabulary, each property
-should be only defined once. </p>
+"pos", we will use "pos" in the dictionary. This implies that "pos" needs to be
+defined in the context so that it can be expanded to the correct URI in the
+vocabulary. Note that we need to be careful with properties that are defined on
+more than one annotation category. Say, for the sake of argument, that we have
+"pos" as a property on both the Token and NamedEntity annotation types. We then
+can use "pos" as the abbreviation of only one of the full URI and if we expand
+"pos" to http://vocab.lapps.grid.org/Token#pos then we need either use
+"NamedEntity#pos" or come up with a new abbreviated term. So far this situation
+has not presented itself.</p>
 
-<p>All annotation elements in a view are members of the list of annotations,
-that is, annotations are not embedded inside of other annotation. For example,
-Constituent annotations will not contain other Constituent objects. However, in
-the features dictionary annotations can refer to other annotations using their
-identifiers.</p>
+<p>All annotation elements in a view are direct members of the list of
+annotations, that is, annotations are not embedded inside of other
+annotation. For example, Constituent annotations will not contain other
+Constituent objects. However, in the features dictionary annotations can refer
+to other annotations using their identifiers.</p>
+
+<p>The rest of the LIF specifications consists of examples of some common
+annotation categories in
+the <a href="http://vocab.lappsgrid.org">vocabulary</a>, showing how the
+annotation types translate into LIF structures.</p>
 
 <hr>
 <p>
