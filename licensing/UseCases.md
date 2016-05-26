@@ -31,7 +31,7 @@ The application (composer or pipeline planner) the end user is using to access a
 **AAS**<br/>
 An authentication and authorization service. Any service that can authenticate a user and
 determine if they are authorized to access a particular *protected resource*.  The *AAS*
-must also return any *access constraints* that apply to the *protected resource*.
+must also return any *access constraints* that apply to the *protected resource*.<br/>
 **LAAS**<br/>
 The LDC's Authentication and Authorization Service.  
 

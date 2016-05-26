@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" xmlns:intf="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns1="http://langrid.nict.go.jp/ws_1_2/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://langrid.nict.go.jp/ws_1_2/" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="LangridException">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AccessLimitExceededException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="InvalidParameterException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence>
+       <element name="parameterName" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="UnsupportedLanguagePairException">
+    <complexContent>
+     <extension base="tns1:InvalidParameterException">
+      <sequence>
+       <element name="language1" nillable="true" type="xsd:string"/>
+       <element name="language2" nillable="true" type="xsd:string"/>
+       <element name="parameterName1" nillable="true" type="xsd:string"/>
+       <element name="parameterName2" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="NoAccessPermissionException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ProcessFailedException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="NoValidEndpointsException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ServerBusyException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ServiceNotActiveException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence>
+       <element name="serviceId" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ServiceNotFoundException">
+    <complexContent>
+     <extension base="tns1:LangridException">
+      <sequence>
+       <element name="serviceId" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="ServiceNotActiveException">
+
+      <wsdl:part name="fault" type="tns1:ServiceNotActiveException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="NoValidEndpointsException">
+
+      <wsdl:part name="fault" type="tns1:NoValidEndpointsException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterException">
+
+      <wsdl:part name="fault" type="tns1:InvalidParameterException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="UnsupportedLanguagePairException">
+
+      <wsdl:part name="fault" type="tns1:UnsupportedLanguagePairException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ServiceNotFoundException">
+
+      <wsdl:part name="fault" type="tns1:ServiceNotFoundException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ServerBusyException">
+
+      <wsdl:part name="fault" type="tns1:ServerBusyException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AccessLimitExceededException">
+
+      <wsdl:part name="fault" type="tns1:AccessLimitExceededException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addMarkRequest">
+
+      <wsdl:part name="inputString" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ProcessFailedException">
+
+      <wsdl:part name="fault" type="tns1:ProcessFailedException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="NoAccessPermissionException">
+
+      <wsdl:part name="fault" type="tns1:NoAccessPermissionException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addMarkResponse">
+
+      <wsdl:part name="addMarkReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="SimpleExclamationMarkService">
+
+      <wsdl:operation name="addMark" parameterOrder="inputString">
+
+         <wsdl:input message="impl:addMarkRequest" name="addMarkRequest"/>
+
+         <wsdl:output message="impl:addMarkResponse" name="addMarkResponse"/>
+
+         <wsdl:fault message="impl:UnsupportedLanguagePairException" name="UnsupportedLanguagePairException"/>
+
+         <wsdl:fault message="impl:ServiceNotFoundException" name="ServiceNotFoundException"/>
+
+         <wsdl:fault message="impl:ServiceNotActiveException" name="ServiceNotActiveException"/>
+
+         <wsdl:fault message="impl:NoValidEndpointsException" name="NoValidEndpointsException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:ServerBusyException" name="ServerBusyException"/>
+
+         <wsdl:fault message="impl:AccessLimitExceededException" name="AccessLimitExceededException"/>
+
+         <wsdl:fault message="impl:ProcessFailedException" name="ProcessFailedException"/>
+
+         <wsdl:fault message="impl:NoAccessPermissionException" name="NoAccessPermissionException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="SimpleExclamationMarkServiceSoapBinding" type="impl:SimpleExclamationMarkService">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="addMark">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addMarkRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://DefaultNamespace" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addMarkResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="UnsupportedLanguagePairException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="UnsupportedLanguagePairException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceNotFoundException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="ServiceNotFoundException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceNotActiveException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="ServiceNotActiveException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoValidEndpointsException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoValidEndpointsException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="InvalidParameterException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServerBusyException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="ServerBusyException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessLimitExceededException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AccessLimitExceededException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ProcessFailedException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="ProcessFailedException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="NoAccessPermissionException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="NoAccessPermissionException" namespace="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="SimpleExclamationMarkServiceService">
+
+      <wsdl:port binding="impl:SimpleExclamationMarkServiceSoapBinding" name="SimpleExclamationMarkService">
+
+         <wsdlsoap:address location="http://localhost:8080/AddMarks/services/SimpleExclamationMarkService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
