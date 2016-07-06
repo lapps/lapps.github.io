@@ -7,8 +7,7 @@ title: Language Application Grid
 
 ### Upcoming Events
 
-LREC 2016  
-
+Nothing scheduled.
 
 
 ### Past Events
