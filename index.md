@@ -8,11 +8,18 @@ title: Language Application Grid
 ### Upcoming Events
 
 LREC 2016  
-Portorož, Slovenia  
-May 23-28, 2016
+
+
 
 ### Past Events
 
+1. Galaxy Community Conference 2016<br/>
+**Where:** Indiana University, Bloomington IA<br/>
+**When:** June 28-29, 2016
+	* Slides ([pdf](galaxy2016-final.pdf)\|[pptx](galaxy2016-final.pptx))
+1. LREC 2016<br/>
+**Where:**Portorož, Slovenia<br/>
+**When:** May 23-28, 2016
 1. CMU Hackathon<br/>
 **Where:** Carnegie Mellon University, Pittsburgh PA<br/>
 **When:** Apr 21-22, 2016

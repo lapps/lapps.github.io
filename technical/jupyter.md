@@ -45,19 +45,22 @@ change GALAXY_HOST and GALAXY_KEY to the appropriate values.
 
 You should now be able to start Jupyter with `jupyter notebook` or `jupyter console --kernel lsd`.
 
-Jupyter will read/write files in the current directory.
+Jupyter will read/write files (notebooks) in the current directory. 
 
 
 ## Interacting with Galaxy
 
 The LSD kernel provides two methods for interacting with Galaxy: `get(int)` and `put(File)`. The `get`
 method downloads a data set item from the current history into a `java.io.File` object. The
-int parameter is the history id number of the item to be downloaded. The `put` command
-uploads a `java.io.File` to the current Galaxy history.
+int parameter is the history id number of the item to be downloaded. 
 
 ```groovy
 f = get(42)
+```
 
+The `put` command uploads a `java.io.File` to the current Galaxy history.
+
+```groovy
 f = new File('/tmp/HelloWorld.txt')
 f.text = 'Hello world'
 put(f)
@@ -202,7 +205,7 @@ of unique locations.
 ```groovy
 unique = [] as HashSet
 locations.each { 
-	unique << getText(it)
+	unique.add(getText(it))
 }
 ```
 
