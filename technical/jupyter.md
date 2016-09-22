@@ -48,7 +48,7 @@ Where *&lt;kernel directory&gt;* is a directory where the kernel jar file will b
 
 #### Notes
 
-By default the *install.sh* script will install the Jupyter kernel to the system kernel directory. This is typically */usr/local/share/juptyer* on Linux/MacOS systems and %PROGRAMDATA%\jupyter\kernels on Windows systems.  To install the Jupyter kernel to the User's directory you must either:
+By default the *install.sh* script will install the Jupyter kernel to the system kernel directory. This is typically */usr/local/share/juptyer* on Linux/MacOS systems and *%PROGRAMDATA%\jupyter\kernels* on Windows systems.  To install the Jupyter kernel to the User's directory you must either:
 
 * Edit the *install.script* and add the *--user* option to the `kernelspec` command, or
 * Edit the kernel.json file to set the *argv* paramater to the location of the Jupyter Groovy kernel and then run the `jupyter kernelspec install` command manually.
@@ -84,6 +84,7 @@ Or, if you don't mind really long command lines the above can be achieved in one
 ```bash
 $> docker run -d -p 8888:8888 -e GALAXY_HOST=http://galaxy.lappsgrid.org -e GALAXY_KEY=1234567890DEADBEEF -v $HOME/kernels:/home/jovyan lappsgrid/jupyter-lsd-kernel
 ```
+
 ## Interacting with Galaxy
 
 ### Connecting to Galaxy
