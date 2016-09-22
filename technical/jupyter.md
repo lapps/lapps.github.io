@@ -20,35 +20,123 @@ $> pip install jupyter
 
 ### Install the kernel
 
-In Jupyter-speak a *kernel* is the program that Jupyter uses to run the code entered into a cell.
+#### From Source
 
-1. [Download](http://www.anc.org/downloads/jupyter-lsd-kernel-1.0.0-SNAPSHOT.tgz) the LSD Kernel.
-1. Open the above archive and edit the jupyter-lsd-kernel.properties file.
-  - Set `GALAXY_HOST` to the URL of the Galaxy server you would like to interact with.
-  - Set `GALAXY_KEY` to the Galaxy API key for your user account on the above Galaxy server.
-1. Run the `install.sh` script with the directory where the DSL jar file will be stored. This
-directory must already exist.
+Building the Jupyter LSD Kernel project requires Maven 3.x or higher.
 
 ```bash
-$> mkdir $HOME/kernels
-$> ./install.sh $HOME/kernels
+$> git clone https://github.com/lappsgrid-incubator/jupyter-lsd-kernel.git 
+$> cd jupyter-lsd-kernel
+$> mvn package
+$> ./install.sh <kernel directory>
 ```
 
-Advanced users are free to put the jar file anywhere and edit the *kernel.json* file appropriately.
-The kernel expects two command line parameters.  The first is the `{connection file}` provided
-by Jupyter and the second is the path to the *jupyter-lsd-kernel.properties* file, which 
-provides the information the kernel need to communicate with a Galaxy instance. To communicate
-with a different Galaxy instance simply update the *jupyter-lsd-kernel.properties* file and
-change GALAXY_HOST and GALAXY_KEY to the appropriate values.
+Where *&lt;kernel directory&gt;* is a directory where the kernel jar file will be copied and can be any directory on your system.
 
-## Starting Jupyter
+#### From Pre-compiled Binaries
+
+Download and expand the [LSD Kernel archive](http://www.lappsgrid.org/downloads/jupyter-lsd-kernel-latest.tgz) and then run the *install.sh* script.
+
+```bash
+$> wget http://www.lappsgrid.org/downloads/jupyter-lsd-kernel-latest.tgz
+$> tar xzf jupyter-lsd-kernel-latest.tgz
+$> cd jupyter-lsd-kernel-x.y.z
+$> ./install.sh <kernel directory>
+```
+
+Where *&lt;kernel directory&gt;* is a directory where the kernel jar file will be copied and can be any directory on your system. Replace *x.y.z* with the current version number.
+
+#### Notes
+
+By default the *install.sh* script will install the Jupyter kernel to the system kernel directory. This is typically */usr/local/share/juptyer* on Linux/MacOS systems and %PROGRAMDATA%\jupyter\kernels on Windows systems.  To install the Jupyter kernel to the User's directory you must either:
+
+* Edit the *install.script* and add the *--user* option to the `kernelspec` command, or
+* Edit the kernel.json file to set the *argv* paramater to the location of the Jupyter Groovy kernel and then run the `jupyter kernelspec install` command manually.
+
+You can view the default directories that Jupyter uses by running the command `jupyter --paths`.
+
+### Starting Jupyter
 
 You should now be able to start Jupyter with `jupyter notebook` or `jupyter console --kernel lsd`.
 
 Jupyter will read/write files (notebooks) in the current directory. 
 
+### Docker
 
+A Docker image containing the LSD kernel is available from the [Docker Hub](https://hub.docker.com/r/lappsgrid/jupyter-lsd-kernel/).  The container expects two environment variables to be defined that are used to connect to a Galaxy server:
+
+1. **GALAXY_HOST** The URL to a Galaxy server.
+1. **GALAXY_KEY** The API key for the user on the Galaxy server.
+
+Inside the container Jupyter uses the directory */home/jovyan* to save and load notebooks.  To persists notebooks created inside the container mount a local directory as */home/jovyan*.
+
+```bash
+$> HOST=http://galaxy.lappsgrid.org
+$> KEY=1234567890DEADBEEF
+$> ENV="-e GALAXY_HOST=$HOST -e GALAXY_KEY=$KEY"
+$> VOLUME="-v $HOME/notebooks:/home/jovyan"
+$> PORTS="-p 8888:8888"
+$> docker run -d $PORTS $ENV $VOLUME lappsgrid/jupyter-lsd-kernel 
+```
+
+Or, if you don't mind really long command lines the above can be achieved in one line:
+
+```bash
+$> docker run -d -p 8888:8888 -e GALAXY_HOST=http://galaxy.lappsgrid.org -e GALAXY_KEY=1234567890DEADBEEF -v $HOME/kernels:/home/jovyan lappsgrid/jupyter-lsd-kernel
+```
 ## Interacting with Galaxy
+
+### Connecting to Galaxy
+
+The LSD kernel needs two pieces of information to be able to interact with Galaxy:
+
+1. The URL of the Galaxy server.
+1. Your Galaxy API key.  If you do not have a Galaxy API key you will need to log in to the Galaxy instance and generate one (User -> Preferences -> Manager your API keys.)
+
+You will need to set the environment variables **GALAXY_HOST** and **GALAXY_KEY** before launching Jupyter:
+
+```bash
+$> export GALAXY_HOST=http://galaxy.example.com:8000
+$> export GALAXY_KEY=1234567890DEADBEEF
+$> jupyter notebook
+```
+
+### Galaxy Notebook Functions
+
+The following functions are built in to the Jupyter LSD kernel to simplify working with a Galaxy instance.
+
+**void selectHistory(String history_name)**<br/>
+Select the Galaxy history to work with.  It is a good practice to always name histories in Galaxy so they may be easily selected in Jupyter.  Since the Galaxy API has no concept of the *current history* it is impossible to select a history if they are all named *"Unnamed history"*.
+
+**File get(int history_id)**<br/>
+Returns a *java.io.File* object with the contents of the dataset with the given history id. The history id is simply the integer to the left of the dataset name in the history panel.
+
+**void put(Stirng path)**<br/>
+**void put(File file)**<br/>
+Uploads the file to the currently selected Galaxy history.  You may need to refresh the history in Galaxy to see the newly uploaded file.  The dataset name will be the name of the uploaded file.
+
+**Object parse(String json)**<br/>
+**Object parse(String json, Class theClass)**<br/>
+Parses a JSON string into an instance of **theClass**.  Calling `parse(json)` is the same as calling `parse(json, org.lappsgrid.serialization.Data)`.
+
+**String toJson(Object object)**<br/>
+Returns the compact JSON string representation of the `object`.
+
+**String toPrettyJSon(Object object)**<br/>
+Returns a pretty-printed JSON string representation of the `object`.
+
+**String readline(String prompt)**<br/>
+Prompts the user to enter a line of input and returns that string.  The Jupyter user interface will 
+determine the best way to display the prompt to the user and read the user input.
+
+**void version()**<br/>
+Displays the current Groovy and LSD kernel versions.
+
+**GalaxyInstance galaxy()**<br/>
+**HistoriesClient histories()**<br/>
+**ToolsClient tools()**<br/>
+**History history()**<br/>
+Returns handles to the various Galaxy clients. See the Blend4J API documentation (link needed) for more information on these clients.
 
 The LSD kernel provides two methods for interacting with Galaxy: `get(int)` and `put(File)`. The `get`
 method downloads a data set item from the current history into a `java.io.File` object. The
@@ -193,7 +281,10 @@ retrieve the text from the document text, which is stored in `container.text`.
 
 ```groovy
 getText = { Annotation a ->
-	return container.text.substring((int)a.start, (int)a.end)
+	return container.text
+		.substring((int)a.start, (int)a.end)
+		.replaceAll('\n', ' ')
+		.replaceAll('  +', ' ')
 }
 ```
 
@@ -229,3 +320,28 @@ t.delete()
 uploaded item.
 
 Enjoy!
+
+## Map/Reduce/Filter
+
+Version 1.1.0-SNAPSHOT of the Jupyter LSD kernel adds the methods *map*, *reduce*, and *filter* to the Java Collection classes.
+While Groovy has the methods *collect*, *inject*, and *grep* (or *find*/*findAll*) many people are more comfortable
+with the names map, reduce and filter.  In fact the map, reducer, filter methods simply delegate to
+collect, inject and grep.
+
+This is the same example as above only using map, reduce, filter methods:
+
+```groovy
+data = parse(get(1).text, DataCollection)
+data.payload.views
+	.find { it.metadata.contains[Uri.NE] }
+	.annotations
+	.filter { it.atType == Uri.LOCATION }
+	.map { data.payload.text.substring((int)it.start, (int)it.end) }
+	.map { it.replaceAll('\n', ' ') }
+	.map { it.replaceAll('  +', ' ') }
+	.reduce([] as HashSet) { set,value -> set << value }
+	.sort()
+	.reduce(new StringWriter()) { writer, value -> writer << value; writer << '\n' }
+	.toString()	
+	
+```
