@@ -8,13 +8,13 @@ title: Language Application Grid
 ### Upcoming Events
 
 1. LAPPS/Galaxy Collaboration Meeting<br/>
-**Featuring**
-- Anton Nekrutenko, PI Galaxy Project
-- TBD, Galaxy developer
-- Steve Cassidy, [Alveo](http://alveo.edu.au)
-- Stephan Oepen, [University of Oslo](http://www.mn.uio.no/ifi/english/people/aca/oe/)
 **Where:** Vassar College, Poughkeepsie NY<br/>
-**When:** November 9-11, 2016
+**When:** November 9-11, 2016<br/>
+**Featuring**
+ - Anton Nekrutenko, PI Galaxy Project
+ - TBD, Galaxy developer
+ - Steve Cassidy, [Alveo](http://alveo.edu.au)
+ - Stephan Oepen, [University of Oslo](http://www.mn.uio.no/ifi/english/people/aca/oe/)
 
 ### Past Events
 
