@@ -7,6 +7,10 @@ title: Language Application Grid
 
 ### Upcoming Events
 
+None scheduled.
+
+### Past Events
+
 1. LAPPS/Galaxy Collaboration Meeting<br/>
 **Where:** Vassar College, Poughkeepsie NY<br/>
 **When:** November 9-11, 2016<br/>
@@ -15,9 +19,7 @@ title: Language Application Grid
  - TBD, Galaxy developer
  - Steve Cassidy, [Alveo](http://alveo.edu.au)
  - Stephan Oepen, [University of Oslo](http://www.mn.uio.no/ifi/english/people/aca/oe/)
-
-### Past Events
-
+**Report** Coming Soon.
 1. Galaxy Community Conference 2016<br/>
 **Where:** Indiana University, Bloomington IA<br/>
 **When:** June 28-29, 2016
@@ -83,6 +85,4 @@ a new release is pushed to Maven Central.
 1. [org.lappsgrid.metadata](http://lapps.github.io/org.lappsgrid.metadata)
 1. [org.lappsgrid.serialization](http://lapps.github.io/org.lappsgrid.serialization)
 1. [org.lappsgrid.vocabulary](http://lapps.github.io/org.lappsgrid.vocabulary)
-
-
 
