@@ -139,6 +139,7 @@ Displays the current Groovy and LSD kernel versions.
 **History history()**<br/>
 Returns handles to the various Galaxy clients. See the Blend4J API documentation (link needed) for more information on these clients.
 
+## Examples 
 The LSD kernel provides two methods for interacting with Galaxy: `get(int)` and `put(File)`. The `get`
 method downloads a data set item from the current history into a `java.io.File` object. The
 int parameter is the history id number of the item to be downloaded. 
@@ -154,6 +155,7 @@ f = new File('/tmp/HelloWorld.txt')
 f.text = 'Hello world'
 put(f)
 ```
+The filename will be used as the dataset name in the history panel so it is recommended to use a meaningful filename.
 
 ### Handling JSON
 
