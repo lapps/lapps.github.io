@@ -3,9 +3,67 @@ layout: slate
 title: Galaxy
 ---
 
-# {{ page.title }}
+This page describes setting up a production LAPPS Grid Galaxy instance on a fresh Ubuntu 14.04 LTS instance. The easiest way to run a LAPPS Grid Galaxy instance is to use one of the Docker images available from the [Docker Hub](https://hub.docker.com).  However at times it is required to install and run a Galaxy instance from the sources in the GitHub repository.
 
-The easiest way to run a LAPPS Grid Galaxy instance is to use one of the Docker images available from the Docker Hub.  However at times it is required to run the Galaxy instance from the GitHub repository.
+# TL;DR
+
+On a fresh Ubuntu install run:
+
+```bash
+$> curl -sSL http://downloads.lappsgrid.org/scripts/galaxy-setup.sh | sh
+$> cd /home/galaxy/galaxy
+$> HOME=/home/galaxy sudo -u galaxy ./run.sh
+```
+
+# The Long Version
+
+### Prerequisites
+
+To run Galaxy and all of the LAPPS Grid tools the following packages are required:
+
+1. Java
+1. PostgreSQL
+1. LSD
+1. Galaxy
+
+Install scripts are available from [http://downloads.lappsgrid.org/script](http://downloads.lappsgrid.org/script) to perform all of the above tasks.
+
+### Common Packages
+
+Install the common utilities, Postgres, Java, and LSD packages.  The database will be configured below:
+
+```bash
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-common.sh | sh
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-postgres.sh | sh
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-java.sh | sh
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-lsd.sh | sh
+```
+
+**NOTE** The *install-common.sh* script may display some error messages when used on a [Jetstream](/technical/jetstream.html) instance.  This seems to be due to Jetstream/OpenStack not allowing some OS packages (i.e. firmware) to be updated.  It should be safe to ignore these errors.
+
+
+### Galaxy User
+
+Create a system account for running galaxy.  We want to create a system account as the *galaxy* user should not be able to login to the system.
+
+```bash
+$> adduser galaxy --system --group
+```
+
+### Selecting a Secure Password
+
+Since both both the database setup script (see below) and the *galaxy.ini* file are available from publicly accessible repositories we will need to change the passwords stored in these files.  Currently both files use *\__DB_PASSWORD\__* as the database password to make it easier to update both via a `sed` command.
+
+For production use it is **highly recommended** to use a strong password.  The web service [http://grid.anc.org:9080/password](http://grid.anc.org:9080/password) can be used to generate cryptographically strong random passwords of any length.  We can use this web service to generate a password and then store it someplace secure on the server (*/root* is a good location) in case an administrator needs to connect to the database later.
+
+```bash
+$> curl -sSL http://grid.anc.org:9080/password?length=24 > /root/postgres.passwd
+$> export PASSWORD=`cat /root/postgres.passwd`
+```
+
+We store the generated password in the environment variable **$PASSWORD** to make it easier to use below.
+
+### Galaxy 
 
 The LAPPS Grid Galaxy instance it stored in two repositories on GitHub:
 
@@ -18,74 +76,44 @@ When the repositories have been checked out to a local system it is important to
 
 | Repository | Branch |
 |------------|--------|
-| Galaxy.git | lappsdev |
+| Galaxy.git | lapps |
 | GalaxyMods.git | master|
 
-## System Setup
 
-For the purposes of this document we will assume a brand new OS install (Ubuntu 14.04 LTS).
-
-### Common Utilities and Postgres
-
-Install the common utilities and Postgres database package.  The database will be configured below:
-
-```bash
-$> curl -sSL http://downloads.lappsgrid.org/scripts/install-common.sh | sh
-$> curl -sSL http://downloads.lappsgrid.org/scripts/install-postgres.sh | sh
-```
-
-**NOTE** The *install-common.sh* script may display some error messages when used on a [Jetstream](/technical/jetstream.html) instance.  This seems to be due to Jetstream/OpenStack not allowing some OS packages (i.e. firmware) to be updated.  It should be safe to ignore these errors.
-
-### Galaxy User
-
-Create a user for running galaxy.  The `useradd -r` command creates a system account, that is, no home directory is created and the user can not login.
-
-```bash
-$> useradd -r galaxy
-```
-
-Since the `useradd -r` command does not create a home directory for the user we will need to do that manually and then make the *galaxy* user the owner of the */home/galaxy* directory.
-
-```bash
-$> mkdir /home/galaxy
-$> chown galaxy:galaxy galaxy
-```
-
-### Selecting a Secure Password
-
-Since both both the database setup script (see below) and the *galaxy.ini* file are available from publicly accessible repositories we will need to change the passwords stored in these files.  Currently both files use *\__DB_PASSWORD\__* as the database password to make it easier to update both via a `sed` command.
-
-For production use it is **highly recommended** to use a strong password.  The web service [http://grid.anc.org:9080/password](http://grid.anc.org:9080/password) uses the Java class *java.security.SecureRandom* to generate cryptographically strong random passwords of any length.  We can use this web service to generate a password and then store it someplace secure on the server (*/root* is a good location) in case an administrator later needs to connect to the database.
-
-```bash
-$> curl -sSL http://grid.anc.org:9080/password?length=24 > /root/postgres.passwd
-$> PASSWORD=`cat /root/postgres.passwd`
-```
-
-We store the generated password in the environment variable **$PW** to make it easier to use below.
-
-### Galaxy 
 Clone the Git repositories into */home/galaxy*.  The default *galaxy.ini* configuration file assumes that the Galaxy configuration files (tool_conf.xml, datatypes_conf.xml etc.) can all be found in */home/galaxy/mods*. If the Galaxy repository is checked out to a location other that */home/galaxy* then the *galaxy.ini* file will need to be updated accordingly.
 
 ```bash
 $> cd /home/galaxy
-$> git clone http://github.com/lappsgrid-incubator/Galaxy.git galaxy
-$> git clone http://github.com/lappsgrid-incubator/GalaxyMods.git mods
+$> HOME=/home/galaxy sudo -u galaxy git clone http://github.com/lappsgrid-incubator/Galaxy.git galaxy
+$> HOME=/home/galaxy sudo -u galaxy git clone http://github.com/lappsgrid-incubator/GalaxyMods.git mods
+$> cd galaxy
+$> git checout lapps
+$> cd -
 ```
+
+**NOTE:** We must set `HOME=/home/galaxy` when using `sudo -u` as sudo does not update the environment and will leave `HOME=/root`, which the *galaxy* user can not read/write.
 
 #### Securing Galaxy
 
-As mentioned above we will need to update the database password as will as the *id_secret* value in the *galaxy.ini* file.  We can use the following Python command to generate the *id_secret*:
+There are four values that have been parameterized in the default *galaxy.ini* file that will need to be replaced before Galaxy can be started.  They are:
+
+- **\__PORT__**<br/>
+The port that Galaxy will listen on.
+- **\__INSTALL_DIR__**<br/>
+The directory containing the two GitHub repositories.
+- **\__DB_PASSWORD__**<br/>
+The password to access the *galaxy* database.
+- **\__ID_SECRET__**<br/>
+Galaxy's "secret" that it uses to encrypt sensitive data.
+
+You can either edit the *galaxy.ini* directly and replace all occurrences of the above or you can use the [http://downloads.lappsgrid.org/scripts/patch-galaxy-ini.sh](http://downloads.lappsgrid.org/scripts/patch-galaxy-ini.sh) script to replace the occurrences for you.
+
+The *patch-galaxy-ini.sh* script accepts one parameter: the path to the directory containing the *galaxy* and *mods* directories; */home/galaxy* in this case.  The script will also use the environment variables **PORT**, **PASSWORD**, and **SECRET** if defined.  The **PORT** will default to 8000 if not defined, and the **PASSWORD** and **SECRET** will be generated with the password web service if not defined.  Recall that we did define **PASSWORD** above.
 
 ```bash
-$> SECRET=$(python -c 'import time; print time.time()' | md5sum | cut -f1 -d ' ')
-```
-
-Now we can use `sed` to replace the database password and *id_secret* when making a copy in */home/galaxy/galaxy/config/galaxy.ini*:
-
-```bash
-$> cd /home/galaxy
-$> cat mods/config/galaxy.ini | sed "s/__DB__PASSWORD/$PASSWORD/" | sed "s/__ID_SECRET__/$SECRET/" > galaxy/config/galaxy.ini 
+$> wget http://downloads.lappsgrid.org/scripts/patch-galaxy-ini.sh
+$> chmod +x patch-galaxy-ini.sh
+$> PORT=80 ./patch-galaxy-ini.sh /home/galaxy
 ```
 
 ### Database Setup
@@ -101,9 +129,22 @@ The *db-setup.sql* script does three things
 Before running the script we will also have to replace the *\__DB_PASSWORD__* string just as we did for the *galaxy.ini* file.
 
 ```bash
-$> curl -sSL http://downloads.lappsgrid.org/script/db-setup.sql | sed "s/__DB_PASSWORD__/$PASSWORD" | sudo -u postgres psql
+$> curl -sSL http://downloads.lappsgrid.org/scripts/db-setup.sql | sed "s/__DB_PASSWORD__/$PASSWORD/" | sudo -u postgres psql
 ```
 
+### Starting Galaxy
+
+For the purposes of this example we will launch galaxy using the *run.sh* script in the root galaxy directory.
+
+```bash
+$> chown -R galaxy:galaxy /home/galaxy
+$> cd /home/galaxy/galaxy
+$> HOME=/home/galaxy sudo -u galaxy ./run.sh
+```
+
+# TODO
+
+1. Explain installing and using **supervisord** to run Galaxy as a proper service.
 
 
 
