@@ -71,8 +71,11 @@ None scheduled.
 * [Creating Docker Images](technical/docker.html)
 * [Current Docker Images](technical/containers.html)
 * [Jupyter Notebook](technical/jupyter.html)
+* [Installing Galaxy From Source](technical/galaxy.html)
+* [Using Jetstream](technical/jetstream.html)
 	
 #### Maven Generated Sites
+
 <div class="note">
 <span class="red">Note</span> The following pages are generated automatically every time
 a new release is pushed to Maven Central.
