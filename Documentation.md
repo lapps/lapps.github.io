@@ -14,10 +14,12 @@ We already agreed that:
 
 Start with a blank slate and figure out the exact procedures for creating a LAPPS Grid. In particular, what needs to be done for the following to happen:
 
-- Install service manager -	requirements (debian, rhel, osx), start with virgin machine (morbius)
-- How to create services - wrapping, LIF, WSEV, registering
+- Installing a  service manager -	requirements (debian, rhel, osx), start with virgin machine (morbius)
+- How to create services - wrapping, discriminators, LIF, WSEV, registering
+- Setting up Galaxy
 - Federation
 - Making services run on https
+- Authorization of data services (LDC)
 - How to create Docker images
 - Running on AWS
 - Running on JetStream
