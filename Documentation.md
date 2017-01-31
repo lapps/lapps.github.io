@@ -5,7 +5,7 @@ title: Documentation
 
 ## {{ page.title }}
 
-Some notes going into the Documentation meeting at Brandeis, 1/1/2017-2/2/2017.
+Some notes going into the Documentation meeting at Brandeis, 1/31/2017-2/2/2017.
 
 We already agreed that:
 
@@ -17,6 +17,13 @@ Start with a blank slate and figure out the exact procedures for creating a LAPP
 - Installing a service manager - requirements (debian, rhel, osx), start with virgin machine (JetStream instance)
   - Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
   - [http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html](http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html)
+  - Keith's one-step-install script (written for debian/ubuntu), Keigh had a RHEL version
+  - Now an easier proces:
+    - requires postgress, tomcat 7 installation, Java 8 (latest manager (Jan 2017)
+    - get the service manager war and put it on tomcat
+    - start/stop tomcat to create database, using tomcat scripts
+    - there are two sql scripts that need to be run to set up tables in postgress
+    - vevice-manager.xml needs to be edited
   
 - How to create services - wrapping, discriminators, LIF, WSEV, registering
   - [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
@@ -71,13 +78,22 @@ Start with a blank slate and figure out the exact procedures for creating a LAPP
 - Conda, toolshed and friends
 
 - Using Jupyter
+  - [https://github.com/lappsgrid-incubator/jupyter-groovy-kernel](https://github.com/lappsgrid-incubator/jupyter-groovy-kernel)
+  - [https://github.com/lappsgrid-incubator/jupyter-lsd-kernel](https://github.com/lappsgrid-incubator/jupyter-lsd-kernel)
+  
 
 Other questions:
 
 - The roles of LDDL and LSD
+  - Both are Groovy DSLs
+  - LSD - Lapps Services DSL, a DSL for invoking LAPPS web services (possibly pipelined).
+  - The code base for LSD is at [https://github.com/lappsgrid-incubator/org.anc.lapps.dsl](https://github.com/lappsgrid-incubator/org.anc.lapps.dsl)
   - LDDL - LAPPS Database Definition Language
   - Configuration scripts for the LAPPS grid at [https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl)
   - LDDL scripts at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
+  - [http://www.lappsgrid.org/software/](http://www.lappsgrid.org/software/) has some notes on LDDL and LSD
+  - Description of LDDL: [http://www.lappsgrid.org/software/lddl/](http://www.lappsgrid.org/software/lddl/)
+  - There is an outdated wiki at [https://github.com/ksuderman/lsd-scripts/wiki](https://github.com/ksuderman/lsd-scripts/wiki)
 
 - Where are all the repositories, what do they do and what is their role in the bigger picture
   - The LAPPS Grid incubator organization at [https://github.com/lappsgrid-incubator](https://github.com/lappsgrid-incubator)
