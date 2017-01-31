@@ -7,95 +7,151 @@ title: Documentation
 
 Some notes going into the Documentation meeting at Brandeis, 1/31/2017-2/2/2017.
 
-We already agreed that:
+### Location of documentation
 
-- Documentation will live in [lappsgrid.github.io](lappsgrid.github.io), which will be redesigned
-- The domain wiki.lappsgrid.org points to lappsgrid.github.io. The github.io page is technically not a wiki but close enough.
+Documentation will live in [lappsgrid.github.io](lappsgrid.github.io), which will be redesigned. The wiki.lappsgrid.org domain points to lappsgrid.github.io. The github.io page is technically not a wiki but close enough.
 
-Start with a blank slate and figure out the exact procedures for creating a LAPPS Grid. In particular, what needs to be done for the following to happen:
 
-- Installing a service manager - requirements (debian, rhel, osx), start with virgin machine (JetStream instance)
-  - Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
-  - [http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html](http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html)
-  - Keith's one-step-install script (written for debian/ubuntu), Keigh had a RHEL version
-  - Now an easier proces:
-    - requires postgress, tomcat 7 installation, Java 8 (latest manager (Jan 2017)
-    - get the service manager war and put it on tomcat
-    - start/stop tomcat to create database, using tomcat scripts
-    - there are two sql scripts that need to be run to set up tables in postgress
-    - vevice-manager.xml needs to be edited
-  
-- How to create services - wrapping, discriminators, LIF, WSEV, registering
-  - [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
-  - [LIF specifications](interchange/index.html)
-  - [LIF JSON-schema](schema/lif-schema.json)
-  - [WSEV at http://vocab.lappsgrid.org/](http://vocab.lappsgrid.org/)
-  - [WSEV discussion](http://wiki.lappsgrid.org/vocabulary/current_issues.html)
-  - [WSEV issues](https://github.com/lapps/vocabulary-pages/issues)
-  - [Creating vocabulary pages](https://github.com/lapps/vocabulary-pages)
+### Overview
 
-- Setting up Galaxy
-  - [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html)
-  - [installation and setup scripts](http://downloads.lappsgrid.org/scripts/)
-  - Two repos with Galaxy code:
+Start with a blank slate and figure out the exact procedures for creating a LAPPS Grid. 
+
+In particular, what needs to be done for the following to happen:
+
+
+### Installing a service manager
+
+Requirements (debian, rhel, osx), start with virgin machine (JetStream instance)
+
+Here are some [historical notes] from (http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html) from 2014. 
+
+There is a one-step-install script (written by Keith for debian/ubuntu, Keigh had a RHEL version).
+ 
+Now an easier proces:
+- requires postgress, tomcat 7 installation, Java 8 (latest manager (Jan 2017)
+- get the service manager war and put it on tomcat
+- start/stop tomcat to create database, using tomcat scripts
+- there are two sql scripts that need to be run to set up tables in postgress
+- vevice-manager.xml needs to be edited
+
+
+### Creating and adding services
+
+How to create services - wrapping, discriminators, LIF, WSEV, deploying, registering
+
+- [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
+
+- [LIF specifications](interchange/index.html)
+
+- [LIF JSON-schema](schema/lif-schema.json)
+
+- [WSEV at http://vocab.lappsgrid.org/](http://vocab.lappsgrid.org/)
+
+- [WSEV discussion](http://wiki.lappsgrid.org/vocabulary/current_issues.html)
+
+- [WSEV issues](https://github.com/lapps/vocabulary-pages/issues)
+
+- [Creating vocabulary pages](https://github.com/lapps/vocabulary-pages)
+
+
+### Setting up Galaxy
+
+- [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html)
+
+- [installation and setup scripts](http://downloads.lappsgrid.org/scripts/)
+
+- Two repos with Galaxy code:
     - We have a fork [https://github.com/lappsgrid-incubator/Galaxy](https://github.com/lappsgrid-incubator/Galaxy) of [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) with some lapps specific modifications
     - The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
     - There are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
-    - Planemo
-    - Visualization
 
-- Federation
-  - No documentation available
-  - We first need to get everything on the latest service manager
+- Planemo
 
-- Making services run on https
-  - Some MV notes somewhere
+- Visualization
 
-- Authorization of data services (LDC)
-  - This is actually just a token header that is put in ...
 
-- How to create Docker images
-  - manual at ...
+### Federation
+
+No documentation available. We first need to get everything on the latest service manager.
+
+
+### Making services run on https
+
+Some MV notes somewhere
+
+
+### Authorization of data services (LDC)
+
+This is actually just a token header that is put in ...
+
+### How to create Docker images
+
+- manual at ...
+
+- Repositories:
   - [https://github.com/lappsgrid-incubator/docker-service-manager](https://github.com/lappsgrid-incubator/docker-service-manager)
   - [https://github.com/lappsgrid-incubator/docker-masc](https://github.com/lappsgrid-incubator/docker-masc)
   - [https://github.com/lappsgrid-incubator/docker-vassar](https://github.com/lappsgrid-incubator/docker-vassar)
   - [https://github.com/lappsgrid-incubator/docker-brandeis](https://github.com/lappsgrid-incubator/docker-brandeis)
   - [https://github.com/lappsgrid-incubator/docker-oaqa](https://github.com/lappsgrid-incubator/docker-oaqa)
 
-- Running on AWS
-  - [Discovery course](https://github.com/lappsgrid-incubator/discovery-course)
 
-- Running on JetStream
-  - [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts)
+### Running on AWS
   
-- Creating a lappsgrid with appliances
-  - A system for configuring a network of LAPPS Grid Docker images
-  - [https://github.com/lappsgrid-incubator/galaxy-appliance](https://github.com/lappsgrid-incubator/galaxy-appliance)
+- [Discovery course](https://github.com/lappsgrid-incubator/discovery-course)
 
-- Ansible
-  - [https://github.com/lappsgrid-incubator/lapps-container](https://github.com/lappsgrid-incubator/lapps-container)
 
-- Conda, toolshed and friends
+### Running on JetStream
 
-- Using Jupyter
-  - [https://github.com/lappsgrid-incubator/jupyter-groovy-kernel](https://github.com/lappsgrid-incubator/jupyter-groovy-kernel)
-  - [https://github.com/lappsgrid-incubator/jupyter-lsd-kernel](https://github.com/lappsgrid-incubator/jupyter-lsd-kernel)
+- Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
+- [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts)
   
 
-Other questions:
+### Creating a lappsgrid with appliances
 
-- The roles of LDDL and LSD
-  - Both are Groovy DSLs
-  - LSD - Lapps Services DSL, a DSL for invoking LAPPS web services (possibly pipelined).
-  - The code base for LSD is at [https://github.com/lappsgrid-incubator/org.anc.lapps.dsl](https://github.com/lappsgrid-incubator/org.anc.lapps.dsl)
-  - LDDL - LAPPS Database Definition Language
-  - Configuration scripts for the LAPPS grid at [https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl)
-  - LDDL scripts at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
-  - [http://www.lappsgrid.org/software/](http://www.lappsgrid.org/software/) has some notes on LDDL and LSD
-  - Description of LDDL: [http://www.lappsgrid.org/software/lddl/](http://www.lappsgrid.org/software/lddl/)
-  - There is an outdated wiki at [https://github.com/ksuderman/lsd-scripts/wiki](https://github.com/ksuderman/lsd-scripts/wiki)
+- A system for configuring a network of LAPPS Grid Docker images
+- [https://github.com/lappsgrid-incubator/galaxy-appliance](https://github.com/lappsgrid-incubator/galaxy-appliance)
 
-- Where are all the repositories, what do they do and what is their role in the bigger picture
+### Using Ansible
+
+[https://github.com/lappsgrid-incubator/lapps-container](https://github.com/lappsgrid-incubator/lapps-container)
+
+
+### Conda, toolshed and friends
+
+
+### Using Jupyter
+
+- [https://github.com/lappsgrid-incubator/jupyter-groovy-kernel](https://github.com/lappsgrid-incubator/jupyter-groovy-kernel)
+
+- [https://github.com/lappsgrid-incubator/jupyter-lsd-kernel](https://github.com/lappsgrid-incubator/jupyter-lsd-kernel)
+  
+
+
+### LDDL and LSD
+
+- Both are Groovy DSLs
+
+- LSD - Lapps Services DSL, a DSL for invoking LAPPS web services (possibly pipelined).
+
+- The code base for LSD is at [https://github.com/lappsgrid-incubator/org.anc.lapps.dsl](https://github.com/lappsgrid-incubator/org.anc.lapps.dsl)
+
+- LDDL - LAPPS Database Definition Language
+
+- Configuration scripts for the LAPPS grid at [https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl)
+
+- LDDL scripts at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
+
+- [http://www.lappsgrid.org/software/](http://www.lappsgrid.org/software/) has some notes on LDDL and LSD
+
+- Description of LDDL: [http://www.lappsgrid.org/software/lddl/](http://www.lappsgrid.org/software/lddl/)
+
+- There is an outdated wiki at [https://github.com/ksuderman/lsd-scripts/wiki](https://github.com/ksuderman/lsd-scripts/wiki)
+
+
+### Repositories
+
+Where are all the repositories, what do they do and what is their role in the bigger picture
   - The LAPPS Grid incubator organization at [https://github.com/lappsgrid-incubator](https://github.com/lappsgrid-incubator)
   - The LAPPS organization at [https://github.com/lapps](https://github.com/lapps)
   - The Galaxy NLP organization at [https://github.com/galaxy-nlp](https://github.com/galaxy-nlp)
