@@ -10,20 +10,47 @@ Some notes going into the Documentation meeting at Brandeis, 1/1/2017-2/2/2017.
 We already agreed that:
 
 - Documentation will live in lappsgrid.github.io, which will be redesigned
-- The domain wiki.lappsgrid.org will point to lappsgrid.github.io. The github.io page is technically not a wiki but close enough.
+- The domain wiki.lappsgrid.org points to lappsgrid.github.io. The github.io page is technically not a wiki but close enough.
 
 Start with a blank slate and figure out the exact procedures for creating a LAPPS Grid. In particular, what needs to be done for the following to happen:
 
-- Installing a  service manager -	requirements (debian, rhel, osx), start with virgin machine (morbius)
+- Installing a service manager - requirements (debian, rhel, osx), start with virgin machine (JetStream instance)
+  - Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
+  - [http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html](http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html)
+  
 - How to create services - wrapping, discriminators, LIF, WSEV, registering
+  - [Wrapping services - README.md file in org.lappsgrid.examples repository]
+    (https://github.com/lapps/org.lappsgrid.examples)
+  - [LIF specifications](interchange/index.html)
+  - [LIF JSON-schema](schema/lif-schema.json)
+  - [WSEV at http://vocab.lappsgrid.org/](http://vocab.lappsgrid.org/)
+  - [WSEV discussion](http://wiki.lappsgrid.org/vocabulary/current_issues.html)
+  - [WSEV issues](https://github.com/lapps/vocabulary-pages/issues)
+
 - Setting up Galaxy
+  - [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html)
+  - [installation and setup scripts](http://downloads.lappsgrid.org/scripts/)
+  - Two repos with Galaxy code:
+    - We have a [fork](https://github.com/lappsgrid-incubator/Galaxy) of https://github.com/galaxyproject/galaxy with some lapps specific modifications
+    - The LAPPS Grid modifications to core Galaxy are in [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods)
+    - There are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at https://docs.galaxyproject.org/en/latest/admin/webhooks.html
+    - Planemo
+
 - Federation
+
 - Making services run on https
+
 - Authorization of data services (LDC)
+
 - How to create Docker images
+
 - Running on AWS
+
 - Running on JetStream
+
 - Creating a lappsgrid with appliances
+
+- Using Jupiter
 
 Other questions:
 
