@@ -87,21 +87,25 @@ Registering:
 - **check whether this works with new service manager**
 
 
-
 ### Setting up Galaxy
 
-- [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html)
+Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
 
-- [installation and setup scripts](http://downloads.lappsgrid.org/scripts/)
+This uses scripts in [installation and setup scripts](http://downloads.lappsgrid.org/scripts/). Which has a bunch of ubuntu style setup scripts.
 
-- Two repos with Galaxy code:
-    - We have a fork [https://github.com/lappsgrid-incubator/Galaxy](https://github.com/lappsgrid-incubator/Galaxy) of [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) with some lapps specific modifications
-    - The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
-    - There are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
+There are two repos with Galaxy code:
+    
+- We have a fork [https://github.com/lappsgrid-incubator/Galaxy](https://github.com/lappsgrid-incubator/Galaxy) of [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) with some lapps specific modifications
+
+- The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
+
+In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
 
 - Planemo
 
-- Visualization
+- Visualization 
+ - **find chunqi paper**
+ - [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
 
 
 ### Federation
@@ -111,23 +115,33 @@ No documentation available. We first need to get everything on the latest servic
 
 ### Making services run on https
 
-Some MV notes somewhere
+Some MV notes somewhere, **find them**
 
 
 ### Authorization of data services (LDC)
 
 This is actually just a token header that is put in ...
 
+
 ### How to create Docker images
 
-- manual at ...
+There is a manual at ...
 
-- Repositories:
-  - [https://github.com/lappsgrid-incubator/docker-service-manager](https://github.com/lappsgrid-incubator/docker-service-manager)
-  - [https://github.com/lappsgrid-incubator/docker-masc](https://github.com/lappsgrid-incubator/docker-masc)
-  - [https://github.com/lappsgrid-incubator/docker-vassar](https://github.com/lappsgrid-incubator/docker-vassar)
-  - [https://github.com/lappsgrid-incubator/docker-brandeis](https://github.com/lappsgrid-incubator/docker-brandeis)
-  - [https://github.com/lappsgrid-incubator/docker-oaqa](https://github.com/lappsgrid-incubator/docker-oaqa)
+Repositories:
+- [https://github.com/lappsgrid-incubator/docker-service-manager](https://github.com/lappsgrid-incubator/docker-service-manager)
+- [https://github.com/lappsgrid-incubator/docker-masc](https://github.com/lappsgrid-incubator/docker-masc)
+- [https://github.com/lappsgrid-incubator/docker-vassar](https://github.com/lappsgrid-incubator/docker-vassar)
+- [https://github.com/lappsgrid-incubator/docker-brandeis](https://github.com/lappsgrid-incubator/docker-brandeis)
+- [https://github.com/lappsgrid-incubator/docker-oaqa](https://github.com/lappsgrid-incubator/docker-oaqa)
+
+The Docker repos tend to have branches that are not intended to be merged again. For example, the vassar, brandeis, service-manager, galaxy-lappsgrid et al all have a discovery branch. In addition, they also have a tag named discovery that tags a particular commit on the discovery branch.
+
+The docker-service-manager repo on the discovery branch has a file Dockerfile.discovery, which clones https://github.com/ksuderman/lddl-scripts.git (which actually was moved to lappsgrid-incubator.
+
+On the docker repos, there is a tag named discovery, which gets to the images created from commits with the discovery tag.
+
+The split with brandeis/vassar is historical, we may want to do something along the lines of docker-stanford, docker-lingpipe etcetera.
+
 
 
 ### Running on AWS
@@ -137,25 +151,33 @@ This is actually just a token header that is put in ...
 
 ### Running on JetStream
 
+Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
+
+Uses OpenStack, which seems to be what AWS is using too.
+
 There is a bash script at [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts).
 
-**Keigh + Marc: review ow to do that from Keith's example a few months ago**
+**Keigh + Marc: review how to do that from Keith's example of a few months ago**
 
-- Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
+Repositories:
 - [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts)
-  
+
 
 ### Creating a lappsgrid with appliances
 
 - A system for configuring a network of LAPPS Grid Docker images
 - [https://github.com/lappsgrid-incubator/galaxy-appliance](https://github.com/lappsgrid-incubator/galaxy-appliance)
 
+
 ### Using Ansible
+
+Like bash scripts but more portable.
 
 [https://github.com/lappsgrid-incubator/lapps-container](https://github.com/lappsgrid-incubator/lapps-container)
 
 
 ### Conda, toolshed and friends
+
 
 
 ### Using Jupyter
@@ -190,18 +212,21 @@ There is a bash script at [downloads.lappsgrid.org/scripts](downloads.lappsgrid.
 ### Repositories
 
 Where are all the repositories, what do they do and what is their role in the bigger picture
-  - The LAPPS Grid incubator organization at [https://github.com/lappsgrid-incubator](https://github.com/lappsgrid-incubator)
-  - The LAPPS organization at [https://github.com/lapps](https://github.com/lapps)
-  - The Galaxy NLP organization at [https://github.com/galaxy-nlp](https://github.com/galaxy-nlp)
-  - The Brandeis NLP organization at [https://github.com/brandeis-nlp](https://github.com/brandeis-nlp)
+  
+- The LAPPS Grid incubator organization at [https://github.com/lappsgrid-incubator](https://github.com/lappsgrid-incubator)
+
+- The LAPPS organization at [https://github.com/lapps](https://github.com/lapps)
+
+- The Galaxy NLP organization at [https://github.com/galaxy-nlp](https://github.com/galaxy-nlp)
+
+- The Brandeis NLP organization at [https://github.com/brandeis-nlp](https://github.com/brandeis-nlp)
     - code for wrappers created at Brandeis
-  - The OANC organization at [https://github.com/oanc](https://github.com/oanc)
+
+- The OANC organization at [https://github.com/oanc](https://github.com/oanc)
     - code for wrappers created at Vassar
  
   
 ### Goals for first day
-
-Do not get lost in details, expand on the list above and get an overview of each item, filling in all we know and collecting in the wiki, by copying in text or by providing links, all information that is relevant and noting what information is missing.
 
 Layout of basic redesign of lappsgrid.github.io.
 
