@@ -34,7 +34,7 @@ Now an easier proces:
 - there are two sql scripts that need to be run to set up tables in postgress
 - vevice-manager.xml needs to be edited
 
-**set up new service manager on Jetstream
+**set up new service manager on Jetstream**
 
 
 ### Creating and adding services
@@ -61,7 +61,7 @@ Vocabulary and Discriminators:
  1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
  2. [https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl)
 - the input to 1 is lapps.vocab in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages) (there are also template files and other onput files for the mapping in there), it creates vocab.lappsgrid.org html, [org.lappsgrid.vocabulary](https://github.com/lapps/org.lappsgrid.vocabulary) (which is like the discriminator package and describes attribute names etcetera defined in the vocab), and a Groovy config DSL file with same content
-- the input to 2 is the text file above and a file named discriminators.txt, the output is [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) and parts of the java package in [https://github.com/lapps/org.lappsgrid.discriminator](https://github.com/lapps/org.lappsgrid.discriminator)
+- the input to 2 is the config DSL file above and a file named [discriminators.config](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/blob/master/src/main/resources/discriminators.config) in the org.lappsgrid.discriminator.dsl repository, the output is [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) and parts of the java package in [https://github.com/lapps/org.lappsgrid.discriminator](https://github.com/lapps/org.lappsgrid.discriminator)
 
 **check whether this all still works**
 
@@ -103,9 +103,10 @@ In additoin, there are Galaxy webhooks for extending the Galaxy client without c
 
 - Planemo
 
-- Visualization 
- - **find chunqi paper**
- - [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
+- Visualization
+   
+   **find chunqi paper**
+.. [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
 
 
 ### Federation
