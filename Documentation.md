@@ -34,24 +34,58 @@ Now an easier proces:
 - there are two sql scripts that need to be run to set up tables in postgress
 - vevice-manager.xml needs to be edited
 
+**set up new service manager on Jetstream
+
 
 ### Creating and adding services
 
 How to create services - wrapping, discriminators, LIF, WSEV, deploying, registering
 
+Wrapping:
+
 - [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
 
+LIF and WSEV:
+
+- output of wrapped components should follow LIF specifications and use elements from WSEV
 - [LIF specifications](interchange/index.html)
-
 - [LIF JSON-schema](schema/lif-schema.json)
-
 - [WSEV at http://vocab.lappsgrid.org/](http://vocab.lappsgrid.org/)
-
 - [WSEV discussion](http://wiki.lappsgrid.org/vocabulary/current_issues.html)
-
 - [WSEV issues](https://github.com/lapps/vocabulary-pages/issues)
 
-- [Creating vocabulary pages](https://github.com/lapps/vocabulary-pages)
+Vocabulary and Discriminators:
+
+- everything in vocab is in discriminators but not vice versa
+- there is a vocab dsl and a discriminators dsl (both configuration files for transformations)
+ 1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
+ 2. [https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl)
+- the input to 1 is lapps.vocab in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages) (there are also template files and other onput files for the mapping in there), it creates vocab.lappsgrid.org html, [org.lappsgrid.vocabulary](https://github.com/lapps/org.lappsgrid.vocabulary) (which is like the discriminator package and describes attribute names etcetera defined in the vocab), and a Groovy config DSL file with same content
+- the input to 2 is the text file above and a file named discriminators.txt, the output is [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) and parts of the java package in [https://github.com/lapps/org.lappsgrid.discriminator](https://github.com/lapps/org.lappsgrid.discriminator)
+
+**check whether this all still works**
+
+Discriminators are used in the produces and requires sections of a tool wrapper's metadata. It is up to the tool wrapper to check whether input has what it needs (searching the contains section of the metadata section of a view. THere is also a discriminator handed in with the Data structure, which has a discriminator and a payload section. The dicriminator there is one of the dozen or so media discriminators in [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) (for example, the discriminator gate	which refers to http://vocab.lappsgrid.org/ns/media/xml#gate).
+
+Deploying:
+
+THis is explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples), which was listed above. 
+
+After deploying a war file to tomcat the new war will be deployed automatically, but if you changed Java versions while running a tomcat server then you do need to restart Tomcat.
+
+
+Registering:
+
+- Using lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
+
+- Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
+
+- We are still assuming old version of the service manager
+
+- The lddl-scripts/Udate.lddl script takes another script from brandeis or vassar and installs/updates just that module
+
+- **check whether this works with new service manager**
+
 
 
 ### Setting up Galaxy
@@ -102,6 +136,10 @@ This is actually just a token header that is put in ...
 
 
 ### Running on JetStream
+
+There is a bash script at [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts).
+
+**Keigh + Marc: review ow to do that from Keith's example a few months ago**
 
 - Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
 - [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts)
