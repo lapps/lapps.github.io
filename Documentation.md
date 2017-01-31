@@ -19,13 +19,13 @@ Start with a blank slate and figure out the exact procedures for creating a LAPP
   - [http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html](http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html)
   
 - How to create services - wrapping, discriminators, LIF, WSEV, registering
-  - [Wrapping services - README.md file in org.lappsgrid.examples repository]
-    (https://github.com/lapps/org.lappsgrid.examples)
+  - [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
   - [LIF specifications](interchange/index.html)
   - [LIF JSON-schema](schema/lif-schema.json)
   - [WSEV at http://vocab.lappsgrid.org/](http://vocab.lappsgrid.org/)
   - [WSEV discussion](http://wiki.lappsgrid.org/vocabulary/current_issues.html)
   - [WSEV issues](https://github.com/lapps/vocabulary-pages/issues)
+  - [Creating vocabulary pages](https://github.com/lapps/vocabulary-pages)
 
 - Setting up Galaxy
   - [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html)
@@ -35,27 +35,59 @@ Start with a blank slate and figure out the exact procedures for creating a LAPP
     - The LAPPS Grid modifications to core Galaxy are in [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods)
     - There are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at https://docs.galaxyproject.org/en/latest/admin/webhooks.html
     - Planemo
+    - Visualization
 
 - Federation
+  - No documentation available
+  - We first need to get everything on the latest service manager
 
 - Making services run on https
+  - Some MV notes somewhere
 
 - Authorization of data services (LDC)
+  - This is actually just a token header that is put in ...
 
 - How to create Docker images
+  - manual at ...
+  - https://github.com/lappsgrid-incubator/docker-service-manager
+  - https://github.com/lappsgrid-incubator/docker-masc
+  - https://github.com/lappsgrid-incubator/docker-vassar
+  - https://github.com/lappsgrid-incubator/docker-brandeis
+  - https://github.com/lappsgrid-incubator/docker-oaqa
 
 - Running on AWS
+  - [Discovery course](https://github.com/lappsgrid-incubator/discovery-course)
 
 - Running on JetStream
-
+  - https://github.com/lappsgrid-incubator/jetstream-scripts
+  
 - Creating a lappsgrid with appliances
+  - A system for configuring a network of LAPPS Grid Docker images
+  - https://github.com/lappsgrid-incubator/galaxy-appliance
 
-- Using Jupiter
+- Ansible
+  - https://github.com/lappsgrid-incubator/lapps-container
+
+- Conda, toolshed and friends
+
+- Using Jupyter
 
 Other questions:
 
 - The roles of LDDL and LSD
+  - LDDL - LAPPS Database Definition Language
+  - Configuration scripts for the LAPPS grid at https://github.com/lappsgrid-incubator/org.anc.lapps.lddl
+  - LDDL scripts at https://github.com/lappsgrid-incubator/lddl-scripts
+
 - Where are all the repositories, what do they do and what is their role in the bigger picture
+  - The LAPPS Grid incubator organization at https://github.com/lappsgrid-incubator
+  - The LAPPS organization at https://github.com/lapps
+  - The Galaxy NLP organization at https://github.com/galaxy-nlp
+  - The Brandeis NLP organization at https://github.com/brandeis-nlp
+    - code for wrappers created at Brandeis
+  - The OANC organization at https://github.com/oanc
+    - code for wrappers created at Vassar
+  
 
   
 ### Goals for first day
