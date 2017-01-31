@@ -26,7 +26,7 @@ To run Galaxy and all of the LAPPS Grid tools the following packages are require
 1. LSD
 1. Galaxy
 
-Install scripts are available from [http://downloads.lappsgrid.org/script](http://downloads.lappsgrid.org/script) to perform all of the above tasks.
+Install scripts are available from [http://downloads.lappsgrid.org/scripts](http://downloads.lappsgrid.org/scripts) to perform all of the above tasks.
 
 ### Common Packages
 
