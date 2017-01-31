@@ -26,6 +26,7 @@ The LAPPS Grid project uses [Travis](https://travis-ci.org/lapps) for continuous
 While there are many plugins available for performing a release, none fit in easily with our
 workflow and tool chain.  In particular, most plugins for deployment want to do everything for
 everyone all the time.  It ends up being a lot of work to perform what is essentially:
+
 ```bash
 $> mvn package javadoc:jar source:jar deploy
 ```
