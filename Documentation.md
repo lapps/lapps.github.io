@@ -79,24 +79,25 @@ After deploying a war file to tomcat the new war will be deployed automatically,
 
 #### Registering:
 
-* Using lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
-* Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
-* We are still assuming old version of the service manager
-* The lddl-scripts/Udate.lddl script takes another script from brandeis or vassar and installs/updates just that module
+- Using lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
+- Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
+- We are still assuming old version of the service manager
+- The lddl-scripts/Udate.lddl script takes another script from brandeis or vassar and installs/updates just that module
 
 - **check whether this works with new service manager**
 
 
 ### Setting up Galaxy
 
-* Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
-* This uses scripts in [installation and setup scripts](http://downloads.lappsgrid.org/scripts/). Which has a bunch of ubuntu style setup scripts.
-* There are two repos with Galaxy code:
+- Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
+- This uses scripts in [installation and setup scripts](http://downloads.lappsgrid.org/scripts/). Which has a bunch of ubuntu style setup scripts.
+- There are two repos with Galaxy code:
   - We have a fork [https://github.com/lappsgrid-incubator/Galaxy](https://github.com/lappsgrid-incubator/Galaxy) of [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) with some lapps specific modifications
   - The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
-* In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
+- In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
 
 #### Planemo
+
 #### Visualization
   - [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
   - **find chunqi paper**
@@ -204,9 +205,9 @@ Where are all the repositories, what do they do and what is their role in the bi
 - The LAPPS organization at [https://github.com/lapps](https://github.com/lapps)
 - The Galaxy NLP organization at [https://github.com/galaxy-nlp](https://github.com/galaxy-nlp)
 - The Brandeis NLP organization at [https://github.com/brandeis-nlp](https://github.com/brandeis-nlp)
-  * code for wrappers created at Brandeis
+  - code for wrappers created at Brandeis
 - The OANC organization at [https://github.com/oanc](https://github.com/oanc)
-  * code for wrappers created at Vassar
+  - code for wrappers created at Vassar
  
   
 ### Goals for first day
