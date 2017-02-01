@@ -163,7 +163,6 @@ Get onto JetStream at [https://jblb.jetstream-cloud.org/dashboard/auth/login/?ne
 Create an instance by running the [jetstream](http://downloads.lappsgrid.org/scripts/jetstream) script, which has several requirements.
 
 1. You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script depending where you put it, the default location is in the .ssh directory:
-
   ```
   PEM=$HOME/.ssh/lappsgrid-shared-key.pem
   ```
@@ -171,8 +170,7 @@ Create an instance by running the [jetstream](http://downloads.lappsgrid.org/scr
 2. You need openrc.sh, see [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it
 
 3. You need the openstack client (see [OpenStack documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html))
-
-```
+  ```
   pip install python-openstackclient
   ``` 
 
