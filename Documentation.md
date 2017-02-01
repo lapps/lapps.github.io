@@ -96,7 +96,9 @@ After deploying a war file to tomcat the new war will be deployed automatically,
   - The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
 - In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
 
+
 #### Planemo
+
 
 #### Visualization
   
@@ -156,23 +158,23 @@ Some notes at [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.l
 
 There are bash scripts at [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts), which is a copy of the contents of the repository [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts). Note that [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts)
 
-Getting on:
+Get onto JetStream at [https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/](https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/), login with TACC as the domain and using your TACC username and password (username is not the same as on XCEDE). 
 
-- [https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/](https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/), login with TACC password
+Create an instance by running the [jetstream](http://downloads.lappsgrid.org/scripts/jetstream) script, which has several requirements.
 
-Creating an instance by running the [jetstream](http://downloads.lappsgrid.org/scripts/jetstream) script, which requires:
+1. You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script depending where you put it, the default location is in the .ssh directory:
+  ```
+  PEM=$HOME/.ssh/lappsgrid-shared-key.pem
+  ```
 
-- You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script
-  - PEM=$HOME/.ssh/lappsgrid-shared-key.pem
+2. You need openrc.sh, see [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it
 
-- You need openrc.sh, see http://wiki.lappsgrid.org/technical/jetstream on how to get it
+3. You need the openstack client, see [OpenStack documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html)/
+  ```
+  pip install python-openstackclient
+  ``` 
 
-- You need nova (pip install nova-client)
-
-- You need the openstack client
-  - pip install python-openstackclient
-  - see [OpenStack documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html)
-
+There is an issue with step 1 in that full access is only granted to the person who created the key.
 
 
 ### Creating a lappsgrid with `galaxy-appliances`
