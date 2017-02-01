@@ -160,16 +160,18 @@ Getting on:
 
 - [https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/](https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/), login with TACC password
 
-Creating an instance:
+Creating an instance by running the [jetstream](http://downloads.lappsgrid.org/scripts/jetstream) script, which requires:
 
-- Run the [jetstream]http://wiki.lappsgrid.org/technical/jetstream) script, which requires:
- - You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script
-   - PEM=$HOME/.ssh/lappsgrid-shared-key.pem
- - You need openrc.sh, see http://wiki.lappsgrid.org/technical/jetstream on how to get it
- - You need nova (pip install nova-client)
- - You need the openstack client
-   - pip install python-openstackclient
-   - see [http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html)
+- You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script
+  - PEM=$HOME/.ssh/lappsgrid-shared-key.pem
+
+- You need openrc.sh, see http://wiki.lappsgrid.org/technical/jetstream on how to get it
+
+- You need nova (pip install nova-client)
+
+- You need the openstack client
+  - pip install python-openstackclient
+  - see [OpenStack documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html)
 
 
 
