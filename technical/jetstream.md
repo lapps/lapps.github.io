@@ -45,6 +45,7 @@ Advanced snapshopts are also available, with `--image` option:
 * `ubuntu`(default) - Default Ubuntu 14.04.3 Development image.
 * `docker` - Ubuntu image with Docker and Docker Compose.
 * `master` - Ubuntu image with Docker, Compose, and Lappsgrid tools.
+
 For instance, 
 
 ```bash
