@@ -157,9 +157,11 @@ Some notes at [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.l
 There are bash scripts at [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts), which is a copy of the contents of the repository [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts). Note that [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts)
 
 Getting on:
+
 - [https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/](https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/), login with TACC password
 
 Creating an instance:
+
 - Run the [jetstream]http://wiki.lappsgrid.org/technical/jetstream) script, which requires:
  - You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script
    - PEM=$HOME/.ssh/lappsgrid-shared-key.pem
