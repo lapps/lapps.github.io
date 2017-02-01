@@ -29,7 +29,7 @@ Once you are able to log in to the Jetstream system you will need to generate th
 
 **NOTE:** The first (non-comment) line of the *openrc.sh* file sets the `OS_AUTH_URL` variable to an incorrect URL.  You will be provided with the correct URL in a separate email.  Please do not make this URL public (i.e. save it anywhere other than your openrc.sh file).
 
-** ALSO NOTE:** PEM file cannot be shared around users except for the simple ssh operation. If one wants to do more than that, for example launching a new instance through openstack command line, s/he needs to have property username-pem combination. 
+**ALSO NOTE:** PEM file cannot be shared around users except for the simple ssh operation. If one wants to do more than that, for example launching a new instance through openstack command line, s/he needs to have property username-pem combination. 
 
 ## Instance Management
 
@@ -42,9 +42,10 @@ The remainder of this document assumes you will be using the [jetstream](http://
 ```
 Advanced snapshopts are also available, with `--image` option: 
 
-* ubuntu(default) - Default Ubuntu 14.04.3 Development image.
-* docker - Ubuntu image with Docker and Docker Compose.
-* master - Ubuntu image with Docker, Compose, and Lappsgrid tools.
+* `ubuntu`(default) - Default Ubuntu 14.04.3 Development image.
+* `docker` - Ubuntu image with Docker and Docker Compose.
+* `master` - Ubuntu image with Docker, Compose, and Lappsgrid tools.
+For instance, 
 
 ```bash
 	jetstream launch [size] --image master <name>
