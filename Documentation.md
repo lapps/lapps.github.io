@@ -23,9 +23,9 @@ In particular, what needs to be done for the following to happen:
 
 Requirements (debian, rhel, osx), start with virgin machine (JetStream instance)
 
-Here are some [historical notes] from (http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html) from 2014. 
+Here are some [historical notes](http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html) from 2014. 
 
-There is a one-step-install script (written by Keith for debian/ubuntu, Keigh had a RHEL version).
+There is a one-step-install script (written by Keith for debian/ubuntu, Keigh had a RHEL version - that is lost).
  
 Now an easier proces:
 - requires postgress, tomcat 7 installation, Java 8 (latest manager (Jan 2017)
@@ -56,12 +56,15 @@ LIF and WSEV:
 
 Vocabulary and Discriminators:
 
-- everything in vocab is in discriminators but not vice versa
+- everything in vocab is in discriminators but not vice versa (vocab ⊂ discriminator)
 - there is a vocab dsl and a discriminators dsl (both configuration files for transformations)
- 1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
- 2. [https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl)
-- the input to 1 is lapps.vocab in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages) (there are also template files and other onput files for the mapping in there), it creates vocab.lappsgrid.org html, [org.lappsgrid.vocabulary](https://github.com/lapps/org.lappsgrid.vocabulary) (which is like the discriminator package and describes attribute names etcetera defined in the vocab), and a Groovy config DSL file with same content
-- the input to 2 is the config DSL file above and a file named [discriminators.config](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/blob/master/src/main/resources/discriminators.config) in the org.lappsgrid.discriminator.dsl repository, the output is [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) and parts of the java package in [https://github.com/lapps/org.lappsgrid.discriminator](https://github.com/lapps/org.lappsgrid.discriminator)
+  1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
+  2. [https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl)
+- the input to 1 is `lapps.vocab` in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages) (there are also template files and other onput files for the mapping in there), it creates 
+  1. vocab.lappsgrid.org `html`, 
+  1. [org.lappsgrid.vocabulary](https://github.com/lapps/org.lappsgrid.vocabulary) (which is like the discriminator package and describes attribute names etcetera defined in the vocab), 
+  1. and a Groovy config DSL file with same content
+- the input to 2 is the config DSL file above and a file named [discriminators.config](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/blob/master/src/main/resources/discriminators.config) in the org.lappsgrid.discriminator.dsl repository, the output is [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) page and parts of the java package in [https://github.com/lapps/org.lappsgrid.discriminator](https://github.com/lapps/org.lappsgrid.discriminator)
 
 **check whether this all still works**
 
@@ -69,7 +72,7 @@ Discriminators are used in the produces and requires sections of a tool wrapper'
 
 Deploying:
 
-THis is explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples), which was listed above. 
+Explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples), which was listed above. 
 
 After deploying a war file to tomcat the new war will be deployed automatically, but if you changed Java versions while running a tomcat server then you do need to restart Tomcat.
 
@@ -77,11 +80,8 @@ After deploying a war file to tomcat the new war will be deployed automatically,
 Registering:
 
 - Using lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
-
 - Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
-
 - We are still assuming old version of the service manager
-
 - The lddl-scripts/Udate.lddl script takes another script from brandeis or vassar and installs/updates just that module
 
 - **check whether this works with new service manager**
@@ -89,24 +89,19 @@ Registering:
 
 ### Setting up Galaxy
 
-Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
-
-This uses scripts in [installation and setup scripts](http://downloads.lappsgrid.org/scripts/). Which has a bunch of ubuntu style setup scripts.
-
-There are two repos with Galaxy code:
-    
-- We have a fork [https://github.com/lappsgrid-incubator/Galaxy](https://github.com/lappsgrid-incubator/Galaxy) of [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) with some lapps specific modifications
-
-- The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
-
-In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
+* Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
+* This uses scripts in [installation and setup scripts](http://downloads.lappsgrid.org/scripts/). Which has a bunch of ubuntu style setup scripts.
+* There are two repos with Galaxy code:
+  - We have a fork [https://github.com/lappsgrid-incubator/Galaxy](https://github.com/lappsgrid-incubator/Galaxy) of [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) with some lapps specific modifications
+  - The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
+* In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
 
 - Planemo
 
 - Visualization
-   
-   **find chunqi paper**
-.. [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
+  - [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
+  - **find chunqi paper**
+
 
 
 ### Federation
@@ -164,13 +159,13 @@ Repositories:
 - [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts)
 
 
-### Creating a lappsgrid with appliances
+### Creating a lappsgrid with `galaxy-appliances`
 
 - A system for configuring a network of LAPPS Grid Docker images
 - [https://github.com/lappsgrid-incubator/galaxy-appliance](https://github.com/lappsgrid-incubator/galaxy-appliance)
 
 
-### Using Ansible
+### Using `ansible`
 
 Like bash scripts but more portable.
 
