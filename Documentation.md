@@ -99,9 +99,9 @@ After deploying a war file to tomcat the new war will be deployed automatically,
 #### Planemo
 
 #### Visualization
-  - [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
-  - **find chunqi paper**
-
+  
+- [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
+- **find chunqi paper**
 
 
 ### Federation
@@ -148,16 +148,27 @@ The split with brandeis/vassar is historical, we may want to do something along 
 
 ### Running on JetStream
 
-Quick applicatin process to get 200K service units, which should allow us to run the grid for a year
+There is a quick applicatin process to get 200K service units, which should allow us to run the grid for a year.
 
 Uses OpenStack, which seems to be what AWS is using too.
 
-There is a bash script at [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts).
+Some notes at [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html).
 
-**Keigh + Marc: review how to do that from Keith's example of a few months ago**
+There are bash scripts at [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts), which is a copy of the contents of the repository [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts). Note that [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts)
 
-Repositories:
-- [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts)
+Getting on:
+- [https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/](https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/), login with TACC password
+
+Creating an instance:
+- Run the [jetstream]http://wiki.lappsgrid.org/technical/jetstream) script, which requires:
+ - You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script
+   - PEM=$HOME/.ssh/lappsgrid-shared-key.pem
+ - You need openrc.sh, see http://wiki.lappsgrid.org/technical/jetstream on how to get it
+ - You need nova (pip install nova-client)
+ - You need the openstack client
+   - pip install python-openstackclient
+   - see [http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html)
+
 
 
 ### Creating a lappsgrid with `galaxy-appliances`
@@ -209,14 +220,4 @@ Where are all the repositories, what do they do and what is their role in the bi
 - The OANC organization at [https://github.com/oanc](https://github.com/oanc)
   - code for wrappers created at Vassar
  
-  
-### Goals for first day
-
-Layout of basic redesign of lappsgrid.github.io.
-
-Come up with scenarios of what somebody may want to do given some configuration. For example:
-
-- I have a server and want to have a Lapps Grid
-- I want something running in AWS
-- I want to add my tool to a grid
 
