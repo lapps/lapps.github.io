@@ -19,6 +19,15 @@ To be able to make use of Jetstream you will need to:
 
 Once you are able to log in to the Jetstream system you will need to generate the openrc.sh file that is used by the Open Stack API to communicate with Jetstream.
 
+### Enabling OpenStack 
+To use command line commands to manage jetstream instances, one needs to have openstack client installed. What you need is
+
+* Python
+* `pip`
+* `python-openstackclient` package installed with `pip`
+
+For full instruction, see [OpenStack Documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html) on installation.
+
 ### openrc.sh
 
 1. Sign on to the [Jetstream Dashboard](https://jblb.jetstream-cloud.org/dashboard)
@@ -29,7 +38,7 @@ Once you are able to log in to the Jetstream system you will need to generate th
 
 **NOTE:** The first (non-comment) line of the *openrc.sh* file sets the `OS_AUTH_URL` variable to an incorrect URL.  You will be provided with the correct URL in a separate email.  Please do not make this URL public (i.e. save it anywhere other than your openrc.sh file).
 
-**ALSO NOTE:** PEM file cannot be shared around users except for the simple ssh operation. If one wants to do more than that, for example launching a new instance through openstack command line, s/he needs to have property username-pem combination. 
+**ALSO NOTE:** PEM file cannot be shared around users except for the simple ssh operation. If one wants to do more than that, for example launching a new instance through openstack command line, a property usercredential-pem combination is required. 
 
 ## Instance Management
 
