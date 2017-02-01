@@ -41,11 +41,11 @@ Now an easier proces:
 
 How to create services - wrapping, discriminators, LIF, WSEV, deploying, registering
 
-Wrapping:
+#### Wrapping:
 
 - [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
 
-LIF and WSEV:
+#### LIF and WSEV:
 
 - output of wrapped components should follow LIF specifications and use elements from WSEV
 - [LIF specifications](interchange/index.html)
@@ -54,7 +54,7 @@ LIF and WSEV:
 - [WSEV discussion](http://wiki.lappsgrid.org/vocabulary/current_issues.html)
 - [WSEV issues](https://github.com/lapps/vocabulary-pages/issues)
 
-Vocabulary and Discriminators:
+#### Vocabulary and Discriminators:
 
 - everything in vocab is in discriminators but not vice versa (vocab ⊂ discriminator)
 - there is a vocab dsl and a discriminators dsl (both configuration files for transformations)
@@ -70,19 +70,19 @@ Vocabulary and Discriminators:
 
 Discriminators are used in the produces and requires sections of a tool wrapper's metadata. It is up to the tool wrapper to check whether input has what it needs (searching the contains section of the metadata section of a view. THere is also a discriminator handed in with the Data structure, which has a discriminator and a payload section. The dicriminator there is one of the dozen or so media discriminators in [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) (for example, the discriminator gate	which refers to http://vocab.lappsgrid.org/ns/media/xml#gate).
 
-Deploying:
+#### Deploying:
 
 Explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples), which was listed above. 
 
 After deploying a war file to tomcat the new war will be deployed automatically, but if you changed Java versions while running a tomcat server then you do need to restart Tomcat.
 
 
-Registering:
+#### Registering:
 
-- Using lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
-- Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
-- We are still assuming old version of the service manager
-- The lddl-scripts/Udate.lddl script takes another script from brandeis or vassar and installs/updates just that module
+* Using lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
+* Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
+* We are still assuming old version of the service manager
+* The lddl-scripts/Udate.lddl script takes another script from brandeis or vassar and installs/updates just that module
 
 - **check whether this works with new service manager**
 
@@ -96,9 +96,8 @@ Registering:
   - The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
 * In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
 
-- Planemo
-
-- Visualization
+#### Planemo
+#### Visualization
   - [https://wiki.galaxyproject.org/Develop/Visualizations](https://wiki.galaxyproject.org/Develop/Visualizations)
   - **find chunqi paper**
 
@@ -124,6 +123,7 @@ This is actually just a token header that is put in ...
 There is a manual at ...
 
 Repositories:
+
 - [https://github.com/lappsgrid-incubator/docker-service-manager](https://github.com/lappsgrid-incubator/docker-service-manager)
 - [https://github.com/lappsgrid-incubator/docker-masc](https://github.com/lappsgrid-incubator/docker-masc)
 - [https://github.com/lappsgrid-incubator/docker-vassar](https://github.com/lappsgrid-incubator/docker-vassar)
@@ -179,7 +179,6 @@ Like bash scripts but more portable.
 ### Using Jupyter
 
 - [https://github.com/lappsgrid-incubator/jupyter-groovy-kernel](https://github.com/lappsgrid-incubator/jupyter-groovy-kernel)
-
 - [https://github.com/lappsgrid-incubator/jupyter-lsd-kernel](https://github.com/lappsgrid-incubator/jupyter-lsd-kernel)
   
 
@@ -187,21 +186,13 @@ Like bash scripts but more portable.
 ### LDDL and LSD
 
 - Both are Groovy DSLs
-
 - LSD - Lapps Services DSL, a DSL for invoking LAPPS web services (possibly pipelined).
-
 - The code base for LSD is at [https://github.com/lappsgrid-incubator/org.anc.lapps.dsl](https://github.com/lappsgrid-incubator/org.anc.lapps.dsl)
-
 - LDDL - LAPPS Database Definition Language
-
 - Configuration scripts for the LAPPS grid at [https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl)
-
 - LDDL scripts at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
-
 - [http://www.lappsgrid.org/software/](http://www.lappsgrid.org/software/) has some notes on LDDL and LSD
-
 - Description of LDDL: [http://www.lappsgrid.org/software/lddl/](http://www.lappsgrid.org/software/lddl/)
-
 - There is an outdated wiki at [https://github.com/ksuderman/lsd-scripts/wiki](https://github.com/ksuderman/lsd-scripts/wiki)
 
 
@@ -210,16 +201,12 @@ Like bash scripts but more portable.
 Where are all the repositories, what do they do and what is their role in the bigger picture
   
 - The LAPPS Grid incubator organization at [https://github.com/lappsgrid-incubator](https://github.com/lappsgrid-incubator)
-
 - The LAPPS organization at [https://github.com/lapps](https://github.com/lapps)
-
 - The Galaxy NLP organization at [https://github.com/galaxy-nlp](https://github.com/galaxy-nlp)
-
 - The Brandeis NLP organization at [https://github.com/brandeis-nlp](https://github.com/brandeis-nlp)
-    - code for wrappers created at Brandeis
-
+  * code for wrappers created at Brandeis
 - The OANC organization at [https://github.com/oanc](https://github.com/oanc)
-    - code for wrappers created at Vassar
+  * code for wrappers created at Vassar
  
   
 ### Goals for first day
