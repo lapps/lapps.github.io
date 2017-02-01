@@ -19,14 +19,14 @@ To be able to make use of Jetstream you will need to:
 
 Once you are able to log in to the Jetstream system you will need to generate the openrc.sh file that is used by the Open Stack API to communicate with Jetstream.
 
-### Enabling OpenStack 
-To use command line commands to manage jetstream instances, one needs to have openstack client installed. What you need is
+### Install OpenStack Client
+To use command line commands to manage jetstream instances, one needs to have openstack client installed. That is, you need to have
 
 * Python
 * `pip`
 * `python-openstackclient` package installed with `pip`
 
-For full instruction, see [OpenStack Documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html) on installation.
+For full instructions, see [OpenStack Documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html) on installation.
 
 ### openrc.sh
 
