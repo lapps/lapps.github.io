@@ -48,6 +48,13 @@ Now an easier proces:
 - service-manager.xml needs to be edited
 
 
+Last steps:
+
+- test last one step install script from Keith on JetStream
+- script needs to be tuned a bit
+- including RHEL flavours
+
+
 ### Creating and adding services
 
 How to create services - wrapping, discriminators, LIF, WSEV, deploying, registering
@@ -56,6 +63,7 @@ How to create services - wrapping, discriminators, LIF, WSEV, deploying, registe
 #### Wrapping:
 
 - [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
+
 
 #### LIF and WSEV:
 
@@ -82,6 +90,7 @@ How to create services - wrapping, discriminators, LIF, WSEV, deploying, registe
 
 Discriminators are used in the produces and requires sections of a tool wrapper's metadata. It is up to the tool wrapper to check whether input has what it needs (searching the contains section of the metadata section of a view. THere is also a discriminator handed in with the Data structure, which has a discriminator and a payload section. The dicriminator there is one of the dozen or so media discriminators in [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) (for example, the discriminator gate	which refers to http://vocab.lappsgrid.org/ns/media/xml#gate).
 
+
 #### Deploying:
 
 Explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples), which was listed above. 
@@ -91,22 +100,30 @@ After deploying a war file to tomcat the new war will be deployed automatically,
 
 #### Registering:
 
-- Using lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
-- Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
-- We are still assuming old version of the service manager
-- The lddl-scripts/Udate.lddl script takes another script from brandeis or vassar and installs/updates just that module
+Use the lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
 
-- **check whether this works with new service manager**
+Register using LDDL to update the service on the service manager on vassar or brandeis servers. Using Brandeis.lddl for Brandeis in lddl-scripts. Brandeis.lddl refers to lddl scripts in the brandeis subdirectory, thise would typically be changed or scripts would be added there for deploying new tools. There is a fork of this on brandeis-nlp, will probably rplace that by using a brandeis branch on lappsgrid-incubator.
+
+We are still assuming old version of the service manager
+
+The lddl-scripts/Update.lddl script takes another script from brandeis or vassar and installs/updates just that module
+
+**check whether this works with new service manager**
+
+- there is a cleanup script that cleans out the database but with the new database there may be new fields that ar enot cleaned up.
 
 
 ### Setting up Galaxy
 
-- Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
-- This uses scripts in [installation and setup scripts](http://downloads.lappsgrid.org/scripts/). Which has a bunch of ubuntu style setup scripts.
-- There are two repos with Galaxy code:
+Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
+
+This uses scripts in [installation and setup scripts](http://downloads.lappsgrid.org/scripts/). Which has a bunch of ubuntu style setup scripts.
+
+There are two repos with Galaxy code:
   - We have a fork [https://github.com/lappsgrid-incubator/Galaxy](https://github.com/lappsgrid-incubator/Galaxy) of [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) with some lapps specific modifications
   - The LAPPS Grid modifications to core Galaxy are in the [GalaxyMods](https://github.com/lappsgrid-incubator/GalaxyMods) repository
-- In additoin, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
+
+In addition, there are Galaxy webhooks for extending the Galaxy client without changing the Galaxy code base at [https://docs.galaxyproject.org/en/latest/admin/webhooks.html](https://docs.galaxyproject.org/en/latest/admin/webhooks.html)
 
 
 #### Planemo
@@ -137,6 +154,8 @@ This is actually just a token header that is put in ...
 
 There is a manual at ...
 
+Notes at [http://wiki.lappsgrid.org/technical/docker](http://wiki.lappsgrid.org/technical/docker).
+
 Repositories:
 
 - [https://github.com/lappsgrid-incubator/docker-service-manager](https://github.com/lappsgrid-incubator/docker-service-manager)
@@ -152,7 +171,6 @@ The docker-service-manager repo on the discovery branch has a file Dockerfile.di
 On the docker repos, there is a tag named discovery, which gets to the images created from commits with the discovery tag.
 
 The split with brandeis/vassar is historical, we may want to do something along the lines of docker-stanford, docker-lingpipe etcetera.
-
 
 
 ### Running on AWS
@@ -215,9 +233,12 @@ Like bash scripts but more portable.
 
 [https://github.com/lappsgrid-incubator/lapps-container](https://github.com/lappsgrid-incubator/lapps-container)
 
+This is an in-progress pipe dream.
 
-### Conda, toolshed and friends
 
+### Conda and the Galaxy toolshed
+
+We are not using those excapt tht we have one tool on the toolshed to prove we can do it.
 
 
 ### Using Jupyter
@@ -226,18 +247,25 @@ Like bash scripts but more portable.
 - [https://github.com/lappsgrid-incubator/jupyter-lsd-kernel](https://github.com/lappsgrid-incubator/jupyter-lsd-kernel)
   
 
-
 ### LDDL and LSD
 
-- Both are Groovy DSLs
-- LSD - Lapps Services DSL, a DSL for invoking LAPPS web services (possibly pipelined).
-- The code base for LSD is at [https://github.com/lappsgrid-incubator/org.anc.lapps.dsl](https://github.com/lappsgrid-incubator/org.anc.lapps.dsl)
-- LDDL - LAPPS Database Definition Language
-- Configuration scripts for the LAPPS grid at [https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl)
-- LDDL scripts at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
-- [http://www.lappsgrid.org/software/](http://www.lappsgrid.org/software/) has some notes on LDDL and LSD
-- Description of LDDL: [http://www.lappsgrid.org/software/lddl/](http://www.lappsgrid.org/software/lddl/)
-- There is an outdated wiki at [https://github.com/ksuderman/lsd-scripts/wiki](https://github.com/ksuderman/lsd-scripts/wiki)
+Both are Groovy DSLs.
+
+LSD - Lapps Services DSL, a DSL for invoking LAPPS web services (possibly pipelined).
+
+The code base for LSD is at [https://github.com/lappsgrid-incubator/org.anc.lapps.dsl](https://github.com/lappsgrid-incubator/org.anc.lapps.dsl)
+
+LDDL - LAPPS Database Definition Language
+
+Configuration scripts for the LAPPS grid at [https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl)
+
+LDDL scripts at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
+
+[http://www.lappsgrid.org/software/](http://www.lappsgrid.org/software/) has some notes on LDDL and LSD
+
+Description of LDDL: [http://www.lappsgrid.org/software/lddl/](http://www.lappsgrid.org/software/lddl/)
+
+There is an outdated wiki at [https://github.com/ksuderman/lsd-scripts/wiki](https://github.com/ksuderman/lsd-scripts/wiki)
 
 
 ### Repositories
@@ -255,5 +283,3 @@ Where are all the repositories, what do they do and what is their role in the bi
 
 - The OANC organization at [https://github.com/oanc](https://github.com/oanc)
   - code for wrappers created at Vassar
- 
-
