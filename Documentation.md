@@ -21,25 +21,37 @@ In particular, what needs to be done for the following to happen:
 
 ### Installing a service manager
 
-Requirements (debian, rhel, osx), start with virgin machine (JetStream instance)
+These notes are for a virgin ubuntu machine.
+
+
+Dowloads at [http://www.anc.org/downloads/langrid/](http://www.anc.org/downloads/langrid/). Get the following onto the jetstream instance.
+
+- one-step-install.sh
+
+Running this will download LappsPackages-1.2.3.zip from [http://www.anc.org/downloads/langrid/](http://www.anc.org/downloads/langrid/) if needed, it will also download the latest service manager war file and other things that are needed.
+
+Active BPEL is still in there, check this because it is most likely not needed (the Brandeis server never had Active BPEL installed). 
+
+It installs Java 7 from Oracle, not the JDK, it even removes the OpenJDK. This is because of some JDBC errors when both existed side-by-side (but this was a problem in 2012, it may have been solved by now).
+
+Running the script should work, but it does not set JAVA_HOME
 
 Here are some [historical notes](http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html) from 2014. 
 
-There is a one-step-install script (written by Keith for debian/ubuntu, Keigh had a RHEL version - that is lost).
+There is a one-step-install script (written by Keith for debian/ubuntu, Keigh had an RHEL version - that is lost).
  
 Now an easier proces:
 - requires postgress, tomcat 7 installation, Java 8 (latest manager (Jan 2017)
 - get the service manager war and put it on tomcat
 - start/stop tomcat to create database, using tomcat scripts
 - there are two sql scripts that need to be run to set up tables in postgress
-- vevice-manager.xml needs to be edited
-
-**set up new service manager on Jetstream**
+- service-manager.xml needs to be edited
 
 
 ### Creating and adding services
 
 How to create services - wrapping, discriminators, LIF, WSEV, deploying, registering
+
 
 #### Wrapping:
 
@@ -152,11 +164,25 @@ The split with brandeis/vassar is historical, we may want to do something along 
 
 There is a quick applicatin process to get 200K service units, which should allow us to run the grid for a year.
 
+Log in to JestStream, you need:
+
+- the pem file
+- the jetstream script
+- the openrc.sh, using keith and his password (hard coded, see Keith's email from yesterday)
+- the openstack client
+
+```
+./jetstream.sh list
+./jetstream.sh ssh proxy
+```
+
+then ssh into any other instance using the local network id.
+
 Uses OpenStack, which seems to be what AWS is using too.
 
 Some notes at [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html).
 
-There are bash scripts at [http://downloads.lappsgrid.org/scripts](http://downloads.lappsgrid.org/scripts/), which is a copy of the contents of the repository [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts). Note that [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts) is hosted on the proxy used on Jetstream.
+There are bash scripts at [http://downloads.lappsgrid.org/scripts](http://downloads.lappsgrid.org/scripts/), which is a copy of the contents of the repository [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts). Note that [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts) is hosted on the proxy used on Jetstream. Also note that the repository is called jetstream-scripts, but all scripts except for jetstream are generic ubuntu scripts, should probably .
 
 Get onto JetStream at [https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/](https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/), login with TACC as the domain and use your TACC username and password (username is not the same as on XCEDE). 
 
