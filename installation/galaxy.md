@@ -1,4 +1,10 @@
-### Setting up Galaxy
+---
+layout: slate
+title: Setting up Galaxy
+---
+
+## {{ page.title }}
+
 
 Documentation is in [http://wiki.lappsgrid.org/technical/galaxy.html](http://wiki.lappsgrid.org/technical/galaxy.html).
 
