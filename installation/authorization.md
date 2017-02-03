@@ -1,6 +1,6 @@
 ---
 layout: slate
-title: Documentation
+title: Authorization
 ---
 
 ## {{ page.title }}
