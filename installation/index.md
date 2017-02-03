@@ -5,7 +5,7 @@ title: Installing a LAPPS Grid
 
 ## {{ page.title }}
 
-This page is an entry point to all pages related to installation of a working LAPPS Grid. The overview describes the LAPPS Universe and has links to all technical detail to the other topics in the list below.
+This page is an entry point to all pages related to installation of a working LAPPS Grid. The overview describes the LAPPS Universe and has links to all technical detail to the other topics in the list below. You will notice that som epages are in a reasonable shape whil eothers seems to be unhinged notes to self, this will get better over time.
 
 | page                                  |  description
 | ------------------------------------- | -------------------------------------------------------------
