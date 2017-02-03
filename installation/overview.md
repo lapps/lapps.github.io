@@ -13,7 +13,7 @@ The core of the LAPPS Grid consists of a Service Manager that connects to web se
 The Service Manager handles requests for service invocations and controls access to services. It also allows federation with other Service Managers so that services accross Service Managers can be accessed through a single point. The image below shows a LAPPS Server with two Tomcat instances and a Postgres database. On Tomcat instance hosts the Service Manager web application which has access to a PostgreSQL database as well as another Tomcat instance with NLP components wrapped as web applications. The PostgreSQL database stores information on what services there are and where they reside. The NLP services do not have to be on a different Tomcat instance on the same server, they could be on the same Tomcat instance as the Service Manager or on a Tomcat instance on a different server. It is also not required that the Tomcat server is used, but all our implementations have used Tomcat.
 
 <div class="image">
-<img src="https://lapps.github.io/installation/images/lapps-sm.png" width="500">
+<img src="https://lapps.github.io/installation/images/lapps-sm.png" width="600">
 <!--
 NOTE: add the following once you have figured out the styles so it displays well
 <div class="caption">LAPPS Server with two Tomcat instances and a Postgres database</div>
@@ -33,7 +33,7 @@ With the Service Manager and its services in place, you can access and run servi
 [Galaxy](https://galaxyproject.org/) is used by the LAPPS Grid as the interface for creating workflows and for evaluating and sharing results. The LAPPS/Galaxy server points at one or more Service Managers, as shown below.
 
 <div class="image">
-<img src="https://lapps.github.io/installation/images/lapps-galaxy.png" width="600">
+<img src="https://lapps.github.io/installation/images/lapps-galaxy.png" width="750">
 <div class="caption"></div>
 </div>
 
