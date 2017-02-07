@@ -5,9 +5,21 @@ title: Installing Services
 
 ## {{ page.title }}
 
-### Creating and adding services
+This page describes how to create services.
 
-How to create services - wrapping, discriminators, LIF, WSEV, deploying, registering
+<div class="image">
+<img src="https://lapps.github.io/installation/images/lapps-services.png" width="600">
+<div class="caption"></div>
+</div>
+
+Adding a service involves various things:
+
+1. Wrapping the service.
+2. Knowing how to use discriminators.
+3. Using the LAPS Interchange Format (LIF).
+4. Using the Web Sevices Exchange Vocabulary (WSEV)
+5. Deploying the service.
+6. Registering the service with the Service Manager.
 
 
 #### Wrapping:
