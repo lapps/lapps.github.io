@@ -57,3 +57,15 @@ Typically the LSD scripts connect to web service endpoints defined by the Servic
 This setup is useful for those cases where the functionality provided by the Service Manager is not needed.
 
 See [Setting up Galaxy](galaxy.html) for more details including installation pointers.
+
+
+### The LAPPS Grid as Docker Containers
+
+To increase portability we have created [Docker](https://www.docker.com/) images for components of the LAPPS Grid so that the LAPPS Grid can also be deployed as a set of Docker containers. 
+
+<div class="image">
+<img src="https://lapps.github.io/installation/images/lapps-docker.png" width="500">
+<div class="caption"></div>
+</div>
+
+Any one can create their own Docker images and build a LAPPS Grid for a specific purpose. See [Creating and Using Docker Images](docker.html) for more details. 
