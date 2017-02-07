@@ -30,7 +30,7 @@ With the Service Manager and its services in place, you can access and run servi
 
 ### The LAPPS/Galaxy Frontend
 
-[Galaxy](https://galaxyproject.org/) is used by the LAPPS Grid as the interface for creating workflows and for evaluating and sharing results. The LAPPS/Galaxy server points at one or more Service Managers, as shown below.
+[Galaxy](https://galaxyproject.org/) is used by the LAPPS Grid as the interface for creating workflows and for evaluating and sharing results. The LAPPS/Galaxy server points at one or more LAPPS Servers with a Service Manager, in the example below the portal uses two LAPPS Servers.
 
 <div class="image">
 <img src="https://lapps.github.io/installation/images/lapps-galaxy.png" width="750">
@@ -40,3 +40,20 @@ With the Service Manager and its services in place, you can access and run servi
 <!--
 [https://www.nginx.com](https://www.nginx.com)
 -->
+
+The LAPPS/Galaxy portal is built from a couple of Github repositories that contain a fork of the repository of the Galaxy Project at [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy) as well as several additions including the following:
+
+1. Configuration files.
+2. LSD scripts to connect to LAPPS servers.
+3. Several visualization plugins.
+
+Typically the LSD scripts connect to web service endpoints defined by the Service Manager, but it is actually possible to have them connect directly to the NLP web services.
+
+<div class="image">
+<img src="https://lapps.github.io/installation/images/lapps-galaxy-simple.png" width="400">
+<div class="caption"></div>
+</div>
+
+This setup is useful for those cases where the functionality provided by the Service Manager is not needed.
+
+See [Setting up Galaxy](galaxy.html) for more details including installation pointers.
