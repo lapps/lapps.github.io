@@ -5,15 +5,22 @@ title: Installing a Service Manager
 
 ## {{ page.title }}
 
+### Sort version
 
-These notes are written with a virgin Ubuntu machine in mind. 
+To install the Service Manager get the [one-step-install.sh](http://www.anc.org/downloads/langrid/one-step-install.sh) script and run it as root:
+
+```
+sudo one-step-install.sh
+```
 
 
-Dowloads at [http://www.anc.org/downloads/langrid/](http://www.anc.org/downloads/langrid/). Get the following onto the jetstream instance.
+### More details
 
-- one-step-install.sh
+These notes are written with a virgin Ubuntu machine in mind. The install script is currently being updated to deal with CentOS and RHEL.
 
-Running this will download LappsPackages-1.2.3.zip from [http://www.anc.org/downloads/langrid/](http://www.anc.org/downloads/langrid/) if needed, it will also download the latest service manager war file and other things that are needed.
+Dowloads are at [http://www.anc.org/downloads/langrid/](http://www.anc.org/downloads/langrid/). You should get the [one-step-install.sh](http://www.anc.org/downloads/langrid/one-step-install.sh) script.
+
+Running this script will download LappsPackages-1.2.3.zip from [http://www.anc.org/downloads/langrid/](http://www.anc.org/downloads/langrid/) and run install scripts included in that package. If needed, those install scripts will also download the latest service manager war file.
 
 Active BPEL is still in there, check this because it is most likely not needed (the Brandeis server never had Active BPEL installed). 
 
@@ -23,8 +30,8 @@ Running the script should work, but it does not set JAVA_HOME
 
 Here are some [historical notes](http://wiki.lappsgrid.org/manuals/service-manager/install-service-manager/index.html) from 2014. 
 
-There is a one-step-install script (written by Keith for debian/ubuntu, Keigh had an RHEL version - that is lost).
- 
+The one-step-install.sh script is maintained in the [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts) repository. It may be moved to [https://github.com/lappsgrid-incubator/service-manager-installation](https://github.com/lappsgrid-incubator/service-manager-installation).
+
 Now an easier proces:
 - requires postgress, tomcat 7 installation, Java 8 (latest manager (Jan 2017)
 - get the service manager war and put it on tomcat
