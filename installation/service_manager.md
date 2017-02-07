@@ -5,7 +5,15 @@ title: Installing a Service Manager
 
 ## {{ page.title }}
 
-### Sort version
+This page describes how to install the Service Manager, one of the two main elements of a LAPPS Server.
+
+<div class="image">
+<img src="https://lapps.github.io/installation/images/lapps-service-manager.png" width="600">
+<div class="caption"></div>
+</div>
+
+
+### Short version
 
 To install the Service Manager get the [one-step-install.sh](http://www.anc.org/downloads/langrid/one-step-install.sh) script and run it as root:
 
@@ -15,6 +23,7 @@ sudo one-step-install.sh
 
 
 ### More details
+
 
 These notes are written with a virgin Ubuntu machine in mind. The install script is currently being updated to deal with CentOS and RHEL.
 
@@ -33,6 +42,7 @@ Here are some [historical notes](http://wiki.lappsgrid.org/manuals/service-manag
 The one-step-install.sh script is maintained in the [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts) repository. It may be moved to [https://github.com/lappsgrid-incubator/service-manager-installation](https://github.com/lappsgrid-incubator/service-manager-installation).
 
 Now an easier proces:
+
 - requires postgress, tomcat 7 installation, Java 8 (latest manager (Jan 2017)
 - get the service manager war and put it on tomcat
 - start/stop tomcat to create database, using tomcat scripts
