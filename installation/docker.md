@@ -5,12 +5,12 @@ title: Creating and Using Docker Images
 
 ## {{ page.title }}
 
+<div class="image">
+<img src="https://lapps.github.io/installation/images/lapps-docker.png" width="500">
+<div class="caption"></div>
+</div>
 
-### How to create Docker images
-
-There is a manual at ...
-
-Notes at [http://wiki.lappsgrid.org/technical/docker](http://wiki.lappsgrid.org/technical/docker).
+There are notes at [http://wiki.lappsgrid.org/technical/docker](http://wiki.lappsgrid.org/technical/docker).
 
 Repositories:
 
