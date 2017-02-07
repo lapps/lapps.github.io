@@ -107,7 +107,8 @@ identifier.
 <li>The view's metadata specify what kind of information objects are in the
 view.
 
-<li>Services may create as many new views as they want.
+<li>Services may create as many new views as they want. New views are added to 
+the end of the views list. 
 
 <li>Services may add information to existing views, both to the metadata section
 and the annotations. We have considered making views read only, which has some
@@ -119,6 +120,12 @@ holds for the view's metadata as well as the annotations.
 
 </ol>
 
+<p>Services search the views list for a view that contains the input that the
+  service needs. It is possible that multiple views provide that information, for 
+  example, a service may require Token annotation and several views have such
+  annotations. As a rule of thumb we suggest that services then proceed to select
+  the most recent view that provides the needed annotations.</p>
+  
 <!--
 <p>It may be a good idea to not allow a service to add information to an
 existing view. While this introduces some redundancy (a POS service would need
