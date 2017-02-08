@@ -20,18 +20,19 @@ Get onto JetStream at [https://jblb.jetstream-cloud.org/dashboard/auth/login/?ne
 
 Create an instance from a local terminal by running the [jetstream](http://downloads.lappsgrid.org/scripts/jetstream) script, which has several requirements.
 
-1. You need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script depending where you put it. You will not have to edit the script if you put your pem file in the directory you will run the jetstream script from or if you put it in the ~/.ssh directory. If you insist in putting the pem file elsewhere you will have to add a line below the code where the script sets the PEM variable:
+First you need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script depending where you put it. You will not have to edit the script if you put your pem file in the directory you will run the jetstream script from or if you put it in the ~/.ssh directory. If you insist in putting the pem file elsewhere you will have to add a line below the code where the script sets the PEM variable:
 
-  ```
-  PEM=YOUR_PATH_TO_PEM/lappsgrid-shared-key.pem
-  ```
+```
+PEM=YOUR_PATH_TO_PEM/lappsgrid-shared-key.pem
+```
 
-2. You need openrc.sh, see [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it
+Then you need openrc.sh, see [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it
 
-3. You need the openstack client (see [OpenStack documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html))
-  ```
-  pip install python-openstackclient
-  ``` 
+Finally ou need the openstack client (see [OpenStack documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html))
+
+```
+pip install python-openstackclient
+``` 
 
 There is an issue with step 1 in that full access is only granted to the person who created the key. So for now we have a temporary way to get on where to log in to Jetstream from the terminal you need:
 
