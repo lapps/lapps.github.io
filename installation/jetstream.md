@@ -17,23 +17,28 @@ Get onto JetStream at [https://jblb.jetstream-cloud.org/dashboard/auth/login/?ne
 
 Create an instance from a local terminal by running the [jetstream](http://downloads.lappsgrid.org/scripts/jetstream) script, which involves a couple of steps.
 
-**Step 1**. First you need the lappsgrid-shared-key.pem somewhere (with 400 permissions) and edit a line in the jetstream script depending where you put it. You will not have to edit the script if you put your pem file in the directory you will run the jetstream script from or if you put it in the ~/.ssh directory. If you insist in putting the pem file elsewhere you will have to add a line below the code where the script sets the PEM variable:
-
-```
-PEM=YOUR_PATH_TO_PEM/lappsgrid-shared-key.pem 
-```
-
-**Step 2**. You need openrc.sh, see [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it.
-
-**Step 3**. You need to install the openstack client (see [OpenStack documentation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html))
+**Step 1**. You need to install the OpenStack client, see the [OpenStack Installation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html) notes for details, but it should suffice to do the following:
 
 ```
 pip install python-openstackclient
 ``` 
 
-You should only need to do steps 1-3 once.
+**Step 2**. You need a shell script named `openrc.sh` to configure the OpenSTack API. See [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it. Once you have it you need to source it:
 
-**Step 4**. If all went right you can now use the jetstream script and get a listing of available instances or log onto an instance:
+```
+$ source openrc.sh
+```
+
+This will set some environment variables in your shell and it will ask for your OpenStack password. 
+
+**Step 3**. You need the `lappsgrid-shared-key.pem` file somewhere (with 400 permissions) and edit a line in the jetstream script depending where you put it. You will not have to edit the script if you put your pem file in the directory you will run the jetstream script from or if you put it in the ~/.ssh directory. If you insist in putting the pem file elsewhere you will have to add a line below the code where the script sets the PEM variable:
+
+```
+PEM=YOUR_PATH_TO_PEM/lappsgrid-shared-key.pem 
+```
+
+
+**Step 4**. Steps 1 through 3 need to be performed only once and if all went right you can now use the jetstream script and get a listing of available instances or log onto an instance:
 
 ```
 source openrc.sh
@@ -41,9 +46,15 @@ source openrc.sh
 ./jetstream.sh ssh proxy
 ```
 
-The list command gives you a list of instances and the ssh command gets you into an instance (you can either give an IP address or a name from the instance as printed by the list command, it can actually be a substring of the name, so `proxy` in our case will match `lappsgrid-proxy`). The `proxy` instance is a special instance that allows you to log on to all the other sinstances.
+The list command gives you a list of instances and the ssh command gets you into an instance (you can either give an IP address or a name from the instance as printed by the list command, it can actually be a substring of the name, so `proxy` in our case will match `lappsgrid-proxy`). The `proxy` instance is a special instance that allows you to log on to all the other instances.
 
-There is an issue with step 1 in that full access is only granted to the person who created the lappsgrid-shared-key.pem key for the group. You can get a listing and you can access an instance through ssh, but you cannot do many of the other things that the jetstream script provides like launching a new instance. Creating a personal key does not work either. For now we have a temporary hack to get on where we use an openrc.sh script which has the user name and password of the user who created the shared key.
+There is an issue with step 3 in that full access is only granted to the person who created the lappsgrid-shared-key.pem key for the group. You can get a listing and you can access an instance through ssh, but you cannot do many of the other things that the jetstream script provides like launching a new instance. Creating a personal key does not work either. For now we have a temporary hack to get on where we use an openrc.sh script which has the user name and password of the user who created the shared key.
+
+**Note**. This issue seems to have been solved. The problem was that the jetstream script relied on a hard-coded KEY variable which was set to the name of the shared key. Without that you can:
+
+1. Get the openrc.file
+2. Get a key that you create yourself
+3. Run the jetstream script as intended
 
 With proper access you can start a new instance by doing the following:
 
@@ -51,7 +62,7 @@ With proper access you can start a new instance by doing the following:
 ./jetstream launch test
 ```
 
-This will create a new instance based on an existing image or snapshot. See [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html) for more details.
+This will create a new instance named `lappsgrid-test` based on an existing image or snapshot, which by default is the ubuntu image (see below). See [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html) for more details.
 
 The jetstream script refers to four LAPPS Grid images on Jetstream:
 
