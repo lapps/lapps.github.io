@@ -18,7 +18,8 @@ This page describes how to install the Service Manager, one of the two main elem
 To install the Service Manager get the [one-step-install.sh](http://www.anc.org/downloads/langrid/one-step-install.sh) script and run it as root:
 
 ```
-sudo one-step-install.sh
+$ wget http://www.anc.org/downloads/langrid/one-step-install.sh
+$ sudo ./one-step-install.sh
 ```
 
 
