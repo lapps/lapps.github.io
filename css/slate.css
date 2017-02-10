@@ -35,10 +35,6 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-ol, ul {
-  list-style: none;
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -236,12 +232,10 @@ ul, ol, dl {
 }
 
 ul {
-  list-style: inside;
   padding-left: 20px;
 }
 
 ol {
-  list-style: decimal inside;
   padding-left: 20px;
 }
 
