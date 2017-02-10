@@ -9,8 +9,8 @@ This page describes how to create a LAPPS Grid instance on Jetstream. Many of th
 
 To get a working LAPPS Grid on Jetstream you need to do the following:
 
-1. Create a Ubuntu instance ready for LAPPS Grid install
-2. Install the LAPPS Grid on that instance, either by installing the LAPPS Grid form scratch or by using Docker images
+1. Create a Ubuntu instance ready for LAPPS Grid install.
+2. Install the LAPPS Grid on that instance, either by installing the LAPPS Grid from scratch or by using Docker images.
 
 ### Starting an Ubuntu instance
 
@@ -24,12 +24,11 @@ You can create an instance from a local terminal by running the [jetstream](http
 
 <div class="highlighter-rouge">
 <pre class="highlight">
-<code>$ pip install python-openstackclient</code>
-</pre>
-</div>
+<code>$ pip install python-openstackclient</code></pre>
+</div><br/>
 </li>
 
-<li>You need a shell script named <code class="highlighter-rouge">openrc.sh</code> to configure the OpenStack API. See [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it. This script will set some environment variables in your shell and it needs to be sourced before your run jetstream, when sourced it will ask for your OpenStack password. </li>
+<li>You need a shell script named <code class="highlighter-rouge">openrc.sh</code> to configure the OpenStack API. See [http://wiki.lappsgrid.org/technical/jetstream](http://wiki.lappsgrid.org/technical/jetstream) on how to get it. This script will set some environment variables in your shell and it needs to be sourced before your run jetstream, when sourced it will ask for your OpenStack password.<br/></li>
 
 <li>You need a key file created on the [Jetstream dashboard/](https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/) (at Compute > Access &amp; Security > Key Pairs). Let's say this file is named  <code class="highlighter-rouge">jetstream.pem</code>. The jetstream script uses two variables, KEY and PEM, to control access to Jetstream. The PEM variable stores the location of the key file and the KEY variable has the base name of the file without the .pem extension. The jetstream script itself uses a default for KEY named <code class="highlighter-rouge">lappsgrid-shared-key</code>, but you can overrule this with an environment variable (see below). Put the key file either in the same directory as the jetstream script or put it in the ~/.ssh directory. If you insist in putting it elsewhere you will have to edit the jetstream script and set the PEM variable manually.</li>
 
@@ -65,7 +64,9 @@ $ ./jetstream launch --ip free test
 $ ./jetstream launch --ip alloc test
 ```
 
-All three will create a new instance named `lappsgrid-test` based on an existing image or snapshot, which by default is the ubuntu image (see below). In the first case the instance will not have a public IP address whereas in the second and third case either one of the avaiable floating IP addresses will be used or a new floating IP address will be allocated. Use the third only when the second invocation does not work (either because there are no free floating IPs or because your version of the OpenStack client does not include `neutron` which is a known issue). See [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html) or run `./jetsream help` for more details.
+All three will create a new instance named `lappsgrid-test` based on an existing image or snapshot, which by default is the ubuntu image (see below). In the first case the instance will not have a public IP address whereas in the second and third case either one of the avaiable floating IP addresses will be used or a new floating IP address will be allocated. Use the third only when the second invocation does not work (either because there are no free floating IPs or because your version of the OpenStack client does not include `neutron` which is a known issue). See [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html) or run `jetstream help` for more details.
+
+Once you have a running instance you can get its local and public IP addresses with `jetstream list`.
 
 The jetstream script refers to four LAPPS Grid images on Jetstream:
 
@@ -88,3 +89,14 @@ When on the Dashboard you can list all the images available, which includes the 
 When you do a listing of the current instances the images are displayed with those names.
 
 The download directory at [http://downloads.lappsgrid.org/scripts](http://downloads.lappsgrid.org/scripts/) is a copy of the contents of the repository [https://github.com/lappsgrid-incubator/jetstream-scripts](https://github.com/lappsgrid-incubator/jetstream-scripts). Note that [downloads.lappsgrid.org/scripts](downloads.lappsgrid.org/scripts) is hosted on the proxy used on Jetstream. Also note that the repository is called jetstream-scripts, but all scripts except for jetstream are generic ubuntu scripts.
+
+
+### Installing the LAPPS Grid
+
+To install a Service Manager, login to your instance with `jetstream ssh` and then follow the instructions in [Installing a Service Manager](service_manager.md). The short version of the instructions is repeated here:
+
+```
+$ wget http://downloads.lappsgrid.org/service-manager/setup.sh
+$ chmod +x setup.sh
+$ sudo ./setup.sh
+```
