@@ -15,18 +15,22 @@ This page describes how to install the Service Manager, one of the two main elem
 
 ### Short version
 
-To install the Service Manager get the [one-step-install.sh](http://www.anc.org/downloads/langrid/one-step-install.sh) script and run it as root:
+To install the Service Manager get the [setup.sh](http://downloads.lappsgrid.org/service-manager/setup.sh) script and run it as root:
 
 ```
-$ wget http://www.anc.org/downloads/langrid/one-step-install.sh
-$ sudo ./one-step-install.sh
+$ wget http://downloads.lappsgrid.org/service-manager/setup.sh
+$ chmod +x setup.sh
+$ sudo ./setup.sh
 ```
 
 
 ### More details
 
+See the readme file at [https://github.com/lappsgrid-incubator/service-manager-installation](https://github.com/lappsgrid-incubator/service-manager-installation).
 
 These notes are written with a virgin Ubuntu machine in mind. The install script is currently being updated to deal with CentOS and RHEL.
+
+NOTE: The following needs to be updated given the name change of one-step-install to setup.
 
 Dowloads are at [http://www.anc.org/downloads/langrid/](http://www.anc.org/downloads/langrid/). You should get the [one-step-install.sh](http://www.anc.org/downloads/langrid/one-step-install.sh) script.
 
