@@ -20,7 +20,7 @@ You can create an instance from a local terminal by running the [jetstream](http
 
 <ol>
 
-<li>You need to install the OpenStack client, see the [OpenStack Installation](http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html) notes for details, but it should suffice to do the following:
+<li>You need to install the OpenStack client, see the <a href="http://docs.openstack.org/user-guide/common/cli-install-openstack-command-line-clients.html">OpenStack installation notes</a> for details, but it should suffice to do the following:
 
 <div class="highlighter-rouge">
 <pre class="highlight">
