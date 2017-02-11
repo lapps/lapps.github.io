@@ -5,7 +5,7 @@ title: The LAPPS Grid on Jetstream
 
 ## {{ page.title }}
 
-This page describes how to create a LAPPS Grid instance on Jetstream. Many of these notes are specific to LAPPS developers at Vassar and Brandeis, but the general flavor is the same for everyone. There are some notes at [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html).
+This page describes how to create a LAPPS Grid instance on [Jetstream](http://jetstream-cloud.org), an NSF funded cloud computing system used by the LAPPS Grid to provide compute resources. Many of these notes are specific to LAPPS developers at Vassar and Brandeis, but the general flavor is the same for everyone. There are more notes on issues touched upon in this page in the readme file of the repository in [https://github.com/lappsgrid-incubator/jetstream-scripts/](https://github.com/lappsgrid-incubator/jetstream-scripts/).
 
 To get a working LAPPS Grid on Jetstream you need to do the following:
 
@@ -28,7 +28,7 @@ You can create an instance from a local terminal by running the [jetstream](http
 </div><br/>
 </li>
 
-<li>You need a shell script named <code class="highlighter-rouge">openrc.sh</code> to configure the OpenStack API. See <a href="http://wiki.lappsgrid.org/technical/jetstream">http://wiki.lappsgrid.org/technical/jetstream</a> on how to get it. This script will set some environment variables in your shell and it needs to be sourced before your run jetstream, when sourced it will ask for your OpenStack password.<br/></li>
+<li>You need a shell script named <code class="highlighter-rouge">openrc.sh</code> to configure the OpenStack API. See <a href="https://github.com/lappsgrid-incubator/jetstream-scripts/">https://github.com/lappsgrid-incubator/jetstream-scripts/</a> on how to get it. This script will set some environment variables in your shell and it needs to be sourced before your run jetstream, when sourced it will ask for your OpenStack password.<p/></li>
 
 <li>You need a key file created on the <a href="https://jblb.jetstream-cloud.org/dashboard/auth/login/?next=/dashboard/">Jetstream dashboard</a> (at Compute > Access &amp; Security > Key Pairs). Let's say this file is named  <code class="highlighter-rouge">jetstream.pem</code>. The jetstream script uses two variables, KEY and PEM, to control access to Jetstream. The PEM variable stores the location of the key file and the KEY variable has the base name of the file without the .pem extension. The jetstream script itself uses a default for KEY named <code class="highlighter-rouge">lappsgrid-shared-key</code>, but you can overrule this with an environment variable (see below). Put the key file either in the same directory as the jetstream script or put it in the ~/.ssh directory. If you insist in putting it elsewhere you will have to edit the jetstream script and set the PEM variable manually.</li>
 
@@ -64,7 +64,7 @@ $ ./jetstream launch --ip free test
 $ ./jetstream launch --ip alloc test
 ```
 
-All three will create a new instance named `lappsgrid-test` based on an existing image or snapshot, which by default is the ubuntu image (see below). In the first case the instance will not have a public IP address whereas in the second and third case either one of the avaiable floating IP addresses will be used or a new floating IP address will be allocated. Use the third only when the second invocation does not work (either because there are no free floating IPs or because your version of the OpenStack client does not include `neutron` which is a known issue). See [http://wiki.lappsgrid.org/technical/jetstream.html](http://wiki.lappsgrid.org/technical/jetstream.html) or run `jetstream help` for more details.
+All three will create a new instance named `lappsgrid-test` based on an existing image or snapshot, which by default is the ubuntu image (see below). In the first case the instance will not have a public IP address whereas in the second and third case either one of the avaiable floating IP addresses will be used or a new floating IP address will be allocated. Use the third only when the second invocation does not work (either because there are no free floating IPs or because your version of the OpenStack client does not include `neutron` which is a known issue). For more details see [https://github.com/lappsgrid-incubator/jetstream-scripts/](https://github.com/lappsgrid-incubator/jetstream-scripts/) or run `jetstream help`.
 
 Once you have a running instance you can get its local and public IP addresses with `jetstream list`.
 
