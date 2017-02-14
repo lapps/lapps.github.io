@@ -14,17 +14,26 @@ This page describes how to create services.
 
 Adding a service involves various things:
 
-1. Wrapping the service.
-2. Knowing how to use discriminators.
-3. Using the LAPS Interchange Format (LIF).
-4. Using the Web Sevices Exchange Vocabulary (WSEV)
-5. Deploying the service.
-6. Registering the service with the Service Manager.
+1. Wrapping the service as a Web Application. This is not just about creating a war file but also requires the developer to use
+  - discriminators,
+  - the LAPPS Interchange Format (LIF), 
+  - the Web Sevices Exchange Vocabulary (WSEV)
+2. Deploying the service.
+3. Registering the service with the Service Manager.
 
 
-#### Wrapping:
+### Wrapping a Service
 
-- [Wrapping services](https://github.com/lapps/org.lappsgrid.examples) - README.md file in org.lappsgrid.examples repository
+There are extensive notes on how to wrap a service at [https://github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples). Those notes are set up as a series of steps and each time you click a next step then the code associated with that step will be presened in the repository. The result of all those steps can be obtained as follows:
+
+```
+$ git clone https://github.com/lapps/org.lappsgrid.examples
+$ git checkout step5
+$ mvn clean package
+```
+
+This will create a war file named `target/YOUR_ARTIFACT_NAME.war` since we have not changed any of the defaults.
+
 
 
 #### LIF and WSEV:
@@ -53,14 +62,34 @@ Adding a service involves various things:
 Discriminators are used in the produces and requires sections of a tool wrapper's metadata. It is up to the tool wrapper to check whether input has what it needs (searching the contains section of the metadata section of a view. THere is also a discriminator handed in with the Data structure, which has a discriminator and a payload section. The dicriminator there is one of the dozen or so media discriminators in [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) (for example, the discriminator gate	which refers to http://vocab.lappsgrid.org/ns/media/xml#gate).
 
 
-#### Deploying:
+### Deploying:
 
-Explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples), which was listed above. 
-
-After deploying a war file to tomcat the new war will be deployed automatically, but if you changed Java versions while running a tomcat server then you do need to restart Tomcat.
+Simply put the war file in the `webapps` directory under a Tomcat server set up for the service. This is also explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples) under step 4 near the end. After deploying a war file to Tomcat the new war will be deployed automatically (however, if you changed Java versions while running a tomcat server then you do need to restart Tomcat).
 
 
-#### Registering:
+### Registering:
+
+You register services with the Service Manager by using LDDL scripts like the ones at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts). LDDL is the LAPPS Database Description Language, which is a Groovy DSL (Domain Specific Language) that can be used to initialize a LAPPS Grid database. See [http://www.lappsgrid.org/software/lddl/] (http://www.lappsgrid.org/software/lddl/) for more information on LDDL.
+
+To run LDDL scripts you need the LDDL jar that you can create from the code at [https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl).
+
+```
+$ git clone https://github.com/lappsgrid-incubator/org.anc.lapps.lddl
+$ cd org.anc.lapps.lddl/
+$ make jar
+$ cp target/lddl-1.3.4.jar ~/bin
+```
+
+You can now take the main LDDL script at `src/main/resources` and edit it by replacing `__VERSION__` by the current version number. Then put the `lddl` script somewhere and make sure that location is on the path.
+
+```
+$ sed 's/__VERSION__/1.3.4/g' src/main/resources/lddl > lddl
+$ chmod +x lddl
+$ mv lddl ~/bin
+$ export PATH=~/bin:$PATH
+```
+
+[https://github.com/lappsgrid-incubator/org.anc.lapps.lddl](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl)
 
 Use the lddl-scripts in [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts)
 
