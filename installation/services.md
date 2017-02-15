@@ -22,9 +22,9 @@ Adding a service involves various things:
 3. Registering the service with the Service Manager.
 
 
-### Wrapping a Service
+### 1. Wrapping a Service
 
-There are extensive notes on how to wrap a service at [https://github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples). Those notes are set up as a series of steps and each time you click a next step then the code associated with that step will be presened in the repository. The result of all those steps can be obtained as follows:
+There are extensive notes on how to wrap a service at [https://github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples). Those notes are set up as a series of steps and each time you click a next step then the code associated with that step will be available in the repository. The result of all those steps can be obtained as follows:
 
 ```
 $ git clone https://github.com/lapps/org.lappsgrid.examples
@@ -32,8 +32,15 @@ $ git checkout step5
 $ mvn clean package
 ```
 
-This will create a war file named `target/YOUR_ARTIFACT_NAME.war` since we have not changed any of the defaults.
+This will create a war file named `target/YOUR_ARTIFACT_NAME.war`, if you had followed the instruction you woul dhave changed that name at some point.
 
+You can actually do the same (without the checkout step) with any of the repositories that implement a wrapped service, including:
+
+- [https://github.com/lapps/org.lappsgrid.example.java.whitespacetokenizer](https://github.com/lapps/org.lappsgrid.example.java.whitespacetokenizer)
+- [https://github.com/oanc/org.anc.lapps.stanford](https://github.com/oanc/org.anc.lapps.stanford)
+- [https://github.com/oanc/org.anc.lapps.gate](https://github.com/oanc/org.anc.lapps.gate)
+- [https://github.com/brandeis-nlp/edu.brandeis.cs.stanfordnlp-web-service](https://github.com/brandeis-nlp/edu.brandeis.cs.stanfordnlp-web-service)
+- [https://github.com/brandeis-nlp/edu.brandeis.cs.opennlp-web-service](https://github.com/brandeis-nlp/edu.brandeis.cs.opennlp-web-service)
 
 
 #### LIF and WSEV:
@@ -62,12 +69,12 @@ This will create a war file named `target/YOUR_ARTIFACT_NAME.war` since we have 
 Discriminators are used in the produces and requires sections of a tool wrapper's metadata. It is up to the tool wrapper to check whether input has what it needs (searching the contains section of the metadata section of a view. THere is also a discriminator handed in with the Data structure, which has a discriminator and a payload section. The dicriminator there is one of the dozen or so media discriminators in [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) (for example, the discriminator gate	which refers to http://vocab.lappsgrid.org/ns/media/xml#gate).
 
 
-### Deploying:
+### 2. Deploying a Service
 
 Simply put the war file in the `webapps` directory under a Tomcat server set up for the service. This is also explained in the wrapping manual in [github.com/lapps/org.lappsgrid.examples](https://github.com/lapps/org.lappsgrid.examples) under step 4 near the end. After deploying a war file to Tomcat the new war will be deployed automatically (however, if you changed Java versions while running a tomcat server then you do need to restart Tomcat).
 
 
-### Registering:
+### 3. Registering a Service
 
 You register services with the Service Manager by using LDDL scripts like the ones at [https://github.com/lappsgrid-incubator/lddl-scripts](https://github.com/lappsgrid-incubator/lddl-scripts). LDDL is the LAPPS Database Description Language, which is a Groovy DSL (Domain Specific Language) that can be used to initialize a LAPPS Grid database. See [http://www.lappsgrid.org/software/lddl/] (http://www.lappsgrid.org/software/lddl/) for more information on LDDL.
 
