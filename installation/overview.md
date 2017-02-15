@@ -20,7 +20,7 @@ NOTE: add the following once you have figured out the styles so it displays well
 -->
 </div>
 
-The dotted boxes give some indication on what was used to create the Service Manager and the NLP Services. The server is prepped for the LAPPS Grid by a couple of setup scripts and the Service Manager is put on the Tomcat server by uploading a WAR file (a <a href="https://en.wikipedia.org/wiki/WAR_(file_format)">Web Application Archive</a>. Similarly, for an NLP component to function in the LAPPS Grid it is wrapped in a WAR file and uploaded to the server. The LDDL scripts ([LAPPS Database Definition Language](http://www.lappsgrid.org/software/lddl/)) add entries to the Postgres database that the Service Manager uses to invoke those services. See the following two pages for more details on this, in particular details on how to install and maintain the servers:
+The dotted boxes give some indication on what was used to create the Service Manager and the NLP Services. The server is prepped for the LAPPS Grid by a couple of setup scripts and the Service Manager is put on the Tomcat server by uploading a WAR file (<a href="https://en.wikipedia.org/wiki/WAR_(file_format)">Web Application Archive</a>). Similarly, for an NLP component to function in the LAPPS Grid it is wrapped in a WAR file and uploaded to the server. The LDDL scripts ([LAPPS Database Definition Language](http://www.lappsgrid.org/software/lddl/)) add entries to the PostgreSQL database that the Service Manager uses to invoke those services. See the following two pages for more details on this, in particular details on how to install and maintain the servers:
 
 - [Installing a Service Manager](service_manager.html)
 - [Installing Services](services.html)
