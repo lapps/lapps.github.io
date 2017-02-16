@@ -44,7 +44,7 @@ $ ./jetstream.sh list
 $ ./jetstream.sh ssh proxy
 ```
 
-The first two commands only need to be done only once after you have opened a new terminal and obviously you only need to run the third command if you had not already downloaded `jetstream`. The list command gives you a list of instances and the ssh command gets you into an instance (you can either give an IP address or a name from the instance as printed by the list command, it can actually be a substring of the name, so `proxy` in our case will match `lappsgrid-proxy`). The `proxy` instance is a special instance that allows you to log on to all the other instances even if those instances do not have a public IP address.
+The first two commands only need to be done only once after you have opened a new terminal and obviously you only need to run the third command if you had not already downloaded `jetstream`. The list command gives you a list of available instances and the ssh command gets you into an instance (you can either give an IP address or a name from the instance as printed by the list command, it can actually be a substring of the name, so `proxy` in our case will match `lappsgrid-proxy`). The `proxy` instance is a special instance used by LAPPS Grid developers that allows you to log on to all the other instances even if those instances do not have a public IP address, it is not available to other users..
 
 <!--
 There is an issue with step 3 in that full access is only granted to the person who created the lappsgrid-shared-key.pem key for the group. You can get a listing and you can access an instance through ssh, but you cannot do many of the other things that the jetstream script provides like launching a new instance. Creating a personal key does not work either. For now we have a temporary hack to get on where we use an openrc.sh script which has the user name and password of the user who created the shared key.
@@ -64,7 +64,7 @@ $ ./jetstream launch --ip free test
 $ ./jetstream launch --ip alloc test
 ```
 
-All three will create a new instance named `lappsgrid-test` based on an existing image or snapshot, which by default is the ubuntu image (see below). In the first case the instance will not have a public IP address whereas in the second and third case either one of the avaiable floating IP addresses will be used or a new floating IP address will be allocated. Use the third only when the second invocation does not work (either because there are no free floating IPs or because your version of the OpenStack client does not include `neutron` which is a known issue). For more details see [https://github.com/lappsgrid-incubator/jetstream-scripts/](https://github.com/lappsgrid-incubator/jetstream-scripts/) or run `jetstream help`.
+All three will create a new instance named `lappsgrid-test` based on an existing image or snapshot, which by default is the ubuntu image (see below). In the first case the instance will not have a public IP address whereas in the second and third case either one of the avaiable floating IP addresses will be used or a new floating IP address will be allocated. Use the third only when the second invocation does not work (either because there are no free floating IPs or because your version of the OpenStack client does not include `neutron`, which is used by the second jetstream invocation and which is a known issue). For more details on available commands see [https://github.com/lappsgrid-incubator/jetstream-scripts/](https://github.com/lappsgrid-incubator/jetstream-scripts/) or run `jetstream help`.
 
 Once you have a running instance you can get its local and public IP addresses with `jetstream list`.
 
@@ -100,3 +100,5 @@ $ wget http://downloads.lappsgrid.org/service-manager/setup.sh
 $ chmod +x setup.sh
 $ sudo ./setup.sh
 ```
+
+This should work if the image you are running this on is an ubuntu image or a CentOS image.
