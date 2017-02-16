@@ -12,12 +12,9 @@ This page describes how to create services.
 <div class="caption"></div>
 </div>
 
-Adding a service involves various things:
+Adding a service to the LAPPS Grid involves various things:
 
-1. Wrapping the service as a Web Application. This is not just about creating a war file but also requires the developer to use
-  - discriminators,
-  - the LAPPS Interchange Format (LIF), 
-  - the Web Sevices Exchange Vocabulary (WSEV)
+1. Wrapping the service as a Web Application. In essence this is about creating a WAR file, but it also requires the developer to know about Lappsgrid Exchange Datastructures (LEDS), the LAPPS Interchange Format (LIF), the Web Sevices Exchange Vocabulary (WSEV), and the use of discriminators.
 2. Deploying the service.
 3. Registering the service with the Service Manager.
 
@@ -32,18 +29,40 @@ $ git checkout step5
 $ mvn clean package
 ```
 
-This will create a war file named `target/YOUR_ARTIFACT_NAME.war`, if you had followed the instruction you woul dhave changed that name at some point.
+We are assuming that you use <a href="http://maven.apache.org/">Maven</a> for building your project. Given the project object model file (POM file) in the repository, the `mvn clean package` command will create a war file named `target/YOUR_ARTIFACT_NAME.war`, if you had followed the instruction you would have changed that name at some point.
+
+<!--
+Note that the code in org.lappsgrid.examples was based on https://github.com/lapps/org.lappsgrid.example.java.whitespacetokenizer, the latter is now obsolete and will be removed.
+
+The POM file has one dependency:
+
+<dependency>
+     <groupId>org.lappsgrid</groupId>
+     <artifactId>all</artifactId>
+     <version>2.3.1</version>
+
+This refers to https://github.com/lapps/org.lappsgrid.all, which has a POM file that refers to all other default dependencies.
+-->
 
 You can actually do the same (without the checkout step) with any of the repositories that implement a wrapped service, including:
 
-- [https://github.com/lapps/org.lappsgrid.example.java.whitespacetokenizer](https://github.com/lapps/org.lappsgrid.example.java.whitespacetokenizer)
 - [https://github.com/oanc/org.anc.lapps.stanford](https://github.com/oanc/org.anc.lapps.stanford)
 - [https://github.com/oanc/org.anc.lapps.gate](https://github.com/oanc/org.anc.lapps.gate)
 - [https://github.com/brandeis-nlp/edu.brandeis.cs.stanfordnlp-web-service](https://github.com/brandeis-nlp/edu.brandeis.cs.stanfordnlp-web-service)
 - [https://github.com/brandeis-nlp/edu.brandeis.cs.opennlp-web-service](https://github.com/brandeis-nlp/edu.brandeis.cs.opennlp-web-service)
 
+All these repositories will be moved to the [https://github.com/lappsgrid-services](https://github.com/lappsgrid-services) organization.
 
-#### LIF and WSEV:
+In the rest of this section we give a bit of high-level background on what services consume and create.
+
+
+##### Lappsgrid Exchange Datastructures (LEDS)
+
+All strings passed to and from LAPPS services are JSON strings containing LEDS, which are implemented as Data objects in [org.lappsgrid.serialization.Data](https://github.com/lapps/org.lappsgrid.serialization/blob/develop/src/main/groovy/org/lappsgrid/serialization/Data.groovy).
+Each LEDS consists of a discriminator, a dictionary of parameters and a payload. We will ignore the parameters here for now since most services do not use them and focus on the discriminator and the payload. The discriminator is used to determine how the contents of the payload should be interpreted (see below for more about discriminators). In general, a discriminator is a URI from the LAPPS Web Service URI Inventory at [http://vocab.lappsgrid.org/discriminators.html](http://vocab.lappsgrid.org/discriminators.html). The dicriminator used in a LEDS is a special kind of discriminator since it is restricted to be one of a dozen or so media discriminators in the URI inventory. For example, the `gate` discriminator refers to [http://vocab.lappsgrid.org/ns/media/xml#gate](http://vocab.lappsgrid.org/ns/media/xml#gate) and instructs the service that the payload is to be interpreted as a GATE data structure.
+
+
+##### LAPPS Interchange Format (LIF) and Web Sevices Exchange Vocabulary (WSEV)
 
 - output of wrapped components should follow LIF specifications and use elements from WSEV
 - [LIF specifications](interchange/index.html)
@@ -52,7 +71,10 @@ You can actually do the same (without the checkout step) with any of the reposit
 - [WSEV discussion](http://wiki.lappsgrid.org/vocabulary/current_issues.html)
 - [WSEV issues](https://github.com/lapps/vocabulary-pages/issues)
 
-#### Vocabulary and Discriminators:
+The WSEV, also know as the LAPPS Vocabulary or simply the Vocabulary, ...
+
+
+##### Discriminators and the LAPPS Vocabulary
 
 - everything in vocab is in discriminators but not vice versa (vocab ⊂ discriminator)
 - there is a vocab dsl and a discriminators dsl (both configuration files for transformations)
