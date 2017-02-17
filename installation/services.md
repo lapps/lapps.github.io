@@ -14,7 +14,7 @@ This page describes how to create services.
 
 Adding a service to the LAPPS Grid involves various things:
 
-1. Wrapping the service as a Web Application. In essence this is about creating a WAR file, but it also requires the developer to know about Lappsgrid Exchange Datastructures (LEDS), the LAPPS Interchange Format (LIF), the Web Sevices Exchange Vocabulary (WSEV), and the use of discriminators.
+1. Wrapping the service as a Web Application. In essence this is about creating a WAR file, but it also requires the developer to know about Lappsgrid Exchange Datastructures (LEDs), the LAPPS Interchange Format (LIF), the Web Sevices Exchange Vocabulary (WSEV), and the use of discriminators.
 2. Deploying the service.
 3. Registering the service with the Service Manager.
 
@@ -56,11 +56,11 @@ All these repositories will be moved to the [https://github.com/lappsgrid-servic
 In the rest of this section we give a bit of high-level background on what services consume and create.
 
 
-##### Lappsgrid Exchange Datastructures (LEDS)
+##### Lappsgrid Exchange Datastructures (LEDs)
 
-All strings passed to and from LAPPS services are JSON strings containing LEDS, which are implemented as Data objects in [org.lappsgrid.serialization.Data](https://github.com/lapps/org.lappsgrid.serialization/blob/develop/src/main/groovy/org/lappsgrid/serialization/Data.groovy). Each LEDS consists of a discriminator, a dictionary of parameters and a payload. We will ignore the parameters here for now since most services do not use them and focus on the discriminator and the payload. The discriminator is used to determine how the contents of the payload should be interpreted (see below for more about discriminators). In general, a discriminator is a URI from the LAPPS Web Service URI Inventory at [http://vocab.lappsgrid.org/discriminators.html](http://vocab.lappsgrid.org/discriminators.html). The dicriminator used in a LEDS is a special kind of discriminator since it is restricted to be one of a dozen or so media discriminators in the URI inventory. For example, the `gate` discriminator refers to [http://vocab.lappsgrid.org/ns/media/xml#gate](http://vocab.lappsgrid.org/ns/media/xml#gate) and instructs the service that the payload is to be interpreted as a GATE data structure.
+All strings passed to and from LAPPS services are JSON strings containing LEDs, which are implemented as Data objects in [org.lappsgrid.serialization.Data](https://github.com/lapps/org.lappsgrid.serialization/blob/develop/src/main/groovy/org/lappsgrid/serialization/Data.groovy). Each LED consists of a discriminator, a dictionary of parameters and a payload. We will ignore the parameters here for now since most services do not use them and focus on the discriminator and the payload. The discriminator is used to determine how the contents of the payload should be interpreted (see below for more about discriminators). In general, a discriminator is a URI from the LAPPS Web Service URI Inventory at [http://vocab.lappsgrid.org/discriminators.html](http://vocab.lappsgrid.org/discriminators.html). The dicriminator used in a LEDS is a special kind of discriminator since it is restricted to be one of a dozen or so media discriminators in the URI inventory. For example, the `gate` discriminator refers to [http://vocab.lappsgrid.org/ns/media/xml#gate](http://vocab.lappsgrid.org/ns/media/xml#gate) and instructs the service that the payload is to be interpreted as a GATE data structure.
 
-Here is a simple example of a LEDS:
+Here is a simple example of a LED:
 
 ```json
 { 
