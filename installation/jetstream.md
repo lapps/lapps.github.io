@@ -24,7 +24,8 @@ You can create an instance from a local terminal by running the [jetstream](http
 
 <div class="highlighter-rouge">
 <pre class="highlight">
-<code>$ pip install python-openstackclient</code></pre>
+<code>$ pip install python-openstackclient
+$ pip install python-neutronclient</code></pre>
 </div><br/>
 </li>
 
@@ -43,6 +44,7 @@ $ wget http://downloads.lappsgrid.org/scripts/jetstream
 $ ./jetstream.sh list
 $ ./jetstream.sh ssh proxy
 ```
+NOTE: the above may not work anymore, check.
 
 The first two commands only need to be done only once after you have opened a new terminal and obviously you only need to run the third command if you had not already downloaded `jetstream`. The list command gives you a list of available instances and the ssh command gets you into an instance (you can either give an IP address or a name from the instance as printed by the list command, it can actually be a substring of the name, so `proxy` in our case will match `lappsgrid-proxy`). The `proxy` instance is a special instance used by LAPPS Grid developers that allows you to log on to all the other instances even if those instances do not have a public IP address, it is not available to other users..
 
