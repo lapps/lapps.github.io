@@ -56,7 +56,7 @@ All these repositories will be moved to the [https://github.com/lappsgrid-servic
 In the rest of this section we give a bit of high-level background on what services consume and create.
 
 
-##### Lappsgrid Exchange Datastructures (LEDs)
+#### Lappsgrid Exchange Datastructures (LEDs)
 
 All strings passed to and from LAPPS services are JSON strings containing LEDs, which are implemented as Data objects in [org.lappsgrid.serialization.Data](https://github.com/lapps/org.lappsgrid.serialization/blob/develop/src/main/groovy/org/lappsgrid/serialization/Data.groovy). Each LED consists of a discriminator, a dictionary of parameters and a payload. We will ignore the parameters here for now since most services do not use them and focus on the discriminator and the payload. The discriminator is used to determine how the contents of the payload should be interpreted (see below for more about discriminators). In general, a discriminator is a URI from the LAPPS Web Service URI Inventory at [http://vocab.lappsgrid.org/discriminators.html](http://vocab.lappsgrid.org/discriminators.html). The dicriminator used in a LEDS is a special kind of discriminator since it is restricted to be one of a dozen or so media discriminators in the URI inventory. For example, the `gate` discriminator refers to [http://vocab.lappsgrid.org/ns/media/xml#gate](http://vocab.lappsgrid.org/ns/media/xml#gate) and instructs the service that the payload is to be interpreted as a GATE data structure.
 
@@ -72,7 +72,7 @@ Here is a simple example of a LED:
 In this case the discriminator instructs the service that the payload is plain text.
 
 
-##### LAPPS Interchange Format (LIF) and Web Sevices Exchange Vocabulary (WSEV)
+#### LAPPS Interchange Format (LIF) and Web Sevices Exchange Vocabulary (WSEV)
 
 - output of wrapped components should follow LIF specifications and use elements from WSEV
 - [LIF specifications](interchange/index.html)
@@ -84,13 +84,15 @@ In this case the discriminator instructs the service that the payload is plain t
 The WSEV, also know as the LAPPS Vocabulary or simply the Vocabulary, ...
 
 
-##### Discriminators and the LAPPS Vocabulary
+#### Discriminators and the LAPPS Vocabulary
 
 Discriminators are used in two places. Above we explained their use in the Lappsgrid Exchange Datastructures, where they acted as a way to tell services how to interpret the payload.
 
 The other role for discriminators is in the `produces` and `requires` sections of a tool wrapper's metadata and it is a way for the tool to tell the rest of the world what it needs and what it creates. Some of the discriminators used here refer to elements of the LAPPS Vocabulary. While it is true that each element of the vocabulary is associated with a discriminator, the reverse is not true.
 
 It is up to the tool wrapper to check whether the input has what it needs by searching the `contains` section of the metadata section of a view. 
+
+More details on this, including on how to change the discriminator inventory and the vocabulary can be found on the [Discriminators and the Vocabulary](discriminators.md) page.
 
 
 ### 2. Deploying a Service
