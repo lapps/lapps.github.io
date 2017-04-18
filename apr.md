@@ -1,6 +1,6 @@
 ---
 title: Apache Portable Runtime
-layout: slate
+layout: default
 ---
 
 The Apache Portable Runtime (APR) and Tomcat Native Libraries are optional components

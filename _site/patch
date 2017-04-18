@@ -1,5 +1,0 @@
-#!/bin/bash
-
-for md in `find . -name '*.md' | xargs grep -l layout` ; do
-	cat $md | sed 's/layout: slate/layout: cayman/' > /tmp/fixed/$md
-done

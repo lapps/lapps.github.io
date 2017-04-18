@@ -1,5 +1,5 @@
 ---
-layout: cayman
+layout: default
 title: Groovy DSL
 buttons: 
   - text: Getting Started

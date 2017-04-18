@@ -1,5 +1,5 @@
 ---
-layout: cayman
+layout: default
 title: Language Application Grid
 ---
 
