@@ -1,1 +1,7 @@
+title: The Language Applications Grid
+description: An open framework for NLP web services
+markdown: kramdown
+branch: gh-pages
 theme: jekyll-theme-cayman
+redcarpet:
+    extensions: [fenced_code_blocks, no_intra_emphasis, tables, autolink]
