@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="oanc.github.io : GitHub repository for the American National Corpus.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/slate_numbered.css">
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+	<!--
+	<script type="text/javascript">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['%','%'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+        });
+    </script>	
+    -->
+    	<script type="text/javascript">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['%','%'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+        });
+    </script>	
+
+    <title>Licensing Use Cases</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/lapps">View on GitHub</a>
+
+          <h1 id="project_title">lapps.github.io</h1>
+          <h2 id="project_tagline">GitHub repository for the Language Application Grid</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+	<h1 id="licensing-use-cases">Licensing Use Cases</h1>
+
+<p>To help us determine the proper work flows to use during user authentication and 
+authorization it will be helpful to run though several typical usage scenarios.</p>
+
+<h2 id="abbreviations">Abbreviations</h2>
+
+<p>The following terms and abbreviations will be used in the remainder of this document:</p>
+
+<p><strong>protected resource</strong><br />
+Any resource that requires specific authorization before a user can be granted access.
+<br />
+<strong>access constraints</strong><br />
+A set of constraints end users <strong>must</strong> agree to before they are allowed to access to
+a particular <em>protected resource</em>.
+<br />
+<strong>access token</strong><br />
+Essentially a session id. An access token allows an authorized user to access a 
+<em>protected resource</em> for a limited time (e.g. 24 hours) without having to 
+authenticate with every request.
+<br />
+<strong>application</strong><br />
+The application (composer or pipeline planner) the end user is using to access a
+<em>protected resource</em>.
+<br />
+<strong>AAS</strong><br />
+An authentication and authorization service. Any service that can authenticate a user and
+determine if they are authorized to access a particular <em>protected resource</em>.  The <em>AAS</em>
+must also return any <em>access constraints</em> that apply to the <em>protected resource</em>.<br />
+<strong>LAAS</strong><br />
+The LDC’s Authentication and Authorization Service.</p>
+
+<h2 id="authorization-use-cases">Authorization Use Cases</h2>
+
+<h3 id="authorized-user-requests-a-gigaword-document">Authorized User Requests a Gigaword Document</h3>
+
+<p>Jane Austen has signed the required licenses and paid all required fees. Jane creates a pipeline and selects
+Gigaword as the data source.</p>
+
+<ol>
+  <li>Since Gigaword is a resource at the LDC the <em>application</em> forwards Jane to the <em>LAAS</em>
+with the ID of the document she wishes to access.</li>
+  <li>The <em>LAAS</em> requests Jane’s username and password and determines if Jane has access to the
+requested resource.</li>
+  <li>Since Jane is an authorized user of the resource the <em>LAAS</em> returns a JSON document
+containing an <em>access token</em> and any <em>access constraints</em> required by the resource.</li>
+  <li>When Jane attempts to run her pipeline the <em>application</em> will validate the pipeline by:
+    <ol>
+      <li>Ensuring none of the selected web services violate the <em>access constraints</em> specified
+ by the <em>protected resource</em>.</li>
+      <li>Asking Jane to agree to any <em>access constraints</em> that must be agreed to at runtime. For example,
+ not to redistribute the output.</li>
+    </ol>
+  </li>
+  <li>If the pipeline is valid then the <em>application</em> will begin running the pipeline:
+    <ol>
+      <li>The <em>application</em> will send a request to the LDC datasource with the <em>access token</em> 
+ and desired document ID.</li>
+      <li>The LDC will verify that the <em>access token</em> has not expired and is valid for
+ the requested <em>protected resource</em>. If the <em>access token</em> is valid the LDC will return 
+ the requested document, otherwise the LDC will return an error message.</li>
+      <li>The <em>application</em> will check that the request succeeded.
+        <ul>
+          <li>If the request succeeded the <em>application</em> will invoke each web service in turn.</li>
+          <li>If the request failed the error message will be displayed and Jane will be 
+ returned to the pipeline construction page.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="unauthorized-user-requests-a-protected-resource">Unauthorized User Requests a Protected Resource</h3>
+
+<p>Alice Cooper is a member of the LDC but has not paid the required fees to access <em>CorpusX</em>, 
+which is a <em>protected resource</em>.</p>
+
+<ol>
+  <li>The <em>application</em> will forward Alice to the <em>LAAS</em> with ID of the document he wishes
+to access.</li>
+  <li>The <em>LAAS</em> prompts Alice for his username and password and determines that he is not an
+authorized user of <em>CorpusX</em>.
+    <ul>
+      <li>The <em>LAAS</em> returns an “permission denied” message.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="access-constraints-use-cases">Access Constraints Use Cases</h2>
+
+<!--
+### Authorized User Access Constraints
+
+Joni Mitchell is an authorized and paid member of the LDC. Joni would like to 
+-->
+
+<h3 id="authorized-user-constraints-violation">Authorized User Constraints Violation</h3>
+
+<p>Dave Bowman is a registered member of the LDC with authorization at access <em>CorpusX</em>. Dave
+has constructed a pipeline that creates a derivative work but <em>CorpusX</em> does not allow
+derivative works.</p>
+
+<ol>
+  <li>The <em>application</em> will forward Dave to the <em>LAAS</em> with the ID of the document he wishes
+to access.</li>
+  <li>Since Dave is an authorized user the <em>LAAS</em> returns a JSON document containing an
+<em>access token</em> and the <em>access constraints</em> <tt>NO_DERIVATIVES</tt>.</li>
+  <li>When the <em>application</em> validates the pipeline it will notify Dave that the <em>protected resource</em>
+does not permit derivative works.</li>
+</ol>
+
+
+	
+      </section>
+    </div>
+	<div>
+	</div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Copyright &copy; 2017 The Language Application Grid</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
+
+

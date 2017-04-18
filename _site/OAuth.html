@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="oanc.github.io : GitHub repository for the American National Corpus.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/slate.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/lappsgrid.css"/>
+     
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+		<script type="text/javascript">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['%','%'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+        });
+    </script>	
+
+    <title>Language Application Grid</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <!-- <a id="forkme_banner" href="https://github.com/lapps">View on GitHub</a> -->
+		  <a id="forkme_banner" href="https://github.com/lapps/lapps.github.io/edit/master/OAuth.md">Edit this page on GitHub</a>.
+		  
+          <h1 id="project_title">The LAPPS Grid Wiki</h1>
+          <h2 id="project_tagline">A framework for interoperable NLP web services.</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+	<h1 id="oauth-authentication">OAuth Authentication</h1>
+
+<p>To retrieve documents from the LDC’s Gigaword corpus.</p>
+
+<ol>
+  <li>Visit <a href="https://grid.anc.org:9443/ldc-authorize/">https://grid.anc.org:9443/ldc-authorize/</a> to obtain an OAuth token. When a user clicks the green <em>Authorize</em> button they will be forwarded to a LDC login page. Once the user has been authenticated by the LDC they will be redirected back to the <em>ldc-authorize</em> service with an OAuth token that is valid for six hours (subject to change by the LDC).</li>
+  <li>Users must manually copy/paste this OAuth token into a <em>OAuth Key Provider</em> tool in the Galaxy interface.</li>
+</ol>
+
+<h2 id="implementation-details">Implementation Details</h2>
+
+<p>The service classes (<code class="highlighter-rouge">ServiceClient</code> and <code class="highlighter-rouge">DataSourceClient</code>) have a <code class="highlighter-rouge">setToken(String)</code> method to set the OAuth token to be used when requesting documents.  The <code class="highlighter-rouge">setToken</code> method is provided by the <code class="highlighter-rouge">AbstractClient</code> base class and simply sets the <em>Authorization</em> HTTP header is requests sent to the LDC server.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Authorization: bearer 0123456789deadbeef
+</code></pre>
+</div>
+
+<h2 id="to-do">To Do</h2>
+
+<p>Ideally, the LDC authentication service would redirect back to Galaxy directly so the user does not have to copy/paste the OAuth token.  This would also permit Galaxy to request refresh tokens as needed (and once the LDC supports refresh tokens).  To support this the Galaxy code base needs to be modified to provide an URL endpoint that the token provider can <em>POST</em> the token to.</p>
+
+
+	
+      </section>
+    </div>
+	<div>
+	</div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Copyright &copy; 2017 The Language Application Grid</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
+
+

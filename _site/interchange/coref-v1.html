@@ -1,0 +1,334 @@
+<html>
+
+<head>
+<title>LAPPS Coreference</title>
+<link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+
+<body>
+
+<h1>Coreference for LAPPS</h2>
+
+<h2>Some Linguistics</h2>
+
+<p>We have coreference when two or more text elements have the same referent,
+that is, they refer to the same person or thing. One of these text elements is a
+full form. There are several kinds of coreference:</p>
+
+<ol>
+
+<li><i>Joe Doe hurt himself</i>. The anophor <i>himself</i> refers to the same thing as
+the full form <i>himself</i>. In this case the full form is called the antecedent.
+
+<li><i>Despite her reluctance, Jane Doe understood the issue</i>. The cataphor <i>her</i>
+occurs before the postcedent (the full form).
+
+<li><i>Carol told Bob to attend the party. They arrived together</i>. The anaphor
+<i>they</i> has a split antecedent.
+
+<li><i>The man refuses to help. The jerk thinks ...</i>.  Coreferring noun phrases,
+where the second noun phrase is a predication over the first.
+
+</ol>
+
+<p>Much of this is taken from <a href="http://en.wikipedia.org/wiki/Coreference"
+target="_blank">http://en.wikipedia.org/wiki/Coreference</a>.</p>
+
+
+<h2>Coreference output examples</h2>
+
+<p>The <b>Stanford tools</b> create a list of mentions for each coreference
+chain and assigns the "representative" value to one of the elements. Each
+mention refers to sentence and token identifiers. For the text <i>"John is
+sick. He is home. Jill sees her dog."</i>, we have the following output:</p>
+
+<pre class="example">
+&lt;root>
+  &lt;document>
+    &lt;sentences>
+      &lt;sentence id="1">
+        &lt;tokens>
+          &lt;token id="1">&lt;word>John&lt/word>...&lt;/token>
+          ...
+        &lt;/tokens>
+        &lt;parse>(ROOT (S (NP (NNP John)) (VP (VBZ is) (ADJP (JJ sick))) (. .))) &lt;/parse>
+        &lt;dependencies type="basic-dependencies">...&lt;/dependencies>
+        &lt;dependencies type="collapsed-dependencies">...&lt;/dependencies>
+        &lt;dependencies type="collapsed-ccprocessed-dependencies">...&lt;/dependencies>
+      &lt;/sentence>
+      &lt;sentence id="2">...&lt;/sentence>
+      &lt;sentence id="3">...&lt;/sentence>
+    &lt;/sentences>
+    &lt;coreference>
+      &lt;coreference>
+        &lt;mention representative="true">
+          &lt;sentence>1&lt;/sentence> &lt;start>1&lt;/start>&lt;end>2&lt;/end>&lt;head>1&lt;/head>&lt;text>John&lt;/text>
+        &lt;/mention>
+        &lt;mention>
+          &lt;sentence>2&lt;/sentence>&lt;start>1&lt;/start>&lt;end>2&lt;/end>&lt;head>1&lt;/head> &lt;text>He&lt;/text>
+        &lt;/mention>
+      &lt;/coreference>
+      &lt;coreference>
+        &lt;mention representative="true">
+          &lt;sentence>3&lt;/sentence> &lt;start>1&lt;/start> &lt;end>2&lt;/end> &lt;head>1&lt;/head> &lt;text>Jill&lt;/text>
+        &lt;/mention>
+        &lt;mention>
+          &lt;sentence>3&lt;/sentence> &lt;start>3&lt;/start> &lt;end>4&lt;/end> &lt;head>3&lt;/head> &lt;text>her&lt;/text>
+        &lt;/mention>
+      &lt;/coreference>
+    &lt;/coreference>
+  &lt;/document>
+&lt;/root>
+</pre>
+
+<p>Here is some output from the <b>OpenNLP coreference</b>:</p>
+
+<pre class="example">
+OpenNLP Coreference 
+-------------------------------------------------------------------------------------------------------
+Input sentences 1 ::
+Carol told Bob to attend the party. They arrived together.
+
+Sentence#1 parse after POS & NER tag:
+(TOP (S (NP (NNP Carol)) (VP (VBD told) (NP (NNP Bob)) (S (VP (TO to) (VP (VB attend) (NP (DT the) (NN party))))))(. .)))
+
+Sentence#2 parse after POS & NER tag:
+(TOP (S (NP (PRP They)) (VP (VBD arrived) (ADVP (RB together)))(. .)))
+
+Now displaying all discourse entities::
+        Mention set:: [ Bob  :: They  ]
+        Mention set:: [ the party  ]
+        Mention set:: [ Carol  ]
+</pre>
+
+<p>Here too, we have a set of mentions. From this print to the output it is not
+possible to see how internally mentions in the data structure refer to text
+elements, whether it is by pointing to sentence and token identifiers, as with
+the Stanford tool, or to nodes in the parse tree. This example, by the way, show
+that split antecedents are not dealt with by OpenNLP (at least, not this
+case).</p>
+
+<p>I would have included the <b>GATE coreference</b> output of the components
+bundled with GATE, but it keeps hanging and produces no output.</p>
+
+
+<h2>Coreference in the LAPPS format</h2>
+
+<p>Several questions need to be answered/discussed, most notably (i) what is the
+markable for the text elements, (ii) how deeply nested to we allow our JSON
+datastructure to be, and (iii) can elements in the coreference view refer to
+identifiers in other views. The examples below, all for the simple phrase <i>Sue
+sees herself</i> show some possible LAPPS JSON-LD structures. The JSON is fairly
+informal, just showing the bits and pieces that are relevant to the
+discussion.</p>
+
+<p>Here is one that I do not like. The coreference relation is expressed on the
+token by letting it refer to the token identifier of the antecedent. The example
+uses the "coref" feature on the toplevel here, but it should probably be in the
+features dictionary. Also, another feature name can be used. The value is a list
+which is necesseray if the antecedent is a multi-token element. When viewed from
+a vocab perspective, we would have "coref", or something like that, as a feature
+on a token.</p>
+
+<pre class="example">
+"views": [ 
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+          "type": "tokenizer:opennlp" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "features": { "word": "herself" }} ] },
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
+          "type": "coref:xxxx" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "coref": ["tok0"], "features": { "word": "herself" }} ] } ]
+</pre>
+
+<p>In the following one we have a new annotation type "Coreference". It has a
+list of mentions, and one of them is marked to be the full form or
+representative, this should be a optional feature. In this example there is
+deeper structure then we have used before. It is a bit silly to have the three
+tokens as annotations in the coref view.</p>
+
+<pre class="example">
+"views": [ 
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+          "type": "tokenizer:opennlp" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "features": { "word": "herself" }} ] },
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
+          "type": "coref:xxxx" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "features": { "word" : "herself" }}
+       { "@type": "Coreference", 
+         "id": "coref0", 
+         "mentions": [
+           [{ "@type": "Token", "id": "tok0", "features": { "word": "Sue", "representative": "true" }}],
+           [{ "@type": "Token", "id": "tok2", "features": { "word": "herself" }}] ]}]}]
+</pre>
+
+<p>Now instead of repeating the tokens inside of mentions, we refer to something
+outside the mentions list. Note also that here the representative is not a
+feature on the token but on the Coreference type.</p>
+
+<pre class="example">
+"views": [ 
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+          "type": "tokenizer:opennlp" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "features": { "word": "herself" }} ] },
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
+          "type": "coref:xxxx" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "coref": "tok0", "features": { "word" : "herself" }}
+       { "@type": "Coreference", 
+         "id": "coref0", 
+         "mentions": [ ["tok0"], ["tok2"] ],
+	 "representative": ["tok0"] }]}]
+</pre>
+
+<p>It does seem a bit silly to me that the second token is part of the coref
+view, here is the same as the above, but with that token removed.</p>
+
+<pre class="example">
+"views": [ 
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+          "type": "tokenizer:opennlp" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "features": { "word": "herself" }} ] },
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
+          "type": "coref:xxxx" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok2", "coref": "tok0", "features": { "word" : "herself" }}
+       { "@type": "Coreference", 
+         "id": "coref0", 
+         "mentions": [ ["tok0"], ["tok2"] ],
+	 "representative": ["tok0"] }]}]
+</pre>
+
+<p>Which takes us to the question of whether elements in a view can refer to
+elements in other views. My gut immediately says that this should be possible
+and all tokens can be removed from the coref view. This by the way is different
+from how we did not remove tokens from the part of speech view since the part of
+speech was a feature on token.</p>
+
+<pre class="example">
+"views": [ 
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+          "type": "tokenizer:opennlp" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "features": { "word": "herself" }} ] },
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
+          "type": "coref:xxxx" }}},
+    "annotations": [ 
+       { "@type": "Coreference", 
+         "id": "coref0", 
+         "mentions": [ ["tok0"], ["tok2"] ],
+	 "representative": ["tok0"] }]}]
+</pre>
+
+<p>What if we do not have tokens (or other annotations) that the mentions can
+refer to? We can then create objects in the coref view. Nancy suggested to use a
+type Markable, which is fine with me. This would need to be a subtype of
+Annotation in <a href="http://vocab.lappsgrid.org/"
+target="_blank">http://vocab.lappsgrid.org/</a> and maybe existing types like
+Token and Sentence should be under Markable and maybe there should be something
+called Relation as another subtype of Annotation. In any case, whether we use
+Markable or just Annotation, we could have the following JSON.</p>
+
+<pre class="example">
+"views": [ 
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
+          "type": "coref:xxxx" }}},
+    "annotations": [ 
+       { "@type": "Markable", "id": "m0", "features": { "word": "Sue" }},
+       { "@type": "Markable", "id": "m1", "features": { "word": "herself" }} ] },
+       { "@type": "Coreference", 
+         "id": "coref0", 
+         "mentions": [ "m0", "m1" ],
+	 "representative": "m0" }]}]
+</pre>
+
+<p>Note how the list of mentions is not a list of lists anymore since the
+markables are not resticted to being single tokens.</p>
+
+<p>A last example here is one where coreference is shown as a chain. If there
+were three corefering elements, then there would be two Coreference types
+(contrary to the previous, where the mentions list would just be longer). There
+must be better names than element1 and element2. Also, I do not know how to
+nicely deal with marking the full form.</p>
+
+<pre class="example">
+"views": [ 
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+          "type": "tokenizer:opennlp" }}},
+    "annotations": [ 
+       { "@type": "Token", "id": "tok0", "features": { "word": "Sue" }},
+       { "@type": "Token", "id": "tok1", "features": { "word": "sees" }},
+       { "@type": "Token", "id": "tok2", "features": { "word": "herself" }} ] },
+  { "metadata": {
+      "contains": {
+        "Token": {
+          "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n",
+          "type": "coref:xxxx" }}},
+    "annotations": [ 
+       { "@type": "Coreference", 
+         "id": "coref0", 
+         "element1": ["tok0"],
+         "element2": ["tok2"] }]}]
+</pre>
+
+
+</body>
+</html>

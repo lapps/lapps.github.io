@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="oanc.github.io : GitHub repository for the American National Corpus.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/slate.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/lappsgrid.css"/>
+     
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+		<script type="text/javascript">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['%','%'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+        });
+    </script>	
+
+    <title>Language Application Grid</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <!-- <a id="forkme_banner" href="https://github.com/lapps">View on GitHub</a> -->
+		  <a id="forkme_banner" href="https://github.com/lapps/lapps.github.io/edit/master/Contributing.md">Edit this page on GitHub</a>.
+		  
+          <h1 id="project_title">The LAPPS Grid Wiki</h1>
+          <h2 id="project_tagline">A framework for interoperable NLP web services.</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+	<h2 id="contributing">Contributing</h2>
+
+<p>Contributions from the community are always welcome and encouraged.  All resources developed by the Language Application Grid are hosted on <a href="http://github.com">GitHub</a> so the only thing needed to contribute is a GitHub account.</p>
+
+<h3 id="contributing-source-code">Contributing Source Code</h3>
+
+<p>All source code produced by the Language Application Grid is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license and is available from one of our two GitHub organizations:</p>
+
+<ol>
+  <li><a href="https://github.com/lapps">https://github.com/lapps</a><br />
+The <em>lapps</em> organization hosts the code for the official LAPPS Grid API modules deployed to <a href="https://search.maven.org/#search%7Cga%7C1%7Corg.lappsgrid">Maven Central</a>.</li>
+  <li><a href="https://github.com/lappsgrid-incubator">https://github.com/lappsgrid-incubator</a><br />
+The <em>incubator</em> is the location for projects that are not a part of the LAPPS Grid API. For example the LAPPS Grid fork of the <a href="https://github.com/galaxyproject/galaxy">Galaxy</a> project, Docker images, etc.</li>
+</ol>
+
+<p>All of the LAPPS Grid repositories use the <a href="http://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a> branching model. What this means in practice is that all pull-requests should target the <em>develop</em> branch as the <strong>base</strong> of the pull request.  More information is available <a href="technical/github.html">here</a>, but pull requests against the <em>master</em> branch will be rejected as pushing code to <em>master</em> is the trigger for our <a href="https://travis-ci.org/lapps">CI server</a> to perform a release to Maven Central.</p>
+
+<h3 id="contributing-to-the-wiki">Contributing To The Wiki</h3>
+
+<p>This wiki is a <a href="https://pages.github.com">GitHub Pages</a> site hosted from the repository <a href="https://github.com/lapps/lapps.github.io">https://github.com/lapps/lapps.github.io</a>. Anyone wanting to contribute to the wiki will need to:</p>
+
+<ol>
+  <li><a href="https://help.github.com/articles/fork-a-repo/">Fork</a> the <em>lapps.github.io</em> repository.</li>
+  <li>Edit the wiki files. Please use your own <em>topic branch</em> for your edits to the wiki.</li>
+  <li>Push your edits to GitHub and create a <a href="https://help.github.com/articles/creating-a-pull-request/">pull request</a>.</li>
+</ol>
+
+<p>While you are editing the wiki locally you can use <a href="https://jekyllrb.com/docs/quickstart/">Jekyll</a> to preview the wiki as you make changes.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve --watch
+</code></pre>
+</div>
+
+<p>The site will be available at http://localhost:4000</p>
+
+<p><a href="/wiki.html">Back</a> | <a href="/index.html">Home</a></p>
+
+	
+      </section>
+    </div>
+	<div>
+	</div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Copyright &copy; 2017 The Language Application Grid</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
+
+

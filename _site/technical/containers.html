@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="oanc.github.io : GitHub repository for the American National Corpus.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/slate.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/lappsgrid.css"/>
+     
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+		<script type="text/javascript">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['%','%'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+        });
+    </script>	
+
+    <title>Current Docker Images</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <!-- <a id="forkme_banner" href="https://github.com/lapps">View on GitHub</a> -->
+		  <a id="forkme_banner" href="https://github.com/lapps/lapps.github.io/edit/master/technical/containers.md">Edit this page on GitHub</a>.
+		  
+          <h1 id="project_title">The LAPPS Grid Wiki</h1>
+          <h2 id="project_tagline">A framework for interoperable NLP web services.</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+	<h1 id="current-docker-images">Current Docker Images</h1>
+
+<p>The following Docker images are available on <a href="https://github.com/lappsgrid-incubator">GitHub</a>.</p>
+
+<ol>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-ubuntu">lappsgrid/ubuntu</a> : Docker image based on Ubuntu 14.04 with Java 7 and Postgres 9.3 included. Also includes emacs, nano, zip, wget, and curl.</li>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-tomcat">lappsgrid/tomcat</a> : Includes Tomcat 7 in the <em>lappsgrid/ubuntu</em> image</li>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-service-manager">lappsgrid/service-manager</a> : Extends the <em>lappsgrid/ubuntu</em> image with a Service Manager installation. Also includes the
+LSD and the LDDL interpreter for configuring services in the service manager.  However, the
+actual LDDL initialization scripts are include in the packages below.</li>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-brandeis">lappsgrid/brandeis</a> : Docker image of the Brandeis processing node.</li>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-vassar">lappsgrid/vassar</a> : Docker image of the Brandeis processing node.</li>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-gigaword">lappsgrid/gigaword</a> : A Docker image that provides Gigaword as a DataSource service. <strong>NOTE</strong> The image does not
+container Gigaword.  The Gigaword corpora must in an externally mounted VOLUME the container
+can read to serve files.</li>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-oaqa">lappsgrid/oaqa</a> : Docker image with running the OAQA EvaluationService.</li>
+  <li><a href="https://github.com/lappsgrid-incubator/docker-galaxy-lappsgrid">lappsgrid/galaxy</a> : Docker image with the LAPPS Galaxy instance.  Two versions of the <em>lappgrid/galaxy</em> image is
+available; one that calls services on the Brandies, CMU, and Vassar nodes, and another that
+calls the services running in the Docker containers.</li>
+</ol>
+
+	
+      </section>
+    </div>
+	<div>
+	</div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Copyright &copy; 2017 The Language Application Grid</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
+
+

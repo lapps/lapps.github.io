@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="oanc.github.io : GitHub repository for the American National Corpus.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/slate.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/lappsgrid.css"/>
+     
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+		<script type="text/javascript">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['%','%'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+        });
+    </script>	
+
+    <title>Jetstream</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <!-- <a id="forkme_banner" href="https://github.com/lapps">View on GitHub</a> -->
+		  <a id="forkme_banner" href="https://github.com/lapps/lapps.github.io/edit/master/technical/jetstream.md">Edit this page on GitHub</a>.
+		  
+          <h1 id="project_title">The LAPPS Grid Wiki</h1>
+          <h2 id="project_tagline">A framework for interoperable NLP web services.</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+	<h1 id="jetstream">Jetstream</h1>
+
+<p><a href="http://jetstream-cloud.org">Jetstream</a> is a NSF funded cloud computing system used by the LAPPS Grid to provide compute resources.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>To be able to make use of Jetstream you will need to:</p>
+
+<ol>
+  <li>Create an account on http://portal.xsede.org</li>
+  <li>Send your XSEDE username to a LAPPS Grid admin so you can be added to our allocation.</li>
+  <li>After you have been added to the LAPPS Grid allocation verify that you can log in to:
+    <ol>
+      <li>http://use.jetstream-cloud.org</li>
+      <li>http://jblb.jetstream-cloud.org/dashboard</li>
+    </ol>
+  </li>
+</ol>
+
+<p>Once you are able to log in to the Jetstream system you will need to generate the openrc.sh file that is used by the Open Stack API to communicate with Jetstream.</p>
+
+<h3 id="openrcsh">openrc.sh</h3>
+
+<ol>
+  <li>Sign on to the <a href="https://jblb.jetstream-cloud.org/dashboard">Jetstream Dashboard</a></li>
+  <li>Go to <em>Compute -&gt; Access &amp; Security</em></li>
+  <li>Select the <em>API Access</em> tab</li>
+  <li>Click on the <em>Download OpenStack RC File v3</em> button</li>
+  <li>Rename the downloaded file to <em>openrc.sh</em> and move it someplace convenient.</li>
+</ol>
+
+<p><strong>NOTE:</strong> The first (non-comment) line of the <em>openrc.sh</em> file sets the <code class="highlighter-rouge">OS_AUTH_URL</code> variable to an incorrect URL.  You will be provided with the correct URL in a separate email.  Please do not make this URL public (i.e. save it anywhere other than your openrc.sh file).</p>
+
+<h2 id="instance-management">Instance Management</h2>
+
+<p>The remainder of this document assumes you will be using the <a href="http://downloads.lappsgrid.org/scripts/jetstream">jetstream</a> script to manage Jetstream instances.</p>
+
+<h3 id="launching">Launching</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	jetstream launch <span class="o">[</span>size] &lt;name&gt;
+</code></pre>
+</div>
+
+<h3 id="suspending">Suspending</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	jetstream <span class="nb">suspend</span> &lt;name&gt;
+</code></pre>
+</div>
+
+<h3 id="resuming">Resuming</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	jetstream resume &lt;name&gt;
+</code></pre>
+</div>
+
+<h3 id="deleting">Deleting</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	jetstream delete &lt;name&gt;
+</code></pre>
+</div>
+
+<h2 id="the-proxy-server">The Proxy Server</h2>
+
+<p>Redirecting to a new server.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	jetstream proxy &lt;ip address&gt;
+</code></pre>
+</div>
+
+<p>Disable the proxy. When the proxy is disabled jetstream.lappsgrid.org will redirect to a static <em>out of service</em> page.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	jetstream offline
+</code></pre>
+</div>
+
+<p>Enable the proxy.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>	jetstream online
+</code></pre>
+</div>
+
+
+	
+      </section>
+    </div>
+	<div>
+	</div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Copyright &copy; 2017 The Language Application Grid</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
+
+

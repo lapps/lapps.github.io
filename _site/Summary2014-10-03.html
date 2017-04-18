@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="oanc.github.io : GitHub repository for the American National Corpus.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/slate.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/lappsgrid.css"/>
+     
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+		<script type="text/javascript">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['%','%'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+        });
+    </script>	
+
+    <title>LAPPS Technical Meeting Summary</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <!-- <a id="forkme_banner" href="https://github.com/lapps">View on GitHub</a> -->
+		  <a id="forkme_banner" href="https://github.com/lapps/lapps.github.io/edit/master/Summary2014-10-03.md">Edit this page on GitHub</a>.
+		  
+          <h1 id="project_title">The LAPPS Grid Wiki</h1>
+          <h2 id="project_tagline">A framework for interoperable NLP web services.</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+	<h1 id="lapps-technical-meeting-summary">LAPPS Technical Meeting Summary</h1>
+
+<p><strong>Date</strong> October 2-3, 2014 <br />
+<strong>Place</strong> Vassar College, Poughkeepsie NY<br /></p>
+
+<p><strong>Attendees</strong><br /></p>
+
+<ol>
+  <li>Keith Suderman</li>
+  <li>Di Wang</li>
+  <li>Marc Verhagen</li>
+  <li>Chunqi Shi</li>
+  <li>Nancy Ide</li>
+</ol>
+
+<h1 id="topics">Topics</h1>
+
+<h2 id="licensing">Licensing</h2>
+
+<p>Issues discussed:</p>
+
+<ol>
+  <li>Implementing the licensing model(s) proposed by the LDC will be relatively easy.</li>
+  <li>The major hurdle is that user authentication and authorization is handled by the Service Grid.</li>
+  <li>To achieve the level of control we require necessitates code changes to the Service Grid
+software.</li>
+  <li>We cannot rely on changes to the ServiceGrid software and will have to find an ad-hoc
+solution.
+    <ul>
+      <li>WS-Security, WS-Federation<br />These are Oasis standards but do not seem to have much 
+ traction.</li>
+      <li>OAuth<br />
+ While not discussed at the meeting, <a href="http://oauth.net">oauth</a> looks promising.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Given our time constraints we did not bring Jonathan in on a Skype call. Marc will
+Skype in when Jonathan visits Vassar.</p>
+
+<h2 id="naming-things">Naming Things</h2>
+
+<h3 id="uri">URI</h3>
+
+<p>All URI should use the base URI http://vocab.lappsgrid.org</p>
+
+<ul>
+  <li>Annotation types will use the base URI; e.g. http://vocab.lappsgrid.org/Token</li>
+  <li>Other URI to be used:
+    <ul>
+      <li>http://vocab.lappsgrid.org/schema : location of JSON schema files.</li>
+      <li>http://vocab.lappsgrid.org/ns : base URI for things that belong in the 
+  Lappsgrid namespace but are not part of the annotation vocabulary.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="content-type-discriminators">Content-type Discriminators</h3>
+
+<p>These should be replaced with URI:</p>
+
+<ul>
+  <li>http://vocab.lappsgrid.org/ns/media/text</li>
+  <li>http://vocab.lappsgrid.org/ns/media/text#tab-separated</li>
+  <li>http://vocab.lappsgrid.org/ns/media/text#space-separated</li>
+  <li>http://vocab.lappsgrid.org/ns/media/xml</li>
+  <li>http://vocab.lappsgrid.org/ns/media/xml#gate</li>
+  <li>etc.</li>
+</ul>
+
+<h3 id="versioning">Versioning</h3>
+
+<p>URI should not include version numbers.  <strong>Note</strong> this is just for URI used in the 
+vocabulary.  URLs for services will likely contain version numbers.</p>
+
+<p>We reserve the right to change this practice and introduce URIs with version numbers
+in them.  However, no other projects seem to include version numbers in URIs.</p>
+
+<h3 id="uri-for-things-with-a-uri">URI for things with a URI</h3>
+
+<p>For consistency, all URI used in the LAPPS vocabulary should use http://vocab.lappsgrid.org
+as the base URI.</p>
+
+<p>Options that were considered:</p>
+
+<ol>
+  <li>Use separate subdomains for major distinctions:
+    <ul>
+      <li>http://vocab.lappsgrid.org/…</li>
+      <li>http://schema.lappsgrid.org/…</li>
+      <li>http://ns.lappsgrid.org/…</li>
+    </ul>
+  </li>
+  <li>Use a single subdomain and use path segments for major distictions:
+    <ul>
+      <li>http://vocab.lappsgrid.org/Token</li>
+      <li>http://vocab.lappsgrid.org/schema/lif-schema.json</li>
+      <li>http://vocab.lappsgrid.org/ns/license#apache-2.0</li>
+    </ul>
+  </li>
+</ol>
+
+<p>While option #2 allows a greater possibility for naming conflicts, for example if we later 
+need an annotations named <em>schema</em> or <em>ns</em>, it was the preferred option.</p>
+
+<h2 id="coreference">Coreference</h2>
+
+<p><a href="interchange/coref-v3.html">Proposal so far</a></p>
+
+<ol>
+  <li>Always require a <em>Markable</em> annotation.</li>
+  <li><em>start</em> and <em>end</em> features are not required on <em>Markable</em> annotations.</li>
+  <li><em>Markable</em>s may contains <em>features</em> and <em>metadata</em></li>
+</ol>
+
+<h2 id="the-service-grid">The Service Grid</h2>
+
+<p>We need to contact Yohei/Toru regarding changes to the Service Grid to meet our
+requirements.</p>
+
+<ol>
+  <li>Enforcing licensing contraints</li>
+  <li>Using third party authentication services (i.e. LDC)</li>
+  <li>Native support to register REST services.</li>
+</ol>
+
+<h2 id="roadmap">Roadmap</h2>
+
+<ol>
+  <li>Release stable(-ish) versions of LAPPS modules.</li>
+  <li>Start running the Service Manager and LAPPS services on https://</li>
+</ol>
+
+<h2 id="work-items">Work Items</h2>
+
+<h3 id="keith">Keith</h3>
+
+<ol>
+  <li>Update JSON-LD context</li>
+  <li>Refactor discriminator URI used to reflect latest decisions</li>
+  <li>Ensure all values used are URI</li>
+  <li>Ensure URI are defined in the JSON-LD context</li>
+  <li>Remove version numbers from URI</li>
+  <li>Refactor discriminators - replace content-types with URI.</li>
+  <li>Update GATE and Stanford services</li>
+  <li>Update MASC DataSource</li>
+</ol>
+
+<h3 id="marc">Marc</h3>
+
+<ol>
+  <li>Example JSON-LD for Phrase Structures.</li>
+  <li>Referencing ID values in other views.</li>
+  <li>Dependencies in LIF</li>
+</ol>
+
+<h3 id="chunqi">Chunqi</h3>
+
+<ol>
+  <li>Update OpenNLP services</li>
+  <li>BRAT</li>
+  <li>Explore simplifying JSONPath</li>
+</ol>
+
+<h3 id="di">Di</h3>
+
+<ol>
+  <li>Simple service discovery.
+    <ul>
+      <li>Query Service Manager for available services.</li>
+      <li>Maintain list as services are registered.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="nancy">Nancy</h3>
+
+<ol>
+  <li>Follow up with Steve Cassidy.</li>
+</ol>
+
+<h3 id="unassigned">Unassigned</h3>
+
+<ol>
+  <li>Write SOAP service wrapper for REST services.</li>
+</ol>
+
+<h2 id="outstanding-items">Outstanding Items</h2>
+
+<ol>
+  <li>Roadmap</li>
+  <li>Licenses.</li>
+</ol>
+
+	
+      </section>
+    </div>
+	<div>
+	</div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Copyright &copy; 2017 The Language Application Grid</p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
+
+
