@@ -7,7 +7,7 @@ buttons:
  - text: "Specifications"
    href: "/specs.html"
  - text: "Developing"
-   href: "/developing.html"
+   href: "/Developing.html"
 ---
 
 <h1>{{ page.title }}</h1>
