@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Jetstream
+title: Manually Annotated Sub-Corpus
 ---
 
 # MASC 3.0.0
