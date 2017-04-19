@@ -3,7 +3,7 @@ layout: default
 title: Language Applications Grid
 buttons:
  - text: "Installing"
-   href: "/installing.html"
+   href: "/installation/index"
  - text: "Specifications"
    href: "/specs.html"
  - text: "Developing"
