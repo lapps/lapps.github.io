@@ -1,0 +1,18 @@
+.note {
+	border: 1px black solid;
+	background-color: #e0e0e0;
+	padding: 5px;
+    margin: 10px 0 15px 0;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+.blue {
+	color: blue;
+}
