@@ -1,0 +1,131 @@
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.18.1), see www.w3.org" />
+    <title>LIF PhraseStructure</title>
+    <link rel="stylesheet" href="main.css" type="text/css" />
+  </head>
+  <body>
+    <p>
+    <a href="index.html">LIF</a> &gt; 
+    <a href="">phrase structure</a></p>
+    <h1>Phrase Structure in LIF</h1>
+    <p>Last updated: January 21
+    <sup>st</sup>, 2016</p>
+    <p>We use two annnotation object from the vocabulary,
+    PhraseStructure and Consituent:</p>
+    <ul>
+      <li>
+        <a href="http://vocab.lappsgrid.org/PhraseStructure.html">http://vocab.lappsgrid.org/PhraseStructure.html</a>
+      </li>
+      <li>
+        <a href="http://vocab.lappsgrid.org/Constituent.html">http://vocab.lappsgrid.org/Constituent.html</a>
+      </li>
+    </ul>
+    <p>The PhraseStructure object contains a single parse tree for
+    some text span, typically for a sentence. It introduces a
+    feature named constituents which contains a list of identifiers
+    referring to (1) annotations of @type Constituent in the same
+    view or (2) annotations of @type Token that may live in another
+    view. A Constituent has a label reflecting the category and in
+    the features dictionary a pointer to the parent (null for the
+    root node) and a list of children.</p>
+    <pre class="example">
+{
+  "text": "Sue sees herself",
+  "views": [
+    { "id": "v1",
+      "metadata": {
+        "contains": {
+          "Token": {
+            "producer":
+"edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
+            "type": "tokenizer:opennlp" }}},
+      "annotations": [
+         { "@type": "Token", "id": "tok0", "start": 0, "end": 3 },
+         { "@type": "Token", "id": "tok1", "start": 4, "end": 8 },
+         { "@type": "Token", "id": "tok2", "start": 9, "end": 16 }
+]},
+    { "id": "v2",
+      "metadata": {
+        "contains": {
+          "PhraseStructure": {
+            "producer":
+"edu.brandeis.cs.lappsgrid.SimpleParser:1.0.0",
+            "categorySet": "ns/types/PTBcategories",
+            "type": "PhraseStructure:SimpleParser" },
+          "Constituent": {
+            "producer":
+"edu.brandeis.cs.lappsgrid.SimpleParser:1.0.0",
+            "categorySet": "ns/types/PTBcategories",
+            "type": "PhraseStructure:SimpleParser" }}},
+      "annotations": [
+         { "@type": "PhraseStructure",
+           "id": "phrase0",
+           "start": 0,
+           "end": 16,
+           "features": {
+              "constituents": [ "c0", "c1", "c2", "v1:tok0",
+"v1:tok1", "v1:tok2" ] }},
+         { "@type": "Constituent",
+           "label": "S",
+           "id": "c0",
+           "features": {
+             "parent": null,
+             "children": [ "c1", "c2"] } },
+         { "@type": "Constituent",
+           "label": "NP",
+           "id": "c1",
+           "features": {
+             "parent": "c0",
+             "children": [ "v1:tok0" ] }},
+         { "@type": "Constituent",
+           "label": "VP",
+           "id": "c2",
+           "features": {
+             "parent": "c0",
+             "children": [ "v1:tok1", "v1:tok2" ] }}]}]
+}
+</pre>
+    <p>In the example tree above we have three Constituents and
+    three Tokens (the three leaf nodes). Since we have the parent
+    feature on Constituents and not on Tokens (where we do not want
+    it) we have a tree where the non-terminals have an explicit
+    parent, but the terminals don't.</p>
+    <p>NOTE: we are currently discussing whether "root" should be
+    added to PhraseStructure as a property, it would contain the
+    identifier of the top node of the tree.</p>
+    <!--
+<p>Some notes and open issues on the above:</p>
+
+<ol class="spacy">
+
+<li>Similar to the coreference structure, should the children be local
+identifiers? In the example above, two of the consituents refer to tokens in
+another view. For coreference, we stipulated that only Markable objects can
+refer to objects in other views. Do we have a same stipulation here? Using
+Markable objects seems wrong here. 
+
+<li>In addition to the PhraseStructure object this view could also have Token
+objects in it.
+
+<li>Identifiers of constituents are here all in the format "cN", we do allow
+any other that complies to the required syntax for expressions, for example, we
+allow "s0", "np0" and "vp0" as identifiers.
+
+<li>We decided not to represent the tree structure directly using deeper
+embedding. This is part of a more general issue which is whether we LIF
+structures are structurally as close as possible to encoded data structures like
+trees, linked lists and graphs. Sine we cannot do graphs that way anyway, we
+decided to flatten out all these structures, but embed them in their own
+annotation type (PhraseStructure in this case).
+
+</ol>
+-->
+    <hr />
+    <p>[ 
+    <a href="index.html">up</a> | 
+    <a href="coref.html">previous</a> | 
+    <a href="dependencies.html">next</a> ]</p>
+  </body>
+</html>

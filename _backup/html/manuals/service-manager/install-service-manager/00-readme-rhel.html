@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.18.1), see www.w3.org" />
+    <title>Installing a Service Grid on RHEL6</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <h1>Installing a Service Grid on RHEL6</h1>
+    <p>Version 1, Marc Verhagen, March 2013.</p>
+    <p>[ 
+    <a href="#sources">sources</a> | 
+    <a href="#postgres">postgres</a> | 
+    <a href="#database">database creation</a> ]</p>
+    <p>This document describes how to install the service grid
+    software on Red Hat Enterpris Linux 6. The process is mostly
+    the same as described for 
+    <a href="00-readme-osx.html">Mac OSX</a>, this document only
+    describes the differences.</p>
+    <a name="sources" id="sources"></a>
+    <h2>Downloading Sources</h2>
+    <p>All sources are the same excpet that you need to get the
+    linux version of Postgres. In what follows, I assume that a
+    recent version of postgres is installed.</p>
+    <a name="sources" id="sources"></a>
+    <h2>Postgres Settings</h2>
+    <p>In our case, after Postgres was installed it did not have
+    access control set up the right way and no matter what we did
+    when defing roles, the service manager was not able to access
+    the dababase. So before service manager installation you have
+    to fix this. We ended palying with the two following files:</p>
+    <pre class="code">
+/var/lib/pgsql/9.2/data/pg_hba.conf
+/var/lib/pgsql/9.2/data/pg_ident.conf
+</pre>
+    <p>I am not quites sure on what the minimal necessary steps
+    are, therefore I'll simply present what worked in the end, then
+    give some intermediate alternative steps. Towards the end of
+    the first file, there are a couple of lines that start with
+    'local' and 'host'. You can edit these and make them look like
+    the following (whitespace was changed a bit to reflect the
+    concept that these lines have five columns, with the columns
+    representing type, database, user, address and method; so do
+    not cut and paste from here because that will not work since
+    the tabs are off):</p>
+    <pre class="code">
+local   all   all                  trust
+host    all   all   127.0.0.1/32   trust
+host    all   all   ::1/128        trust
+</pre>
+    <p>This worked, but may be a bit rough since it does make for
+    rather liberal access control. Originally, we just edited the
+    first line:</p>
+    <pre class="code">
+local   all   all                  peer map="local"
+</pre>
+    <p>And we edited the end of the second file and made look
+    like:</p>
+    <pre class="code">
+local    /(.*)    \1
+local    /.*      lapps
+</pre>
+    <p>Unfortunately, this did not solve the problem, although it
+    did make local access from the command line with psql a lot
+    better.</p>
+    <a name="database" id="database" />
+    <h2>Dababase Creation</h2>
+    <p>For OSX, the install script did not work and it forced us
+    into using pgAdmin. Here is a quicker way to do this from the
+    command line. Note that you have to be the postgres user to do
+    this.</p>
+    <pre class="code">
+$ sudo su - postgres
+$ createuser -S -D -R -P lapps
+$ createdb servicegrid -O lapps -E 'UTF8'
+$ createlang plpgsql lapps
+$ psql servicegrid &lt;
+sources/langrid/langrid-corenode-p2p-2.0.0-20120718/postgresql/create_storedproc.sql
+$ psql servicegrid -c "ALTER FUNCTION
+\"AccessStat.increment\"(character varying, character varying,
+        character varying, character varying, character varying,
+timestamp without time zone,
+        timestamp without time zone, integer, timestamp without
+time zone, integer, timestamp
+        without time zone, integer, integer, integer, integer)
+OWNER TO lapps"
+</pre>
+    <p>The last command was mangled a bit for display purposes by
+    adding in some whitespace.</p>
+  </body>
+</html>
