@@ -1,5 +1,5 @@
 ---
-layout: slate
+layout: default
 title: The LAPPS Grid on Amazon Web Services
 ---
 
