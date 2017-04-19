@@ -3,31 +3,22 @@ layout: default
 title: LIF DependencyStructure
 ---
 
-[LIF](index.html) > 
-    [dependency structure]()
+[LIF](index.html) > <a name='null'></a>
+
 
 # Dependency Structure in LIF
 
-Last updated: October 29
-    <sup>th</sup>, 2015
+Last updated: October 29 <sup>th</sup>, 2015
 
-We use two annotation types from the vocabulary,
-    DependencyStructure and Dependency:
+We use two annotation types from the vocabulary, DependencyStructure and Dependency:
 
 * [
         http://vocab.lappsgrid.org/DependencyStructure.html](http://vocab.lappsgrid.org/DependencyStructure.html)
 * [http://vocab.lappsgrid.org/Dependency.html](http://vocab.lappsgrid.org/Dependency.html))
 
-The DependencyStructure object contains a list of
-    dependencies, typically for a sentence. It introduces a feature
-    named dependencies which contains a list of identifiers
-    referring to annotations of @type Dependency in the same view.
-    A Dependency has a label reflecting the dependency name and in
-    its feature dictionary it has references to the governor and
-    dependent. Note that the ROOT node has no governor.
+The DependencyStructure object contains a list of dependencies, typically for a sentence. It introduces a feature named dependencies which contains a list of identifiers referring to annotations of @type Dependency in the same view. A Dependency has a label reflecting the dependency name and in its feature dictionary it has references to the governor and dependent. Note that the ROOT node has no governor.
 
 ```
-
 {
   "text": "Sue sees herself",
   "views": [
@@ -86,6 +77,4 @@ The DependencyStructure object contains a list of
 }
 ```
 
-[ 
-    [up](index.html) | 
-    [previous](phrase_structure.html) ]
+[ [up](index.html) | [previous](phrase_structure.html) ]

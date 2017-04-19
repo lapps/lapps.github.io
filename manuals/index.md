@@ -5,9 +5,7 @@ title:
 
 # LAPPS Manuals and tutorials
 
-This is a gathering place for LAPPS manuals and tutorial.
-    This is one place where we could fiddle and fiddle till we find
-    the result can be exported to the website.
+This is a gathering place for LAPPS manuals and tutorial. This is one place where we could fiddle and fiddle till we find the result can be exported to the website.
 
 Some manuals, in different states of decency.
 
@@ -24,8 +22,7 @@ Tutorial presentations from the May 2014 LREC tutorial.
 
 1. [
       Introduction to web services](wrapping/lrec-presentation/lrec_web_service_overview.pdf) (1MB pdf)
-1. [Wrapping](wrapping/lrec-presentation/wrapping.pdf)
-      (4MB pdf)
+1. [Wrapping](wrapping/lrec-presentation/wrapping.pdf) (4MB pdf)
 1. [LREC
       presentation on contributing to the LAPPS Grid, includes
       slides on wrapping](wrapping/lrec-presentation/contributing.pdf) (2MB pdf)

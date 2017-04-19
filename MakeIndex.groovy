@@ -10,20 +10,27 @@ void process(File dir) {
 			process(file)
 			indent.less()
 		}
-		else if (file.path.endsWith('.md') || file.path.endsWith('.html')) {
+		else if (file.path.endsWith('.md')) {
 			if (!ignored.contains(file.name)) {		
 				String name = file.name
 				int index = name.lastIndexOf(".")
 				if (index > 0) {
 					name = name.substring(0,index)
 				}
-				println "${indent}- [${name.capitalize()}](${file.path.substring(1)})"
+				println "${indent}- [${name.capitalize()}](${file.path.substring(1).replace('.md', '')})"
 			}
 		}
 	}
 	//return lines
 }
 
+println '''---
+layout: default
+title: Site Index
+---
+
+# Site Index
+'''
 process(new File('.'))
 //List lines = process(new File('.'))
 //lines.each { println it }

@@ -1,74 +1,76 @@
 ---
 layout: default
-title: Page Index
+title: Site Index
 ---
 
-- [Apr](/apr.html)
-- [Contents](/Contents.html)
-- [Contributing](/Contributing.html)
+# Site Index
+
+- [Apr](/apr)
+- [Contents](/Contents)
+- [Contributing](/Contributing)
 - Corpora
-  - [Masc](/corpora/masc.html)
-- [Developing](/Developing.html)
-- [Documentation](/Documentation.html)
-- [Events](/Events.html)
+  - [Masc](/corpora/masc)
+- [Developing](/Developing)
+- [Documentation](/Documentation)
+- [Events](/Events)
 - Grids
-  - [Conversion](/grids/conversion.html)
-- Images
-- [Index](/index.html)
+  - [Conversion](/grids/conversion)
+- [Installing](/installing)
 - Interchange
-  - [Coref](/interchange/coref.html)
-  - [Dependencies](/interchange/dependencies.html)
-  - [Index](/interchange/index.html)
-  - [Ner](/interchange/ner.html)
-  - [Overview](/interchange/overview.html)
-  - [Phrase_structure](/interchange/phrase_structure.html)
-  - [Temporal-v1](/interchange/temporal-v1.html)
-  - [Tokens](/interchange/tokens.html)
+  - [Coref](/interchange/coref)
+  - [Dependencies](/interchange/dependencies)
+  - [Index](/interchange/index)
+  - [Ner](/interchange/ner)
+  - [Overview](/interchange/overview)
+  - [Phrase_structure](/interchange/phrase_structure)
+  - [Temporal-v1](/interchange/temporal-v1)
+  - [Tokens](/interchange/tokens)
 - Licensing
-  - [Index](/licensing/index.html)
-  - [Meeting1-Agenda](/licensing/Meeting1-Agenda.html)
-  - [Meeting1-Summary](/licensing/Meeting1-Summary.html)
-  - [Model](/licensing/model.html)
-  - [UseCases](/licensing/UseCases.html)
-- [Licensing](/Licensing.html)
-- [LiveSite](/LiveSite.html)
+  - [Index](/licensing/index)
+  - [Meeting1-Agenda](/licensing/Meeting1-Agenda)
+  - [Meeting1-Summary](/licensing/Meeting1-Summary)
+  - [Model](/licensing/model)
+  - [UseCases](/licensing/UseCases)
+- [Licensing](/Licensing)
+- [LiveSite](/LiveSite)
 - Manuals
-  - [Index](/manuals/index.html)
+  - [Index](/manuals/index)
   - Service-manager
     - Install-service-manager
-      - [00-readme-osx](/manuals/service-manager/install-service-manager/00-readme-osx.html)
-      - [00-readme-rhel](/manuals/service-manager/install-service-manager/00-readme-rhel.html)
+      - [00-readme-osx](/manuals/service-manager/install-service-manager/00-readme-osx)
+      - [00-readme-rhel](/manuals/service-manager/install-service-manager/00-readme-rhel)
       - Bpel
-        - [00-readme](/manuals/service-manager/install-service-manager/bpel/00-readme.html)
+        - [00-readme](/manuals/service-manager/install-service-manager/bpel/00-readme)
       - Examples
       - Images
-      - [Index](/manuals/service-manager/install-service-manager/index.html)
+      - [Index](/manuals/service-manager/install-service-manager/index)
       - Scripts
   - Wrapping
     - Mv1
       - Manual
-        - [Index](/manuals/wrapping/mv1/manual/index.html)
+        - [Index](/manuals/wrapping/mv1/manual/index)
     - Mv2
-      - [Domain_settings](/manuals/wrapping/mv2/domain_settings.html)
-      - [Manual](/manuals/wrapping/mv2/manual.html)
-- [OAuth](/OAuth.html)
-- [README](/README.html)
-- [Roadmap](/Roadmap.html)
-- [Security](/Security.html)
-- [Specs](/specs.html)
-- [Summary2014-10-03](/Summary2014-10-03.html)
-- [TechMeeting2014-10-02](/TechMeeting2014-10-02.html)
+      - [Domain_settings](/manuals/wrapping/mv2/domain_settings)
+      - [Manual](/manuals/wrapping/mv2/manual)
+- [Modernist](/Modernist)
+- [OAuth](/OAuth)
+- [README](/README)
+- [Roadmap](/Roadmap)
+- [Security](/Security)
+- [Specs](/specs)
+- [Summary2014-10-03](/Summary2014-10-03)
+- [TechMeeting2014-10-02](/TechMeeting2014-10-02)
 - Technical
-  - [Containers](/technical/containers.html)
-  - [Docker](/technical/docker.html)
-  - [Dsl](/technical/dsl.html)
-  - [Galaxy](/technical/galaxy.html)
-  - [Github](/technical/github.html)
-  - [Jetstream](/technical/jetstream.html)
-  - [Jupyter](/technical/jupyter.html)
-  - [Maven](/technical/Maven.html)
-  - [Release](/technical/release.html)
-- [Test](/Test.html)
-- [Themes](/Themes.html)
+  - [Containers](/technical/containers)
+  - [Docker](/technical/docker)
+  - [Dsl](/technical/dsl)
+  - [Galaxy](/technical/galaxy)
+  - [Github](/technical/github)
+  - [Jetstream](/technical/jetstream)
+  - [Jupyter](/technical/jupyter)
+  - [Maven](/technical/Maven)
+  - [Release](/technical/release)
+- [Test](/Test)
+- [Themes](/Themes)
 - Vocabulary
-  - [Current_issues](/vocabulary/current_issues.html)
+  - [Current_issues](/vocabulary/current_issues)

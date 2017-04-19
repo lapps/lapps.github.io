@@ -3,31 +3,21 @@ layout: default
 title: LIF PhraseStructure
 ---
 
-[LIF](index.html) > 
-    [phrase structure]()
+[LIF](index.html) > <a name='null'></a>
+
 
 # Phrase Structure in LIF
 
-Last updated: January 21
-    <sup>st</sup>, 2016
+Last updated: January 21 <sup>st</sup>, 2016
 
-We use two annnotation object from the vocabulary,
-    PhraseStructure and Consituent:
+We use two annnotation object from the vocabulary, PhraseStructure and Consituent:
 
 * [http://vocab.lappsgrid.org/PhraseStructure.html](http://vocab.lappsgrid.org/PhraseStructure.html)
 * [http://vocab.lappsgrid.org/Constituent.html](http://vocab.lappsgrid.org/Constituent.html)
 
-The PhraseStructure object contains a single parse tree for
-    some text span, typically for a sentence. It introduces a
-    feature named constituents which contains a list of identifiers
-    referring to (1) annotations of @type Constituent in the same
-    view or (2) annotations of @type Token that may live in another
-    view. A Constituent has a label reflecting the category and in
-    the features dictionary a pointer to the parent (null for the
-    root node) and a list of children.
+The PhraseStructure object contains a single parse tree for some text span, typically for a sentence. It introduces a feature named constituents which contains a list of identifiers referring to (1) annotations of @type Constituent in the same view or (2) annotations of @type Token that may live in another view. A Constituent has a label reflecting the category and in the features dictionary a pointer to the parent (null for the root node) and a list of children.
 
 ```
-
 {
   "text": "Sue sees herself",
   "views": [
@@ -85,17 +75,8 @@ The PhraseStructure object contains a single parse tree for
 }
 ```
 
-In the example tree above we have three Constituents and
-    three Tokens (the three leaf nodes). Since we have the parent
-    feature on Constituents and not on Tokens (where we do not want
-    it) we have a tree where the non-terminals have an explicit
-    parent, but the terminals don't.
+In the example tree above we have three Constituents and three Tokens (the three leaf nodes). Since we have the parent feature on Constituents and not on Tokens (where we do not want it) we have a tree where the non-terminals have an explicit parent, but the terminals don't.
 
-NOTE: we are currently discussing whether "root" should be
-    added to PhraseStructure as a property, it would contain the
-    identifier of the top node of the tree.
+NOTE: we are currently discussing whether "root" should be added to PhraseStructure as a property, it would contain the identifier of the top node of the tree.
 
-[ 
-    [up](index.html) | 
-    [previous](coref.html) | 
-    [next](dependencies.html) ]
+[ [up](index.html) | [previous](coref.html) | [next](dependencies.html) ]
