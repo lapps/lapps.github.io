@@ -11,7 +11,7 @@ the new URLs is also easy, but will take more time.
 
 <div class="note">
 <p>
-<span class="red">NOTE</span> the web services themselves do not need to be updated; only 
+<em>NOTE:</em> the web services themselves do not need to be updated; only 
 clients that call the services need to be updated to use the new URLs.
 </p>
 <p>
@@ -21,7 +21,7 @@ automatically redirected to the secure service port.
 </div>
 
 <div class="note">
-<span class="red">NOTE:</span> If you already have a security certificate for your server 
+<em>NOTE:</em> If you already have a security certificate for your server 
 you can use that instead of generating a new one. In that case, create the Java keystore, skip
 the section on creating a CSR (Certificate Signing Request) and jump to the section on
 installing your certificate.  You will only have to install your existing certificate rather 
@@ -33,6 +33,13 @@ than the three listed below.
 To serve requests over https Tomcat needs a private key and public key (certificate) that 
 it can use to sign and encode/decode messages.  These keys are stored in a *"keystore"* 
 which is created with the Java <tt>keytool</tt> program.
+
+<div class="note">
+<p><em>Update:</em> Since all LAPPS Grid members are also members of the [InCommon Federation](https://www.incommon.org) server certificats can be obtained through the [InCommon Certificate Service](https://www.incommon.org/certificates/).  Please contact the appropriate person in your IT department for information on obtaining certificates through your institution.
+</p>
+<p>This means you can also skip the first two steps and most of the third step below and go directly to the [Configure Tomcat](#configure-tomcat) section.
+</p>
+</div>
 
 ### Create a keystore.  
 
@@ -46,7 +53,7 @@ keytool -genkey -keysize 2048 -alias tomcat -keyalg RSA -keystore /path/to/keyst
 The <tt>/path/to/keystore</tt> is the keystore file that will be generated.
 
 <div class="note">
-<span class="red">NOTE:</span> as a matter of policy, always select a 2048 bit key size
+<em>NOTE:</em> as a matter of policy, always select a 2048 bit key size
 any time you are given the option.
 </div>
 
@@ -98,7 +105,7 @@ keytool -import -alias signer -keystore /path/to/keystore -trustcacerts -file la
 bin/keytool -import -alias tomcat -keystore /path/to/keystore -trustcacerts -file server-name.crt
 ```
 
-### Configure Tomcat. 
+### Configure Tomcat
 
 Edit <tt>$CATALINE_HOME/conf/server.xml</tt> and uncomment the Connector for port 8443. 
 
@@ -130,13 +137,13 @@ two Tomcat instances; one on port 8443 that hosts the service manager and anothe
 9443 that hosts the services. Both Tomcat instances are configured to use the same keystore.
 
 <div class="note">
-<p><span class="red">NOTE:</span> Make sure that the <tt>redirectPort</tt> for the other
+<p><em>NOTE:</em> Make sure that the <tt>redirectPort</tt> for the other
 Connectors uses the same port number used for the HTTPS Conntector. For example, if you decide
 to have Tomcat listen for HTTPS connections on port 1234 then the other Connectors (if any)
 should use 1234 as their <tt>redirectPort</tt>.</p>
 
 <p>
-<span class="red">NOTE:</span> All Tomcat instances involved in running LAPPS services <strong>must</strong> be
+<em>NOTE:</em> All Tomcat instances involved in running LAPPS services <strong>must</strong> be
 configured to use HTTPS.  That is, you can not configure the services to use HTTPS but continue
 to run the Service Manager over HTTP.  Similarly, you can not just configure the Service
 Manager to use HTTPS and continue to use HTTP for the services.  It has to be HTTPS from end 

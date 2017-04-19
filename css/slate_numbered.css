@@ -117,11 +117,22 @@ footer p {
 
 /* LAPPS customizations. */
 
-.note {
+div.note {
 	border: 1px black solid;
 	background-color: #e0e0e0;
 	padding: 5px;
     margin: 10px 0 15px 0;
+}
+
+span.note {
+	color: red;
+	font-weight: bold;
+}
+
+div.note em {
+	color: red;
+	font-weight: bold;
+	font-style: normal;
 }
 
 .green {
@@ -135,6 +146,7 @@ footer p {
 .blue {
 	color: blue;
 }
+
 
 tt {
 	font-family: 'Courier New', Courier, monospace; 

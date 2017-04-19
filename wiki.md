@@ -1,5 +1,5 @@
 ---
-layout: slate
+layout: cayman
 title: Language Application Grid
 ---
 
