@@ -6,12 +6,21 @@ title: Wrapping Services Manual
 ## Domain Settings
 
 Domains
-[[images/settings-domain.jpg]]
+
+<img src="images/settings-domain.jpg"/>
+
 Resource Meta Attributes
-[[images/settings-resource-meta.jpg]]
+
+<img src="images/settings-resource-meta.jpg"/>
+
 Resource Types.
-[[images/settings-resource-type.jpg]]
+
+<img src="images/settings-resource-type.jpg"/>
+
 Service Meta Attributes.
-[[images/settings-service-meta.jpg]]
+
+<img src="images/settings-service-meta.jpg"/>
+
 Service Types.
-[[images/settings-service-type.jpg]]
+
+<img src="./images/settings-service-type.jpg"/>
