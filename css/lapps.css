@@ -1,8 +1,17 @@
 .note {
 	border: 1px black solid;
 	background-color: #e0e0e0;
-	padding: 5px;
+	padding: 5px 10px;
     margin: 10px 0 15px 0;
+    border-radius: 10px; 
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+}
+
+.note em {
+	font-weight: bold;
+	font-style: normal;
+	color: #F55;
 }
 
 .green {
