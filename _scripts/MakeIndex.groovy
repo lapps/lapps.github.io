@@ -37,7 +37,7 @@ stack.push(new Menu('ROOT'))
 process(new File('.'))
 Menu root = stack.pop()
 root.prune()
-root.print(System.out, new Indentation())
+root.items.each { it.print(System.out, new Indentation()) }
 return
 
 

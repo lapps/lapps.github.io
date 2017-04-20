@@ -8,16 +8,17 @@ title: Site Index
 - [Apr](/apr)
 - [Contents](/Contents)
 - [Contributing](/Contributing)
-- Corpora
+- corpora
   - [Masc](/corpora/masc)
 - [Developing](/Developing)
-- Documentation
+- documentation
   - [Index](/documentation/index)
 - [Documentation](/Documentation)
 - [Events](/Events)
-- Grids
+- grids
   - [Conversion](/grids/conversion)
-- Installation
+- [Index](/index)
+- installation
   - [Authorization](/installation/authorization)
   - [Aws](/installation/aws)
   - [Discriminators](/installation/discriminators)
@@ -29,7 +30,7 @@ title: Site Index
   - [Overview](/installation/overview)
   - [Service_manager](/installation/service_manager)
   - [Services](/installation/services)
-- Interchange
+- interchange
   - [Coref](/interchange/coref)
   - [Dependencies](/interchange/dependencies)
   - [Index](/interchange/index)
@@ -38,7 +39,7 @@ title: Site Index
   - [Phrase_structure](/interchange/phrase_structure)
   - [Temporal-v1](/interchange/temporal-v1)
   - [Tokens](/interchange/tokens)
-- Licensing
+- licensing
   - [Index](/licensing/index)
   - [Meeting1-Agenda](/licensing/Meeting1-Agenda)
   - [Meeting1-Summary](/licensing/Meeting1-Summary)
@@ -46,21 +47,20 @@ title: Site Index
   - [UseCases](/licensing/UseCases)
 - [Licensing](/Licensing)
 - [LiveSite](/LiveSite)
-- Manuals
+- manuals
   - [Index](/manuals/index)
-  - Service-manager
-    - Install-service-manager
+  - service-manager
+    - install-service-manager
       - [00-readme-osx](/manuals/service-manager/install-service-manager/00-readme-osx)
       - [00-readme-rhel](/manuals/service-manager/install-service-manager/00-readme-rhel)
-      - Bpel
+      - bpel
         - [00-readme](/manuals/service-manager/install-service-manager/bpel/00-readme)
       - [Index](/manuals/service-manager/install-service-manager/index)
-  - Wrapping
-    - Mv1
-      - Manual
-        - Images
+  - wrapping
+    - mv1
+      - manual
         - [Index](/manuals/wrapping/mv1/manual/index)
-    - Mv2
+    - mv2
       - [Domain_settings](/manuals/wrapping/mv2/domain_settings)
       - [Manual](/manuals/wrapping/mv2/manual)
 - [Maven](/Maven)
@@ -72,7 +72,7 @@ title: Site Index
 - [Specs](/specs)
 - [Summary2014-10-03](/Summary2014-10-03)
 - [TechMeeting2014-10-02](/TechMeeting2014-10-02)
-- Technical
+- technical
   - [Containers](/technical/containers)
   - [Docker](/technical/docker)
   - [Dsl](/technical/dsl)
@@ -82,5 +82,6 @@ title: Site Index
   - [Jupyter](/technical/jupyter)
   - [Maven](/technical/Maven)
   - [Release](/technical/release)
-- Vocabulary
+- vocabulary
   - [Current_issues](/vocabulary/current_issues)
+- [Wiki](/wiki)
