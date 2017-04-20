@@ -23,7 +23,10 @@ public class Hello {
 ## Project template
 
 You start with the template in template.zip, which has the following directory structure:
-[[images/template.jpg]]
+
+
+![alt-text](images/template.jpg)
+
 Once you have unpacked the template, you should rename the directory (for this example, let's say we use "howdy") and add you code file Hello.java to src/main/java.
 
 ## Editing files
@@ -155,7 +158,13 @@ When this is running, and especially the first time, Maven may be frantically do
 ```
 
 This indicates that the Jetty server is now running and you can access it on your brower using [http://localhost:4040](http://localhost:4040). When you click this link, you will see something like:
-[[images/jetty-4040.jpg]]
+
+
+![alt-text](images/jetty-4040.jpg)
+
 Ignore the error and just click the link. This will lead you to a new page [http://localhost:4040/howdy](http://localhost:4040/howdy/). Now add "service" to the url, that is, go to [http://localhost:4040/howdy/services](http://localhost:4040/howdy/services).
-[[images/jetty-services.jpg]]
+
+
+![alt-text](images/jetty-services.jpg)
+
 A few notes on the names. In the URLs, we consistently saw "howdy" as an identifier, this is driven by the artifactId enterd in the POM file. In the images right above, we see "howdyyou", which is taken from the name of the XML file in src/main/webapp/WEB_INF/serviceimpl. Notice how the service exposes execute, requires and produces methods.

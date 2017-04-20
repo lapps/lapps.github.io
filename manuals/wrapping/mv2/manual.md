@@ -50,9 +50,15 @@ Amended versions of these scripts will be used when creating the service.
 ## Preparing Eclipse
 
 Open Eclipse. The first thing you want to do on a virgin Eclipse is to create a server. Select "File > New > Other > Servers > Server", then the Apache Tomcat server that you want. The default name (Tomcat v6.0 Server at localhost) is fine.
-[[images/screenshot-00-new-server-1.jpg]]
+
+
+![alt-text](images/screenshot-00-new-server-1.jpg)
+
 As part of this process you need to enter the location of your tomcat server. This can be any Tomcat server, it does not need to be a Tomcat server with the Service manager installed.
-[[images/screenshot-00-new-server-2.jpg]]
+
+
+![alt-text](images/screenshot-00-new-server-2.jpg)
+
 This should be easy but it can be a pain in the extreme lower back. I did this with a new install of Eclipse Kepler SR2 and it worked fine. it also worked fine when I first did this on Eclipse Juno SR2, but later, when I had removed the Tomcat 6 servers and tried to install a new one, Eclipse would not let me (the "Server name" input box was empty and the "Next" button was greyed out; this was only an issue with the Tomcat 6 server, others could still be created).
 
 In even older versions you may need to edit, add and/or configure the runtime environment (part of this is specifiying where the tomcat server is located) yet I have no idea how I did this. In a previous version I also ran into some other rather puzzling behaviour. At first, the older version would not let me create a tomcat 6 server because there was already one defined so I had to delete it. Later it kept insisting on creating a new Servers directory to put in new servers. It did not seem to matter though.
@@ -63,9 +69,15 @@ In even older versions you may need to edit, add and/or configure the runtime en
 We now create a project. For this we need the `sources/langrid-webapps-blank-20130221.zip` archive. This archive has the skeleton code for creating services. Unzip it and rename the result into something that makes sense, for these notes, we rename `langrid-webapps-blank-20130221` into `langrid-webapps-marks-v1`. This directory will turn into an Eclipse Java project and when we are done it will have the code for a related set of services, all wrapping Python scripts that add characters to the end of a string.
 
 Open the project in Eclipse by selecting "File > New > Java Project" (if there is no"'Java Project" under "File > New", then do "File > New > Other" and navigate till you find "Java Project", using the wizards input field and typing "Java Project" will help).
-[[images/screenshot-01-java-project-1.jpg]]
+
+
+![alt-text](images/screenshot-01-java-project-1.jpg)
+
 You will be asked for a project name (AddMarks) and a location. If we had renamed `langrid-webapps-blank-20130221` into `AddMarks` and if we had put it in the default Ecplise workspace, we could have used the default location, but since we used `langrid-webapps-marks-v1` we have to define the location by hand. You may get a dialog about what kind of perspective to use, follow the suggestion and you'll get something like the window below.
-[[images/screenshot-01-java-project-2.jpg]]
+
+
+![alt-text](images/screenshot-01-java-project-2.jpg)
+
 In older Eclipse versions, the Eclipse package explorer for AddMarks may not have a JUnit library. You can add it by selecting AddMarks and "File > Properties". Then select "Java Build Path > Libraries > Add Library > JUnit > Junit 4" (in some version of Eclipse you may not have to press a "Libraries" tab before you click "Add Library").
 
 With the project and server in place, we can create the java classes needed for the service. We create an Interface and two classes that implement the interface, one each for the two python script that we are wrapping:
@@ -75,9 +87,15 @@ With the project and server in place, we can create the java classes needed for 
 1. SimpleQuestionMarkService.java
 
 The create the interface use "File > New > Interface" and fill in the package name and the interface name. In the example below, I have used brandeis.simpleservices for the package name and PythonInterface for the interface name, but you can use anything you want.
-[[images/screenshot-03-new-interface.jpg]]
+
+
+![alt-text](images/screenshot-03-new-interface.jpg)
+
 Once you have clicked "Finish", Eclipse creates an interface named PythonInterface.java and gives it some skeleton code:
-[[images/screenshot-04-new-interface-skeleton.jpg]]
+
+
+![alt-text](images/screenshot-04-new-interface-skeleton.jpg)
+
 The skeleton code should be replaced with the code printed below, which defines the interface for the services. It defines the method used by the service classes and the parameters for that method. In this case, we only have one parameter, the input string to the python script. It is not clear to me whether all the exceptions are needed, the exceptions were lifted from some Language Grid interface. I am also not clear on how exactly the names space plays into this, I figure we could always uses something like servicegrid:servicetype:<site>:<interface_name>, but I am not sure.
 
 ```
@@ -114,9 +132,15 @@ UnsupportedLanguagePairException;
 As an aside, the example that came with the sample code in our project is much simpler. It is not wrong and will work, but because it does not have any of the pre-defined exceptions, it will be less effective in the service manager environment.
 
 With the interface in place, we can now create the exclamation mark and question mark services, here shown just for one of them. In Eclipse, the way to create a regular class is similar to creating an interface and involves the "File > New" menu. For the exclamation service file you can use the settings below. I think the package name has to be the same as for the interface, but I am not sure.
-[[images/screenshot-05-new-class.jpg]]
+
+
+![alt-text](images/screenshot-05-new-class.jpg)
+
 Again, when you press "Finish" Eclipse will create the class with some skeleton code:
-[[images/screenshot-06-new-class-skeleton.jpg]]
+
+
+![alt-text](images/screenshot-06-new-class-skeleton.jpg)
+
 The SimpleExclamationMarkService.java file implements the Python interface above. The skeleton code needs to be replaced with the code below. That code is based on the Java wrapper named AddExclamationMark.java, but there are changes because the code now needs to run in the context of a service. The most salient changes for the current example are:
 
 1. the name of the class was changed to distinguish it from the simple wrapper,
@@ -165,9 +189,15 @@ System.out.println(st); }
 ```
 
 Once you have these files in place you really want to test them right there in Eclipse. So we create a test case with "File > New > JUnit Test Case":
-[[images/screenshot-07-junit-test.jpg]]
+
+
+![alt-text](images/screenshot-07-junit-test.jpg)
+
 Pressing "Finish" creates the skeleton code:
-[[images/screenshot-08-junit-test-skeleton.jpg]]
+
+
+![alt-text](images/screenshot-08-junit-test-skeleton.jpg)
+
 Replace the skeleton code with something that actually does some testing. The goal here is not to build an extensive test suite, but to make sure your code runs and wraps the Python scripts, so the test can be simple.
 
 ```
@@ -210,7 +240,10 @@ Run the test by selecting SimpleExclamationMarkServiceTest in the package explor
 ## Testing with SoapUI
 
 We now test whether the code can run as a service using SoapUI. For this we first create an XML file named SimpleExclamationMarkService.xml (using the "File > New > File" menu) in WebContent/WEB-INF/serviceimpl/:
-[[images/screenshot-09-beans-file.jpg]]
+
+
+![alt-text](images/screenshot-09-beans-file.jpg)
+
 When clicking "Finish", an empty file will be created. I don't think the file needs to be named SimpleExclamationMarkService.xml, but the contents have to refer to the class that wraps the Python script. Paste in the following content and save it.
 
 ```
@@ -234,7 +267,10 @@ A similar XML file should be made for the question mark wrapper. With these XML 
 But... the step above starts the tomcat server and allows us to find the URL through which the service can be accessed. First open [http://localhost:8080/jp.go.nict.langrid.webapps.blank/services](http://localhost:8080/jp.go.nict.langrid.webapps.blank/services) in a browser. This gives a page with all available services. Select the wsdl link next to the SimpleExclamationMarkService, which will lead you to an XML file with a URL like this:
  http://localhost:8080/jp.go.nict.langrid.webapps.blank/services/SimpleExclamationMarkService?wsdl
 Now start SoapUI and create a new soap project. Give it any name and give the URL above as the value of "Initial WSDL/WADL".
-[[images/screenshot-10-soapui.jpg]]
+
+
+![alt-text](images/screenshot-10-soapui.jpg)
+
 In the SoapUI GUI, Expand the "addMark" line and double click "Request 1". This gives you two widgets, one for the request and one for the response (you may need to first close the starter page). In the request page, replace the question mark with any string, press the submit button, and check whether the response is as expected. The result should look like below (click the image to view a larger version).
 [](images/screenshot-11-soapui-large.jpg)
 When this all works fine, we are ready for deploying the service.
@@ -263,7 +299,10 @@ This is a high-level description of the domain of your application. The Language
 1. Protocols. 
 There is actually only one protocol, there may be more in the future. It still needs to be defined here by entering SOAP_RPC_ENCODED in all three fields (well, you can definitely put something more elaborate in the description field and the name could be something else I think, but there is really no need to do that now, name and description can always be changed later). This protocol actually refers to the "Axis SOAP (RPC/ENC) invoker" protocols in the diagram below in the "Intra-Grid Executor" and the "Inter-Grid Executor" (we are focusing on the first here).
 
-[[images/service_grid.jpg]]
+
+
+![alt-text](images/service_grid.jpg)
+
 
 1. Resource Meta Attributes. 
 I have not figured out yet how to best use this to our advantage, for lack of understanding, I have just used NLP_ResourceMetaAttribute
@@ -288,7 +327,10 @@ Here are some [screen shots](domain_settings.html) that show how to define some 
 1. Your language services
 
 As with many of the domain settings above, the language resources are just labels. You use them to group your services. To see what resources the Language Grid defined, click [http://langrid.org/service_manager/language-resources](http://langrid.org/service_manager/language-resources). One of my favourites is the very first one: *An Introduction to Schools in Japan: School Guidance for Foreign Guardians*. This gives you an idea of the granularity. For the current example, I just defined a resource named SimplePythonServices:
-[[images/providing-resources.jpg]]
+
+
+![alt-text](images/providing-resources.jpg)
+
 A language service is registered under a particular resource. For the Language Grid, it is typical to have a one-to-one relationship between resources and services, and in most cases the names are the same. In this example, we have two services bundled with one resource. In addition to a name and a resource, registering a service requires uploading a wsdl file either from a local XML file or through a URL. For our exclamation mark service, this file is actually the same file as the one we uploaded for the NLP_ServiceType service type. We can provide services for the exclamation and question mark services using the following URLs:
  http://localhost:8080/AddMarks/services/SimpleExclamationMarkService?wsdl <br/>
 http://localhost:8080/AddMarks/services/SimpleQuestionMarkService?wsdl

@@ -50,10 +50,16 @@ The main goal here is to increase shared memory. After this, you need to reboot 
 The installation includes pgAdmin III and the application stack builder, which can be used to add some extensions. With pgAdmin, creating a database for the service manager is a five-step procedure:
 
 1. Open pgAdmin3 in `/Applications/PostgreSQL 9.3` and select the PostgreSQL 9.3 Server in the Object Browser, then right-click it and select "Connect" in order to see and connect to your databases. 
-1. Select "Login Roles" and right-click it. Select "New Loging Role...". Add a role (eg 'service'), give it a password under the Definition tab (eg 'servicepw'). Right-click the login role and select "properties" to change the password. [[images/postgres-login-role.jpg]]
+1. Select "Login Roles" and right-click it. Select "New Loging Role...". Add a role (eg 'service'), give it a password under the Definition tab (eg 'servicepw'). Right-click the login role and select "properties" to change the password. 
+
+![alt-text](images/postgres-login-role.jpg)
+
 1. Now select "Databases" and right-click it. Select "New Database...". Give it a name (eg 'servicegrid') and an owner ('service').
 1. Select the newly created database and click the SQL button in the top menu. Paste in the contents of `source/langrid/langrid-corenode-p2p-2.0.0-20120718/postgresql/create_storedproc.sql` (or its [local
-    copy](examples/create_storedproc.sql) in this manual). You can use the "Open File" button for this (second on the left on the menu bar). Then click "Execute query" (the green right arrow on the menu bar). You should get a message indicating success as below. [[images/postgres-stored-procedure.jpg]]
+    copy](examples/create_storedproc.sql) in this manual). You can use the "Open File" button for this (second on the left on the menu bar). Then click "Execute query" (the green right arrow on the menu bar). You should get a message indicating success as below. 
+
+![alt-text](images/postgres-stored-procedure.jpg)
+
 1. Select the function that was just created ("servicegrid > Schemas > public > Functions") and double click the owner in the properties tab (a dialog appears, click OK, then a new dialog appears which has the habit of disappearing behind the main window). Now change the owner from postgres to service.
 
 A few remarks on the above:
