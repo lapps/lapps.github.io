@@ -1,204 +1,199 @@
 <html>
-  <head>
-    <meta name="generator"
-    content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.18.1), see www.w3.org" />
-    <title>LIF Coreference</title>
-    <link rel="stylesheet" href="main.css" type="text/css" />
-  </head>
-  <body>
-    <p>
-    <a href="index.html">LIF</a> &gt; 
-    <a href="">coreference</a></p>
-    <h1>Coreference in LIF</h1>
-    <p>Last updated: October 29
-    <sup>th</sup>, 2015</p>
-    <p>This document contains examples on how to represent
-    coreference in the LAPPS Interchange Format. It also has
-    examples of the output of some common coreference tools.</p>
-    <p>[ 
-    <a href="#linguistics">linguistics</a> | 
-    <a href="#output">tool output</a> | 
-    <a href="#lif">coreference in LIF</a> ]</p>
-    <a name="linguistics" id="linguistics"></a>
-    <h2>Some Linguistics</h2>
-    <p>Coreference occurs when two or more text elements have the
-    same referent, that is, they refer to the same person or thing.
-    One of these text elements is a full form. There are several
-    kinds of coreference:</p>
-    <ol>
-      <li>
-      <i>Joe Doe hurt himself</i>. The anophor 
-      <i>himself</i> refers to the same thing as the full form 
-      <i>himself</i>. In this case the full form is called the
-      antecedent.</li>
-      <li>
-      <i>Despite her reluctance, Jane Doe understood the issue</i>.
-      The cataphor 
-      <i>her</i> occurs before the postcedent (the full form).</li>
-      <li>
-      <i>Carol told Bob to attend the party. They arrived
-      together</i>. The anaphor 
-      <i>they</i> has a split antecedent.</li>
-      <li>
-      <i>The man refuses to help. The jerk thinks he is too good
-      for that</i>. Coreferring noun phrases, where the second noun
-      phrase is a predication over the first.</li>
-    </ol>
-    <p>Much of this is taken from 
-    <a href="http://en.wikipedia.org/wiki/Coreference"
-    target="_blank">http://en.wikipedia.org/wiki/Coreference</a>.</p>
-    <a name="output" id="output"></a>
-    <h2>Coreference output examples</h2>
-    <p>The 
-    <b>Stanford tools</b> create a list of mentions for each
-    coreference chain and assigns the "representative" attribute to
-    one of the elements. Each mention refers to sentence and token
-    identifiers. For the text 
-    <i>"John is sick. He is home. Jill sees her dog."</i>, we have
-    the following output:</p>
-    <pre class="example">
-&lt;root&gt;
-  &lt;document&gt;
-    &lt;sentences&gt;
-      &lt;sentence id="1"&gt;
-        &lt;tokens&gt;
-          &lt;token
-id="1"&gt;&lt;word&gt;John&lt;/word&gt;...&lt;/token&gt;
+
+<head>
+<title>LIF Coreference</title>
+<link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+
+<body>
+
+<p>
+  <a href="index.html">LIF</a>
+> <a href="">coreference</a>
+</p>
+
+<h1>Coreference in LIF</h1>
+
+<p>Last updated: October 29<sup>th</sup>, 2015</p>
+
+
+<p>This document contains examples on how to represent coreference in the LAPPS
+Interchange Format. It also has examples of the output of some common
+coreference tools.</p>
+
+<p>
+[ <a href="#linguistics">linguistics</a>
+| <a href="#output">tool output</a>
+| <a href="#lif">coreference in LIF</a>
+]
+</p>
+
+
+<a name="linguistics"></a>
+<h2>Some Linguistics</h2>
+
+<p>Coreference occurs when two or more text elements have the same referent,
+that is, they refer to the same person or thing. One of these text elements is a
+full form. There are several kinds of coreference:</p>
+
+<ol>
+
+<li><i>Joe Doe hurt himself</i>. The anophor <i>himself</i> refers to the same thing as
+the full form <i>himself</i>. In this case the full form is called the antecedent.
+
+<li><i>Despite her reluctance, Jane Doe understood the issue</i>. The cataphor <i>her</i>
+occurs before the postcedent (the full form).
+
+<li><i>Carol told Bob to attend the party. They arrived together</i>. The anaphor
+<i>they</i> has a split antecedent.
+
+<li><i>The man refuses to help. The jerk thinks he is too good for
+that</i>. Coreferring noun phrases, where the second noun phrase is a
+predication over the first.
+
+</ol>
+
+<p>Much of this is taken from <a href="http://en.wikipedia.org/wiki/Coreference"
+target="_blank">http://en.wikipedia.org/wiki/Coreference</a>.</p>
+
+
+<a name="output"></a>
+<h2>Coreference output examples</h2>
+
+<p>The <b>Stanford tools</b> create a list of mentions for each coreference
+chain and assigns the "representative" attribute to one of the elements. Each
+mention refers to sentence and token identifiers. For the text <i>"John is
+sick. He is home. Jill sees her dog."</i>, we have the following output:</p>
+
+<pre class="example">
+&lt;root>
+  &lt;document>
+    &lt;sentences>
+      &lt;sentence id="1">
+        &lt;tokens>
+          &lt;token id="1">&lt;word>John&lt/word>...&lt;/token>
           ...
-        &lt;/tokens&gt;
-        &lt;parse&gt;(ROOT (S (NP (NNP John)) (VP (VBZ is) (ADJP
-(JJ sick))) (. .))) &lt;/parse&gt;
-        &lt;dependencies
-type="basic-dependencies"&gt;...&lt;/dependencies&gt;
-        &lt;dependencies
-type="collapsed-dependencies"&gt;...&lt;/dependencies&gt;
-        &lt;dependencies
-type="collapsed-ccprocessed-dependencies"&gt;...&lt;/dependencies&gt;
-      &lt;/sentence&gt;
-      &lt;sentence id="2"&gt;...&lt;/sentence&gt;
-      &lt;sentence id="3"&gt;...&lt;/sentence&gt;
-    &lt;/sentences&gt;
-    &lt;coreference&gt;
-      &lt;coreference&gt;
-        &lt;mention representative="true"&gt;
-         
-&lt;sentence&gt;1&lt;/sentence&gt;&lt;start&gt;1&lt;/start&gt;&lt;end&gt;2&lt;/end&gt;&lt;head&gt;1&lt;/head&gt;&lt;text&gt;John&lt;/text&gt;
-        &lt;/mention&gt;
-        &lt;mention&gt;
-         
-&lt;sentence&gt;2&lt;/sentence&gt;&lt;start&gt;1&lt;/start&gt;&lt;end&gt;2&lt;/end&gt;&lt;head&gt;1&lt;/head&gt;&lt;text&gt;He&lt;/text&gt;
-        &lt;/mention&gt;
-      &lt;/coreference&gt;
-      &lt;coreference&gt;
-        &lt;mention representative="true"&gt;
-         
-&lt;sentence&gt;3&lt;/sentence&gt;&lt;start&gt;1&lt;/start&gt;&lt;end&gt;2&lt;/end&gt;&lt;head&gt;1&lt;/head&gt;&lt;text&gt;Jill&lt;/text&gt;
-        &lt;/mention&gt;
-        &lt;mention&gt;
-         
-&lt;sentence&gt;3&lt;/sentence&gt;&lt;start&gt;3&lt;/start&gt;&lt;end&gt;4&lt;/end&gt;&lt;head&gt;3&lt;/head&gt;&lt;text&gt;her&lt;/text&gt;
-        &lt;/mention&gt;
-      &lt;/coreference&gt;
-    &lt;/coreference&gt;
-  &lt;/document&gt;
-&lt;/root&gt;
+        &lt;/tokens>
+        &lt;parse>(ROOT (S (NP (NNP John)) (VP (VBZ is) (ADJP (JJ sick))) (. .))) &lt;/parse>
+        &lt;dependencies type="basic-dependencies">...&lt;/dependencies>
+        &lt;dependencies type="collapsed-dependencies">...&lt;/dependencies>
+        &lt;dependencies type="collapsed-ccprocessed-dependencies">...&lt;/dependencies>
+      &lt;/sentence>
+      &lt;sentence id="2">...&lt;/sentence>
+      &lt;sentence id="3">...&lt;/sentence>
+    &lt;/sentences>
+    &lt;coreference>
+      &lt;coreference>
+        &lt;mention representative="true">
+          &lt;sentence>1&lt;/sentence>&lt;start>1&lt;/start>&lt;end>2&lt;/end>&lt;head>1&lt;/head>&lt;text>John&lt;/text>
+        &lt;/mention>
+        &lt;mention>
+          &lt;sentence>2&lt;/sentence>&lt;start>1&lt;/start>&lt;end>2&lt;/end>&lt;head>1&lt;/head>&lt;text>He&lt;/text>
+        &lt;/mention>
+      &lt;/coreference>
+      &lt;coreference>
+        &lt;mention representative="true">
+          &lt;sentence>3&lt;/sentence>&lt;start>1&lt;/start>&lt;end>2&lt;/end>&lt;head>1&lt;/head>&lt;text>Jill&lt;/text>
+        &lt;/mention>
+        &lt;mention>
+          &lt;sentence>3&lt;/sentence>&lt;start>3&lt;/start>&lt;end>4&lt;/end>&lt;head>3&lt;/head>&lt;text>her&lt;/text>
+        &lt;/mention>
+      &lt;/coreference>
+    &lt;/coreference>
+  &lt;/document>
+&lt;/root>
 </pre>
-    <p>Here is some output from the 
-    <b>OpenNLP coreference</b>:</p>
-    <pre class="example">
+
+<p>Here is some output from the <b>OpenNLP coreference</b>:</p>
+
+<pre class="example">
 OpenNLP Coreference 
 -------------------------------------------------------------------------------------------------------
 Input sentences 1 ::
 Carol told Bob to attend the party. They arrived together.
 
-Sentence#1 parse after POS &amp; NER tag:
-(TOP (S (NP (NNP Carol)) (VP (VBD told) (NP (NNP Bob)) (S (VP (TO
-to) (VP (VB attend) (NP (DT the) (NN party))))))(. .)))
+Sentence#1 parse after POS & NER tag:
+(TOP (S (NP (NNP Carol)) (VP (VBD told) (NP (NNP Bob)) (S (VP (TO to) (VP (VB attend) (NP (DT the) (NN party))))))(. .)))
 
-Sentence#2 parse after POS &amp; NER tag:
-(TOP (S (NP (PRP They)) (VP (VBD arrived) (ADVP (RB together)))(.
-.)))
+Sentence#2 parse after POS & NER tag:
+(TOP (S (NP (PRP They)) (VP (VBD arrived) (ADVP (RB together)))(. .)))
 
 Now displaying all discourse entities::
         Mention set:: [ Bob  :: They  ]
         Mention set:: [ the party  ]
         Mention set:: [ Carol  ]
 </pre>
-    <p>Here too, we have sets of mentions. From this print it is
-    not possible to see how internally mentions in the data
-    structure refer to text elements, whether it is by pointing to
-    sentence and token identifiers, as with the Stanford tool, or
-    to nodes in the parse tree. This example, by the way, shows
-    that split antecedents are not dealt with by OpenNLP (at least,
-    not in this case).</p>
-    <p>And here is the 
-    <b>ANNIE coreference</b> output from GATE. This is the
-    coreference component as wrapped at Vassar (
-    <a href="http://grid.anc.org:8080/service_manager/wsdl/anc:gate.coref_1.3.5">http://grid.anc.org:8080/service_manager/wsdl/anc:gate.coref_1.3.5</a>.
-    The className and itemClassName attributes were removed to make
-    the datas tructure easier to read.</p>
-    <pre class="example">
-&lt;Annotation Id="28" Type="Person" StartNode="9" EndNode="13"&gt;
-&lt;Feature&gt;
-  &lt;Name&gt;matches&lt;/Name&gt;
-  &lt;Value&gt;28;31&lt;/Value&gt;
-&lt;/Feature&gt;
-&lt;Feature&gt;
-  &lt;Name&gt;string&lt;/Name&gt;
-  &lt;Value&gt;John&lt;/Value&gt;
-&lt;/Feature&gt;
-&lt;/Annotation&gt;
-&lt;Annotation Id="31" Type="Person" StartNode="27"
-EndNode="30"&gt;
-&lt;Feature&gt;
-  &lt;Name&gt;ENTITY_MENTION_TYPE&lt;/Name&gt;
-  &lt;Value&gt;PRONOUN&lt;/Value&gt;
-&lt;/Feature&gt;
-&lt;Feature&gt;
-  &lt;Name&gt;antecedent_offset&lt;/Name&gt;
-  &lt;Value&gt;9&lt;/Value&gt;
-&lt;/Feature&gt;
-&lt;Feature&gt;
-  &lt;Name&gt;matches&lt;/Name&gt;
-  &lt;Value&gt;28;31&lt;/Value&gt;
-&lt;/Feature&gt;
-&lt;/Annotation&gt;
+
+<p>Here too, we have sets of mentions. From this print it is not possible to see
+how internally mentions in the data structure refer to text elements, whether it
+is by pointing to sentence and token identifiers, as with the Stanford tool, or
+to nodes in the parse tree. This example, by the way, shows that split
+antecedents are not dealt with by OpenNLP (at least, not in this case).</p>
+
+<p>And here is the <b>ANNIE coreference</b> output from GATE. This is the
+coreference component as wrapped at Vassar
+(<a href="http://grid.anc.org:8080/service_manager/wsdl/anc:gate.coref_1.3.5">http://grid.anc.org:8080/service_manager/wsdl/anc:gate.coref_1.3.5</a>. The
+className and itemClassName attributes were removed to make the datas tructure
+easier to read.</p>
+
+<pre class="example">
+&lt;Annotation Id="28" Type="Person" StartNode="9" EndNode="13">
+&lt;Feature>
+  &lt;Name>matches&lt;/Name>
+  &lt;Value>28;31&lt;/Value>
+&lt;/Feature>
+&lt;Feature>
+  &lt;Name>string&lt;/Name>
+  &lt;Value>John&lt;/Value>
+&lt;/Feature>
+&lt;/Annotation>
+&lt;Annotation Id="31" Type="Person" StartNode="27" EndNode="30">
+&lt;Feature>
+  &lt;Name>ENTITY_MENTION_TYPE&lt;/Name>
+  &lt;Value>PRONOUN&lt;/Value>
+&lt;/Feature>
+&lt;Feature>
+  &lt;Name>antecedent_offset&lt;/Name>
+  &lt;Value>9&lt;/Value>
+&lt;/Feature>
+&lt;Feature>
+  &lt;Name>matches&lt;/Name>
+  &lt;Value>28;31&lt;/Value>
+&lt;/Feature>
+&lt;/Annotation>
 </pre>
-    <p>This is a fragment of the result for 
-    <i>There is John Smith. I saw him in London</i>. This
-    particular result was obtained from a pipeline where the
-    coreference occurred after named entity recognition. Without
-    NER, there are no coreference results (this may be a feature of
-    the particular coreference coponent wrapped). The NER found 
-    <i>John</i> and 
-    <i>him</i> as persons, but not 
-    <i>Smith</i>. Coreference information is added to the Person
-    annotations. StartNode and EndNode refer to the character
-    offsets, whereas matches refers to the annotation object
-    identifiers. 
-    <a name="lif" id="lif"></a></p>
-    <h2>Coreference in the LAPPS Interchange Format</h2>
-    <p>Time for some coreference representations in JSON. The
-    examples below are all for the simple phrase 
-    <i>Sue sees herself</i>. The JSON is fairly informal, just
-    showing the bits and pieces that are relevant to the
-    discussion.</p>
-    <p>The LIF approach to coreference is closer to the Stanford
-    and OpenNLP output than to the GATE output, that is, we express
-    corefence as an attribute or set of attributes on Token or
-    Person objects. Instead, we introduce Coreference and Markable
-    annotation categories, defined in the vocabulary at 
-    <a href="http://vocab.lappsgrid.org/Coreference.html">http://vocab.lappsgrid.org/Coreference.html</a>
-    and 
-    <a href="http://vocab.lappsgrid.org/Markable.html">http://vocab.lappsgrid.org/Markable.html</a>.
-    The latter category is a common appearance in coreference
-    annotation.</p>
-    <p>There are several ways in which coreference can be
-    represented. Here is an example where the coreference view
-    refers to elements in another view and where in fact the
-    tokenization in that view may have been input to the
-    coreference tool.</p>
-    <pre class="example">
+
+<p>This is a fragment of the result for <i>There is John Smith. I saw him in
+London</i>. This particular result was obtained from a pipeline where the
+coreference occurred after named entity recognition. Without NER, there are
+no coreference results (this may be a feature of the particular coreference
+coponent wrapped). The NER found <i>John</i> and <i>him</i> as persons, but
+not <i>Smith</i>. Coreference information is added to the Person
+annotations. StartNode and EndNode refer to the character offsets, whereas
+matches refers to the annotation object identifiers.
+
+
+<a name="lif"></a>
+<h2>Coreference in the LAPPS Interchange Format</h2>
+
+<p>Time for some coreference representations in JSON. The examples below are all
+for the simple phrase <i>Sue sees herself</i>. The JSON is fairly informal, just
+showing the bits and pieces that are relevant to the discussion.</p>
+
+<p>The LIF approach to coreference is closer to the Stanford and OpenNLP output
+than to the GATE output, that is, we express corefence as an attribute or set of
+attributes on Token or Person objects. Instead, we introduce Coreference and
+Markable annotation categories, defined in the vocabulary
+at <a href="http://vocab.lappsgrid.org/Coreference.html">http://vocab.lappsgrid.org/Coreference.html</a>
+and <a href="http://vocab.lappsgrid.org/Markable.html">http://vocab.lappsgrid.org/Markable.html</a>. The
+latter category is a common appearance in coreference annotation.</p>
+
+<p>There are several ways in which coreference can be represented. Here is an
+example where the coreference view refers to elements in another view and where
+in fact the tokenization in that view may have been input to the coreference
+tool.</p>
+
+<pre class="example">
 {
   "text": "Sue sees herself",
   "views": [ 
@@ -206,28 +201,22 @@ EndNode="30"&gt;
        "metadata": {
         "contains": {
           "Token": {
-            "producer":
-"edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
+            "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
             "type": "tokenizer:opennlp" }}},
       "annotations": [ 
          { "@type": "Token", "id": "tok0", "start": 0, "end": 3 },
          { "@type": "Token", "id": "tok1", "start": 4, "end": 8 },
-         { "@type": "Token", "id": "tok2", "start": 9, "end": 16 }
-]},
+         { "@type": "Token", "id": "tok2", "start": 9, "end": 16 } ]},
     { "id": "v2",
       "metadata": {
         "contains": {
           "Markable": {
-            "producer":
-"edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n" },
+            "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n" },
           "Coreference": {
-            "producer":
-"edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n" }}},
+            "producer": "edu.brandeis.cs.lappsgrid.xxxx.coref:n.n.n" }}},
       "annotations": [
-         { "@type": "Markable", "id": "m0", "targets": [ "v1:tok0"
-] },
-         { "@type": "Markable", "id": "m1", "targets": [ "v1:tok2"
-] },
+         { "@type": "Markable", "id": "m0", "targets": [ "v1:tok0" ] },
+         { "@type": "Markable", "id": "m1", "targets": [ "v1:tok2" ] },
          { "@type": "Coreference", 
            "id": "coref0", 
            "features": {
@@ -235,20 +224,19 @@ EndNode="30"&gt;
              "representative": "m0" }}]}]
 }
 </pre>
-    <p>The Coreference element contains a list of mentions, which
-    are identifiers of annotation objects in the same view. In this
-    case the mentions refer to markables that refer to eleents in
-    another view. Markables either have start and end attributes or
-    the target attribute. These attibutes are inherited from Span
-    (see 
-    <a href="http://vocab.lappsgrid.org/Span.html">http://vocab.lappsgrid.org/Span.html</a>).
-    Note that this use of Span is a bit peculiar since we allow
-    spans to either have a start and end or have a list of targets
-    which each have a start and end, th eformer use is common, but
-    the latter use may raise eyebrows.</p>
-    <p>Here is an example where there is no other view to refer to
-    and where the markables directly refer to text offsets.</p>
-    <pre class="example">
+
+<p>The Coreference element contains a list of mentions, which are identifiers of
+annotation objects in the same view. In this case the mentions refer to
+markables that refer to eleents in another view. Markables either have start and
+end attributes or the target attribute. These attibutes are inherited from
+Span (see <a href="http://vocab.lappsgrid.org/Span.html">http://vocab.lappsgrid.org/Span.html</a>). Note that this use of Span is a bit peculiar since we allow spans to
+either have a start and end or have a list of targets which each have a start
+and end, th eformer use is common, but the latter use may raise eyebrows.</p>
+
+<p>Here is an example where there is no other view to refer to and where the
+markables directly refer to text offsets.</p>
+
+<pre class="example">
 {
   "text": "Sue sees herself",
   "views": [ 
@@ -259,8 +247,7 @@ EndNode="30"&gt;
           "Coreference": { } }},
       "annotations": [
          { "@type": "Markable", "id": "m0", "start": 0, "end": 3 },
-         { "@type": "Markable", "id": "m1", "start": 9, "end": 16
-},
+         { "@type": "Markable", "id": "m1", "start": 9, "end": 16 },
          { "@type": "Coreference", 
            "id": "coref0",
            "features": {
@@ -268,12 +255,13 @@ EndNode="30"&gt;
              "representative": "m0" }}]}]
 }
 </pre>
-    <p>If a coreference component generates actual annotations that
-    can be used, but that are not available in other views, then we
-    put them in the coreference view. Below we have Token
-    annotations in the coreference view. Instead of Token we could
-    also have Person or NounChunk or any other Annotation type.</p>
-    <pre class="example">
+
+<p>If a coreference component generates actual annotations that can be used, but
+that are not available in other views, then we put them in the coreference
+view. Below we have Token annotations in the coreference view. Instead of Token
+we could also have Person or NounChunk or any other Annotation type.</p>
+
+<pre class="example">
 {
   "text": "Sue sees herself",
   "views": [ 
@@ -301,13 +289,13 @@ EndNode="30"&gt;
              "representative": "m0" }}]}]
 }
 </pre>
-    <p>Sometimes, coreference modules will have all kinds of other
-    information on the annotations that are linked. For example,
-    the ANNIE Coreference componen has an attribute
-    ENTITY_MENTION_TYPE with value PRONOUN on one of the
-    annotations. We put them in the features directory of the
-    Markable.</p>
-    <pre class="example">
+
+<p>Sometimes, coreference modules will have all kinds of other information on
+the annotations that are linked. For example, the ANNIE Coreference componen has
+an attribute ENTITY_MENTION_TYPE with value PRONOUN on one of the
+annotations. We put them in the features directory of the Markable. </p>
+
+<pre class="example">
 {
   "text": "Sue sees herself",
   "views": [ 
@@ -336,14 +324,15 @@ EndNode="30"&gt;
              "representative": "m0" }}]}]
 }
 </pre>
-    <p>The list of targets can be used to deal with split
-    antecedents. For example, in "John and Mary left, they were
-    late", the mentions can be m1 and m2, and m1 is a Markable with
-    "John" and "Mary" as targets. Note though that in this case we
-    need to be able to refer to annotation objects that contain
-    "John" and "Mary". If they are not available then we need to
-    introduce markables that refer to other markables.</p>
-    <pre class="example">
+
+<p>The list of targets can be used to deal with split antecedents. For example,
+in "John and Mary left, they were late", the mentions can be m1 and m2, and m1
+is a Markable with "John" and "Mary" as targets. Note though that in this case
+we need to be able to refer to annotation objects that contain "John" and
+"Mary". If they are not available then we need to introduce markables that refer
+to other markables.</p>
+
+<pre class="example">
 {
   "text": "John and Mary left, they were late",
   "views": [ 
@@ -351,14 +340,12 @@ EndNode="30"&gt;
       "metadata": { },
       "annotations": [
          { "@type": "Markable", "id": "m0", "start": 0, "end": 4 },
-         { "@type": "Markable", "id": "m1", "start": 9, "end": 13
-},
+         { "@type": "Markable", "id": "m1", "start": 9, "end": 13 },
          { "@type": "Markable",
            "id": "m2",
            "features": {
              "targets": [ "mo", "m1" ] }},
-         { "@type": "Markable", "id": "m3", "start": 20, "end": 24
-},
+         { "@type": "Markable", "id": "m3", "start": 20, "end": 24 },
          { "@type": "Coreference", 
            "id": "coref0", 
            "features": {
@@ -366,14 +353,17 @@ EndNode="30"&gt;
              "representative": "m2" }}]}]
 }
 </pre>
-    <p>Markables m0 and m1 could be other annotation types like
-    Token or Person.</p>
-    <hr />
-    <p>[ 
-    <a href="index.html">up</a> | 
-    <a href="tokens.html">previous</a> 
-    <!--| <a href="ner.html">previous</a>-->
-    | 
-    <a href="phrase_structure.html">next</a> ]</p>
-  </body>
+
+<p>Markables m0 and m1 could be other annotation types like Token or Person.</p>
+
+<hr>
+<p>
+[ <a href="index.html">up</a>
+| <a href="tokens.html">previous</a>
+<!--| <a href="ner.html">previous</a>-->
+| <a href="phrase_structure.html">next</a> ]
+</p>
+
+
+</body>
 </html>

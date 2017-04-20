@@ -5,7 +5,7 @@ buttons:
  - text: "Installing"
    href: "/installation/index"
  - text: "Specifications"
-   href: "/specs.html"
+   href: "/interchange/"
  - text: "Developing"
    href: "/Developing.html"
 ---
