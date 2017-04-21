@@ -1,7 +1,8 @@
 title: The Language Applications Grid
 description: An open framework for interoperable NLP web services
 markdown: kramdown
-branch: gh-pages
+#branch: gh-pages
 theme: jekyll-theme-cayman
+top: "<div class='top'><a href='#top'>Back to top</a></div>"
 redcarpet:
     extensions: [fenced_code_blocks, no_intra_emphasis, tables, autolink]

@@ -1,5 +1,5 @@
-.note {
-	border: 1px black solid;
+div.note {
+	border: 1px #dce6f0 solid;
 	background-color: #e0e0e0;
 	padding: 5px 10px;
     margin: 10px 0 15px 0;
@@ -8,10 +8,67 @@
     -webkit-border-radius: 10px; 
 }
 
-.note em {
+div.note em {
 	font-weight: bold;
 	font-style: normal;
 	color: #F55;
+}
+
+div.tip {
+	color: white;
+	background-color: #159957;
+	background-image: linear-gradient(120deg, #155799, #159957); 
+	padding: 5px 20px;
+    margin: 10px 2em 15px 2em;
+    font-size: 1rem;
+	border: 1px #dce6f0 solid;
+    border-radius: 10px; 
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+}
+
+/* The first menu item is not padded on the left */
+.menu .item {
+	padding-right: 10px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+a.top {
+	float: right;
+	font-size: 0.9rem;
+	text-decoration: none;
+}
+
+a.top:hover {
+	text-decoration: underline; 
+}
+
+/*
+a.top {
+	color: white;
+	background-color: #159957;
+	padding: 5px 10px;
+    font-size: 0.8rem;
+	border: 1px #dce6f0 solid;
+    border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+    float: right; 
+}
+
+a.top:hover {
+	text-decoration: none;
+	background-color: #35B977;
+}
+*/
+
+/* Subsequent menu items are padded on both sides. */
+.menu .item2 {
+	padding-right: 10px;
+	padding-left: 10px;
+    margin: 0;
+    font-size: 1rem;
 }
 
 .green {

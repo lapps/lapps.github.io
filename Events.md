@@ -13,6 +13,7 @@ None scheduled.
 1. **Mellon Kickoff Meeting**<br/>
 **Where:** Charles University, Prague, Czech Republic<br/>
 **When:** March 3-5, 2017<br/>
+[Agenda](https://ufal.mff.cuni.cz/events/lapps-grid-clarin-mellon-foundation-project-kickoff-meeting)
 1. **LAPPS/Galaxy Collaboration Meeting**<br/>
 **Where:** Vassar College, Poughkeepsie NY<br/>
 **When:** November 9-11, 2016<br/>

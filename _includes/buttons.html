@@ -1,0 +1,10 @@
+{% if page.buttons %}
+  {% for button in page.buttons %}
+	<a href="{{ button.href }}" class="btn">{{ button.text }}</a>
+  {% endfor %}
+{% else %}
+<a href="/" class="btn">Home</a>
+<a href="/interchange" class="btn">Specifications</a>
+<a href="/Documentation" class="btn">Documentation</a>
+<a href="/Contents" class="btn">Index</a>
+{% endif %}

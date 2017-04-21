@@ -1,0 +1,8 @@
+{% if page.menu %}
+<div class="menu">
+	<a class="item" href="#{{page.menu[0] | downcase | replace: ' ', '-' }}">{{page.menu[0]}}</a>
+	{% for item in page.menu offset:1 %}
+		| <a class="item2" href='#{{item | downcase | replace: " ", "-" }}'>{{item}}</a>
+	{% endfor %}
+</div>
+{% endif %}
