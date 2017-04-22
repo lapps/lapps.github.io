@@ -1,0 +1,5 @@
+# Example data used in the wiki page.
+- name: Alice
+  homepage: http://www.example.com/alice
+- name: Bob
+  homepage: http://bob.example.com

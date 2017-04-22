@@ -1,11 +1,6 @@
 ---
 layout: default
 title: Developer Documentation
-buttons:
- - text: 'Home'
-   href: '/'
- - text: 'Specifications'
-   href: '/specs.html'
 ---
 
 # Developer Information
@@ -17,6 +12,7 @@ buttons:
 * [Jupyter Notebook](technical/jupyter.html)
 * [Installing Galaxy From Source](technical/galaxy.html)
 * [Using Jetstream](technical/jetstream.html)
+* [Helping with the Wiki](wiki)
 
 # Maven Generated Sites
 
