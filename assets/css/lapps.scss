@@ -52,45 +52,17 @@ div.tip {
 	}
 }
 
-
-/*
-a.top:hover {
-}
-a.top {
-	color: white;
-	background-color: #159957;
-	padding: 5px 10px;
-    font-size: 0.8rem;
-	border: 1px #dce6f0 solid;
-    border-radius: 5px; 
-    -moz-border-radius: 5px; 
-    -webkit-border-radius: 5px;
-    float: right; 
-}
-
-a.top:hover {
-	text-decoration: none;
-	background-color: #35B977;
-}
-*/
-
 /* The first menu item is not padded on the left */
 .menu .item {
 	padding-right: 10px;
     margin: 0;
     font-size: 1rem;
      + .item {
+	     /* Subsequent menu items are padded on both sides. */
      	padding-left: 10px;
      }
 }
 
-/* Subsequent menu items are padded on both sides. */
-.menu .item2 {
-	padding-right: 10px;
-	padding-left: 10px;
-    margin: 0;
-    font-size: 1rem;
-}
 
 .green {
 	color: green;
