@@ -8,7 +8,7 @@ view: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/blob/
 
 #branch: gh-pages
 theme: jekyll-theme-cayman
-top: <a class='top' href='#top'>Back to the top</a>
+top: <div class="top"><a href='#top'>Back to the top</a></div>
 
 # Used to generate links to files on GitHub
 home: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/blob/master

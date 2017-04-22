@@ -1,27 +1,21 @@
 ---
 layout: default
 title: Groovy DSL
-buttons: 
-  - text: Getting Started
-    href: 'getting_started.html'
-  - text: Examples
-    href: '/code/examples.html'
-  - text: Support
-    href: 'support.html'
+edit: true
 ---
 
 ## The Language Applications Grid and Groovy DSLs
 
 > A *Domain Specific Language* (DSL) is a computer programming language specialized to a specific application domain. [1]
 
-The Language Applications Grid (LAPPS Grid, or just LAPPS) uses several domain specific languages:
+The Language Applications Grid uses several domain specific languages:
 
-1. LAPPS Services DSL (LSD)
-1. LAPPS Database Definition Language (LDDL)
-1. Vocabulary DSL
-1. Discirminator DSL
+1. [LAPPS Services DSL](https://github.com/lappsgrid-incubator/org.anc.lapps.dsl) (LSD)
+1. [LAPPS Database Definition Language](https://github.com/lappsgrid-incubator/org.anc.lapps.lddl) (LDDL)
+1. [Vocabulary DSL](https://github.com/lappsgrid-incubator/vocabulary-dsl)
+1. [Discirminator DSL](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl)
 
-LSD is basically just Groovy bundled with the LAPPS API modules that are automatically imported into user scripts. The other three can be thought of executable configuration languages. To effectively leverage these languages it is important to understand how a Groovy DSL is constructed and operates.
+LSD is basically just Groovy bundled with the LAPPS API modules that are automatically imported into user scripts. The other three can be thought of executable configuration languages. 
 
 ## It is all just Groovy
 
@@ -222,7 +216,7 @@ print 1.mile // MissingPropertyException: Invalid unit mile
 
 ## Putting it all together
 
-Assume we are unhappy with the Groovy MarkupBuilder class and we would like to write our own Builder that accepted our DSL and returned a tree of `groovy.util.Node` objects.  We might start with something like:
+Suppose we are unhappy with the Groovy MarkupBuilder class and we would like to write our own Builder that processed our DSL and returned a tree of [groovy.util.Node](http://docs.groovy-lang.org/latest/html/api/groovy/util/Node.html) objects.  We might start with something like:
 
 ```groovy
 import groovy.util.Node

@@ -1,43 +1,61 @@
+---
+---
+
+@import "normalize";
+@import "rouge-github";
+@import "variables";
+
+$primary: $header-bg-color;
+$secondary: $header-bg-color-secondary;
+$radius: 10px;
+
+@mixin rounded($R) {
+    border-radius: $R; 
+    -moz-border-radius: $R; 
+    -webkit-border-radius: $R; 
+}
+
 div.note {
-	border: 1px #dce6f0 solid;
-	background-color: #e0e0e0;
-	padding: 5px 10px;
-    margin: 10px 0 15px 0;
-    border-radius: 10px; 
-    -moz-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
+	/* border: 1px #dce6f0 solid; */
+	/* background-color: #e0e0e0; */
+	@include rounded($radius);
+	border: 1px $primary solid;
+	padding: 0.5em 1em;
+    margin: 10px 30px;
 }
 
 div.note em {
 	font-weight: bold;
 	font-style: normal;
-	color: #F55;
+	/* color: #F55; */
+	color: $primary;
 }
 
 div.tip {
 	color: white;
-	background-color: #159957;
-	background-image: linear-gradient(120deg, #155799, #159957); 
+	background-color: $primary;
+	background-image: linear-gradient(120deg, $secondary, $primary); 
 	padding: 5px 20px;
     margin: 10px 2em 15px 2em;
     font-size: 1rem;
-	border: 1px #dce6f0 solid;
-    border-radius: 10px; 
-    -moz-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
+	border: 1px $border-color solid;
+	@include rounded($radius);
 }
 
-a.top {
+.top a {
 	float: right;
 	font-size: 0.9rem;
 	text-decoration: none;
+	
+	&:hover {
+		text-decoration: underline; 
+	}
 }
 
-a.top:hover {
-	text-decoration: underline; 
-}
 
 /*
+a.top:hover {
+}
 a.top {
 	color: white;
 	background-color: #159957;
@@ -61,6 +79,9 @@ a.top:hover {
 	padding-right: 10px;
     margin: 0;
     font-size: 1rem;
+     + .item {
+     	padding-left: 10px;
+     }
 }
 
 /* Subsequent menu items are padded on both sides. */

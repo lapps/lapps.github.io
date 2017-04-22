@@ -182,7 +182,9 @@ More content.
 
 # Themes
 
-A Jekyll *Theme* is a [Liquid](https://shopify.github.io/liquid/) template file stored in the \_layouts directory. The variable `{% raw %}{{ content }}{% endraw %}` will be replaced by the HTML generated from the markdown.  For example, suppose we have the following in `_layouts/example.html`:
+A Jekyll *Theme* is a [Liquid](https://shopify.github.io/liquid/) template file stored in the \_layouts directory. The variable `{% raw %}{{ content }}{% endraw %}` in the template will be replaced by the HTML generated from the markdown.  
+
+For example, suppose we have the following in `_layouts/example.html`:
 
 ```html
 <html>

@@ -3,19 +3,19 @@ layout: default
 title: Discriminators and the Vocabulary
 ---
 
-
 *Note: this page contains preliminary scribbles*
-
 
 ## {{ page.title }}
 
 Everything in vocab is in discriminators but not vice versa (vocab ⊂ discriminator).
 
 There is a vocab dsl and a discriminators dsl (both configuration files for transformations)
+
   1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
   2. [https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl)
 
 The input to 1 is `lapps.vocab` in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages) (there are also template files and other onput files for the mapping in there), it creates 
+
   - vocab.lappsgrid.org `html`, 
   - [org.lappsgrid.vocabulary](https://github.com/lapps/org.lappsgrid.vocabulary) (which is like the discriminator package and describes attribute names etcetera defined in the vocab), 
   - and a Groovy config DSL file with same content

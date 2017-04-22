@@ -7,9 +7,9 @@
 	{% endif %}
 	{% for item in page.menu offset:1 %}
 		{% if item == 'Edit' or item == 'edit %}
-			| <a class="item2" href='{{site.edit}}/{{page.path}}'>{{item}}</a>		
+			| <a class="item" href='{{site.edit}}/{{page.path}}'>{{item}}</a>		
 		{% else %}
-			| <a class="item2" href='#{{item | downcase | replace: " ", "-" }}'>{{item}}</a>
+			| <a class="item" href='#{{item | downcase | replace: " ", "-" }}'>{{item}}</a>
 		{% endif %}
 	{% endfor %}
 </div>
