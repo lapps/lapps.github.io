@@ -15,11 +15,14 @@ $radius: 10px;
     -webkit-border-radius: $R; 
 }
 
+@mixin bordered {
+	border: 1px $primary solid;
+}
+
 div.note {
-	/* border: 1px #dce6f0 solid; */
 	/* background-color: #e0e0e0; */
 	@include rounded($radius);
-	border: 1px $primary solid;
+	@include bordered;
 	padding: 0.5em 1em;
     margin: 10px 30px;
 }
@@ -27,7 +30,6 @@ div.note {
 div.note em {
 	font-weight: bold;
 	font-style: normal;
-	/* color: #F55; */
 	color: $primary;
 }
 
@@ -38,7 +40,7 @@ div.tip {
 	padding: 5px 20px;
     margin: 10px 2em 15px 2em;
     font-size: 1rem;
-	border: 1px $border-color solid;
+	@include bordered;
 	@include rounded($radius);
 }
 
@@ -52,17 +54,16 @@ div.tip {
 	}
 }
 
-/* The first menu item is not padded on the left */
+/* The first menu item is only padded on the right. */
 .menu .item {
 	padding-right: 10px;
     margin: 0;
     font-size: 1rem;
      + .item {
-	     /* Subsequent menu items are padded on both sides. */
+	     /* Subsequent items are padded on both sides. */
      	padding-left: 10px;
      }
 }
-
 
 .green {
 	color: green;
