@@ -8,8 +8,7 @@ buttons:
    href: "/interchange/"
  - text: "Developing"
    href: "/Developing.html"
- - text: Edit on GitHub
-   href: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io
+edit: true
 ---
 
 <h1>{{ page.title }}</h1>

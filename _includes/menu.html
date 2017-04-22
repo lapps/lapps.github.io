@@ -1,8 +1,16 @@
 {% if page.menu %}
 <div class="menu">
-	<a class="item" href="#{{page.menu[0] | downcase | replace: ' ', '-' }}">{{page.menu[0]}}</a>
+	{% if page.menu[0] == 'Edit' or page.menu[0] == 'edit' %}
+		<a class="item" href="{{ site.edit }}/{{page.path}}">{{page.menu[0]}}</a>	
+	{% else %}
+		<a class="item" href="#{{page.menu[0] | downcase | replace: ' ', '-' }}">{{page.menu[0]}}</a>
+	{% endif %}
 	{% for item in page.menu offset:1 %}
-		| <a class="item2" href='#{{item | downcase | replace: " ", "-" }}'>{{item}}</a>
+		{% if item == 'Edit' or item == 'edit %}
+			| <a class="item2" href='{{site.edit}}/{{page.path}}'>{{item}}</a>		
+		{% else %}
+			| <a class="item2" href='#{{item | downcase | replace: " ", "-" }}'>{{item}}</a>
+		{% endif %}
 	{% endfor %}
 </div>
 {% endif %}

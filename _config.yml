@@ -2,7 +2,10 @@ title: The Language Applications Grid
 description: An open framework for interoperable NLP web services
 markdown: kramdown
 # For local previews to work correctly
-repository: lappsgrid-incubator/lappsgrid-incubator.github.io
+#repository: lappsgrid-incubator/lappsgrid-incubator.github.io
+edit: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/edit/master
+view: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/blob/master
+
 #branch: gh-pages
 theme: jekyll-theme-cayman
 top: <a class='top' href='#top'>Back to the top</a>

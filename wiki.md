@@ -6,6 +6,7 @@ menu:
  - Themes
  - Scripts	
  - FAQ
+ - Edit
 ---
 
 # The Wiki

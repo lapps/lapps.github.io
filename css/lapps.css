@@ -27,13 +27,6 @@ div.tip {
     -webkit-border-radius: 10px; 
 }
 
-/* The first menu item is not padded on the left */
-.menu .item {
-	padding-right: 10px;
-    margin: 0;
-    font-size: 1rem;
-}
-
 a.top {
 	float: right;
 	font-size: 0.9rem;
@@ -62,6 +55,13 @@ a.top:hover {
 	background-color: #35B977;
 }
 */
+
+/* The first menu item is not padded on the left */
+.menu .item {
+	padding-right: 10px;
+    margin: 0;
+    font-size: 1rem;
+}
 
 /* Subsequent menu items are padded on both sides. */
 .menu .item2 {

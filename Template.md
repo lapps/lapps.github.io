@@ -5,9 +5,6 @@ buttons:
    href: /
  - name: Index
    href: /Contents
- - name: Edit me on GitHub
-   target: _blank
-   href: {{ site.github.repository_url }}/blob/master/Template.md
 menu:
  - Heading One
  - Heading Two
