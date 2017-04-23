@@ -8,7 +8,6 @@ buttons:
    href: "/interchange/"
  - text: "Developing"
    href: "/Developing.html"
-edit: true
 ---
 
 <h1>{{ page.title }}</h1>

@@ -56,7 +56,7 @@ The navigation buttons that appear in the header are defined in the front matter
 buttons:
   - text: Home
     href: /
-  - text: Edit on GitHub
+  - text: View on GitHub
     href: https://github.com/lapps/lapps.github.io/
   - text: Site Index
     href: /Contents
@@ -251,6 +251,29 @@ A Liquid template is a snippet of HTML (plus the Liquid code) in the `_includes`
 <dt>menu.html</dt>
 <dd>Generates a simple navigation menu at the top of a page with links to anchor elements on the same page.</dd>
 </dl>
+
+## HTML
+
+GFM (GitHub Flavored Markdown) does not support everything that is possible with HTML.  In particular definition lists are not supported and tables without a heading row are impossible.  Fortunately, GFM supports embedded HTML to do things that are not possible in markdown.
+
+```html
+<div class="note">
+    <em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and redefines the &lt;em> tag.
+</div>
+```
+
+Will produce the following:
+
+<div class="note"><em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and restyles the &lt;em> tag.
+</div>
+
+## CSS / SCSS
+
+Jekyll supports [SASS](http://sass-lang.com) stylesheets and any *.sass or *.scss files will be automatically be compiled into their *.css counterparts. The wiki defines several custom styles in the `assets/css/lapps.scss` file:
+
+- .note and .tip for &lt;div> elements
+- styling for the "Back to the top" links.
+
 
 {{ site.top }}
 

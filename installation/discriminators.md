@@ -24,6 +24,10 @@ The input to 2 is the config DSL file above and a file named [discriminators.con
 
 Automatically generated html page at http://vocab.lappsgrid.org/discriminators. Note that the IDs are not really IDs because they can change when new discriminators are added.
 
+<div class='note'>
+<p>The IDs should not change, the purpose of <i>banks</i> and <i>offsets</i> is so new discriminators can be added without affecting other discriminators' ID values.</p>
+<p>Having said that, discriminator ID values are an obsolete concept that should be deprecated and removed.  A discriminator's "id" is its URL.</p>
+</div>
 
 The repository is at https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/. In this repo, discriminators are manually defined in https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/blob/master/src/main/resources/discriminators.config.
 
