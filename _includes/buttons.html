@@ -4,9 +4,11 @@
 {% endcomment %}
 
 {% if page.buttons %}
-  {% for button in page.buttons %}
-	<a href="{{ button.href }}" {% if button.target %} target="{{button.target}}" {% endif %} class="btn">{{ button.text }}</a>
-  {% endfor %}
+  {% if page.buttons.first %}
+    {% for button in page.buttons %}
+      <a href="{{ button.href }}" {% if button.target %} target="{{button.target}}" {% endif %} class="btn">{{ button.text }}</a>
+    {% endfor %}
+  {% endif %}
 {% else %}
 <a href="/" class="btn">Home</a>
 <a href="/interchange" class="btn">Specifications</a>
@@ -16,4 +18,5 @@
 {% if page.edit %}
 <a href="{{site.edit}}/{{page.path}}" class="btn">Edit</a>
 {% endif %}
+
 

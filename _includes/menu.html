@@ -1,16 +1,20 @@
 {% if page.menu %}
 <div class="menu">
-	{% if page.menu[0] == 'Edit' or page.menu[0] == 'edit' %}
-		<a class="item" href="{{ site.edit }}/{{page.path}}">{{page.menu[0]}}</a>	
-	{% else %}
-		<a class="item" href="#{{page.menu[0] | downcase | replace: ' ', '-' }}">{{page.menu[0]}}</a>
-	{% endif %}
-	{% for item in page.menu offset:1 %}
-		{% if item == 'Edit' or item == 'edit %}
-			| <a class="item" href='{{site.edit}}/{{page.path}}'>{{item}}</a>		
-		{% else %}
-			| <a class="item" href='#{{item | downcase | replace: " ", "-" }}'>{{item}}</a>
-		{% endif %}
+	{% for menu in page.menu %}
+		{% for item in menu %}
+			{% if item[1].first %}
+				<div class="submenu">
+					<button class="button" onclick="show_menu(this)">{{item[0]}}</button>
+					<div class="content">
+						{% for part in item[1] %}
+							<a href="{{part.first[1]}}">{{ part.first[0] }}</a>
+						{% endfor %}
+					</div>
+				</div>
+			{% else %}
+				<a href="{{item[1]}}">{{item[0]}}</a>
+			{% endif %}
+		{% endfor %}
 	{% endfor %}
 </div>
 {% endif %}

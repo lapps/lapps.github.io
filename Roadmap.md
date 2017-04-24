@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Roadmap
-menu:
+nav:
  - Mellon Grant
  - Vocabulary
  - Wiki

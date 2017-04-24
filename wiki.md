@@ -1,7 +1,7 @@
 ---
 layout: default
 title: The Wiki
-menu:
+nav:
  - Pages
  - Themes
  - Scripts	
@@ -48,6 +48,8 @@ layout: default
 
 If the front matter is missing Jekyll will ignore the file. The `layout` should always be set to *default*.  
 
+{{ site.top }}
+
 ### Buttons
 
 The navigation buttons that appear in the header are defined in the front matter:
@@ -64,13 +66,24 @@ buttons:
 
 The `href` may contain relative, absolute, or remote links.  The value of the `text` field will appear as the text for the button. If no buttons are defined in the front matter a default set of buttons will be included.  The default set of buttons is defined in the `_includes/buttons.html` template.
 
+It is also possible to specify a `target` if you would like the page to open in a new browser window/tab:
+
+```
+buttons:
+ - text: Edit on GitHub
+ - href: {{site.edit}}/{{page.path}}
+ - target: _blank
+```
+
+{{ site.top }}
+
 ### Navigation Menu
 
-A simple navigation menu can be created at the top of a page by including a `menu` list in the front matter. Each item in the list will have a link generated where the href is derived by converting the label to lowercase and replacing spaces with dashes. This is (more or less) the way that Jekyll automatically generates anchors for header elements. 
+A simple navigation menu can be created at the top of a page by including a `nav` list in the front matter. Each item in the list will have a link generated where the href is derived by converting the label to lowercase and replacing spaces with dashes. This is (more or less) the way that Jekyll automatically generates anchors for header elements. 
 
 ```
 ---
-menu:
+nav:
   - Menu One
 ---
   
@@ -81,12 +94,44 @@ If the menu label and heading are the same nothing else needs to be done. If the
 
 ```
 ---
-menu:
+nav:
   - FAQ
 ---
 
 # <a name="faq"></a>Frequently Asked Questions
 ```
+
+<div class="note">
+<p>A  navigation menu will be included by at the top of the page just under the header.  However, it is also possible to include other navigation bars in the page by including the <code>nav.html</code> Liquid template</p>
+<pre>
+{% raw %}
+{% include nav.html %}
+{% endraw %}
+</pre>
+</div>
+
+{{ site.top }}
+
+### Dropdown Menus
+
+It is also possible to defined menus and drop-down menus.
+
+```
+menu:
+ - Home: /
+ - Edit: 
+   - Cut: /edit/cut
+   - Copy: /edit/copy
+   - Paste: /edit/paste
+ - Support:
+   - Email: /support/email
+   - Phone: /support/phone
+   - Chat: /support/chat   
+```
+
+Drop down menus only support one level of sub-menus at this time.
+
+{{ site.top }}
 
 #### HTML5 Notes
 
@@ -99,6 +144,23 @@ While it is possible to use the `id` attribute as the target of a an `href` attr
 ```
 
 See [this](http://stackoverflow.com/questions/5319754/cross-reference-named-anchor-in-markdown/7335259#7335259) StackOverflow question for more discussion.
+
+
+### Edit on GitHub
+
+It is possible to add "Edit" links to the buttons section or in the navigation menu. To add an edit button to the header of a page include `edit: true` in the front matter.  To add an edit link to a navigation menu include `edit` in the list of navigation items.
+
+```yaml
+edit: true
+nav:
+ - edit
+```
+
+<div class="note">
+You can use either uppercase <code>Edit</code> or lowercase <code>edit</code> and the case used in the front-matter will be the case used in the navigation menu.
+</div>
+
+{{ site.top }}
 
 ### YAML
 
@@ -157,16 +219,24 @@ See the [Template.md]({{ site.github.repository_url }}/blob/master/Template.md) 
 ---
 layout: default
 buttons:
- - name: Home
+ - text: Home
    href: /
- - name: Index
+ - text: Index
    href: /Contents
- - name: Edit me on GitHub
-   href: {{ site.github.repository_url }}/blob/master/Template.md
-menu:
+nav:
  - Heading One
  - Heading Two
  - Heading Three
+menu:
+ - Home: /
+ - Edit: 
+   - Cut: /edit/cut
+   - Copy: /edit/copy
+   - Paste: /edit/paste
+ - Support:
+   - Email: /support/email
+   - Phone: /support/phone
+   - Chat: /support/chat   
 ---
 
 # Heading One
@@ -178,6 +248,8 @@ Put content here.
 More content.
 
 # <a name="heading-three"></a>Sub-Heading
+
+{{ site.top }}
 {% endraw %}
 </pre>
 
@@ -248,8 +320,12 @@ A Liquid template is a snippet of HTML (plus the Liquid code) in the `_includes`
 <dl>
 <dt>buttons.html</dt>
 <dd>Creates buttons in the header for any <i>buttons</i> defined in the page's front matter.  These buttons are intended to include links to other pages, including pages on other sites.</dd>
-<dt>menu.html</dt>
+
+<dt>nav.html</dt>
 <dd>Generates a simple navigation menu at the top of a page with links to anchor elements on the same page.</dd>
+
+<dt>menu.html</dt>
+<dd>Generated drop-down menus at the top of the page just under the header and above any navigation menu.</dd>
 </dl>
 
 ## HTML
@@ -267,13 +343,18 @@ Will produce the following:
 <div class="note"><em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and restyles the &lt;em> tag.
 </div>
 
+<div class="note">
+<em>NOTE</em> You **cannot** use markdown in a HTML element, you <b>must</b> use HTML for any styling.  For example, notice that the word <tt>cannot</tt> above is wrapped in asterisks. The asterisks were not interpreted by the markdown processor.</div>
+
+It is important to ensure that all HTML is well formed.  Any malformed HTML (unclosed tags etc.) **WILL** result in the page not rendering correctly.
+
 ## CSS / SCSS
 
 Jekyll supports [SASS](http://sass-lang.com) stylesheets and any *.sass or *.scss files will be automatically be compiled into their *.css counterparts. The wiki defines several custom styles in the `assets/css/lapps.scss` file:
 
 - .note and .tip for &lt;div> elements
-- styling for the "Back to the top" links.
-
+- styling for the "Back to the top" links
+- styles for the menus
 
 {{ site.top }}
 
@@ -319,10 +400,22 @@ How do I...
 	</ol>
 	The theme may require manual modification to make use of the buttons.html and menu.html templates located in the _includes directory.
 </dd>
+
 <dt>update the site index?</dt>
 <dd>Run the <code>_scripts/MakeIndex.groovy</code> script and redirect the output to <code>Contents.md</code>. Push the updated file to GitHub.</dd>
+
 <dt>add a link to the top of the page.</dt>
 <dd>Add {% raw %}{{ site.top }}{% endraw %} to your markup file.  The `site.top` variable is defined in <code>_config.yml</code>.</dd>
+
+<dt>create notes with the border around them?</dt>
+<dd>Create a &lt;div> with the class <i>note</i>.
+<pre>
+&lt;div class="note">This will have a border. The margins will also be adjusted.&lt;/div>
+</pre>
+</dd>
 </dl>
 
 {{ site.top }}
+
+
+

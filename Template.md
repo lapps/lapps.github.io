@@ -1,14 +1,24 @@
 ---
 layout: default
 buttons:
- - name: Home
+ - text: Home
    href: /
- - name: Index
+ - text: Index
    href: /Contents
-menu:
+nav:
  - Heading One
  - Heading Two
  - Heading Three
+menu:
+ - Home: /
+ - Edit: 
+   - Cut: /edit/cut
+   - Copy: /edit/copy
+   - Paste: /edit/paste
+ - Support:
+   - Email: /support/email
+   - Phone: /support/phone
+   - Chat: /support/chat   
 ---
 
 # Heading One
@@ -20,3 +30,5 @@ Put content here.
 More content.
 
 # <a name="heading-three"></a>Sub-Heading
+
+{{ site.top }}
