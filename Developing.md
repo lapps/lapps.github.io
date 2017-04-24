@@ -12,6 +12,7 @@ title: Developer Documentation
 * [Jupyter Notebook](technical/jupyter.html)
 * [Installing Galaxy From Source](technical/galaxy.html)
 * [Using Jetstream](technical/jetstream.html)
+* [DSL Basics](technical/dsl)
 * [Helping with the Wiki](wiki)
 
 # Maven Generated Sites
