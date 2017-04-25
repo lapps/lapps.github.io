@@ -74,6 +74,7 @@ title: Site Index
 - [TechMeeting2014-10-02](/TechMeeting2014-10-02)
 - technical
   - [Containers](/technical/containers)
+  - [Discriminators](/technical/discriminators)
   - [Docker](/technical/docker)
   - [Dsl](/technical/dsl)
   - [Galaxy](/technical/galaxy)
@@ -82,6 +83,7 @@ title: Site Index
   - [Jupyter](/technical/jupyter)
   - [Maven](/technical/Maven)
   - [Release](/technical/release)
+- [Template](/Template)
 - vocabulary
   - [Current_issues](/vocabulary/current_issues)
 - [Wiki](/wiki)
