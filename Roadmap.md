@@ -5,6 +5,7 @@ nav:
  - Mellon Grant
  - Vocabulary
  - Wiki
+ - Edit
 ---
 
 # LAPPS Roadmap
