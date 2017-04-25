@@ -74,32 +74,32 @@ Suppose we want to transform the following simplified Discriminator DSL into a J
 
 ```groovy
 token {
-	url 'http://vocab.lappsgrid.org/Token'
+	uri 'http://vocab.lappsgrid.org/Token'
 	description 'A string of one or more characters that serves as an indivisible unit.'
 }
 sentence {
-	url 'http://vocab.lappsgrid.org/Sentence'
+	uri 'http://vocab.lappsgrid.org/Sentence'
 	description 'A sequence of one or more words.'
 }
 ```
 
 Our DSL processor will do three things:
 
-1. Implement a delegate class that provides the `url` and `description` methods.
+1. Implement a delegate class that provides the `uri` and `description` methods.
 1. Parse the code into a [Script](http://docs.groovy-lang.org/latest/html/api/groovy/lang/Script.html) object.
 1. Implement `script.metaClass.methodMissing` to intercept method calls.
 1. Generate the JSON from the constructed data structure.
 
 ### 1. The delegate class is simple enough.
 
-The `Delegate` class will provide the `url` and `description` methods.  Each method takes a String and will save it in a field of the same name.
+The `Delegate` class will provide the `uri` and `description` methods.  Each method takes a String and will save it in a field of the same name.
 
 ```groovy
 class Delegate {
-	String url
+	String uri
 	String description
 	
-	void url(String url) { this.url = url }
+	void uri(String uri) { this.uri = uri }
 	void description(String description) { this.description = description }
 }
 ```
@@ -157,15 +157,15 @@ class Dsl {
     }
 }
 class Delegate {
-    String url
+    String uri
     String description
     
-    void url(String url) { this.url = url }
+    void uri(String uri) { this.uri = uri }
     void description(String description) { this.description = description }
 }
 ```
 
-If we did not implement `script.metaClass.methodMissing` then Groovy would complain about the missing method `token` when we tried to run the program on the example input.  Similarly, if we did not add a delegate that implemented `url` and `description` to the closure Groovy would complain about the missing method `url` when attempting to execute the closure.
+If we did not implement `script.metaClass.methodMissing` then Groovy would complain about the missing method `token` when we tried to run the program on the example input.  Similarly, if we did not add a delegate that implemented `uri` and `description` to the closure Groovy would complain about the missing method `uri` when attempting to execute the closure.
 
 {{ site.top }}
 

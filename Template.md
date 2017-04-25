@@ -10,15 +10,12 @@ nav:
  - Heading Two
  - Heading Three
 menu:
- - Home: /
- - Edit: 
-   - Cut: /edit/cut
-   - Copy: /edit/copy
-   - Paste: /edit/paste
- - Support:
-   - Email: /support/email
-   - Phone: /support/phone
-   - Chat: /support/chat   
+ - home: /
+ - edit: /Edit 
+ - support:
+   - phone: /support/phone
+   - email: /support/email
+   - chat: /support/chat
 ---
 
 # Heading One

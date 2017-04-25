@@ -55,6 +55,13 @@ token {
 
 Here the `parents` value is actually wrong given the actualy hierarchy in the vocabulary. Note that the link from `token` to the `uri` value is manual, so if we add a new category to the vocab (Synonym for example), then we would need to add it to both the vocab and the discriminator config file.
 
+<div class="note">
+<em>Notes</em><br/>
+<ol>
+<li>The <tt>parents</tt> field should be ignored; the only required fields are <tt>uri</tt> and <tt>description</tt>.</li>
+<li>The Vocabulary DSL processor generates the section of the <tt>discriminators.config</tt> related to the vocabulary and annotation types.</li>
+</ol>
+</div>
 
 ### Updating the vocabulary
 

@@ -64,7 +64,7 @@ buttons:
     href: /Contents
 ```
 
-The `href` may contain relative, absolute, or remote links.  The value of the `text` field will appear as the text for the button. If no buttons are defined in the front matter a default set of buttons will be included.  The default set of buttons is defined in the `_includes/buttons.html` template.
+The `href` may contain relative, absolute, or remote links.  The value of the `text` field will appear as the text for the button. If no buttons are defined in the front matter a default set of buttons will be included.  The default set of buttons is defined in the `_includes/buttons.html` template. If you do not want any buttons to appear in the header define `buttons: none` in the front matter.
 
 It is also possible to specify a `target` if you would like the page to open in a new browser window/tab:
 
@@ -114,7 +114,7 @@ nav:
 
 ### Dropdown Menus
 
-It is also possible to defined menus and drop-down menus.
+It is also possible to define drop-down menus that will appear at the bottom of the header.
 
 ```
 menu:
@@ -209,8 +209,38 @@ Simply include the following where you would like the link to appear:
 {% raw %}{{ site.top }}{% endraw %}
 </pre>
 
+## HTML
 
-### Template
+GFM (GitHub Flavored Markdown) does not support everything that is possible with HTML.  In particular definition lists are not supported and tables without a heading row are impossible.  Fortunately, GFM supports embedded HTML to do things that are not possible in markdown.
+
+```html
+<div class="note">
+    <em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and redefines the &lt;em> tag.
+</div>
+```
+
+Will produce the following:
+
+<div class="note"><em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and restyles the &lt;em> tag.
+</div>
+
+<div class="note">
+<em>NOTE</em> You **cannot** use markdown in a HTML element, you <b>must</b> use HTML for any styling.  For example, notice that the word "<tt>cannot</tt>" above is wrapped in asterisks. The asterisks were not interpreted by the markdown processor and appear verbatim in the output.</div>
+
+It is important to ensure that all HTML is well formed.  Any malformed HTML (unclosed tags etc.) **WILL** result in the page not rendering correctly.
+
+### CSS / SCSS
+
+Jekyll supports [SASS](http://sass-lang.com) stylesheets and any *.sass or *.scss files will be automatically be compiled into their *.css counterparts. The wiki defines several custom styles in the `assets/css/lapps.scss` file:
+
+- .note and .tip for &lt;div> elements
+- styling for the "Back to the top" links
+- styles for the menus
+
+{{ site.top }}
+
+
+## Template
 
 See the [Template.md]({{ site.github.repository_url }}/blob/master/Template.md) file for a starting point for wiki pages.
 
@@ -228,15 +258,12 @@ nav:
  - Heading Two
  - Heading Three
 menu:
- - Home: /
- - Edit: 
-   - Cut: /edit/cut
-   - Copy: /edit/copy
-   - Paste: /edit/paste
- - Support:
-   - Email: /support/email
-   - Phone: /support/phone
-   - Chat: /support/chat   
+ - home: /
+ - edit: /Edit 
+ - support:
+   - phone: /support/phone
+   - email: /support/email
+   - chat: /support/chat
 ---
 
 # Heading One
@@ -327,36 +354,6 @@ A Liquid template is a snippet of HTML (plus the Liquid code) in the `_includes`
 <dt>menu.html</dt>
 <dd>Generated drop-down menus at the top of the page just under the header and above any navigation menu.</dd>
 </dl>
-
-## HTML
-
-GFM (GitHub Flavored Markdown) does not support everything that is possible with HTML.  In particular definition lists are not supported and tables without a heading row are impossible.  Fortunately, GFM supports embedded HTML to do things that are not possible in markdown.
-
-```html
-<div class="note">
-    <em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and redefines the &lt;em> tag.
-</div>
-```
-
-Will produce the following:
-
-<div class="note"><em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and restyles the &lt;em> tag.
-</div>
-
-<div class="note">
-<em>NOTE</em> You **cannot** use markdown in a HTML element, you <b>must</b> use HTML for any styling.  For example, notice that the word <tt>cannot</tt> above is wrapped in asterisks. The asterisks were not interpreted by the markdown processor.</div>
-
-It is important to ensure that all HTML is well formed.  Any malformed HTML (unclosed tags etc.) **WILL** result in the page not rendering correctly.
-
-## CSS / SCSS
-
-Jekyll supports [SASS](http://sass-lang.com) stylesheets and any *.sass or *.scss files will be automatically be compiled into their *.css counterparts. The wiki defines several custom styles in the `assets/css/lapps.scss` file:
-
-- .note and .tip for &lt;div> elements
-- styling for the "Back to the top" links
-- styles for the menus
-
-{{ site.top }}
 
 # Scripts
 
