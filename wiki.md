@@ -1,46 +1,418 @@
 ---
-layout: cayman
-title: Language Application Grid
+layout: default
+title: The Wiki
+nav:
+ - Pages
+ - Themes
+ - Scripts	
+ - FAQ
+ - Edit
 ---
 
-The Language Applications (LAPPS) Grid is an open interoperable web service platform for natural language processing (NLP) research and development. More information about the LAPPS Grid can be found on the [LAPPS Grid website](http://www.lappsgrid.org)
+# The Wiki
 
+The LAPPS Grid wiki is just the [GitHub Pages](https://pages.github.com) website for the [LAPPS Grid organization](https://github.com/lapps). GitHub uses [Jekyll](https://github.com/jekyll/jekyll) to render the markdown files into static html files and if you have Jekyll installed locally it is possible to preview any local changes before pushing them to GitHub.
 
-## Contents
+To install Jekyll.
 
-1. [Contributing](Contributing.html)
-1. [Events](Events.html)
-1. Specifications and Schemata
-  * LAPPS Interchange Format
-    1. [specifications](interchange/index.html)  
-    1. [json schema](http://vocab.lappsgrid.org/schema/lif-schema.json)
-  * LAPPS Vocabulary
-    1. [Pages](http://vocab.lappsgrid.org)  
-    1. [Issues](https://github.com/lapps/vocabulary-pages/issues)  
-    1. [Discussion](vocabulary/current_issues.html)  
-1. Information for Developers
-  * [GitHub Branches](technical/github.html)
-  * [Maven Repository Information](Maven.html)
-  * [Creating Docker Images](technical/docker.html)
-  * [Current Docker Images](technical/containers.html)
-  * [Jupyter Notebook](technical/jupyter.html)
-  * [Installing Galaxy From Source](technical/galaxy.html)
-  * [Using Jetstream](technical/jetstream.html)
-1. Miscellaneous
-  * [Live Site](LiveSite.html)
-  * [Roadmap](Roadmap.html)
-  * [Documentation - of widely varying maturity](manuals/)
-1. Maven Generated Sites
-  * [org.lappsgrid.api](http://lapps.github.io/org.lappsgrid.api)
-  * [org.lappsgrid.core](http://lapps.github.io/org.lappsgrid.core)
-  * [org.lappsgrid.client](http://lapps.github.io/org.lappsgrid.client)
-  * [org.lappsgrid.discriminator](http://lapps.github.io/org.lappsgrid.discriminator)
-  * [org.lappsgrid.metadata](http://lapps.github.io/org.lappsgrid.metadata)
-  * [org.lappsgrid.serialization](http://lapps.github.io/org.lappsgrid.serialization)
-  * [org.lappsgrid.vocabulary](http://lapps.github.io/org.lappsgrid.vocabulary)
+```bash
+gem install jekyll bundler  
+```
+
+To preview the wiki site run the following commands in the directory containing the wiki pages:
+
+```bash
+bundle exec jekyll serve --watch
+```
+
+Now open http://localhost:4000 in your web browser.  The `--watch` parameter tells Jekyll to rebuild any files that change on disk.
+
+{{ site.top }}
+
+# Pages
+
+Every GitHub Page consists of:
+
+1. some front matter
+1. some markdown
+
+## Front Matter
+
+GitHub/Jekyll will not serve a page if it does not contain YAML *front matter*  surrounded by triple dashes:
+
+```
+---
+layout: default
+---
+```
+
+If the front matter is missing Jekyll will ignore the file. The `layout` should always be set to *default*.  
+
+{{ site.top }}
+
+### Buttons
+
+The navigation buttons that appear in the header are defined in the front matter:
+
+```
+buttons:
+  - text: Home
+    href: /
+  - text: View on GitHub
+    href: https://github.com/lapps/lapps.github.io/
+  - text: Site Index
+    href: /Contents
+```
+
+The `href` may contain relative, absolute, or remote links.  The value of the `text` field will appear as the text for the button. If no buttons are defined in the front matter a default set of buttons will be included.  The default set of buttons is defined in the `_includes/buttons.html` template. If you do not want any buttons to appear in the header define `buttons: none` in the front matter.
+
+It is also possible to specify a `target` if you would like the page to open in a new browser window/tab:
+
+```
+buttons:
+ - text: Edit on GitHub
+ - href: {{site.edit}}/{{page.path}}
+ - target: _blank
+```
+
+{{ site.top }}
+
+### Navigation Menu
+
+A simple navigation menu can be created at the top of a page by including a `nav` list in the front matter. Each item in the list will have a link generated where the href is derived by converting the label to lowercase and replacing spaces with dashes. This is (more or less) the way that Jekyll automatically generates anchors for header elements. 
+
+```
+---
+nav:
+  - Menu One
+---
+  
+# Menu One
+```
+
+If the menu label and heading are the same nothing else needs to be done. If the text you wish to use as the menu label does not match the header text simply create an anchor of your own. 
+
+```
+---
+nav:
+  - FAQ
+---
+
+# <a name="faq"></a>Frequently Asked Questions
+```
 
 <div class="note">
-<span class="red">Note</span> The Maven Sites are generated automatically by the Travis-ci server every time a new release is pushed to Maven Central.
+<p>A  navigation menu will be included by at the top of the page just under the header.  However, it is also possible to include other navigation bars in the page by including the <code>nav.html</code> Liquid template</p>
+<pre>
+{% raw %}
+{% include nav.html %}
+{% endraw %}
+</pre>
 </div>
+
+{{ site.top }}
+
+### Dropdown Menus
+
+It is also possible to define drop-down menus that will appear at the bottom of the header.
+
+```
+menu:
+ - Home: /
+ - Edit: 
+   - Cut: /edit/cut
+   - Copy: /edit/copy
+   - Paste: /edit/paste
+ - Support:
+   - Email: /support/email
+   - Phone: /support/phone
+   - Chat: /support/chat   
+```
+
+Drop down menus only support one level of sub-menus at this time.
+
+{{ site.top }}
+
+#### HTML5 Notes
+
+While it is possible to use the `id` attribute as the target of a an `href` attribute this can have several undesirable side-effects; namely a global variable in Javascript (which may or may not be what we want) and possible conflicts with ID values generated by Jekyll. Therefore it is recommend to use the `name` attribute when creating named anchors.  Many browsers will also choke if the `<a>` tag does not have a closing `</a>` tag so avoid self closing tags.
+
+```html
+<a id="dont-do-this"/>
+
+<a name="do-this-instead"></a>
+```
+
+See [this](http://stackoverflow.com/questions/5319754/cross-reference-named-anchor-in-markdown/7335259#7335259) StackOverflow question for more discussion.
+
+
+### Edit on GitHub
+
+It is possible to add "Edit" links to the buttons section or in the navigation menu. To add an edit button to the header of a page include `edit: true` in the front matter.  To add an edit link to a navigation menu include `edit` in the list of navigation items.
+
+```yaml
+edit: true
+nav:
+ - edit
+```
+
+<div class="note">
+You can use either uppercase <code>Edit</code> or lowercase <code>edit</code> and the case used in the front-matter will be the case used in the navigation menu.
+</div>
+
+{{ site.top }}
+
+### YAML
+
+Variables for use in templates or markdown can be defined in three places.
+
+1. The front matter. YAML included in the front matter will be available in the `page` object in the template or markup file. 
+1. The `_config.yml` file. These variables will be accessible through the `site` object.  This is how the *Back to the top* links are generated.  See [below](#back-to-the-top).
+1. YAML files located in the `_data` directory. These variables will be available through the `site.data.filename` object.
+
+For example, assume `_data/people.yml` contains the following:
+
+```yaml
+- name: Alice
+  homepage: http://www.example.com/alice
+- name: Bob
+  homepage: http://bob.example.com
+```
+
+The data can then be used with:
+
+<pre>
+{% raw %}
+{% for person in site.data.people %}
+1. [{{ person.name }}]({{ person.homepage }})
+{% endfor %}
+{% endraw %}
+</pre>
+
+which will generate:
+
+{% for person in site.data.people %}
+1. [{{ person.name }}]({{ person.homepage }})
+{% endfor %}
+ 
+### Back to the top
+
+As was mentioned above the `_config.yml` file defines a variable named `top` that can be referenced to generate *Back to the top* links.  
+
+```
+top: <a class='top' href='#top'>Back to the top</a>
+```
+
+Simply include the following where you would like the link to appear:
+
+<pre>
+{% raw %}{{ site.top }}{% endraw %}
+</pre>
+
+## HTML
+
+GFM (GitHub Flavored Markdown) does not support everything that is possible with HTML.  In particular definition lists are not supported and tables without a heading row are impossible.  Fortunately, GFM supports embedded HTML to do things that are not possible in markdown.
+
+```html
+<div class="note">
+    <em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and redefines the &lt;em> tag.
+</div>
+```
+
+Will produce the following:
+
+<div class="note"><em>Example</em><br/>The lapps.scss stylesheet defines a .note class that adds a border, adjusts the margins, and restyles the &lt;em> tag.
+</div>
+
+<div class="note">
+<em>NOTE</em> You **cannot** use markdown in a HTML element, you <b>must</b> use HTML for any styling.  For example, notice that the word "<tt>cannot</tt>" above is wrapped in asterisks. The asterisks were not interpreted by the markdown processor and appear verbatim in the output.</div>
+
+It is important to ensure that all HTML is well formed.  Any malformed HTML (unclosed tags etc.) **WILL** result in the page not rendering correctly.
+
+### CSS / SCSS
+
+Jekyll supports [SASS](http://sass-lang.com) stylesheets and any *.sass or *.scss files will be automatically be compiled into their *.css counterparts. The wiki defines several custom styles in the `assets/css/lapps.scss` file:
+
+- .note and .tip for &lt;div> elements
+- styling for the "Back to the top" links
+- styles for the menus
+
+{{ site.top }}
+
+
+## Template
+
+See the [Template.md]({{ site.github.repository_url }}/blob/master/Template.md) file for a starting point for wiki pages.
+
+<pre>
+{% raw %}
+---
+layout: default
+buttons:
+ - text: Home
+   href: /
+ - text: Index
+   href: /Contents
+nav:
+ - Heading One
+ - Heading Two
+ - Heading Three
+menu:
+ - home: /
+ - edit: /Edit 
+ - support:
+   - phone: /support/phone
+   - email: /support/email
+   - chat: /support/chat
+---
+
+# Heading One
+
+Put content here.
+
+# Heading Two
+
+More content.
+
+# <a name="heading-three"></a>Sub-Heading
+
+{{ site.top }}
+{% endraw %}
+</pre>
+
+{{ site.top }}
+
+# Themes
+
+A Jekyll *Theme* is a [Liquid](https://shopify.github.io/liquid/) template file stored in the \_layouts directory. The variable `{% raw %}{{ content }}{% endraw %}` in the template will be replaced by the HTML generated from the markdown.  
+
+For example, suppose we have the following in `_layouts/example.html`:
+
+```html
+<html>
+	<head>
+		<title>{% raw %}{{ page.title }}{% endraw %}</title>
+	</head>
+	<body>
+		{% raw %}{{ content }}{% endraw %}
+	</body>
+<body>
+```
+
+we can use this layout with the following:
+
+```
+---
+layout: example
+title: This is an example
+---
+
+# Examples
+
+1. list item one
+1. list item two
+```
+
+which will result in the following html being generated:
+
+```html
+<html>
+	<head>
+		<title>This is an example</title>
+	</head>
+	<body>
+		<h1>Examples</h1>
+		<ol>
+			<li>list item one</li>
+			<li>list item two</li>
+		</ol>
+	</body>
+<body>
+```
+
+## Available Themes
+
+GitHub provides several [default themes](https://pages.github.com/themes/) that can be used on GitHub Pages sites. Three of them are available in the *\_layouts* directory:
+
+- cayman
+- slate
+- modernist
+
+To change the theme used by the LAPPS Grid wiki make a copy of the desired theme and rename it *default.html*.  
+
+## Templates 
+
+A Liquid template is a snippet of HTML (plus the Liquid code) in the `_includes` directory that can be included in other pages/templates. Several templates are available can be used in the selected theme:
+
+<dl>
+<dt>buttons.html</dt>
+<dd>Creates buttons in the header for any <i>buttons</i> defined in the page's front matter.  These buttons are intended to include links to other pages, including pages on other sites.</dd>
+
+<dt>nav.html</dt>
+<dd>Generates a simple navigation menu at the top of a page with links to anchor elements on the same page.</dd>
+
+<dt>menu.html</dt>
+<dd>Generated drop-down menus at the top of the page just under the header and above any navigation menu.</dd>
+</dl>
+
+# Scripts
+
+### ./start
+
+Starts the local Jekyll server.  The web site will be available at http://localhost:4000
+
+### _scripts/restyle 
+
+Changes the `layout:` for all *.md* files in the current directory add all subdirectories.
+
+```bash
+./restyle slate cayman
+```
+
+<div class="note">
+<em>Note</em> this script should not be required as all pages should use the <i>default</i> layout.
+</div>
+
+### _scripts/MakeIndex.groovy
+
+Use this script to generate the site index (Contents.md).
+
+```bash
+groovy _script/MakeIndex.groovy > Contents.md
+```
+
+The script will walk the directory tree starting at the current directory and generate a markdown page with links to all the .md files found. 
+
+{{ site.top }}
+
+# <a name="faq"></a>Frequently Asked Questions
+
+How do I...
+
+<dl>
+<dt>change themes?</dt>
+<dd><ol>
+	<li>Delete _layouts/default.html</li>
+	<li>Copy the desired theme to _layouts/default.html</li>
+	</ol>
+	The theme may require manual modification to make use of the buttons.html and menu.html templates located in the _includes directory.
+</dd>
+
+<dt>update the site index?</dt>
+<dd>Run the <code>_scripts/MakeIndex.groovy</code> script and redirect the output to <code>Contents.md</code>. Push the updated file to GitHub.</dd>
+
+<dt>add a link to the top of the page.</dt>
+<dd>Add {% raw %}{{ site.top }}{% endraw %} to your markup file.  The `site.top` variable is defined in <code>_config.yml</code>.</dd>
+
+<dt>create notes with the border around them?</dt>
+<dd>Create a &lt;div> with the class <i>note</i>.
+<pre>
+&lt;div class="note">This will have a border. The margins will also be adjusted.&lt;/div>
+</pre>
+</dd>
+</dl>
+
+{{ site.top }}
+
 
 

@@ -1,5 +1,5 @@
 ---
-layout: slate_numbered
+layout: default
 title: Licensing Use Cases
 ---
 

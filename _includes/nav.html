@@ -1,0 +1,16 @@
+{% if page.nav %}
+<div class="nav">
+	{% if page.nav[0] == 'Edit' or page.nav[0] == 'edit' %}
+		<a class="item" href="{{ site.edit }}/{{page.path}}">{{page.nav[0]}}</a>	
+	{% else %}
+		<a class="item" href="#{{page.nav[0] | downcase | replace: ' ', '-' }}">{{page.nav[0]}}</a>
+	{% endif %}
+	{% for item in page.nav offset:1 %}
+		{% if item == 'Edit' or item == 'edit %}
+			| <a class="item" href='{{site.edit}}/{{page.path}}'>{{item}}</a>		
+		{% else %}
+			| <a class="item" href='#{{item | downcase | replace: " ", "-" }}'>{{item}}</a>
+		{% endif %}
+	{% endfor %}
+</div>
+{% endif %}

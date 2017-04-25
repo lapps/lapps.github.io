@@ -1,0 +1,22 @@
+{% comment %}
+	If the page defines buttons in its front matter those will be rendered
+	as links.  Otherwise a default set of buttons/links will be rendered.
+{% endcomment %}
+
+{% if page.buttons %}
+  {% if page.buttons.first %}
+    {% for button in page.buttons %}
+      <a href="{{ button.href }}" {% if button.target %} target="{{button.target}}" {% endif %} class="btn">{{ button.text }}</a>
+    {% endfor %}
+  {% endif %}
+{% else %}
+<a href="/" class="btn">Home</a>
+<a href="/interchange" class="btn">Specifications</a>
+<a href="/Documentation" class="btn">Documentation</a>
+<a href="/Contents" class="btn">Index</a>
+{% endif %}
+{% if page.edit %}
+<a href="{{site.edit}}/{{page.path}}" class="btn">Edit</a>
+{% endif %}
+
+

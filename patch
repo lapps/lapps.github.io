@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ ! -e ../archive ] ; then
+	mkdir ../archive
+fi
+
+for md in `find . -name '*.md' | xargs grep -l layout` ; do
+	cat $md | sed 's/layout: cayman/layout: default/' > /tmp/patched
+	mv $md ../archive
+	mv /tmp/patched $md
+	echo "Rewrote $md"
+done
+echo "Done"

@@ -115,11 +115,16 @@ footer p {
 }
 
 .red {
-	color: red;
+	color: blue;
 }
 
 .blue {
 	color: blue;
+}
+
+.r {
+	color: red;
+	#font-weight: bold;
 }
 
 tt {
@@ -334,7 +339,7 @@ Full-Width Styles
 }
 
 #header_wrap .inner {
-  padding: 50px 10px 30px 10px;
+  padding: 30px 10px 10px 10px;
 }
 
 #project_title {

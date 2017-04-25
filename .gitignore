@@ -1,4 +1,5 @@
 *~
 _site
 examples/
+Gemfile.lock
 .jekyll-metadata

@@ -1,4 +1,17 @@
+title: The Language Applications Grid
+description: An open framework for interoperable NLP web services
 markdown: kramdown
-branch: gh-pages
-redcarpet:
-    extensions: [fenced_code_blocks, no_intra_emphasis, tables, autolink]
+# For local previews to work correctly
+#repository: lappsgrid-incubator/lappsgrid-incubator.github.io
+edit: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/edit/master
+view: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/blob/master
+
+#branch: gh-pages
+theme: jekyll-theme-cayman
+top: <div class="top"><a href='#top'>Back to the top</a></div>
+
+# Used to generate links to files on GitHub
+home: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/blob/master
+
+#redcarpet:
+#    extensions: [fenced_code_blocks, no_intra_emphasis, tables, autolink]

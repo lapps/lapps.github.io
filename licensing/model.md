@@ -1,5 +1,5 @@
 ---
-layout: slate_numbered
+layout: default
 title: Data Model for LAPPS Licensing
 ---
 

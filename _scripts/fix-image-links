@@ -1,0 +1,12 @@
+#!/bin/bash
+set -eu
+
+temp=/tmp/fixed-images.md
+for md in `find . -name "*.md" | xargs grep -l "\[\["` ; do
+	cat $md | sed 's/\[\[/\
+\
+![alt-text](/g' | sed 's/]]/)\
+/g' > $temp
+	mv $temp $md
+	echo "Fixed $md"
+done
