@@ -11,7 +11,7 @@ nav:
  - Heading Three
 menu:
  - home: /
- - edit: /Edit 
+ - edit: https://github.com/lappsgrid-incubator/lappsgrid-incubator.github.io/edit/master/Template.md 
  - support:
    - phone: /support/phone
    - email: /support/email
