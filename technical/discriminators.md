@@ -32,18 +32,17 @@ A BNF(-ish) grammar for the Discriminator DSL:
 <bank-decl>   ::= 'bank' '(' <number> ')' 
 <offset-decl> ::= 'offset' '(' <offset-expr> ')' <bank>
 <offset-expr> ::= <number> | <bank-decl> ( <add-op> <number> )?
-<add-op>      ::= '+' | '-'
-
 <bank>        ::= '{' decl* '}'
 <decl>        ::= <type-string> '{' <decl-body> '}'
 <type-string> ::= <ident> | <string>
 <decl-body>   ::= <uri> <eol> <description>
 <uri>         ::= 'uri' <string>
 <description> ::= 'description' <string>
-
-<eol>         ::= ';' | '\n'
-<groovy>      ::= any syntactically correct Groovy statements
+<add-op>      ::= '+' | '-'
 <number>      ::= [0..9]+
+<eol>         ::= ';' | '\n'
+
+<groovy>      ::= any syntactically correct Groovy statements
 <ident>       ::= any valid Groovy identifier
 <string>      ::= anything that evaluates to a java.lang.String
 ```
