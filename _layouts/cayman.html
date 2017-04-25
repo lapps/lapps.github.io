@@ -8,7 +8,8 @@
     <meta name="theme-color" content="#157878">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/cayman.css?v=' | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" type="text/css" href="/css/lapps.css"></link>
+    <link rel="stylesheet" type="text/css" href="/assets/css/lapps.css"></link>
+    <script src='/assets/js/jquery-3.2.1.min.js'></script>
   </head>
   <body>
     <section class="page-header">
@@ -16,13 +17,28 @@
       <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
       {% include buttons.html %}      
     </section>
+    {% include menu.html %}
 	<a id="top"></a>
     <section class="main-content">    
-	  {% include menu.html %} 
+	  {% include nav.html %} 
       {{ content }}
       <footer class="site-footer">
         <div style="font-size:small; text-align:center; padding-top:10px">Copyright 2017 The Language Applications Grid.</div>
       </footer>
     </section>
+    <script>
+    $(document).ready(function() {
+    	window.onclick = function(event) {
+    		if (!event.target.matches(".button")) {
+				$(".submenu > .content").hide();
+			}
+    	};
+    });
+    
+    function show_menu(menu) {
+    	$('.submenu > .content').hide()
+    	$(menu).parent().find('.content').show()
+    }
+    </script> 
   </body>
 </html>
