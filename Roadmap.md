@@ -42,13 +42,15 @@ nav:
 
 ## Wiki
 
-1. Style changes
-1. Navigation
+1. ~~Style changes~~ 
+1. Navigation (review)
 1. Update stale documents
   - [Vocabulary current issues](vocabulary/current_issues) is three years old (2014).
 1. [Documentation](wiki)
-  - GitHub Pages
-  - Jekyll Basics
-  - Style/theme modifications
+  - GitHub Pages (review)
+  - ~~Jekyll Basics~~
+  - ~~Style/theme modifications~~
   
+<div class="note">Items that have been <strike>crossed off</strike> have been completed. Items tagged with <i>(review)</i> need peer review before being marked as completed.</div>
+
 {{ site.top }}
