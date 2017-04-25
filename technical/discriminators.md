@@ -71,7 +71,7 @@ token {
 ./vocab -d -o target/ lapps.vocab
 ```
 
-**OPTIONS***<br/>
+**OPTIONS**<br/>
 - The **-d** option tells the vocab program to generate discriminators
 - The **-o** option specifies the output directory.
 
@@ -88,4 +88,5 @@ token {
 ./ddsl -p target/ -t discriminator-page.template discriminator.config
 ```
  
+{{ site.top }}
 
