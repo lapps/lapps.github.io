@@ -3,10 +3,14 @@ layout: default
 title: URI Inventory
 ---
 
-# Discriminator/Vocabulary DSL
+# The LAPPS URI Inventory
 
-<div class="note">These are scribbles in response to <a href="/installation/discriminators.html">installation/discriminators</a>.
-</div>
+<div class="note">This page is a work in progress.</div>
+
+The LAPPS URI Inventory is the set of all URIs recognized by LAPPS Grid services. The URIs in the inventory fall into two categories:
+
+1. [Web Service Exchange Vocabulary](http://vocab.lappsgrid.org) (or simply "The Vocabulary")<br/>The URI used for annotation types produced and consumed by LAPPS services.  For example the URIs for [Token](http://vocab.lappsgrid.org/Token) and [Sentence](http://vocab.lappsgrid.org/Sentence).
+1. Metadata<br/>Anything that is not a vocabulary URI is metadata about something else.
 
 Discriminators are the set of URI used by LAPPS Grid services and should really be referred to as *The LAPPS URI Inventory*. URI in the LAPPS inventory fall into three general categories:
 
@@ -22,24 +26,18 @@ The only important fields are *uri* and *description*.
 
 All URI in the LAPPS inventory begin with <tt>http://vocab.lappsgrid.org</tt> and URI that are not one of the *vocabulary types* begin with <tt>http://vocab.lappsgrid.org/ns</tt>.
 
-# Syntax
+## Syntax
 
 A BNF(-ish) grammar for the Discriminator DSL:
 
 ```html
-<dsl>         ::= ( <bank-block> | <offset-decl> | <groovy> )+
-<bank-block>  :: <bank-decl> <bank>
-<bank-decl>   ::= 'bank' '(' <number> ')' 
-<offset-decl> ::= 'offset' '(' <offset-expr> ')' <bank>
-<offset-expr> ::= <number> | <bank-decl> ( <add-op> <number> )?
-<bank>        ::= '{' decl* '}'
+<dsl>         ::= ( <include> | <decl> | <groovy> )+
+<include>     ::= 'include' <string>
 <decl>        ::= <type-string> '{' <decl-body> '}'
 <type-string> ::= <ident> | <string>
 <decl-body>   ::= <uri> <eol> <description>
 <uri>         ::= 'uri' <string>
 <description> ::= 'description' <string>
-<add-op>      ::= '+' | '-'
-<number>      ::= [0..9]+
 <eol>         ::= ';' | '\n'
 
 <groovy>      ::= any syntactically correct Groovy statements
@@ -47,12 +45,15 @@ A BNF(-ish) grammar for the Discriminator DSL:
 <string>      ::= anything that evaluates to a java.lang.String
 ```
 
-
 ### Grammar Notes
 
-Since the Disciminators DSL is a [Groovy DSL](technical/dsl) Groovy code can be used almost anywhere. For example, the `discriminators.config` file defines several closures that are used to generate URI.
+The order of the `uri` and `description` in the `decl-body` does not matter.
 
-```
+Every line can be terminated with a semicolon, but semicolons and whitespace handling are omitted in the grammar for brevity.
+
+Since the Disciminators DSL is a [Groovy DSL](/technical/dsl) Groovy code can be used almost anywhere. For example, the `discriminators.config` file defines several closures that are used to generate URI.
+
+```groovy
 vocab = { "http://vocab.lappsgrid.org/$it" }
 ...
 token {
@@ -61,11 +62,22 @@ token {
 }
 ```
 
-# Generating Discriminators
+# Vocabulary DSL
+
+
+# Creating Vocabularies
+
+- Generating HTML pages
+  - http://vocab.lappsgrid.org
+  - http://vocab.lappsgrid.org/discriminators
+- Generating Java code
+  - org.lappsgrid.discriminator
+  - org.lappsgrid.vocabulary
+- Deployment
 
 #### Generate the vocabulary.config file
 
-The *vocabulary.config* file is a Discriminator DSL fragment that is included by the *discriminator.config* file.
+The <tt>vocabulary.config</tt> file is a Discriminator DSL fragment that is included by the *discriminator.config* file.
 
 ```bash
 ./vocab -d -o target/ lapps.vocab
@@ -94,6 +106,6 @@ Pages in the http://vocab.lappsgrid.org/ns namespace need to be generated . All 
 ```bash
 ./ddsl -p target/ -t discriminator-page.template discriminator.config
 ```
- 
+
 {{ site.top }}
 

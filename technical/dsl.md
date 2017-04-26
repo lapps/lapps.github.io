@@ -1,12 +1,8 @@
 ---
 layout: default
 title: Groovy DSL
-edit: true
-buttons:
-- text: Home
-  href: /
-- text: Index
-  href: /Contents
+edit: false
+buttons: none
 ---
 
 ## The Language Applications Grid and Groovy DSLs

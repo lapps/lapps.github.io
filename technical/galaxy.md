@@ -54,10 +54,10 @@ $> adduser galaxy --system --group
 
 Since both both the database setup script (see below) and the *galaxy.ini* file are available from publicly accessible repositories we will need to change the passwords stored in these files.  Currently both files use *\__DB_PASSWORD\__* as the database password to make it easier to update both via a `sed` command.
 
-For production use it is **highly recommended** to use a strong password.  The web service [http://grid.anc.org:9080/password](http://grid.anc.org:9080/password) can be used to generate cryptographically strong random passwords of any length.  We can use this web service to generate a password and then store it someplace secure on the server (*/root* is a good location) in case an administrator needs to connect to the database later.
+For production use it is **highly recommended** to use a strong password.  The web service [http://api.lappsgrid.org/password](http://api.lappsgrid.org/password) can be used to generate cryptographically strong random passwords of any length.  We can use this web service to generate a password and then store it someplace secure on the server (*/root* is a good location) in case an administrator needs to connect to the database later.
 
 ```bash
-$> curl -sSL http://grid.anc.org:9080/password?length=24 > /root/postgres.passwd
+$> curl -sSL http://api.lappsgrid.org/password?length=24 > /root/postgres.passwd
 $> export PASSWORD=`cat /root/postgres.passwd`
 ```
 
