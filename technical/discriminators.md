@@ -5,22 +5,16 @@ title: URI Inventory
 
 # The LAPPS URI Inventory
 
-<div class="note">This page is a work in progress.</div>
+<div class="note"><em>WIP</em> This page is a work in progress.</div>
 
-The LAPPS URI Inventory is the set of all URIs recognized by LAPPS Grid services. The URIs in the inventory fall into two categories:
+The [LAPPS URI Inventory](http://vocab.lappsgrid.org/discriminators) is the set of all URIs recognized by LAPPS Grid services. The URIs in the inventory fall into two categories:
 
 1. [Web Service Exchange Vocabulary](http://vocab.lappsgrid.org) (or simply "The Vocabulary")<br/>The URI used for annotation types produced and consumed by LAPPS services.  For example the URIs for [Token](http://vocab.lappsgrid.org/Token) and [Sentence](http://vocab.lappsgrid.org/Sentence).
-1. Metadata<br/>Anything that is not a vocabulary URI is metadata about something else.
+1. Metadata<br/>Anything that is not a vocabulary URI is metadata about something else. These are often referred to as *discriminators* since they are the URI used as the value of the `discriminator` field in [org.lappsgrid.serialization.Data](http://wiki.lappsgrid.org/org.lappsgrid.serialization/groovydoc/org/lappsgrid/serialization/Data.html) objects.
 
-Discriminators are the set of URI used by LAPPS Grid services and should really be referred to as *The LAPPS URI Inventory*. URI in the LAPPS inventory fall into three general categories:
+For historical reasons the Discriminator DSL language includes keywords and provisions for concepts that no longer apply.  In particular, *parents*, *offset*, and *bank* will go away in the near future. 
 
-1. Media types. For example the URI for LIF documents.
-1. Metadata. Information about licensing, allowable uses, or actions a service should perform.
-1. Vocabulary types.  Annotation types added by services that have additional semantics associated with them.
-
-For historical reasons the Discriminator DSL language includes keywords and provisions for concepts that no longer apply.  In particular, *parents*, *offset*, and *bank* will go away in the future.
-
-The only important fields are *uri* and *description*.  
+The only important fields are *uri* and *description*, and only *uri* is required.  
 
 ## URI
 
@@ -64,6 +58,7 @@ token {
 
 # Vocabulary DSL
 
+*The Vocabulary* is a sub-set of the full URI inventory that is used to denote annotation types.
 
 # Creating Vocabularies
 
