@@ -3,102 +3,123 @@ layout: default
 title: Discriminators and the Vocabulary
 ---
 
-*Note: this page contains preliminary scribbles*
+# {{ page.title }}
 
-## {{ page.title }}
+The main Git repository relevant to the vocabulary and discriminators is https://github.com/lapps/vocabulary-pages. In it, there are two files, `lapps.vocabulary` and `lapps.discriminators` that are maintained manually and that contain the specifications for the vocabulary and the list of discriminators. Both are configuration files written in domain-specific languages and are input to transformations from those configuration files to HTML pages and Java source code, as depicted below.
 
-Everything in vocab is in discriminators but not vice versa (vocab ⊂ discriminator).
-
-There is a vocab dsl and a discriminators dsl (both configuration files for transformations)
-
-  1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
-  2. [https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl)
-
-The input to 1 is `lapps.vocab` in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages) (there are also template files and other onput files for the mapping in there), it creates 
-
-  - vocab.lappsgrid.org `html`, 
-  - [org.lappsgrid.vocabulary](https://github.com/lapps/org.lappsgrid.vocabulary) (which is like the discriminator package and describes attribute names etcetera defined in the vocab), 
-  - and a Groovy config DSL file with same content
-
-The input to 2 is the config DSL file above and a file named [discriminators.config](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/blob/master/src/main/resources/discriminators.config) in the org.lappsgrid.discriminator.dsl repository, the output is [http://vocab.lappsgrid.org/discriminators](http://vocab.lappsgrid.org/discriminators) page and parts of the java package in [https://github.com/lapps/org.lappsgrid.discriminator](https://github.com/lapps/org.lappsgrid.discriminator)
-
-Automatically generated html page at http://vocab.lappsgrid.org/discriminators. Note that the IDs are not really IDs because they can change when new discriminators are added.
-
-<div class='note'>
-<p>The IDs should not change, the purpose of <i>banks</i> and <i>offsets</i> is so new discriminators can be added without affecting other discriminators' ID values.</p>
-<p>Having said that, discriminator ID values are an obsolete concept that should be deprecated and removed.  A discriminator's "id" is its URL.</p>
+<div class="image">
+<img src="images/lapps-vocabulary.png" width="600">
+<div class="caption"></div>
 </div>
 
-The repository is at https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/. In this repo, discriminators are manually defined in https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/blob/master/src/main/resources/discriminators.config.
+The Vocabulary DSL executable generates Java classes that need to be exported to the https://github.com/lapps/org.lappsgrid.vocabulary repository as well as a set of web pages that can then be put online at http://vocab.lappsgrid.org/. In addition it creates a file that contains elements of the vocabulary that are always considered discriminators, basically the names of annotation types.
 
-Example 1:
+The Discriminator DSL executable generates Java classes that need to be exported to the https://github.com/lapps/org.lappsgrid.discriminator repository and one HTML file that can be added to the vocabulary pages, more specifically, the content of http://vocab.lappsgrid.org/discriminators.html.
+
+Details on how to run the code that creates the HTML pages and Java code are in the README file in https://github.com/lapps/vocabulary-pages.
+
+As hinted at above, the Vocabulary DSL and Discriminator DSL are Groovy Domain-Specific Languages (DSLs) for the vocabulary and the discriminators. The DSLs are defined in two repositories:
+
+  1. https://github.com/lappsgrid-incubator/vocabulary-dsl
+  2. https://github.com/lappsgrid-incubator/discriminator-dsl
+
+Both these repositories allow you to create a shell script and a jar that can be used by the code in https://github.com/lapps/vocabulary-pages to create the vocabulary pages and Java source code.
+
+
+## Vocabulary
+
+Vocabulary pages are defined by top-level elements of the `lapps-vocabulary` file. Here is the element that defines the http://vocab.lappsgrid.org/NamedEntity page:
+
+```
+NamedEntity {
+    parent "Region"
+    definition "A phrase that clearly identifies an individual from others that have similar attributes, such as the name of a person, organization, location, artifact, etc. as well as temporal expressions."
+    sameAs "$iso/DC-2275"
+    discriminator 'ne'
+    metadata {
+    	namedEntityCategorySet {
+    		type "String or URI"
+    		description "The set of values that can be used for the category property."
+    	}
+    }
+    properties {
+    	category {
+    		type "String or URI"
+    		required true
+    		description "The type of named entity. Typically one of DATE, PERSON, ORGANIZATION, or LOCATION."
+    	}
+    	type {
+    		type "String or URI"
+    		description "A type attribute for the entity. For example the type of location or organization."
+    	}
+        gender {
+            type "String or URI"
+            description "A value such as male, female, unknown. Ideally a URI referencing a pre-defined descriptor."
+        }
+    }
+}
+```
+
+The properties directly under `NamedEntity` (`parent`, `definition`, etcetera) are a fixed group, but you are allowed to add any property under `metadata` and `properties`, as long as the values of those properties themselves have properties from the set {`type`, `required`, `description`}, the default for `required` is `false`. The `discriminator` property is optional and is used to overrule the default used when discriminators are generated from the vocabulary entry, the default is to use the same name but in lower case. There is one more property that is illustrated below.
+
+```
+Date {
+    parent "NamedEntity"
+    definition "A reference to a date or period."
+    similarTo "http://schema.org/Date"
+    sameAs "$iso/DC-6123"
+    deprecated NE_DEPRECATED
+    properties {
+        dateType {
+            type "String or URI"
+            description "Sub-type information such as date, datetime, time, etc. Ideally a URI referencing a pre-defined descriptor."
+        }
+    }
+}
+```
+
+The `deprecated` property indicates that the `Date` annotation type will be removed in the future version of the vocabulary. The `NE_DEPRECATED` is a variable defined earlier in the vocabulary file which sets the message to be displayed:
+
+```
+NE_DEPRECATED = '''Use <link>NamedEntity</link> with appropriate @category and @type attributes instead. This annotation type will be removed in a future version of the vocabulary.'''
+```
+
+
+## Discriminators
+
+Some of the discriminators are generated automatically from the vocabulary by `make vocabulary` when running this command from the vocabulary-pages repository. For each annotation type a discriminator is generated using the annotation type name in lower case (unless the `discriminator` property is used). In addition, some of the properties will be added as discriminators. What properties those are is currently hard-wired in the code in [VocabDsl.groovy](https://github.com/lappsgrid-incubator/vocabulary-dsl/blob/master/src/main/groovy/org/anc/lapps/vocab/dsl/VocabDsl.groovy), at the moment only `token#pos` and `token#lemma` are added.
+
+Many other non-vocabulary discriminators are defined in `lapps.discriminators`. Here is an example:
 
 ```groovy
 lif {
   uri media('jsonld#lif')
   description "LAPPS Interchange format. (LIF)"
-  parents 'json-ld'
 }
 ```
 
-Note that `media` is a closure that expands to the full URI for media types. The link target does actually exist and has content, the value of `description` is in that page. The `parents` attribute is not used, but correct in this case.
+Note that `media` is a closure that is defined at the top of the file, it expands to the full URI for media types (actually, using another embedded closure). The link target does actually exist and has content and the value of `description` is in that page (http://vocab.lappsgrid.org/ns/media/jsonld#lif).
 
-Example 2:
 
-```groovy
-token {
-   uri vocab('Token')
-   description "Tokens"
-   parents chunk
-}
-```
+<!--
 
-Here the `parents` value is actually wrong given the actualy hierarchy in the vocabulary. Note that the link from `token` to the `uri` value is manual, so if we add a new category to the vocab (Synonym for example), then we would need to add it to both the vocab and the discriminator config file.
-
-<div class="note">
-<em>Notes</em><br/>
-<ol>
-<li>The <tt>parents</tt> field should be ignored; the only required fields are <tt>uri</tt> and <tt>description</tt>.</li>
-<li>The Vocabulary DSL processor generates the section of the <tt>discriminators.config</tt> related to the vocabulary and annotation types.</li>
-</ol>
-</div>
-
-### Updating the vocabulary
+## Updating the vocabulary
 
 Repositories involved:
 
-- [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages)
-- [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
+1. https://github.com/lapps/vocabulary-pages
+1. https://github.com/lappsgrid-incubator/vocabulary-dsl
+1. https://github.com/lappsgrid-incubator/discriminator-dsl
+1. https://github.com/lappsgrid-incubator/org.lappsgrid.github.commit
 
-The former has `lapps.vocab`, which contains the actual vocabulary in some format. There is a Makefile and the command to use seems to be
+The first contains `lapps.vocabulary`, which contains the actual vocabulary in some format. There is a Makefile that has four goals that are of interest:
+
+You can run them all by doing
 
 ```
-$ make site
+$ make all
 ```
 
 This relies on a jar `vocab-1.2.2.jar`, which happens to have (April 13th) a hard-coded path in the `vocab` bash script.
 
-Create the jar from the second repository:
-
-```
-$ mvn package
-```
-
-
-
-### Updating the discriminator inventory
-
-Repository needed: [https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl](https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl). This repository also has some notes on updating the pages.
-
-To update the discriminators you first need to edit the (discriminators.config)[https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl/blob/master/src/main/resources/discriminators.config] page. Then you generate the new HTML pages: 
-
-```
-$ git clone https://github.com/lappsgrid-incubator/org.lappsgrid.discriminator.dsl
-$ cd org.lappsgrid.discriminator.dsl
-$ make clean	# remove old build
-$ make jar	# creates the jar needed to create the vocabulary
-$ make html	# creates target/discriminators.html
-$ make site	# creates target/vocab/ns and target/vocab/ns.zip, with pages to extend the vocab
-```
-
-The last step is to upload these to the server.
+-->
