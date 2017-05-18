@@ -5,30 +5,30 @@ title: Discriminators and the Vocabulary
 
 # {{ page.title }}
 
-The main Git repository relevant to the vocabulary and discriminators is https://github.com/lapps/vocabulary-pages. In it, there are two files, `lapps.vocabulary` and `lapps.discriminators` that are maintained manually and that contain the specifications for the vocabulary and the list of discriminators. Both are configuration files written in domain-specific languages and are input to transformations from those configuration files to HTML pages and Java source code, as depicted below.
+The main Git repository relevant to the vocabulary and discriminators is [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages). In it, there are two files, `lapps.vocabulary` and `lapps.discriminators` that are maintained manually and that contain the specifications for the vocabulary and the list of discriminators. Both are configuration files written in domain-specific languages and are input to transformations from those configuration files to HTML pages and Java source code, as depicted below.
 
 <div class="image">
 <img src="images/lapps-vocabulary.png" width="600">
 <div class="caption"></div>
 </div>
 
-The Vocabulary DSL executable generates Java classes that need to be exported to the https://github.com/lapps/org.lappsgrid.vocabulary repository as well as a set of web pages that can then be put online at http://vocab.lappsgrid.org/. In addition it creates a file that contains elements of the vocabulary that are always considered discriminators, basically the names of annotation types.
+The Vocabulary DSL executable generates Java classes that need to be exported to the [https://github.com/lapps/org.lappsgrid.vocabulary](https://github.com/lapps/org.lappsgrid.vocabulary) repository as well as a set of web pages that can then be put online at [http://vocab.lappsgrid.org/](http://vocab.lappsgrid.org/). In addition it creates a file that contains elements of the vocabulary that are always considered discriminators, basically the names of annotation types.
 
-The Discriminator DSL executable generates Java classes that need to be exported to the https://github.com/lapps/org.lappsgrid.discriminator repository and one HTML file that can be added to the vocabulary pages, more specifically, the content of http://vocab.lappsgrid.org/discriminators.html.
+The Discriminator DSL executable generates Java classes that need to be exported to the [https://github.com/lapps/org.lappsgrid.discriminator](https://github.com/lapps/org.lappsgrid.discriminator) repository and one HTML file that can be added to the vocabulary pages, more specifically, the content of [http://vocab.lappsgrid.org/discriminators.html](http://vocab.lappsgrid.org/discriminators.html).
 
-Details on how to run the code that creates the HTML pages and Java code are in the README file in https://github.com/lapps/vocabulary-pages.
+Details on how to run the code that creates the HTML pages and Java code are in the README file in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages).
 
 As hinted at above, the Vocabulary DSL and Discriminator DSL are Groovy Domain-Specific Languages (DSLs) for the vocabulary and the discriminators. The DSLs are defined in two repositories:
 
-  1. https://github.com/lappsgrid-incubator/vocabulary-dsl
-  2. https://github.com/lappsgrid-incubator/discriminator-dsl
+  1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
+  2. [https://github.com/lappsgrid-incubator/discriminator-dsl](https://github.com/lappsgrid-incubator/discriminator-dsl)
 
-Both these repositories allow you to create a shell script and a jar that can be used by the code in https://github.com/lapps/vocabulary-pages to create the vocabulary pages and Java source code.
+Both these repositories allow you to create a shell script and a jar that can be used by the code in [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages) to create the vocabulary pages and Java source code.
 
 
 ## Vocabulary
 
-Vocabulary pages are defined by top-level elements of the `lapps-vocabulary` file. Here is the element that defines the http://vocab.lappsgrid.org/NamedEntity page:
+Vocabulary pages are defined by top-level elements of the `lapps-vocabulary` file. Here is the element that defines the [http://vocab.lappsgrid.org/NamedEntity](http://vocab.lappsgrid.org/NamedEntity) page:
 
 ```
 NamedEntity {
@@ -98,7 +98,7 @@ lif {
 }
 ```
 
-Note that `media` is a closure that is defined at the top of the file, it expands to the full URI for media types (actually, using another embedded closure). The link target does actually exist and has content and the value of `description` is in that page (http://vocab.lappsgrid.org/ns/media/jsonld#lif).
+Note that `media` is a closure that is defined at the top of the file, it expands to the full URI for media types (actually, using another embedded closure). The link target does actually exist and has content and the value of `description` is in that page ([http://vocab.lappsgrid.org/ns/media/jsonld#lif](http://vocab.lappsgrid.org/ns/media/jsonld#lif)).
 
 
 <!--
@@ -107,10 +107,10 @@ Note that `media` is a closure that is defined at the top of the file, it expand
 
 Repositories involved:
 
-1. https://github.com/lapps/vocabulary-pages
-1. https://github.com/lappsgrid-incubator/vocabulary-dsl
-1. https://github.com/lappsgrid-incubator/discriminator-dsl
-1. https://github.com/lappsgrid-incubator/org.lappsgrid.github.commit
+1. [https://github.com/lapps/vocabulary-pages](https://github.com/lapps/vocabulary-pages)
+1. [https://github.com/lappsgrid-incubator/vocabulary-dsl](https://github.com/lappsgrid-incubator/vocabulary-dsl)
+1. [https://github.com/lappsgrid-incubator/discriminator-dsl](https://github.com/lappsgrid-incubator/discriminator-dsl)
+1. [https://github.com/lappsgrid-incubator/org.lappsgrid.github.commit](https://github.com/lappsgrid-incubator/org.lappsgrid.github.commit)
 
 The first contains `lapps.vocabulary`, which contains the actual vocabulary in some format. There is a Makefile that has four goals that are of interest:
 
