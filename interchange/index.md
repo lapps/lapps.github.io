@@ -15,6 +15,7 @@ Table of contents:
 
 1. [Overview](overview.html)
 1. [Tokens and tags](tokens.html)
+1. [Chunks and Named Entities](chunks.html)
 1. [Coreference](coref.html)
 1. [Phrase structure](phrase_structure.html)
 1. [Dependency structure](dependencies.html)

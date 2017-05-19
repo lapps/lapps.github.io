@@ -3,12 +3,21 @@ layout: default
 title: LIF Coreference
 ---
 
-[LIF](index.html) > <a name='null'></a>
+# LAPPS Interchange Format
 
+[
+[Index](index.html) |
+[Overview](overview.html) |
+[Tokens](tokens.html) |
+[Chunks &amp; NER](ner.html) |
+[Coreference](coref.html) |
+[Phrase Structure](phrase_structure.html) |
+[Dependencies](dependencies.html)
+]
 
-# Coreference in LIF
+## Coreference
 
-Last updated: October 29 <sup>th</sup>, 2015
+Last updated: May 5<sup>th</sup>, 2017
 
 This document contains examples on how to represent coreference in the LAPPS Interchange Format. It also has examples of the output of some common coreference tools.
 
@@ -56,21 +65,21 @@ type="collapsed-ccprocessed-dependencies">...</dependencies>
     <coreference>
       <coreference>
         <mention representative="true">
-         
+
 <sentence>1</sentence><start>1</start><end>2</end><head>1</head><text>John</text>
         </mention>
         <mention>
-         
+
 <sentence>2</sentence><start>1</start><end>2</end><head>1</head><text>He</text>
         </mention>
       </coreference>
       <coreference>
         <mention representative="true">
-         
+
 <sentence>3</sentence><start>1</start><end>2</end><head>1</head><text>Jill</text>
         </mention>
         <mention>
-         
+
 <sentence>3</sentence><start>3</start><end>4</end><head>3</head><text>her</text>
         </mention>
       </coreference>
@@ -82,7 +91,7 @@ type="collapsed-ccprocessed-dependencies">...</dependencies>
 Here is some output from the **OpenNLP coreference**:
 
 ```
-OpenNLP Coreference 
+OpenNLP Coreference
 -------------------------------------------------------------------------------------------------------
 Input sentences 1 ::
 Carol told Bob to attend the party. They arrived together.
@@ -147,15 +156,14 @@ There are several ways in which coreference can be represented. Here is an examp
 ```
 {
   "text": "Sue sees herself",
-  "views": [ 
+  "views": [
     { "id": "v1",
        "metadata": {
         "contains": {
           "Token": {
-            "producer":
-"edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
+            "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
             "type": "tokenizer:opennlp" }}},
-      "annotations": [ 
+      "annotations": [
          { "@type": "Token", "id": "tok0", "start": 0, "end": 3 },
          { "@type": "Token", "id": "tok1", "start": 4, "end": 8 },
          { "@type": "Token", "id": "tok2", "start": 9, "end": 16 }
@@ -174,8 +182,8 @@ There are several ways in which coreference can be represented. Here is an examp
 ] },
          { "@type": "Markable", "id": "m1", "targets": [ "v1:tok2"
 ] },
-         { "@type": "Coreference", 
-           "id": "coref0", 
+         { "@type": "Coreference",
+           "id": "coref0",
            "features": {
              "mentions": [ "m0", "m1" ],
              "representative": "m0" }}]}]
@@ -189,7 +197,7 @@ Here is an example where there is no other view to refer to and where the markab
 ```
 {
   "text": "Sue sees herself",
-  "views": [ 
+  "views": [
     { "id": "v1",
       "metadata": {
         "contains": {
@@ -199,7 +207,7 @@ Here is an example where there is no other view to refer to and where the markab
          { "@type": "Markable", "id": "m0", "start": 0, "end": 3 },
          { "@type": "Markable", "id": "m1", "start": 9, "end": 16
 },
-         { "@type": "Coreference", 
+         { "@type": "Coreference",
            "id": "coref0",
            "features": {
              "mentions": [ "m0", "m1" ],
@@ -212,7 +220,7 @@ If a coreference component generates actual annotations that can be used, but th
 ```
 {
   "text": "Sue sees herself",
-  "views": [ 
+  "views": [
     { "id": "v1",
       "metadata": {
         "contains": {
@@ -230,7 +238,7 @@ If a coreference component generates actual annotations that can be used, but th
            "id": "m1",
            "features": {
              "targets": [ "tok2" ] }},
-         { "@type": "Coreference", 
+         { "@type": "Coreference",
            "id": "coref0",
            "features": {
              "mentions": [ "m0", "m1" ],
@@ -243,7 +251,7 @@ Sometimes, coreference modules will have all kinds of other information on the a
 ```
 {
   "text": "Sue sees herself",
-  "views": [ 
+  "views": [
     { "id": "v1",
       "metadata": {
         "contains": {
@@ -262,8 +270,8 @@ Sometimes, coreference modules will have all kinds of other information on the a
            "features": {
              "targets": [ "tok2" ],
              "ENTITY_MENTION_TYPE": "PRONOUN" } },
-         { "@type": "Coreference", 
-           "id": "coref0", 
+         { "@type": "Coreference",
+           "id": "coref0",
            "features": {
              "mentions": [ "m0", "m1" ],
              "representative": "m0" }}]}]
@@ -275,21 +283,19 @@ The list of targets can be used to deal with split antecedents. For example, in 
 ```
 {
   "text": "John and Mary left, they were late",
-  "views": [ 
+  "views": [
     { "id": "v1",
       "metadata": { },
       "annotations": [
          { "@type": "Markable", "id": "m0", "start": 0, "end": 4 },
-         { "@type": "Markable", "id": "m1", "start": 9, "end": 13
-},
+         { "@type": "Markable", "id": "m1", "start": 9, "end": 13 },
          { "@type": "Markable",
            "id": "m2",
            "features": {
              "targets": [ "mo", "m1" ] }},
-         { "@type": "Markable", "id": "m3", "start": 20, "end": 24
-},
-         { "@type": "Coreference", 
-           "id": "coref0", 
+         { "@type": "Markable", "id": "m3", "start": 20, "end": 24 },
+         { "@type": "Coreference",
+           "id": "coref0",
            "features": {
              "mentions": [ "m2", "m3" ],
              "representative": "m2" }}]}]
@@ -297,5 +303,3 @@ The list of targets can be used to deal with split antecedents. For example, in 
 ```
 
 Markables m0 and m1 could be other annotation types like Token or Person.
-
-[ [up](index.html) | [previous](tokens.html) | [next](phrase_structure.html) ]

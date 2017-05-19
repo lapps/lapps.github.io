@@ -3,10 +3,20 @@ layout: default
 title: LIF Tokens
 ---
 
-[LIF](index.html) > <a name='null'></a>
+# LAPPS Interchange Format
+
+[
+[Index](index.html) |
+[Overview](overview.html) |
+[Tokens](tokens.html) |
+[Chunks &amp; NER](ner.html) |
+[Coreference](coref.html) |
+[Phrase Structure](phrase_structure.html) |
+[Dependencies](dependencies.html)
+]
 
 
-# Tokens and Tags in LIF
+# Tokens and Tags
 
 Last updated: October 29 <sup>th</sup>, 2015
 
@@ -36,26 +46,24 @@ With this object as input, the sentence splitter will append a Sentence view to 
       "metadata": {
         "contains": {
           "Sentence": {
-            "producer":
-"edu.brandeis.cs.lappsgrid.opennlp.Splitter:0.0.4",
+            "producer": "edu.brandeis.cs.lappsgrid.opennlp.Splitter:0.0.4",
             "type": "splitter:opennlp" }}},
       "annotations": [
          { "@type": "Sentence", "id": "s0", "start": 0, "end": 11 }
-]
+      ]
     },
     {
       "id": "v2",
       "metadata": {
          "contains": {
            "Token": {
-             "producer":
-"org.anc.lapps.stanford.SATokenizer:1.4.0",
+             "producer": "org.anc.lapps.stanford.SATokenizer:1.4.0",
              "type": "tokenization:stanford" }}},
       "annotations": [
          { "@type": "Token", "id": "tok0", "start": 0, "end": 4 },
          { "@type": "Token", "id": "tok1", "start": 5, "end": 10 },
          { "@type": "Token", "id": "tok2", "start": 10, "end": 11 }
-]
+      ]
     }
   ]
 }
@@ -76,12 +84,9 @@ The Stanford tagger, the third step in the pipeline, could do one of two things:
          "posTagSet": "penn",
          "type": "postagging:stanford" }}},
   "annotations": [
-     { "@type": "Token", "id": "tok0", "start": 0, "end": 4,
-"features": { "pos": "NNP" } },
-     { "@type": "Token", "id": "tok1", "start": 5, "end": 10,
-"features": { "pos": "VBZ" } },
-     { "@type": "Token", "id": "tok2", "start": 10, "end": 11,
-"features": { "pos": "." } } ]
+     { "@type": "Token", "id": "tok0", "start": 0, "end": 4, "features": { "pos": "NNP" } },
+     { "@type": "Token", "id": "tok1", "start": 5, "end": 10, "features": { "pos": "VBZ" } },
+     { "@type": "Token", "id": "tok2", "start": 10, "end": 11, "features": { "pos": "." } } ]
 }
 ```
 
@@ -109,12 +114,9 @@ The second way for the tagger to add to the LIF object is to add a view and not 
          "posTagSet": "penn",
          "type": "postagging:stanford" }}},
   "annotations": [
-     { "@type": "Token", "id": "tok0", "start": 0, "end": 4,
-"features": { "pos": "NNP" } },
-     { "@type": "Token", "id": "tok1", "start": 5, "end": 10,
-"features": { "pos": "VBZ" } },
-     { "@type": "Token", "id": "tok2", "start": 10, "end": 11,
-"features": { "pos": "." } } ]
+     { "@type": "Token", "id": "tok0", "start": 0, "end": 4, "features": { "pos": "NNP" } },
+     { "@type": "Token", "id": "tok1", "start": 5, "end": 10, "features": { "pos": "VBZ" } },
+     { "@type": "Token", "id": "tok2", "start": 10, "end": 11, "features": { "pos": "." } } ]
 }
 ```
 
@@ -123,5 +125,3 @@ The view's annotation list is identical to the previous one shown because meta d
 At this point, there is no established way in the meta data to specify that this view is based on view "v2", if we adopt the `dependsOn` attribute then we would be able to do that.
 
 In the above, we have used types like "splitter:nlp", "tokenization:stanford" and "postagging:stanford". These refer to URLs in the types section of the vocabulary. An initial type system for these is under construction.
-
-[ [up](index.html) | [previous](overview.html) | [next](coref.html) ]

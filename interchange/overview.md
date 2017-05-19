@@ -3,14 +3,24 @@ layout: default
 title: LIF Overview
 ---
 
-[LIF](index.html) > <a name='null'></a>
+# LAPPS Interchange Format
+
+[
+[Index](index.html) |
+[Overview](overview.html) |
+[Tokens](tokens.html) |
+[Chunks &amp; NER](ner.html) |
+[Coreference](coref.html) |
+[Phrase Structure](phrase_structure.html) |
+[Dependencies](dependencies.html)
+]
 
 
-# Overview of LIF
+## Overview
 
-Last updated: May 26 <sup>th</sup>, 2016
+Last updated: May 5<sup>th</sup>, 2017
 
-## The structure of LIF objects
+### The structure of LIF objects
 
 A LIF object contains the text, a list of annotation views, a reference to an external context file and optional metadata. The top-level structure of a LIF object is as follows:
 
@@ -25,22 +35,22 @@ A LIF object contains the text, a list of annotation views, a reference to an ex
 
 There are four top-level keys: `@context`, `metadata`, `text` and `views`. The following sub sections will describe the values of these four keys.
 
-### The @context key
+#### The @context key
 
 The value here is the fixed URL [http://vocab.lappsgrid.org/context-1.0.0.jsonld](http://vocab.lappsgrid.org/context-1.0.0.jsonld) which leads to a document with a JSON object that points to various parts of the LAPPS vocabulary. We allow people to provide their own context, but we do not allow services to changes this top-level context and turn it into a list. Instead, we allow services to add contexts to individual views or to add elements to contexts in individual views. However, we strongly caution against redefining terms that are defined in the external context or the vocabulary since then some annotation objects or properties would have different meanings depending on what view they are in. Note that this sentiment is shared by the [JSON-LD
     recommendation](http://www.w3.org/TR/json-ld/#advanced-context-usage): *this is rarely a good authoring practice and is typically used when working with legacy applications that depend on a specific structure of the JSON object*.
 
-### The metadata key
+#### The metadata key
 
 All examples of output of our services have an empty object here. There is no current use case for what could be in this metadata object. The LIF object is created and consumed by wrappers and metadata information added should be relevant to and usable by these wrappers. All metadata we have so far are relevant to individual views only and are included in the views key. Nevertheless, we will allow a metadata key here for future use.
 
-### The text key
+#### The text key
 
 This is a JSON [value
     object](http://www.w3.org/TR/json-ld/#dfn-value-object) containing a `@value` and a `@language` key. The value associated with `@value` is a string and the value associated with `@language` follows the rules in [BCP47](http://www.w3.org/TR/json-ld/#bib-BCP47), which for our current purposes boils down to using the ISO 639 code (also see the [Document
     section](http://vocab.lappsgrid.org/Document.html#language) in the vocabulary).
 
-### The views key
+#### The views key
 
 This is where all the annotations and associated information live. The value is a JSON array of views where each view specifies what information it contains and what service created that information. Views are similar to annotation layers and annotation tasks as used by several annotation tools, formalisms and frameworks. They contain structured information about a text but are separate from that text. They also provide flexibility in structuring annotations.
 
@@ -58,26 +68,25 @@ There are a few general principles:
 Here is a minimal example of a view with just one annotation element.
 
 ```
-"views": [ 
+"views": [
    {
       "@context": {},
       "id": "v0",
       "metadata": {
         "contains": {
           "Token": {
-            "producer":
-"edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+            "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
             "type": "tokenization:opennlp",
             "rules": "tokenization:opennlp_basic"
           }
         }
       },
-      "annotations": [ 
-         { "@type": "Token", 
-           "id": "t0", 
-           "start": 0, 
-           "end": 5, 
-           "features": {} 
+      "annotations": [
+         { "@type": "Token",
+           "id": "t0",
+           "start": 0,
+           "end": 5,
+           "features": {}
          }
       ]
    }
@@ -93,7 +102,7 @@ The question is what we do when the newly added feature or annotation element is
 ```
 {
   "@context": { "MyToken": "http:/www/example.com/MyToken" },
-  "annotations": [ 
+  "annotations": [
     { "@type": "MyToken", "id": "t0", "start": 0, "end": 5 } ]
 }
 ```
@@ -110,8 +119,7 @@ The **metadata** key contains information to describe the annotations in a view.
 {
   "contains": {
     "Token": {
-      "producer":
-"edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
+      "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:0.0.4",
       "type": "tokenization:opennlp",
       "rules": "tokenization:opennlp_basic" }}
 }
@@ -142,8 +150,7 @@ Finally, the value of **annotations** is a list of annotation objects. The relev
   }
 ```
 
-The keys allowed are specified in the [JSON
-    LIF schema](http://vocab.lappsgrid.org/schema/lif-schema.json) in the definitions for `annotations` and `annotation`. The value of `@type` is an element of the LAPPS vocabulary or an annotation category added by the user. If a user-defined category is used then it would be defined outside of the LAPPS vocabulary and in that case the user should either use the full URI or add a context to the view in which this new annotation category lives.
+The keys allowed are specified in the [JSON LIF schema](http://vocab.lappsgrid.org/schema/lif-schema.json) in the definitions for `annotations` and `annotation`. The value of `@type` is an element of the LAPPS vocabulary or an annotation category added by the user. If a user-defined category is used then it would be defined outside of the LAPPS vocabulary and in that case the user should either use the full URI or add a context to the view in which this new annotation category lives.
 
 Identifiers are unique to the view. It is allowed that two views both have an annotation with the same identifier and these could even be annotations of the same type (Token for example) and have the same start and end character offset. To uniquely refer to one of them we use the view identifier and the annotation identifier separated by a colon and the Token in the example above can be referred to as "v0:t0".
 
@@ -152,5 +159,3 @@ Technically all that is required of the keys in the features dictionary is that 
 All annotation elements in a view are direct members of the list of annotations, that is, annotations are not embedded inside of other annotation. For example, Constituent annotations will not contain other Constituent objects. However, in the features dictionary annotations can refer to other annotations using their identifiers.
 
 The rest of the LIF specifications consists of examples of some common annotation categories in the [vocabulary](http://vocab.lappsgrid.org), showing how the annotation types translate into LIF structures.
-
-[ [up](index.html) | [next](tokens.html) ]
