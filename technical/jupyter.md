@@ -1,6 +1,10 @@
 ---
 layout: default
 title: Jupyter Notebook
+nav:
+	- installing
+	- galaxy
+	- examples
 ---
 
 # {{ page.title }}
@@ -18,6 +22,7 @@ If you don't have Jupyter, but do have Python the following should work:
 $> pip install jupyter
 ```
 
+<a name="installing"></a>
 ### Install the kernel
 
 #### From Source
@@ -85,6 +90,7 @@ Or, if you don't mind really long command lines the above can be achieved in one
 $> docker run -d -p 8888:8888 -e GALAXY_HOST=http://galaxy.lappsgrid.org -e GALAXY_KEY=1234567890DEADBEEF -v $HOME/kernels:/home/jovyan lappsgrid/jupyter-lsd-kernel
 ```
 
+<a name="galaxy"></a>
 ## Interacting with Galaxy
 
 ### Connecting to Galaxy
@@ -223,6 +229,7 @@ container = getContainer(42)
 container.text
 ```
 
+<a name="example"></a>
 # Example : Create a list of all locations in a document.
 
 Each of the following steps should be run in their own cell in a Jupyter Notebook. A Notebook
