@@ -90,6 +90,8 @@ Or, if you don't mind really long command lines the above can be achieved in one
 $> docker run -d -p 8888:8888 -e GALAXY_HOST=http://galaxy.lappsgrid.org -e GALAXY_KEY=1234567890DEADBEEF -v $HOME/kernels:/home/jovyan lappsgrid/jupyter-lsd-kernel
 ```
 
+{{ site.top }}
+
 <a name="galaxy"></a>
 ## Interacting with Galaxy
 
@@ -228,6 +230,8 @@ getContainer =  { historyId ->
 container = getContainer(42)
 container.text
 ```
+
+{{ site.top }}
 
 <a name="example"></a>
 # Example : Create a list of all locations in a document.
