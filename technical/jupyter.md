@@ -2,9 +2,9 @@
 layout: default
 title: Jupyter Notebook
 nav:
-	- installing
-	- galaxy
-	- examples
+  - installing
+  - galaxy
+  - example
 ---
 
 # {{ page.title }}
