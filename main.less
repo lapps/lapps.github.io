@@ -1,0 +1,82 @@
+/*
+ * Stylesheet compiled from less source.
+ */
+
+@radius: 10px;
+@theme: #046;
+@shade: lighten(desaturate(@theme, 50%), 70%);
+@darker: darken(@theme, 3%);
+@lighter: lighten(@theme, 20%);
+
+.rounded-corners(@r: @radius) {
+  moz-border-radius: @r;
+  webkit-border-radius: @r;
+  border-radius: @r;
+  border-spacing: 0;
+  border: 1px solid @theme;
+}
+
+html {
+  background-color: @theme;
+}
+
+body {
+  margin: 0 10%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 6%;
+  background-color: white;
+  color: @darker;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: @lighter;
+}
+
+h2 {
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+p {
+  margin: 10px 20px;
+}
+
+// Used to ensure the width of the first column is the same width for
+// all tables.
+.first-column {
+  width: 15%;
+}
+
+table {
+  .rounded-corners;
+  margin: 0;
+  padding: 0;
+  width: 95%;
+  tr {
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    th, td {
+      text-align: left;
+      padding: 3px 10px;
+    }
+    th {
+      color: white;
+      background-color: @darker;
+      &:first-child { border-top-left-radius: @radius }
+      &:last-child { border-top-right-radius: @radius }
+    }
+    &:nth-child(even) { background-color: @shade; }
+    &:last-child {
+      td:first-child { border-bottom-left-radius: @radius }
+      td:last-child { border-bottom-right-radius: @radius }
+    }
+  }
+}
+
+.copyright {
+  font-size: smaller;
+  text-align: center;
+
+}

@@ -10,7 +10,7 @@ This page describes setting up a production LAPPS Grid Galaxy instance on a fres
 On a fresh Ubuntu install run:
 
 ```bash
-$> curl -sSL http://downloads.lappsgrid.org/scripts/galaxy-setup.sh | sh
+$> curl -sSL http://downloads.lappsgrid.org/scripts/galaxy-setup.sh | bash
 $> cd /home/galaxy/galaxy
 $> HOME=/home/galaxy sudo -u galaxy ./run.sh
 ```
@@ -33,10 +33,10 @@ Install scripts are available from [http://downloads.lappsgrid.org/scripts](http
 Install the common utilities, Postgres, Java, and LSD packages.  The database will be configured below:
 
 ```bash
-$> curl -sSL http://downloads.lappsgrid.org/scripts/install-common.sh | sh
-$> curl -sSL http://downloads.lappsgrid.org/scripts/install-postgres.sh | sh
-$> curl -sSL http://downloads.lappsgrid.org/scripts/install-java.sh | sh
-$> curl -sSL http://downloads.lappsgrid.org/scripts/install-lsd.sh | sh
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-common.sh | bash
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-postgres.sh | bash
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-java.sh | bash
+$> curl -sSL http://downloads.lappsgrid.org/scripts/install-lsd.sh | bash
 ```
 
 **NOTE** The *install-common.sh* script may display some error messages when used on a [Jetstream](/technical/jetstream.html) instance.  This seems to be due to Jetstream/OpenStack not allowing some OS packages (i.e. firmware) to be updated.  It should be safe to ignore these errors.
