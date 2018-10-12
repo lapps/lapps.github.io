@@ -7,10 +7,16 @@ title: Language Application Grid
 
 ### Upcoming Events
 
-None scheduled.
+**TBA**
 
 ### Past Events
 
+1. LAPPS-Clarin Integration Workshop<br/>
+**Where:** Poughkeepsie, New York<br/>
+**When:** September 5-9, 2018<br/>
+1. LAPPS-Clarin Integration Workshop<br/>
+**Where:** Tübingen, Germany<br/>
+**When:** March 14-17, 2018<br/>
 1. LAPPS/Galaxy Collaboration Meeting<br/>
 **Where:** Vassar College, Poughkeepsie NY<br/>
 **When:** November 9-11, 2016<br/>
@@ -25,7 +31,7 @@ None scheduled.
 **When:** June 28-29, 2016
 	* Slides ([pdf](galaxy2016-final.pdf)\|[pptx](galaxy2016-final.pptx))
 1. LREC 2016<br/>
-**Where:**Portorož, Slovenia<br/>
+**Where:** Portorož, Slovenia<br/>
 **When:** May 23-28, 2016
 1. CMU Hackathon<br/>
 **Where:** Carnegie Mellon University, Pittsburgh PA<br/>
@@ -73,6 +79,8 @@ None scheduled.
 * [Jupyter Notebook](technical/jupyter.html)
 * [Installing Galaxy From Source](technical/galaxy.html)
 * [Using Jetstream](technical/jetstream.html)
+* [Setting up a Nexus Server](technical/nexus.md)
+* [Discussion on Multi-Word Tokens](technical/multiword.md)
 	
 #### Maven Generated Sites
 

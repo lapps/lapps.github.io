@@ -1,3 +1,5 @@
 *~
 _site
 examples/
+.idea/
+.jekyll-metadata
