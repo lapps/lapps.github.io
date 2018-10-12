@@ -61,21 +61,21 @@ The PhraseStructure object contains a single parse tree for some text span, typi
            "features": {
               "constituents": [ "c0", "c1", "c2", "v1:tok0", "v1:tok1", "v1:tok2" ] }},
          { "@type": "Constituent",
-           "label": "S",
            "id": "c0",
            "features": {
+             "label": "S",
              "parent": null,
              "children": [ "c1", "c2"] } },
          { "@type": "Constituent",
-           "label": "NP",
            "id": "c1",
            "features": {
+             "label": "NP",
              "parent": "c0",
              "children": [ "v1:tok0" ] }},
          { "@type": "Constituent",
-           "label": "VP",
            "id": "c2",
            "features": {
+             "label": "VP",
              "parent": "c0",
              "children": [ "v1:tok1", "v1:tok2" ] }}]}]
 }
