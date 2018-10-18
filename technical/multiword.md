@@ -21,6 +21,11 @@ Previous discussion can be found [here](https://www.dropbox.com/s/20tfij7q55gbi5
 
 ## LIF Proposals
 
+1. [Put in separate views](#put-in-separate-views)
+1. [Put in same view different annotation types](#option-#1)
+1. [Put in same view differnt tokenTypes](#option-#2)
+1. [Single token with features](#option-#3)
+
 ### Put In Separate Views
 
 ```json
@@ -181,3 +186,35 @@ The surface token and component tokens are annotated with *http://vocab.lappsgri
     }
 },
 ```
+
+#### Option #3
+
+The surface token is annotated with *http://vocab.lappsgrid.org/Token* and the component tokens are features of the Token.
+
+```json
+{
+    "id": "tok4-5",
+    "start": 177,
+    "end": 182,
+    "@type": "http://vocab.lappsgrid.org/Token",
+    "features": {
+        "word": "abych",
+        "components": [
+            {
+                "word": "aby",
+                "lemma": "aby",
+                "pos": "SCONJ"
+            },
+            {
+                "word": "bych",
+                "lemma": "b\u00fdt",
+                "pos": "AUX"
+            }   
+        ]
+    }
+}
+```
+
+**Issues**
+
+1. What should really be an annotation is now the feature of another annotation.
