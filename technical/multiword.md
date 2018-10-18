@@ -22,9 +22,9 @@ Previous discussion can be found [here](https://www.dropbox.com/s/20tfij7q55gbi5
 ## LIF Proposals
 
 1. [Put in separate views](#put-in-separate-views)
-1. [Put in same view different annotation types](#option-#1)
-1. [Put in same view differnt tokenTypes](#option-#2)
-1. [Single token with features](#option-#3)
+1. [Put in same view different annotation types](#option-1)
+1. [Put in same view differnt tokenTypes](#option-2)
+1. [Single token with features](#option-3)
 
 ### Put In Separate Views
 
