@@ -6,8 +6,6 @@ title: Installing LAPPS/Galaxy - local install
 
 # Installing a local LAPPS/Galaxy instance
 
-**IN PROGRESS**
-
 This page describes setting up a local LAPPS Grid Galaxy instance for quick experimentation. There is considerable overlap with the page on installing a [production instance](galaxy.html) and it would be a good idea to skim through that page as well, but this page should be mostly stand on its own. The main difference with installing a production in stance is that no PostgreSQL installation is needed here.
 
 For a list of known issues and workarounds see [galaxy-known-issues.html](galaxy-known-issues.html).
