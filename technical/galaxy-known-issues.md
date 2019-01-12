@@ -8,10 +8,28 @@ title: Installing LAPPS/Galaxy - known issues
 
 This page has some known issues when installing a LAPPS/Galaxy instance as well as the workarounds. The following issues are discussed:
 
+- GLIBC incompatibilities preventing psycopg2 from loading
 - Logging error: logging.getLogger does not exist
 - Missing migration scripts
 - Updating the tool menu
 
+
+### psycopg2
+
+There are some problems with glibc on later versions of Ubuntu that may manifest as an error like:
+
+```
+ibresolv-2-c4c53def.5.so: symbol __res_maybe_init version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference
+```
+
+The solution is to uninstall psycopg2 and re-install the binary only. It is probably wise to run this in Galaxy's `.venv`.
+
+```
+$> source .venv/bin/activate
+$> sudo pip uninstall psycopg2
+$> pip install psycopg2-binary
+$> deactivate
+```
 
 ### Logging error: logging.getLogger does not exist
 

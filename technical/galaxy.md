@@ -7,7 +7,8 @@ title: Installing LAPPS/Galaxy
 
 This page describes setting up a production LAPPS Grid Galaxy instance on a fresh Ubuntu 14.04 LTS instance. The easiest way to run a LAPPS Grid Galaxy instance is to use one of the Docker images available from the [Docker Hub](https://hub.docker.com). However at times it is required to install and run a Galaxy instance from the sources in the GitHub repository.
 
-For some pointers on how to do a local install for quick experimentation see [galaxy-local.html](galaxy-local.html). For a list of known issues and workarounds see [galaxy-known-issues.html](galaxy-known-issues.html).
+
+For some pointers on how to do a local install for quick experimentation see [galaxy-local.html](galaxy-local.html). For a list of known issues and workarounds see [galaxy-known-issues.html](galaxy-known-issues.html). 
 
 
 ## TL;DR
