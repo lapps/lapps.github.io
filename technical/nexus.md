@@ -1,3 +1,8 @@
+--- 
+layout: default
+title: LAPPS Nexus Repository
+---
+
 # Maven
 
 A Nexus Maven repository has been setup at http://149.165.157.51:8100 that is used to deploy artifacts in anticipation of a CI/CD server. Configuring a Nexus server is straight-forward and involves the following steps:

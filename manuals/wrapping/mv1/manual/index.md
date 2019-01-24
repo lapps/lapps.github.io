@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Lapp Wrapping
+title: Wrapping LAPPS Services
 ---
 
 # Wrapping LAPPS Services
