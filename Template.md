@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Example Document Template
 buttons:
  - text: Home
    href: /

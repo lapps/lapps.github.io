@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Wrapping Services Manual
+title: Domain Settings
 ---
 
 ## Domain Settings
