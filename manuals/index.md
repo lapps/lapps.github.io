@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 
+title: Manuals and Tutorials
 ---
 
 # LAPPS Manuals and tutorials

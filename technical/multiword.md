@@ -1,3 +1,8 @@
+---
+layout: default
+title: Multi-Word Tokens
+---
+
 # Multi-Word Tokens
 
 Previous discussion can be found [here](https://www.dropbox.com/s/20tfij7q55gbi5e/tcf-lif-lindat.pdf?dl=0).
