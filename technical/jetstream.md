@@ -9,6 +9,13 @@ title: Jetstream
 
 Once the Jetstream has been configured you probably want to head over to the [Clusters](cluster.md) page to read about setting up a cluster using Docker Swarm or Kubernetes. [Apache Mesos](http://mesos.apache.org) is also an option, but has not been tested.
 
+## Citing Jetstream
+
+To acknowledge Jetstream in your work, please cite:
+
+> Stewart, C.A., Cockerill, T.M., Foster, I., Hancock, D., Merchant, N., Skidmore, E., Stanzione, D., Taylor, J., Tuecke, S., Turner, G., Vaughn, M., and Gaffney, N.I., Jetstream: a self-provisioned, scalable science and engineering cloud environment. 2015, In Proceedings of the 2015 XSEDE Conference: Scientific Advancements Enabled by Enhanced Cyberinfrastructure. St. Louis, Missouri.  ACM: 2792774.  p. 1-8. https://dl.acm.org/citation.cfm?doid=2792745.2792774
+
+
 ## Prerequisites
 
 To be able to make use of Jetstream you will need to:

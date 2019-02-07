@@ -7,7 +7,8 @@ title: Installing LAPPS/Galaxy
 
 This page describes setting up a production LAPPS Grid Galaxy instance on a fresh Ubuntu 14.04 LTS instance. The easiest way to run a LAPPS Grid Galaxy instance is to use one of the Docker images available from the [Docker Hub](https://hub.docker.com). However at times it is required to install and run a Galaxy instance from the sources in the GitHub repository.
 
-For some pointers on how to do a local install for quick experimentation see [galaxy-local.html](galaxy-local.html). For a list of known issues and workarounds see [galaxy-known-issues.html](galaxy-known-issues.html).
+
+For some pointers on how to do a local install for quick experimentation see [galaxy-local.html](galaxy-local.html). For a list of known issues and workarounds see [galaxy-known-issues.html](galaxy-known-issues.html). 
 
 
 ## TL;DR
@@ -147,6 +148,68 @@ $> cd /home/galaxy/galaxy
 $> HOME=/home/galaxy sudo -u galaxy ./run.sh
 ```
 
+The above is useful during development and development as the Galaxy log is displayed in the console window.  However, in production Galaxy should be configured to run as a proper service. Galaxy includes example supervisord conf and SysV style init scripts in the contrib/ directory.  For example, on Debian/Ubuntu systems:
+
+``` 
+# Run as sudo
+$> cp /home/galaxy/galaxy/contrib/galaxy.debian-init /etc/init.d/galaxy
+$> update-rc.d galaxy defaults
+$> service galaxy start
+```
+
+# Migrating Galaxy
+
+To migrate a Galaxy installation to a new server requires three steps
+
+1. Install Galaxy on the new server
+1. Export data from the current Galaxy server
+1. Install the data on the new Galaxy server
+
+Both Galaxy servers should have the same set of tools installed, same datatypes, and any other custom configurations.  This usually just means both servers have the same branches checked out in Git.
+
+
+### Exporting Data
+
+All of the files in Galaxy's `database` directory (`/home/galaxy/galaxy/database` by default) need to be copied as well as the contents of the Postgres database.
+
+``` 
+$> cd /home/galaxy/galaxy
+$> sudo -u postgres pg_dump -U postgres -O galaxy > galaxy.sql
+$> tar czf galaxy-files.tgz galaxy.sql database/
+```
+
+Transfer the *galaxy-files.tgz* to the `/home/galaxy/galaxy` directory on the new server.
+
+### Importing Data
+
+If Galaxy has been started, or Galaxy was installed using the scripts above then there will already be a database named *galaxy* in Postgres. This database needs to be dropped and recreated before data is imported from the old server.
+
+``` 
+$> sudo -u postgres psql
+psql (9.6.10)
+Type "help" for help.
+
+postgres=# drop database galaxy;
+DROP
+postgres=# create database galaxy;
+CREATE
+postgres=# grant all privileged on database galaxy to galaxy;
+GRANT
+postgres=# \quit
+
+$>
+```
+
+If the *galaxy-files.tgz* archive if unpacked in `/home/galaxy/galaxy` then the `database/` directory will be recreated, but the current `database/` directory should be renamed or removed.  Then the Postgres database can be recreated.
+``` 
+$> cd /home/galaxy/galaxy
+$> sudo -u galaxy tar xzf galaxy-files.tgz
+$> sudo -u galaxy psql -U galaxy -d galaxy -f galaxy.sql
+$> sudo service start galaxy
+``` 
+
+**Note** This procedure does not take into account any customizations (datatypes, galaxy.ini etc) or installed tools.
+ 
 # TODO
 
 1. Explain installing and using **supervisord** to run Galaxy as a proper service.
