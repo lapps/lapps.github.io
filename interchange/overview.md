@@ -3,7 +3,7 @@ layout: default
 title: LIF Overview
 ---
 
-# LAPPS Interchange Format
+# LAPPS Interchange Format - Overview
 
 [
 [Index](index.html) |
@@ -24,7 +24,7 @@ Last updated: May 5<sup>th</sup>, 2017
 
 A LIF object contains the text, a list of annotation views, a reference to an external context file and optional metadata. The top-level structure of a LIF object is as follows:
 
-```
+```json
 {
   "@context": "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
   "metadata": { },
@@ -37,8 +37,19 @@ There are four top-level keys: `@context`, `metadata`, `text` and `views`. The f
 
 #### The @context key
 
-The value here is the fixed URL [http://vocab.lappsgrid.org/context-1.0.0.jsonld](http://vocab.lappsgrid.org/context-1.0.0.jsonld) which leads to a document with a JSON object that points to various parts of the LAPPS vocabulary. We allow people to provide their own context, but we do not allow services to changes this top-level context and turn it into a list. Instead, we allow services to add contexts to individual views or to add elements to contexts in individual views. However, we strongly caution against redefining terms that are defined in the external context or the vocabulary since then some annotation objects or properties would have different meanings depending on what view they are in. Note that this sentiment is shared by the [JSON-LD
-    recommendation](http://www.w3.org/TR/json-ld/#advanced-context-usage): *this is rarely a good authoring practice and is typically used when working with legacy applications that depend on a specific structure of the JSON object*.
+The value here is the fixed URL [http://vocab.lappsgrid.org/context-1.0.0.jsonld](http://vocab.lappsgrid.org/context-1.0.0.jsonld) which leads to a document with a JSON object that points to various parts of the LAPPS vocabulary. One thing the context does is to define a default vocabulary, which is http://vocab.lappsgrid.org, which allow us to use shortcuts in the `@type` attribute of annotations (see below). For example
+
+```json
+{ "@type": "Token" }
+```
+
+will be automatically expanded to
+
+```json
+{ "@type": "http://vocab.lappsgrid.org/Token" }
+```
+
+We do not allow services to change this top-level context and turn it into a list. Instead, we allow services to add contexts to individual views created by the service. However, we strongly caution against redefining terms that are defined in the external context or the vocabulary since then some annotation objects or properties would have different meanings depending on what view they are in. Note that this sentiment is shared by the [JSON-LD recommendation](http://www.w3.org/TR/json-ld/#advanced-context-usage): *this is rarely a good authoring practice and is typically used when working with legacy applications that depend on a specific structure of the JSON object*.
 
 #### The metadata key
 
@@ -46,9 +57,7 @@ All examples of output of our services have an empty object here. There is no cu
 
 #### The text key
 
-This is a JSON [value
-    object](http://www.w3.org/TR/json-ld/#dfn-value-object) containing a `@value` and a `@language` key. The value associated with `@value` is a string and the value associated with `@language` follows the rules in [BCP47](http://www.w3.org/TR/json-ld/#bib-BCP47), which for our current purposes boils down to using the ISO 639 code (also see the [Document
-    section](http://vocab.lappsgrid.org/Document.html#language) in the vocabulary).
+This is a JSON [value object](http://www.w3.org/TR/json-ld/#dfn-value-object) containing a `@value` and a `@language` key. The value associated with `@value` is a string and the value associated with `@language` follows the rules in [BCP47](http://www.w3.org/TR/json-ld/#bib-BCP47), which for our current purposes boils down to using the ISO 639 code (also see the [Document section](http://vocab.lappsgrid.org/Document.html#language) in the vocabulary).
 
 #### The views key
 
@@ -67,7 +76,7 @@ There are a few general principles:
 
 Here is a minimal example of a view with just one annotation element.
 
-```
+```json
 "views": [
    {
       "@context": {},
@@ -97,25 +106,44 @@ There are four keys in the view object: `@context`, `id`, `metadata` and `annota
 
 The **@context** key is an optional key used for user-defined context elements. As noted before, this is one of two possible choices on how to do this. One of the general principles listed above was that services may add information to existing views. Typically this would involve adding a feature to the Annotation element dictionary or adding an Annotation element.
 
-The question is what we do when the newly added feature or annotation element is not defined in our vocabulary or is interpreted differently by the service. To deal with the first case the service can simply add the needed term to the local context, as illustrated in the view fragment below.
+The question is what we do when the newly added feature or annotation element is not defined in our vocabulary or is interpreted differently by the service. To deal with the first case (an element that is not defined in the context) the service can simply add the needed term to the local context, as illustrated in the view fragment below.
 
-```
+```json
 {
-  "@context": { "MyToken": "http:/www/example.com/MyToken" },
+  "@context": { "MyToken": "http://www.example.com/MyToken" },
   "annotations": [
     { "@type": "MyToken", "id": "t0", "start": 0, "end": 5 } ]
 }
 ```
 
-The second case is more complicated. Say the service creates Token elements but these elements have an idiosyncratic interpretation which cannot be explained away by using the `type` or `rules` keys (see below). And, more importantly (and a more likely scenario), say the service adds Token elements to a view that already has Token elements. Adding a Token definition to the context in the existing view now overwrites the existing interpretation of Token, which is not acceptable. There are two solutions: (i) do not allow a service to redefine a term that was not added by the service, and (ii) do not allow services to change the context of an existing view. The latter is preferred because the former is much harder to do and to enforce. Note also that if you have two kinds of Tokens in a view it is impossible to say who was the producer. With the latter approach, services that want to use their own context definitions either have to create a new view for adding that context or use a fully expanded URI.
+As we mentioned above, we do not encourage the solution of using local contexts, instead we suggest that no abbreviation is used for the value of the `@type` attribute:
 
-This needs to be vetted and agreed on.
-
-The **id** key is required and its value should be unique relative to all view objects. If annotation elements refer to an Annotation in another view then they have to use the view identifier as part of the reference.
-
-The **metadata** key contains information to describe the annotations in a view. At this point, its only key is `contains`. The `contains` dictionary has keys that refer to annotation objects in the LAPPS vocabulary or properties of those annotation objects (they can also refer to user-defined objects or properties). And the value of each of those keys is a JSON object with `producer`, `type` and `rules` keys. The relevant part of the example above is repeated here:
-
+```json
+{
+  "annotations": [
+    { "@type": "http://www.example.com/MyToken", "id": "t0", "start": 0, "end": 5 } ]
+}
 ```
+
+The second case was where an annotation is added where the type is of the same name as types in another view, but it is interpreted differently. For example, a service creates Token elements but these elements have an idiosyncratic interpretation which cannot be explained away by using the `type` or `rules` keys (see below). Now the context can be used to expand the type to a full URI (which is different from the standard URI for Token which is http://vocab.lappsgrid.org/Token) .
+
+```json
+{
+  "@context": { "Token": "http:/www/example.com/Token" },
+  "annotations": [
+    { "@type": "Token", "id": "t0", "start": 0, "end": 5 } ]
+}
+```
+
+Again, we caution against using this approach and prefer full URI in the `@type` attribute.
+
+Note that even when using local contexts, two identical values of the `@type` attribute in the same view will always have identical expansions. A service may not change the context of an existing view since it would potentially redefine terms.
+
+The **id** key in a view is required and its value should be unique relative to all view objects. This value can be referred to from other annotations. Note that annotations also have `id` keys that other annotations can refer to. If annotation elements refer to an Annotation in another view then they have to use the view identifier as part of the reference. For example, if an annotation refers to an annotation with `id` "tok23" in a view with `id` "v3", then the reference would be "v3:tok23".
+
+The **metadata** key contains information to describe the annotations in a view. At this point, its only key is `contains`. The `contains` dictionary has keys that refer to annotation objects in the LAPPS vocabulary or properties of those annotation objects (they can also refer to user-defined objects or properties). The value of each of those keys is a JSON object with `producer`, `type` and `rules` keys. The relevant part of the view example above is repeated here:
+
+```json
 {
   "contains": {
     "Token": {
@@ -131,16 +159,16 @@ We have discussed adding (1) a `timestamp` key, probably using Unix epoch, and (
 
 The `type` key is used to specify what kind of token we are dealing with. It allows several tokenizers to specify the same type, for example if two tokenizers are both implementations of the OpenNLP tokenization scheme. In the example here the type key has the compact IRI value "tokenization:opennlp", where tokenization refers to the tokenization key in the external context file in [http://vocab.lappsgrid.org/context-1.0.0.jsonld](http://vocab.lappsgrid.org/context-1.0.0.jsonld), which contains the following two lines:
 
-```
+```json
     "types": "http://vocab.lappsgrid.org/types/",
     "tokenization": "types:tokenization/",
 ```
 
 Because of these definitions, `tokenization:opennlp` will be expanded to http://vocab.lappsgrid.org/types/tokenization/opennlp. The `rules` key inside of Token can be used to specify a rule set, in this case one defined by http://vocab.lappsgrid.org/types/tokenization/opennlp_basic.
 
-Finally, the value of **annotations** is a list of annotation objects. The relevant part of the view printed above is repeated here:
+Finally, the value of the **annotations** key on a view is a list of annotation objects. The relevant part of the minimal view example used above is repeated here:
 
-```
+```json
 "annotations": [
   { "@type": "Token",
     "id": "t0",
@@ -148,14 +176,17 @@ Finally, the value of **annotations** is a list of annotation objects. The relev
     "end": 5,
     "features": {}
   }
+]
 ```
 
-The keys allowed are specified in the [JSON LIF schema](http://vocab.lappsgrid.org/schema/lif-schema.json) in the definitions for `annotations` and `annotation`. The value of `@type` is an element of the LAPPS vocabulary or an annotation category added by the user. If a user-defined category is used then it would be defined outside of the LAPPS vocabulary and in that case the user should either use the full URI or add a context to the view in which this new annotation category lives.
+The only two required keys are `@type` and `id`. The value of `@type` is an element of the LAPPS vocabulary or an annotation category defined elsewhere, for example by the creator of a service. If a user-defined category is used then it would be defined outside of the LAPPS vocabulary and in that case the user should either use the full URI or add a context to the view in which this new annotation category lives. The `id` key should have a value that is unique relative to all view objects. Other annotations can refer to this identifier either with just the identifier (for example "tok23") or the identifier with a view identifier prefix (for example "v3:tok23"). If there is no prefix the current view is assumed.
 
-Identifiers are unique to the view. It is allowed that two views both have an annotation with the same identifier and these could even be annotations of the same type (Token for example) and have the same start and end character offset. To uniquely refer to one of them we use the view identifier and the annotation identifier separated by a colon and the Token in the example above can be referred to as "v0:t0".
+The features dictionary typically contains the features defined for the annotation category as defined in the vocabulary at [http://vocab.lappsgrid.org](http://vocab.lappsgrid.org). For example, for the Token annotation type the vocabulary includes features like `pos` and `lemma` as well as the inherited features `id`, `start` and `end`. It should be noted here that all features except for the three inherited features are expressed in the features dictionary. This is by historical accident and is not likely to change even though it would be more consistent if an annotation only had attributes `@type` and `features` with all features defined in the vocabulary stored in the features dictionary.
+
+The specifications allow arbitrary features in the features dictionary. Values should as specified in the vocabulary. Typically these are strings, identifiers and integers, or lists of strings, identifiers and integers.
 
 Technically all that is required of the keys in the features dictionary is that they expand to a URI. In most cases, the keys reflect properties in the LAPPS vocabulary and we prefer to use the same name. So if we have a property "pos", we will use "pos" in the dictionary. This implies that "pos" needs to be defined in the context so that it can be expanded to the correct URI in the vocabulary. Note that we need to be careful with properties that are defined on more than one annotation category. Say, for the sake of argument, that we have "pos" as a property on both the Token and NamedEntity annotation types. We then can use "pos" as the abbreviation of only one of the full URI and if we expand "pos" to http://vocab.lapps.grid.org/Token#pos then we need either use "NamedEntity#pos" or come up with a new abbreviated term. So far this situation has not presented itself.
 
-All annotation elements in a view are direct members of the list of annotations, that is, annotations are not embedded inside of other annotation. For example, Constituent annotations will not contain other Constituent objects. However, in the features dictionary annotations can refer to other annotations using their identifiers.
+The annotations list is shallow, that is all annotations in a view are in that list and annotations are not embedded inside of other annotation. For example, Constituent annotations will not contain other Constituent annotations. However, in the features dictionary annotations can refer to other annotations using the identifiers of the other annotations.
 
 The rest of the LIF specifications consists of examples of some common annotation categories in the [vocabulary](http://vocab.lappsgrid.org), showing how the annotation types translate into LIF structures.
