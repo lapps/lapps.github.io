@@ -18,7 +18,7 @@ title: LIF Overview
 
 ## Overview
 
-Last updated: May 5<sup>th</sup>, 2017
+Last updated: April 11<sup>th</sup>, 2019
 
 ### The structure of LIF objects
 
