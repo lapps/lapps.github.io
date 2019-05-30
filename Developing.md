@@ -14,6 +14,7 @@ title: Developer Documentation
 * [Using Jetstream](technical/jetstream.html)
   * [Setting up a cluster](technical/cluster.md)
 * [DSL Basics](technical/dsl)
+* [Vocabulary](technical/vocabulary.md)
 * [Helping with the Wiki](wiki)
 
 # Maven Generated Sites
