@@ -48,7 +48,7 @@ $> registry.sh [run|kill|start|stop] (registry|web|all|both)
 
 - **registry** Runs the Docker Registry container
 - **web** Runs the web UI for the Docker Registry
-- **all | both** Runs both the Docker Registyr container and the web UI container.
+- **all** | **both** Runs both the Docker Registyr container and the web UI container.
 
 If no option is provided then both containers are started, stopped, or killed.
 
